@@ -90,6 +90,64 @@ Details of what was done, why, and any findings.
 
 ---
 
+### [2026-08-12 11:11] — Jwanil — DOCX report generator + original presentation
+
+**Actions:**
+- Created `execution/generate_report.py` — programmatic .docx academic report generator
+- Generated `docs/Minor_Project_Report_Hearing_Aid_Speech_Enhancement.docx`
+- Built 14-slide faculty pitch deck at `docs/presentation.html`
+
+**Status:** Documentation complete for initial faculty pitch.
+
+---
+
+### [2026-08-15 16:00] — Jwanil — Faculty meeting feedback integrated
+
+**Actions:**
+- Received faculty notes: replace Wiener filter, add MMSE/Wavelet, add 1D CNN, add TIMIT/NOIZEUS datasets
+- Created `faculty_feedback_analysis.md` (artifact — not in repo)
+- Expanded architecture from 3-model to 5-model comparison
+
+**Status:** Architecture decisions updated. Deep research sweep initiated.
+
+---
+
+### [2026-08-15 17:00–17:30] — Jwanil — Deep SOTA research sweep (4 parallel agents)
+
+**Actions:**
+- Launched 4 parallel research subagents covering: SOTA architectures, hearing-aid ML, advanced techniques, datasets/evaluation
+- Key finding: SEMamba (Mamba/SSM) achieves PESQ 3.69 — beats all Transformers AND is linear O(T) complexity
+- Decision: replace Transformer plan with Mamba/SSM
+- Created `peak_architecture_research.md` artifact with full synthesis
+- Added 6 research-backed upgrades: CRM (Complex Ratio Mask), MetricGAN+ with HASPI discriminator, ERB subband FiLM, knowledge distillation, CoNNear, Mamba
+
+**Status:** Final architecture decided. Research complete.
+
+---
+
+### [2026-08-16 21:15–21:55] — Jwanil — Full directive update, simple guide, session template, new presentation
+
+**Actions:**
+- Created `docs/simple_guide.md` — plain-English guide: all concepts with full forms, analogies, resources per phase, timeline, what success looks like
+- Created `directives/02_classical_baselines.md` — Wavelet DWT + MMSE-LSA (replaces Wiener)
+- Created `directives/04_1d_cnn_model.md` — Conv-TasNet waveform model
+- Created `directives/05_unet_film_model.md` — U-Net + Self-Attention + FiLM + CRM + MetricGAN+ with HASPI discriminator
+- Created `directives/05b_mamba_film_model.md` — Mamba/SSM + FiLM
+- Updated `directives/06_evaluation.md` — 5 models, 3 audiogram profiles, HASPI vs STOI comparison strategy
+- Updated `AGENTS.md` — phase table with Nov 1 deadline, 5-model architecture summary
+- Updated `context.md` — decisions log, file index, environment dependencies, open tasks
+- Deleted superseded: `02_wiener_baseline.md`, `04_generic_dnn.md`, `05_film_conditioning.md`
+- Created `SESSION_START.md` — copy-paste prompt template for any new chat session
+- Replaced `docs/presentation.html` — 14 slides → 20-slide full project proposal
+- Restructured `shared_context.md` — separate Jwanil and Namya log sections, backfilled all history
+- Committed and pushed all changes to GitHub
+
+**Status:** All documentation current. Directory clean. 9 active directives. SESSION_START.md ready.
+
+**Next action for Jwanil:** Begin Phase 0 — read `directives/00_dsp_fundamentals.md` and run `execution/00_verify_setup.py`.
+
+---
+
 ## Open Tasks
 
 - [ ] Install Python dependencies: `pip install torch torchaudio asteroid speechbrain pyclarity pystoi pesq PyWavelets mamba-ssm`
