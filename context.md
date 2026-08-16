@@ -37,11 +37,12 @@ ACTION: Output the context-reset block from AGENTS.md and stop.
 |-------|------|--------|-------|
 | 0 | Audio/DSP Fundamentals | 🟡 In Progress | Project setup done |
 | 1 | Audiology + Audiograms | ⬜ Not Started | |
-| 2 | Wiener Filter Baseline | ⬜ Not Started | |
-| 3 | Data Pipeline | ⬜ Not Started | |
-| 4 | Generic DNN Denoiser | ⬜ Not Started | |
-| 5 | FiLM Conditioning | ⬜ Not Started | |
-| 6 | Full Evaluation | ⬜ Not Started | |
+| 2 | Classical Baselines: Wavelet DWT + MMSE-LSA | ⬜ Not Started | Replaces Wiener filter (faculty feedback) |
+| 3 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | ⬜ Not Started | |
+| 4 | 1D CNN Model (Conv-TasNet) | ⬜ Not Started | Waveform-domain DL baseline |
+| 5 | U-Net + Attention + FiLM | ⬜ Not Started | Core contribution — complex masking + MetricGAN+ |
+| 5b | Mamba/SSM + FiLM | ⬜ Not Started | SOTA model — replaces Transformer plan |
+| 6 | Full Evaluation | ⬜ Not Started | All 5 models, 3 audiogram profiles |
 | 7 | Report + Demo | ⬜ Not Started | |
 
 **Legend:** ✅ Done | 🟡 In Progress | ⬜ Not Started | ❌ Blocked
@@ -54,7 +55,8 @@ ACTION: Output the context-reset block from AGENTS.md and stop.
 - **Python:** (set when installed)
 - **CUDA available:** (check when GPU setup)
 - **Workspace path:** `/Users/jwanilmodi/Web development/hearing-aid-speech-enhancement`
-- **Key dependencies:** torch, torchaudio, speechbrain, pyclarity, pystoi
+- **Key dependencies:** torch, torchaudio, asteroid, speechbrain, pyclarity, pystoi, pesq, pywavelets, mamba-ssm
+- **Deadline:** November 1, 2026
 
 ---
 
@@ -90,12 +92,13 @@ Details of what was done, why, and any findings.
 
 ## Open Tasks
 
-- [ ] Install Python dependencies (`pip install torch torchaudio librosa speechbrain pyclarity pystoi`)
+- [ ] Install Python dependencies: `pip install torch torchaudio asteroid speechbrain pyclarity pystoi pesq PyWavelets mamba-ssm`
 - [ ] Run `execution/00_verify_setup.py` — confirm all imports work
-- [ ] Download VoiceBank-DEMAND dataset (small, for early experiments)
-- [ ] Apply for Clarity Challenge dataset access at claritychallenge.org
+- [ ] Download NOIZEUS dataset (free, small — use for immediate testing)
+- [ ] Apply for Clarity Challenge (CEC2/CEC3) dataset access at claritychallenge.org
+- [ ] Source TIMIT (check college library for LDC access) or use LibriSpeech as substitute
 - [ ] Run `execution/01_stft_visualize.py` — first audio/spectrogram visualization
-- [ ] Present to faculty (presentation.html ready)
+- [ ] Generate `execution/generate_report.py` — run to create the .docx report
 
 ---
 
@@ -106,8 +109,14 @@ Details of what was done, why, and any findings.
 | 2026-08-11 | Architecture: U-Net + FiLM conditioning | Best novelty-to-feasibility ratio for minor project scope |
 | 2026-08-11 | Primary metric: HASPI/HASQI | Hearing-aid-specific — differentiates from generic denoising work |
 | 2026-08-11 | Primary dataset: Clarity Challenge | Purpose-built for HA research, includes audiograms |
-| 2026-08-11 | Baseline: Wiener Filter | Well-understood, gives clear comparison point |
-| 2026-08-11 | Framework: PyTorch + SpeechBrain | Mature, well-documented, has pretrained recipes |
+| 2026-08-11 | Framework: PyTorch + SpeechBrain + Asteroid | Mature, well-documented, pretrained recipes |
+| 2026-08-15 | **Replace Wiener filter with Wavelet DWT + MMSE-LSA** | Faculty feedback — more sophisticated classical baselines |
+| 2026-08-15 | **Replace Transformer with Mamba/SSM** | Research sweep: Mamba beats Transformer on PESQ (3.69 vs ~3.4) AND is faster (O(T) vs O(T²)) |
+| 2026-08-15 | **Add Complex Ratio Mask (CRM)** | Research: phase-aware masking eliminates musical noise artifacts |
+| 2026-08-15 | **MetricGAN+ with HASPI discriminator** | Novel: direct HASPI optimisation has not been published — our specific contribution |
+| 2026-08-15 | **Add 1D CNN as 3rd model** | Faculty suggestion: waveform-domain approach, natural low-latency comparison |
+| 2026-08-15 | **Datasets: TIMIT + NOIZEUS** | Faculty suggestion + standard evaluation benchmarks in SE literature |
+| 2026-08-15 | **Deadline: November 1, 2026** | Faculty-set deadline |
 
 ---
 
@@ -121,12 +130,20 @@ Details of what was done, why, and any findings.
 
 | File | Purpose |
 |------|---------|
-| `AGENTS.md` | Agent operating instructions (read first) |
+| `AGENTS.md` / `GEMINI.md` / `CLAUDE.md` | Agent operating instructions (read first) |
 | `context.md` | This file — session state |
-| `shared_context.md` | Cross-partner collaboration log |
+| `shared_context.md` | Cross-partner collaboration log (Jwanil + Namya) |
+| `docs/simple_guide.md` | **Plain-English guide — START HERE for any new session** |
 | `docs/project_overview.md` | Full project background — feed to new sessions |
-| `docs/everything_from_scratch.md` | Theory explainer — all concepts from scratch |
+| `docs/everything_from_scratch.md` | Deep technical theory explainer |
 | `docs/presentation.html` | Faculty pitch deck |
-| `directives/` | Phase-by-phase SOPs |
-| `execution/` | Deterministic Python scripts |
-| `src/models/` | Model architecture code |
+| `directives/00_dsp_fundamentals.md` | Phase 0 SOP |
+| `directives/01_audiology.md` | Phase 1 SOP |
+| `directives/02_classical_baselines.md` | Phase 2 SOP — Wavelet + MMSE-LSA |
+| `directives/03_data_pipeline.md` | Phase 3 SOP |
+| `directives/04_1d_cnn_model.md` | Phase 4 SOP — Conv-TasNet |
+| `directives/05_unet_film_model.md` | Phase 5 SOP — U-Net + FiLM (Core) |
+| `directives/05b_mamba_film_model.md` | Phase 5b SOP — Mamba/SSM + FiLM |
+| `directives/06_evaluation.md` | Phase 6 SOP — Full evaluation |
+| `directives/07_report.md` | Phase 7 SOP — Report and demo |
+| `execution/` | Numbered Python scripts (00–26+) |

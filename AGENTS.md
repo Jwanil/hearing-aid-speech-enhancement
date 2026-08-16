@@ -121,18 +121,32 @@ Errors are learning opportunities. When something breaks:
 
 ## ML Project Phases (Know Where You Are)
 
-| Phase | Name | Directive | Status |
-|-------|------|-----------|--------|
-| 0 | Audio/DSP Fundamentals | `directives/00_dsp_fundamentals.md` | [ ] |
-| 1 | Audiology + Audiograms | `directives/01_audiology.md` | [ ] |
-| 2 | Wiener Filter Baseline | `directives/02_wiener_baseline.md` | [ ] |
-| 3 | Data Pipeline | `directives/03_data_pipeline.md` | [ ] |
-| 4 | Generic DNN Denoiser | `directives/04_generic_dnn.md` | [ ] |
-| 5 | FiLM Conditioning (Core) | `directives/05_film_conditioning.md` | [ ] |
-| 6 | Full Evaluation | `directives/06_evaluation.md` | [ ] |
-| 7 | Report + Demo | `directives/07_report.md` | [ ] |
+**Deadline: November 1, 2026**
 
-Update the Status column in this table as phases complete.
+| Phase | Name | Directive | Dates | Status |
+|-------|------|-----------|-------|--------|
+| 0 | Audio/DSP (Digital Signal Processing) Fundamentals | `directives/00_dsp_fundamentals.md` | Aug 15–22 | [ ] |
+| 1 | Audiology + Audiogram Generation | `directives/01_audiology.md` | Aug 23–29 | [ ] |
+| 2 | Classical Baselines: Wavelet DWT + MMSE-LSA | `directives/02_classical_baselines.md` | Aug 30–Sep 6 | [ ] |
+| 3 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | `directives/03_data_pipeline.md` | Sep 7–20 | [ ] |
+| 4 | 1D CNN Model (Conv-TasNet style) | `directives/04_1d_cnn_model.md` | Sep 21–Oct 4 | [ ] |
+| 5 | U-Net + Attention + FiLM (Core Contribution) | `directives/05_unet_film_model.md` | Oct 5–18 | [ ] |
+| 5b | Mamba / State Space Model (SSM) + FiLM | `directives/05b_mamba_film_model.md` | Oct 19–25 | [ ] |
+| 6 | Full Evaluation (all 5 models, all metrics) | `directives/06_evaluation.md` | Oct 26–28 | [ ] |
+| 7 | Report + Audio Demo | `directives/07_report.md` | Oct 29–31 | [ ] |
+| 🎯 | **SUBMIT** | — | **Nov 1, 2026** | [ ] |
+
+Update the Status column as phases complete. Mark [ ] → [/] (in progress) → [x] (done).
+
+## 5-Model Architecture Summary
+
+| # | Model | Type | Key Innovation |
+|---|---|---|---|
+| 1 | Wavelet Denoising | Classical | DWT (Discrete Wavelet Transform) soft thresholding |
+| 2 | MMSE-LSA Filter | Classical | Industry standard HA (hearing aid) algorithm |
+| 3 | 1D CNN (Conv-TasNet) | Deep learning, generic | Waveform-domain, no audiogram |
+| 4 | U-Net + Attention + FiLM | Deep learning, personalised | CRM (Complex Ratio Mask) + MetricGAN+ HASPI discriminator |
+| 5 | Mamba/SSM + FiLM | Deep learning, personalised | SOTA (State-of-the-Art) accuracy + linear complexity |
 
 ---
 
@@ -147,17 +161,21 @@ hearing-aid-speech-enhancement/
 ├── context.md              ← per-session task log (READ FIRST)
 ├── shared_context.md       ← cross-partner log (READ FIRST)
 ├── docs/
-│   ├── project_overview.md ← feed to new sessions
-│   ├── everything_from_scratch.md
-│   └── presentation.html
-├── directives/             ← SOPs per project phase
-├── execution/              ← deterministic Python scripts
+│   ├── project_overview.md        ← full project background (feed to new sessions)
+│   ├── simple_guide.md            ← plain-English guide with resources (START HERE)
+│   ├── everything_from_scratch.md ← deep technical background
+│   └── presentation.html          ← faculty presentation deck
+├── directives/             ← SOPs per project phase (00, 01, 02, 03, 04, 04_1d_cnn, 05, 05b, 06, 07)
+├── execution/              ← deterministic Python scripts (numbered 00–26+)
 ├── src/                    ← model source code
 │   ├── data/
 │   └── models/
 ├── notebooks/              ← exploratory notebooks only
-├── results/                ← saved models, metrics, plots
-└── .tmp/                   ← intermediates (never commit)
+├── results/
+│   ├── checkpoints/        ← saved model weights (do NOT commit)
+│   ├── plots/              ← evaluation charts
+│   └── audio_demos/        ← before/after .wav files
+└── .tmp/                   ← intermediates (never commit, always regeneratable)
 ```
 
 **Key principle:** `.tmp/` can always be deleted and regenerated. Deliverables go in `results/`. Source code goes in `src/`. Never put trained model weights in git — use cloud storage.
