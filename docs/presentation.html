@@ -1000,7 +1000,53 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════ SLIDE 18 — CONCLUSION -->
+
+  <!-- ═══════════════════════════════════════════════════════ SLIDE 18 — FUTURE SCOPE -->
+  <div class="slide" data-notes="Future scope separates a minor project from a publishable research contribution. Four directions: hardware deployment (actual hearing aid chipsets), research paper submission to ICASSP or Interspeech, Indian language robustness testing (novel — not done in Clarity Challenge), and federated learning for privacy. Present these as 'what we would do with 6 more months.'">
+    <div class="slide-header">
+      <div class="eyebrow">Future Scope</div>
+      <h2>Where This Goes Next</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;margin-bottom:16px;">
+      <div class="card card-teal">
+        <div style="font-size:1.4rem;margin-bottom:8px;">🔬</div>
+        <div style="color:var(--teal);font-weight:700;font-size:0.88rem;margin-bottom:8px;">Real Hardware Testing</div>
+        <p style="font-size:0.8rem;">Deploy the Mamba+FiLM model on actual hearing aid DSP (Digital Signal Processor) chips — e.g. Arm Cortex-M55 + Ethos-U55 NPU (Neural Processing Unit). Benchmark true on-device latency, power draw, and memory footprint. Validate that the <10ms constraint holds in silicon, not just simulation.</p>
+      </div>
+      <div class="card card-accent">
+        <div style="font-size:1.4rem;margin-bottom:8px;">📄</div>
+        <div style="color:var(--accent);font-weight:700;font-size:0.88rem;margin-bottom:8px;">Research Paper Submission</div>
+        <p style="font-size:0.8rem;">The HASPI-optimised MetricGAN+ discriminator + audiogram FiLM conditioning is an original contribution. Target venues: <strong>ICASSP 2027</strong> (IEEE International Conference on Acoustics, Speech and Signal Processing), <strong>Interspeech 2027</strong>, or <strong>IEEE/ACM TASLP</strong> (Transactions on Audio, Speech, and Language Processing). Deadline for ICASSP 2027 is ~Sep 2026.</p>
+      </div>
+      <div class="card card-amber">
+        <div style="font-size:1.4rem;margin-bottom:8px;">🌐</div>
+        <div style="color:var(--amber);font-weight:700;font-size:0.88rem;margin-bottom:8px;">Indian Language Testing</div>
+        <p style="font-size:0.8rem;">Evaluate robustness on Indian languages — Hindi, Gujarati, Bengali, Tamil. Use IndicSpeech or MUCS (Multilingual and Code-switching ASR) datasets. Indian speech has different phoneme inventories and retroflex consonants — a model trained only on English may fail. This is a genuinely underexplored gap in the HA literature.</p>
+      </div>
+      <div class="card card-green">
+        <div style="font-size:1.4rem;margin-bottom:8px;">🔐</div>
+        <div style="color:var(--green);font-weight:700;font-size:0.88rem;margin-bottom:8px;">Federated Learning</div>
+        <p style="font-size:0.8rem;">Audiograms are private medical data. Federated Learning (FL) trains the model across many hearing aid users without sending raw audio or audiograms to a server — each device trains locally and shares only gradient updates. Privacy-preserving personalisation at scale — combines with FiLM perfectly.</p>
+      </div>
+      <div class="card" style="border-top:2px solid #c77dff;">
+        <div style="font-size:1.4rem;margin-bottom:8px;">📱</div>
+        <div style="color:#c77dff;font-weight:700;font-size:0.88rem;margin-bottom:8px;">Companion Mobile App</div>
+        <p style="font-size:0.8rem;">A smartphone app where hearing-impaired users input or import their audiogram (from a photo of their audiogram chart). The app connects to the hearing aid via Bluetooth LE, uploads the audiogram vector, and the model re-conditions itself in real time. Audiogram update = instant personalisation with no clinic visit.</p>
+      </div>
+      <div class="card" style="border-top:2px solid #f72585;">
+        <div style="font-size:1.4rem;margin-bottom:8px;">🏥</div>
+        <div style="color:#f72585;font-weight:700;font-size:0.88rem;margin-bottom:8px;">Clinical User Study</div>
+        <p style="font-size:0.8rem;">Recruit 20–30 hearing-impaired participants, play enhanced audio via calibrated headphones, collect subjective intelligibility and quality ratings. Compare our system vs their current hearing aids. This is the gold standard validation — aligns with the <strong>Clarity Challenge</strong>'s listener evaluation methodology.</p>
+      </div>
+    </div>
+    <div class="highlight-box teal" style="width:100%;">
+      <div class="section-label" style="color:var(--teal);">The Highest-Impact Next Step</div>
+      <p style="font-size:0.88rem;color:var(--text);">Submit a paper to <strong>ICASSP 2027</strong> on the HASPI-optimised MetricGAN+ finding. This is the specific result that has not been published — and it is directly testable from the deliverables of this minor project.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ SLIDE 19 — CONCLUSION -->
+
   <div class="slide" data-notes="Sum up the project. 466M people, one clear gap, a feasible academic implementation, four novelty claims. The project is ambitious but scoped correctly for a minor project — we have two students, 77 days, and a clear technical path.">
     <div class="slide-header">
       <div class="eyebrow">Conclusion</div>
