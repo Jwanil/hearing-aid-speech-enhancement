@@ -148,6 +148,20 @@ Details of what was done, why, and any findings.
 
 ---
 
+### [2026-08-16 22:20–22:28] — Jwanil — Future Scope and Presentation DOCX
+
+**Actions:**
+- Added "Future Scope" slide (Slide 18) to `docs/presentation.html` covering hardware testing, paper submission, Indian language testing, federated learning, and mobile app.
+- Created `execution/generate_presentation_docx.py` using `python-docx` to generate a meticulously styled DOCX version of the 21-slide proposal.
+- Generated `docs/Project_Proposal_Hearing_Aid_Speech_Enhancement.docx`.
+- Committed and pushed to GitHub.
+
+**Status:** Presentation and DOCX proposal document are finalized.
+
+**Next action:** Begin Phase 0.
+
+---
+
 ## Open Tasks
 
 - [ ] Install Python dependencies: `pip install torch torchaudio asteroid speechbrain pyclarity pystoi pesq PyWavelets mamba-ssm`

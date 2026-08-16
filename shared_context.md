@@ -116,6 +116,19 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-08-16 22:20 IST] | Phase: Setup / Documentation
+
+**What changed:** Added Future Scope to the proposal presentation and generated a DOCX version of the full 21-slide pitch.
+**Files touched:** 
+- `docs/presentation.html` (Added Slide 18: Future Scope)
+- `execution/generate_presentation_docx.py` (NEW: script to generate DOCX from the presentation design)
+- `docs/Project_Proposal_Hearing_Aid_Speech_Enhancement.docx` (NEW: output document)
+**Agent used:** Antigravity (Gemini)
+**Status after:** The final project proposal is now available as a highly-styled HTML presentation and an exact-match DOCX document.
+**Action needed from partner:** None
+
+---
+
 ### [2026-08-16 21:55 IST] | Phase: Setup / Documentation
 
 **What changed:** Final session cleanup — session start template, cleaned stale directives, new 20-slide proposal presentation, context.md and shared_context.md restructured.
