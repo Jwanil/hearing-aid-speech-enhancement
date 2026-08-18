@@ -116,6 +116,19 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-08-17 09:20 IST] | Phase: Setup / Documentation
+
+**What changed:** Generated a proposal DOCX using the exact same design as the minor project report (`generate_report.py`). White background, `1A56AA` blue headings, `EBF3FB` alternating table rows, `F5F5F5` code blocks, Calibri body — 12 sections, 18 references.
+**Files touched:**
+- `execution/generate_proposal_docx.py` (NEW: proposal DOCX generator)
+- `docs/Minor_Project_Proposal_Hearing_Aid_Speech_Enhancement.docx` (NEW: output)
+**Agent used:** Antigravity (Claude Sonnet 4.6)
+**Status after:** Two separate DOCX generators now exist — one for the report, one for the proposal. Run either to regenerate. Full architecture (5 models, Mamba, HASPI-GAN, CRM, all RASTA explanation) is documented in the proposal DOCX.
+**Action needed from partner:** None
+
+---
+
+
 ### [2026-08-16 22:20 IST] | Phase: Setup / Documentation
 
 **What changed:** Added Future Scope to the proposal presentation and generated a DOCX version of the full 21-slide pitch.

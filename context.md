@@ -162,6 +162,19 @@ Details of what was done, why, and any findings.
 
 ---
 
+### [2026-08-17 09:20 IST] — Jwanil — Proposal DOCX (report-style design)
+
+**Actions:**
+- Created `execution/generate_proposal_docx.py` — new script using the EXACT same design language as `generate_report.py` (white background, `1A56AA` blue headings, `EBF3FB` alternating table rows, `F5F5F5` code blocks, `4A90D9` horizontal rules, Calibri 11pt body).
+- Generated `docs/Minor_Project_Proposal_Hearing_Aid_Speech_Enhancement.docx` — 12-section academic proposal document including: Abstract, Problem Statement, Literature Review (with RASTA explanation), Background Theory (7 topics including Mamba/SSM), Methodology (all 5 models with code diagrams), Datasets, Evaluation Metrics, Timeline, Expected Results, Future Scope (6 extensions), Conclusion, References (18 citations).
+- Committed and pushed to GitHub.
+
+**Status:** Both `generate_report.py` and `generate_proposal_docx.py` now exist. Run either to regenerate the respective .docx file.
+
+**Next action:** Begin Phase 0.
+
+---
+
 ## Open Tasks
 
 - [ ] Install Python dependencies: `pip install torch torchaudio asteroid speechbrain pyclarity pystoi pesq PyWavelets mamba-ssm`
