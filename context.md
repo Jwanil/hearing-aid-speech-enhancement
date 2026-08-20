@@ -175,7 +175,23 @@ Details of what was done, why, and any findings.
 
 ---
 
-## Open Tasks
+### [2026-08-20 18:17 IST] — Jwanil — project_overview.md fully rewritten
+
+**Actions:**
+- Rewrote `docs/project_overview.md` from scratch to reflect the current 5-model architecture.
+- Old file still referenced Wiener filter, 3 models, and wrong directive filenames.
+- New file covers: 5-model comparison table, CRM vs IRM, Mamba vs Transformer, HASPI-GAN novelty,
+  all datasets (TIMIT, NOIZEUS, Clarity, VoiceBank-DEMAND, MUSAN), 3 test audiogram profiles,
+  updated phases table with correct directive filenames, and Nov 1 deadline.
+- Committed and pushed to GitHub.
+
+**Status:** `docs/project_overview.md` is now fully current.
+
+**Next action:** Begin Phase 0.
+
+---
+
+
 
 - [ ] Install Python dependencies: `pip install torch torchaudio asteroid speechbrain pyclarity pystoi pesq PyWavelets mamba-ssm`
 - [ ] Run `execution/00_verify_setup.py` — confirm all imports work

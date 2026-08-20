@@ -129,6 +129,18 @@ These decisions have been made after faculty meeting + research sweep. They are 
 ---
 
 
+### [2026-08-20 18:17 IST] | Phase: Setup / Documentation
+
+**What changed:** Fully rewrote `docs/project_overview.md` to reflect the 5-model architecture.
+The old file still described Wiener filter + 3 models and had wrong directive filenames.
+**Files touched:**
+- `docs/project_overview.md` (REWRITTEN — 5-model plan, correct datasets, correct directives, Nov 1 deadline)
+**Agent used:** Antigravity (Gemini/Claude)
+**Status after:** project_overview.md is now fully in sync with the current project plan.
+**Action needed from partner:** Pull latest. `@project_overview.md` in any new AI session now gives correct context.
+
+---
+
 ### [2026-08-16 22:20 IST] | Phase: Setup / Documentation
 
 **What changed:** Added Future Scope to the proposal presentation and generated a DOCX version of the full 21-slide pitch.
