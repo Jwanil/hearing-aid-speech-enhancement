@@ -19,62 +19,120 @@ This model skips the spectrogram entirely and works on the **raw waveform** — 
 - The model can learn a frequency decomposition better suited to speech than a fixed STFT
 - Represents the "waveform approach" in our comparison vs. the "spectrogram approach" of Models 4 and 5
 
+
 ---
 
-## Faculty Instruction: CNN Input Sources
+## Key Experiment: Two Input Types Compared
 
-> "After the filter outputs the result, preprocess the output to use into the 1D CNN."
+> The core question of this phase: **Does the 1D CNN work better when we feed it raw noisy audio, or when we feed it the output of the classical filter first?**
 
-The 1D CNN has **two roles** in our pipeline:
+We run the **same trained CNN model** on two different inputs and compare the results.
 
-### Role A — Standalone DL baseline
-Train the CNN on raw noisy waveforms directly (the standard Conv-TasNet use case).
-This is the main experiment for this phase.
+---
 
-### Role B — Post-filter enhancement (cascade pipeline)
-The CNN can also be trained/fine-tuned on the *output* of a classical filter, learning to
-remove the residual noise and musical noise artefacts that MMSE-LSA or Wavelet leave behind.
+### Experiment A — CNN on Raw Noisy Audio (direct approach)
 
 ```
-Noisy audio
+data/processed/noisy/*.wav
     |
     v
-[MMSE-LSA or Wavelet Filter] -> postprocess_filter_output() -> partially-cleaned waveform
+[Standardize: 16kHz, mono, float32, [-1,1], 4 seconds]
     |
     v
-[1D CNN] -> further enhanced waveform
+[1D CNN]
+    |
+    v
+Enhanced speech
 ```
 
-This is called a **cascade pipeline**. It can outperform either stage alone because:
-- The classical filter removes the bulk of the noise quickly and cheaply
-- The CNN removes the residual noise and artefacts the filter left behind
+The CNN sees the original noisy speech with all the noise intact. It must learn to
+separate speech from noise entirely on its own, from scratch.
 
-### Required: Postprocessing Before CNN Input
+---
 
-Before the 1D CNN receives audio (from either Role A or Role B), the waveform MUST be:
-1. At 16,000 Hz sampling rate
-2. Mono, float32
-3. Normalized to peak amplitude [-1.0, +1.0]
-4. Trimmed/padded to exactly 64,000 samples (4 seconds)
-5. DC offset removed (subtract mean)
+### Experiment B — CNN on Classical Filter Output (cascade approach)
 
-For Role B inputs (classical filter outputs), use `postprocess_filter_output()` from
-`directives/02_classical_baselines.md` before passing to the CNN.
+```
+data/processed/noisy/*.wav
+    |
+    v
+[MMSE-LSA Filter] or [Wavelet DWT Filter]
+    |
+    v
+[postprocess_filter_output()]  ← re-normalize, fix length, remove DC offset
+    |
+    v
+[1D CNN]
+    |
+    v
+Enhanced speech
+```
+
+The classical filter first removes the bulk of the noise. The CNN then learns to clean
+up the residual noise and musical noise artefacts that the filter left behind.
+This is called a **cascade pipeline**.
+
+---
+
+### Why This Comparison Matters
+
+| | Experiment A | Experiment B |
+|---|---|---|
+| **Input to CNN** | Raw noisy .wav | Classical filter output (postprocessed) |
+| **CNN's job** | Learn everything from scratch | Clean up filter artefacts |
+| **Advantage** | Simpler pipeline, CNN has full control | Filter does heavy lifting, CNN fine-tunes |
+| **Risk** | CNN may not learn well on very noisy input | Filter may remove speech along with noise — CNN has less to work with |
+| **Expected winner?** | Unknown — this is why we run the experiment | Unknown — depends on noise type and SNR |
+
+**The result tells us something scientifically useful:** if Experiment B wins, classical filters
+are a good preprocessing step for DL models. If Experiment A wins, the CNN is powerful enough
+to not need a pre-filter — and adding one hurts more than it helps.
+
+---
+
+### Required: Preprocessing Checklist Before CNN Input
+
+Both experiment inputs MUST satisfy these 5 requirements before entering the CNN:
+
+1. Sampling rate: **16,000 Hz** (16 kHz)
+2. Channels: **Mono** (1 channel), **float32**
+3. Amplitude: **normalized to peak [-1.0, +1.0]**
+4. Length: **exactly 64,000 samples** (4 seconds — pad with silence or trim)
+5. DC offset removed: `signal = signal - signal.mean()`
+
+For **Experiment A**, the standardize() function from `directives/03_data_pipeline.md` handles all 5.
+For **Experiment B**, call `postprocess_filter_output()` from `directives/02_classical_baselines.md` after the filter.
 
 ```python
-# Example: Role B cascade
-noisy_wav = load_and_standardize('data/processed/noisy/sp01_babble_sn5.wav')
+# Experiment A input
+from execution.utils import standardize
+noisy_wav, sr = torchaudio.load('data/raw/noisy/sp01_babble_sn5.wav')
+cnn_input = standardize(noisy_wav, sr)                        # shape: (1, 64000)
 
-# Step 1: classical filter
-enhanced_by_mmse = mmse_lsa_filter(noisy_wav)
-# Step 2: postprocess (REQUIRED before CNN)
-cnn_input = postprocess_filter_output(enhanced_by_mmse, original_length=len(noisy_wav))
-# Step 3: CNN
-cnn_input_tensor = torch.tensor(cnn_input).unsqueeze(0).unsqueeze(0)  # (1, 1, 64000)
-cnn_output = model(cnn_input_tensor)
+# Experiment B input (MMSE first, then CNN)
+noisy_np = cnn_input.squeeze().numpy()
+enhanced_by_filter = mmse_lsa_filter(noisy_np)               # classical filter output
+cnn_input_b = postprocess_filter_output(enhanced_by_filter,   # clean up for CNN
+                                         original_length=64000)
+cnn_input_b = torch.tensor(cnn_input_b).unsqueeze(0)         # shape: (1, 64000)
 ```
 
 ---
+
+### Results Comparison Table (fill in after running both experiments)
+
+| Metric | Noisy (no processing) | Experiment A: CNN on raw | Experiment B: Filter → CNN |
+|--------|----------------------|--------------------------|---------------------------|
+| HASPI ↑ | ___ | ___ | ___ |
+| STOI ↑  | ___ | ___ | ___ |
+| PESQ ↑  | ___ | ___ | ___ |
+| SI-SDR ↑| ___ | ___ | ___ |
+| **Winner** | — | ? | ? |
+
+> Fill this table in `results/1d_cnn_comparison.csv` after running `execution/12_eval_1d_cnn.py`.
+
+---
+
 
 ## Architecture Reference: Conv-TasNet
 
