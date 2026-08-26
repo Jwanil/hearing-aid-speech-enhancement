@@ -21,6 +21,61 @@ This model skips the spectrogram entirely and works on the **raw waveform** — 
 
 ---
 
+## Faculty Instruction: CNN Input Sources
+
+> "After the filter outputs the result, preprocess the output to use into the 1D CNN."
+
+The 1D CNN has **two roles** in our pipeline:
+
+### Role A — Standalone DL baseline
+Train the CNN on raw noisy waveforms directly (the standard Conv-TasNet use case).
+This is the main experiment for this phase.
+
+### Role B — Post-filter enhancement (cascade pipeline)
+The CNN can also be trained/fine-tuned on the *output* of a classical filter, learning to
+remove the residual noise and musical noise artefacts that MMSE-LSA or Wavelet leave behind.
+
+```
+Noisy audio
+    |
+    v
+[MMSE-LSA or Wavelet Filter] -> postprocess_filter_output() -> partially-cleaned waveform
+    |
+    v
+[1D CNN] -> further enhanced waveform
+```
+
+This is called a **cascade pipeline**. It can outperform either stage alone because:
+- The classical filter removes the bulk of the noise quickly and cheaply
+- The CNN removes the residual noise and artefacts the filter left behind
+
+### Required: Postprocessing Before CNN Input
+
+Before the 1D CNN receives audio (from either Role A or Role B), the waveform MUST be:
+1. At 16,000 Hz sampling rate
+2. Mono, float32
+3. Normalized to peak amplitude [-1.0, +1.0]
+4. Trimmed/padded to exactly 64,000 samples (4 seconds)
+5. DC offset removed (subtract mean)
+
+For Role B inputs (classical filter outputs), use `postprocess_filter_output()` from
+`directives/02_classical_baselines.md` before passing to the CNN.
+
+```python
+# Example: Role B cascade
+noisy_wav = load_and_standardize('data/processed/noisy/sp01_babble_sn5.wav')
+
+# Step 1: classical filter
+enhanced_by_mmse = mmse_lsa_filter(noisy_wav)
+# Step 2: postprocess (REQUIRED before CNN)
+cnn_input = postprocess_filter_output(enhanced_by_mmse, original_length=len(noisy_wav))
+# Step 3: CNN
+cnn_input_tensor = torch.tensor(cnn_input).unsqueeze(0).unsqueeze(0)  # (1, 1, 64000)
+cnn_output = model(cnn_input_tensor)
+```
+
+---
+
 ## Architecture Reference: Conv-TasNet
 
 **Conv-TasNet** stands for **Convolution-based Time-domain Audio Separation Network** (Luo & Mesgarani, 2019). Despite being designed for source separation, it is the most important and widely-used waveform-domain speech enhancement architecture.
