@@ -40,14 +40,58 @@ data/
 | Dataset | What to Download | Where to Download | Size |
 |---------|-----------------|-------------------|------|
 | **NOIZEUS** | All noisy .wav files + clean reference | ecs.utdallas.edu/loizou/speech/noizeus/ | ~100 MB |
+| **VoiceBank-DEMAND** ⭐ | clean_trainset_28spk_wav + noisy_trainset_28spk_wav + testsets | **datashare.ed.ac.uk/items/6ed35425-bf14-4d2b-93a1-0a4984952757** | ~10 GB |
 | **MUSAN** | Noise subset only (not music) | openslr.org/17/ | ~10 GB, use noise/ subfolder only |
 | **ESC-50** | All 50 noise categories | github.com/karolpiczak/ESC-50 | ~600 MB |
-| **VoiceBank-DEMAND** | Both clean_trainset and noisy_trainset | Available via SpeechBrain data recipes | ~10 GB |
 | **Clarity CEC2** | Register then download | claritychallenge.org | ~20 GB |
 | **TIMIT** | Full corpus | LDC / college library access | ~400 MB |
 
-> For initial testing (Phase 2 classical baselines), only NOIZEUS is needed.
-> Download NOIZEUS first — it is small, free, and purpose-built for speech enhancement evaluation.
+> **Download order:** NOIZEUS first (tiny, instant) → VoiceBank-DEMAND second (gold standard) → rest when ready.
+
+---
+
+### About VoiceBank-DEMAND (Edinburgh DataShare)
+
+**Full name:** Noisy speech database for training speech enhancement algorithms and TTS models
+**Authors:** Valentini-Botinhao et al., University of Edinburgh (2017)
+**Paper:** "Speech Enhancement for a Noise-Robust Text-to-Speech Synthesis System using Deep Recurrent Neural Networks", Interspeech 2016
+
+This is the **single most cited speech enhancement dataset in the world**. Nearly every major paper
+(Conv-TasNet, MetricGAN, CMGAN, SEMamba) reports results on this dataset. This means:
+- Our results on VoiceBank-DEMAND can be **directly compared to published numbers** without any
+  ambiguity about dataset differences
+- PESQ, STOI, and SI-SDR scores from our models can be placed side-by-side with those in papers
+
+**What is in it:**
+| Split | Speakers | Utterances | Noise types | SNR levels |
+|-------|---------|-----------|------------|-----------|
+| Train | 28 speakers | 11,572 utterances | 10 types (from DEMAND database) | 0, 5, 10, 15 dB |
+| Test | 2 speakers | 824 utterances | 5 different noise types | 2.5, 7.5, 12.5, 17.5 dB |
+
+**Noise types used:** cafeteria, restaurant, office, public transport, street, etc. (from the DEMAND noise database — real-world, recorded with microphone arrays)
+
+**Key property:** Train and test noise types are DIFFERENT — the model must generalize, not memorize.
+
+**Sampling rate:** 48 kHz (must be resampled to 16 kHz before use — this is standard practice)
+
+**Why this is better than NOIZEUS for training:**
+- NOIZEUS has only 30 clean utterances — too small to train a deep learning model
+- VoiceBank-DEMAND has 11,572 utterances — large enough for CNN and U-Net training
+- VoiceBank-DEMAND is the industry-standard benchmark — NOIZEUS is for classical method evaluation
+
+**Download directly from:** https://datashare.ed.ac.uk/items/6ed35425-bf14-4d2b-93a1-0a4984952757
+
+Files to download (the ones in the file list on that page):
+- `clean_trainset_28spk_wav.zip` — clean speech (train split)
+- `noisy_trainset_28spk_wav.zip` — noisy speech (train split)  
+- `clean_testset_wav.zip` — clean speech (test split)
+- `noisy_testset_wav.zip` — noisy speech (test split)
+
+> **Note:** The noisy files in VoiceBank-DEMAND are pre-mixed (not raw clean + noise separately).
+> You do NOT need to mix them yourself — they are ready to use as-is.
+> For the DataLoader, use clean as the training target and noisy as the model input.
+
+
 
 ### Step 3: Labeling — the Metadata CSV
 

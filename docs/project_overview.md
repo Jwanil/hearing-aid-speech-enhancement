@@ -132,7 +132,7 @@ metric score for any enhanced signal, then guides the generator to maximise it.
 | **TIMIT** | Clean speech training | 6,300 utterances | Phoneme labels, 630 speakers | LDC / university library |
 | **NOIZEUS** | Primary evaluation benchmark | 30 x 8 noises x 4 SNR levels | Purpose-built for SE evaluation | Free — ecs.utdallas.edu |
 | **Clarity CEC2/CEC3** | Primary HA training | ~11,000 scenes | Includes real listener audiograms | Free — claritychallenge.org |
-| **VoiceBank-DEMAND** | Sanity check / pretraining | 11,572 utterances | Standard SE benchmark | Free — via SpeechBrain |
+| **VoiceBank-DEMAND** ⭐ | Primary DL training + evaluation | 11,572 train / 824 test utterances | Gold standard SE benchmark — used by every SOTA paper | Free — datashare.ed.ac.uk/items/6ed35425-bf14-4d2b-93a1-0a4984952757 |
 | **MUSAN + ESC-50** | Noise augmentation | 900+ clips | Diverse real-world noise types | Free — openslr.org |
 
 **Test audiogram profiles** (held-out — not seen during training):
