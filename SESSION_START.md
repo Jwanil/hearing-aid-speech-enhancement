@@ -76,22 +76,22 @@ Then wait for my instructions before doing anything.
 
 ---
 
-## 📁 Active Directive Files (as of Aug 16, 2026)
+## 📁 Active Directive Files
 
-| Phase | File | Dates |
+| Phase | File | Status |
 |---|---|---|
-| 0 | `directives/00_dsp_fundamentals.md` | Aug 15–22 |
-| 1 | `directives/01_audiology.md` | Aug 23–29 |
-| 2 | `directives/02_classical_baselines.md` | Aug 30–Sep 6 |
-| 3 | `directives/03_data_pipeline.md` | Sep 7–20 |
-| 4 | `directives/04_1d_cnn_model.md` | Sep 21–Oct 4 |
-| 5 | `directives/05_unet_film_model.md` | Oct 5–18 |
-| 5b | `directives/05b_mamba_film_model.md` | Oct 19–25 |
-| 6 | `directives/06_evaluation.md` | Oct 26–28 |
-| 7 | `directives/07_report.md` | Oct 29–31 |
+| 0 | `directives/00_dsp_fundamentals.md` | ✅ Done |
+| 1 | `directives/01_audiology.md` | ✅ Done |
+| 2 | `directives/02_classical_baselines.md` | 🟡 In Progress |
+| 3 | `directives/03_data_pipeline.md` | ⬜ Not Started |
+| 4 | `directives/04_1d_cnn_model.md` | ⬜ Not Started |
+| 5 | `directives/05_unet_film_model.md` | ⬜ Not Started |
+| 5b | `directives/05b_mamba_film_model.md` | ⬜ Not Started |
+| 6 | `directives/06_evaluation.md` | ⬜ Not Started |
+| 7 | `directives/07_report.md` | ⬜ Not Started |
 | 🎯 | **SUBMIT** | **Nov 1, 2026** |
 
 ---
 
 *This file lives at: `SESSION_START.md` in the project root.*
-*Last updated: 2026-08-16 by Jwanil.*
+*Last updated: 2026-09-04 by Jwanil.*

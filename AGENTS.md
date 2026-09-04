@@ -123,18 +123,18 @@ Errors are learning opportunities. When something breaks:
 
 **Deadline: November 1, 2026**
 
-| Phase | Name | Directive | Dates | Status |
-|-------|------|-----------|-------|--------|
-| 0 | Audio/DSP (Digital Signal Processing) Fundamentals | `directives/00_dsp_fundamentals.md` | Aug 15–22 | [ ] |
-| 1 | Audiology + Audiogram Generation | `directives/01_audiology.md` | Aug 23–29 | [ ] |
-| 2 | Classical Baselines: Wavelet DWT + MMSE-LSA | `directives/02_classical_baselines.md` | Aug 30–Sep 6 | [ ] |
-| 3 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | `directives/03_data_pipeline.md` | Sep 7–20 | [ ] |
-| 4 | 1D CNN Model (Conv-TasNet style) | `directives/04_1d_cnn_model.md` | Sep 21–Oct 4 | [ ] |
-| 5 | U-Net + Attention + FiLM (Core Contribution) | `directives/05_unet_film_model.md` | Oct 5–18 | [ ] |
-| 5b | Mamba / State Space Model (SSM) + FiLM | `directives/05b_mamba_film_model.md` | Oct 19–25 | [ ] |
-| 6 | Full Evaluation (all 5 models, all metrics) | `directives/06_evaluation.md` | Oct 26–28 | [ ] |
-| 7 | Report + Audio Demo | `directives/07_report.md` | Oct 29–31 | [ ] |
-| 🎯 | **SUBMIT** | — | **Nov 1, 2026** | [ ] |
+| Phase | Name | Directive | Status |
+|-------|------|-----------|--------|
+| 0 | Audio/DSP (Digital Signal Processing) Fundamentals | `directives/00_dsp_fundamentals.md` | [x] |
+| 1 | Audiology + Audiogram Generation | `directives/01_audiology.md` | [x] |
+| 2 | Classical Baselines: Wavelet DWT + MMSE-LSA | `directives/02_classical_baselines.md` | [/] |
+| 3 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | `directives/03_data_pipeline.md` | [ ] |
+| 4 | 1D CNN Model (Conv-TasNet style) | `directives/04_1d_cnn_model.md` | [ ] |
+| 5 | U-Net + Attention + FiLM (Core Contribution) | `directives/05_unet_film_model.md` | [ ] |
+| 5b | Mamba / State Space Model (SSM) + FiLM | `directives/05b_mamba_film_model.md` | [ ] |
+| 6 | Full Evaluation (all 5 models, all metrics) | `directives/06_evaluation.md` | [ ] |
+| 7 | Report + Audio Demo | `directives/07_report.md` | [ ] |
+| 🎯 | **SUBMIT** | — | [ ] |
 
 Update the Status column as phases complete. Mark [ ] → [/] (in progress) → [x] (done).
 

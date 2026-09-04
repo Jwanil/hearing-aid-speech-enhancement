@@ -101,7 +101,7 @@ Both experiment inputs MUST satisfy these 5 requirements before entering the CNN
 5. DC offset removed: `signal = signal - signal.mean()`
 
 For **Experiment A**, the standardize() function from `directives/03_data_pipeline.md` handles all 5.
-For **Experiment B**, call `postprocess_filter_output()` from `directives/02_classical_baselines.md` after the filter.
+For **Experiment B**, call `postprocess_filter_output()` from `directives/03_classical_baselines.md` after the filter.
 
 ```python
 # Experiment A input

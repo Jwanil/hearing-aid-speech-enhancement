@@ -25,9 +25,9 @@ ACTION: Output the context-reset block from AGENTS.md and stop.
 
 ## Current Project Phase
 
-**Active Phase:** Phase 0 — Setup & DSP Fundamentals  
-**Current Task:** Project scaffolding  
-**Next Task:** Install dependencies, run STFT visualization script
+**Active Phase:** Phase 2 — Classical Baselines: Wavelet DWT + MMSE-LSA  
+**Current Task:** Implementing Wavelet denoiser (Model 1) + MMSE-LSA filter (Model 2)  
+**Next Task:** Read `directives/02_classical_baselines.md` → run/write execution scripts
 
 ---
 
@@ -35,9 +35,9 @@ ACTION: Output the context-reset block from AGENTS.md and stop.
 
 | Phase | Name | Status | Notes |
 |-------|------|--------|-------|
-| 0 | Audio/DSP Fundamentals | 🟡 In Progress | Project setup done |
-| 1 | Audiology + Audiograms | ⬜ Not Started | |
-| 2 | Classical Baselines: Wavelet DWT + MMSE-LSA | ⬜ Not Started | Replaces Wiener filter (faculty feedback) |
+| 0 | Audio/DSP Fundamentals | ✅ Done | Resources studied by Jwanil |
+| 1 | Audiology + Audiograms | ✅ Done | Resources studied by Jwanil |
+| 2 | Classical Baselines: Wavelet DWT + MMSE-LSA | 🟡 In Progress | Replaces Wiener filter (faculty feedback) |
 | 3 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | ⬜ Not Started | |
 | 4 | 1D CNN Model (Conv-TasNet) | ⬜ Not Started | Waveform-domain DL baseline |
 | 5 | U-Net + Attention + FiLM | ⬜ Not Started | Core contribution — complex masking + MetricGAN+ |
@@ -187,21 +187,35 @@ Details of what was done, why, and any findings.
 
 **Status:** `docs/project_overview.md` is now fully current.
 
-**Next action:** Begin Phase 0.
+**Next action:** Begin Phase 2 — implement Wavelet DWT + MMSE-LSA.
 
 ---
 
+### [2026-09-04 06:57 IST] — Jwanil — Phase 0 & 1 marked complete; Phase 2 activated
 
+**Author:** Jwanil (via Antigravity)
 
-- [ ] Install Python dependencies: `pip install torch torchaudio asteroid speechbrain pyclarity pystoi pesq PyWavelets mamba-ssm`
-- [ ] Run `execution/00_verify_setup.py` — confirm all imports work
-- [ ] Download NOIZEUS dataset (free, small — use for immediate testing)
-- [ ] Apply for Clarity Challenge (CEC2/CEC3) dataset access at claritychallenge.org
-- [ ] Source TIMIT (check college library for LDC access) or use LibriSpeech as substitute
-- [ ] Run `execution/01_stft_visualize.py` — first audio/spectrogram visualization
-- [ ] Generate `execution/generate_report.py` — run to create the .docx report
+**Actions:**
+- Confirmed Phase 0 (DSP Fundamentals) and Phase 1 (Audiology) resources studied independently.
+- Removed date timeline columns from `AGENTS.md`, `SESSION_START.md` phase tables.
+- Updated active phase → Phase 2 (Classical Baselines: Wavelet DWT + MMSE-LSA).
+- Updated status table: Phase 0 ✅, Phase 1 ✅, Phase 2 🟡.
+- Logged to `shared_context.md` under Jwanil's section.
+
+**Status:** Ready to begin Phase 2 implementation.
+
+**Next action:** Read `directives/02_classical_baselines.md` → implement Wavelet DWT denoiser and MMSE-LSA filter scripts in `execution/`.
 
 ---
+
+## Phase 2 Open Tasks
+
+- [ ] Read `directives/02_classical_baselines.md` fully
+- [ ] Run/write `execution/02_wavelet_denoiser.py` — Wavelet DWT soft-thresholding denoiser
+- [ ] Run/write `execution/03_mmse_lsa_filter.py` — MMSE-LSA filter (industry standard HA baseline)
+- [ ] Test both on NOIZEUS sample audio clips
+- [ ] Compute PESQ (Perceptual Evaluation of Speech Quality), STOI (Short-Time Objective Intelligibility), SI-SDR (Scale-Invariant Signal-to-Distortion Ratio) scores for both baselines
+- [ ] Save results to `results/` with plots
 
 ## Decisions Made
 

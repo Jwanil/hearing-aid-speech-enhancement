@@ -116,6 +116,20 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-04 06:57 IST] | Phase: 2 — Classical Baselines
+
+**What changed:** Phase 0 and Phase 1 marked complete. Phase 2 (Classical Baselines: Wavelet DWT + MMSE-LSA) set as active. Date timeline columns removed from `AGENTS.md`, `SESSION_START.md`, and `GEMINI.md` phase tables. Phase tracking switched to status-only.
+**Files touched:**
+- `AGENTS.md` (Dates column removed from phase table, Phase 0/1 → [x], Phase 2 → [/])
+- `SESSION_START.md` (Dates column removed, status column added)
+- `context.md` (Active phase updated, new log entry, Phase 2 open tasks added)
+- `shared_context.md` (this entry)
+**Agent used:** Antigravity (Claude Sonnet 4.6)
+**Status after:** Phases 0 & 1 complete. Phase 2 in progress. Next: implement Wavelet DWT denoiser and MMSE-LSA filter in `execution/`.
+**Action needed from partner:** Pull latest. Note that open tasks in `context.md` have been updated to Phase 2 tasks.
+
+---
+
 ### [2026-08-17 09:20 IST] | Phase: Setup / Documentation
 
 **What changed:** Generated a proposal DOCX using the exact same design as the minor project report (`generate_report.py`). White background, `1A56AA` blue headings, `EBF3FB` alternating table rows, `F5F5F5` code blocks, Calibri body — 12 sections, 18 references.

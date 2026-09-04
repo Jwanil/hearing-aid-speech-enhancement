@@ -197,13 +197,14 @@ pip install torch torchaudio asteroid speechbrain pyclarity pystoi pesq PyWavele
 |-------|------|----------------|--------|
 | 0 | Audio/DSP Fundamentals — STFT, spectrograms | `directives/00_dsp_fundamentals.md` | In Progress |
 | 1 | Audiology + Audiograms — pyclarity, hearing loss sim | `directives/01_audiology.md` | TODO |
-| 2 | Classical Baselines — Wavelet DWT + MMSE-LSA | `directives/02_classical_baselines.md` | TODO |
-| 3 | Data Pipeline — TIMIT + Clarity + NOIZEUS | `directives/03_data_pipeline.md` | TODO |
-| 4 | 1D CNN (Conv-TasNet) training | `directives/04_1d_cnn_model.md` | TODO |
+| 2 | Dataset Collection + Standardization + Data Pipeline | `directives/02_data_pipeline.md` | TODO |
+| 3 | Classical Baselines — MMSE-LSA first, then Wavelet DWT | `directives/03_classical_baselines.md` | TODO |
+| 4 | 1D CNN (Conv-TasNet) training — Exp A vs Exp B | `directives/04_1d_cnn_model.md` | TODO |
 | 5 | U-Net + Self-Attention + FiLM + CRM + MetricGAN+ | `directives/05_unet_film_model.md` | TODO |
 | 5b | Mamba/SSM + FiLM | `directives/05b_mamba_film_model.md` | TODO |
 | 6 | Full Evaluation — all 5 models x all metrics x 3 audiogram profiles | `directives/06_evaluation.md` | TODO |
 | 7 | Report + Demo | `directives/07_report.md` | TODO |
+
 
 **Deadline: November 1, 2026**
 
