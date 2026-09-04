@@ -215,7 +215,8 @@ Details of what was done, why, and any findings.
 - [x] Installed missing dependencies via `~/Library/Python/3.9/bin/pip3`: scipy, matplotlib, librosa, soundfile, PyWavelets, pystoi, torchmetrics, speechbrain, pyclarity
 - [x] Run `execution/00_verify_setup.py` — all pass ✅ (jupyter optional ⚠️, pesq replaced by torchmetrics)
 - [x] Created + ran `execution/01_stft_visualize.py` — waveform, spectrogram, HF removal plots generated
-- [ ] Run audiology / audiogram generation scripts (Phase 1 execution)
+- [x] Run `execution/02_audiogram_generator.py` — 3 project profiles + 8 random audiograms + JSON saved
+- [x] Run `execution/03_simulate_hearing_loss.py` — MSBG applied to all 3 profiles, 4 .wav files + spectrogram comparison saved
 - [ ] Read `directives/02_data_pipeline.md` fully
 - [ ] Download NOIZEUS dataset (free, small — use for immediate testing)
 - [ ] Apply for Clarity Challenge (CEC2/CEC3) dataset access at claritychallenge.org
