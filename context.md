@@ -173,6 +173,15 @@ Details of what was done, why, and any findings.
 (user deleted those)
 **Next action:** Begin Phase 0.
 
+### [2026-09-04 09:03 IST] — Jwanil — SSD storage and symlink restored
+
+**Actions:**
+- Checked SSD storage — verified 27 GB free after removing some unnecessary downloaded `.zip` files (handled by user/system).
+- Restored unified symlink: `data/` now points directly to `/Volumes/SANDISK/Minor Project/Data`.
+- Moved `data/metadata` back to the SSD successfully since space is now available.
+
+**Status:** Data pipeline ready for audio standardization (`03b_standardize_audio.py`).
+
 ---
 
 ### [2026-08-20 18:17 IST] — Jwanil — project_overview.md fully rewritten
@@ -218,9 +227,13 @@ Details of what was done, why, and any findings.
 - [x] **Write `execution/03a_build_metadata.py`:** parse filenames → generate `metadata/test_manifest.csv`
 - [x] Installed missing dependencies via `~/Library/Python/3.9/bin/pip3`: scipy, matplotlib, librosa, soundfile, PyWavelets, pystoi, torchmetrics, speechbrain, pyclarity
 - [x] Run `execution/00_verify_setup.py` — all pass ✅ (jupyter optional ⚠️, pesq replaced by torchmetrics)
-- [x] Created + ran `execution/01_stft_visualize.py` — waveform, spectrogram, HF removal plots generated
+- [x] Created `execution/01_stft_visualize.py` — waveform, spectrogram, HF removal plots generated
 - [x] Run `execution/02_audiogram_generator.py` — 3 project profiles + 8 random audiograms + JSON saved
 - [x] Run `execution/03_simulate_hearing_loss.py` — MSBG applied to all 3 profiles, 4 .wav files + spectrogram comparison saved
+- [x] **Write `execution/03b_standardize_audio.py`:** resample + mono + normalize + fix length → save to `data/processed/`
+- [x] **Verify standardization:** load 5 random files from `data/processed/`, confirm shape `(1, 64000)`, sample rate 16000, values in `[-1, 1]`
+- [x] **Write `execution/03c_data_pipeline.py`:** implement `HearingAidDataset` with on-the-fly mixing (or dynamic audiograms)
+- [x] **Test DataLoader:** iterate 10 batches, print shapes, plot spectrograms of noisy vs clean
 - [ ] Read `directives/02_data_pipeline.md` fully
 - [ ] Source TIMIT (check college library for LDC access) or use LibriSpeech as substitute
 - [ ] Build DataLoader and preprocessing pipeline in `execution/`

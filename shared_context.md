@@ -116,6 +116,25 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-04 09:08 IST] | Phase: 2 — Data Pipeline (Complete)
+
+**What changed:** 
+- Successfully ran `03b_standardize_audio.py` across 25,541 dataset `.wav` files using multiprocessing. All files are now exactly 16kHz, mono, peak-normalized to [-1, 1], and exactly 4 seconds long (`1x64000` samples) and stored in `data/processed/`.
+- Wrote `03c_data_pipeline.py` containing the `HearingAidDataset` and `DataLoader`. 
+- The dataloader maps processed `.wav` files and randomly assigns one of the generated audiogram profiles (normalized from 0-120dB to 0-1 range).
+- Tested dataloader: successfully generates batches of `noisy`, `clean`, `audiogram`, and `snr`. Spectrograms plotted and verified.
+**Files touched:**
+- `context.md` (checked off standardisation and dataloader tasks)
+- `execution/03b_standardize_audio.py` (NEW)
+- `execution/03c_data_pipeline.py` (NEW)
+- `results/plots/02_dataloader_test.png` (NEW)
+- `shared_context.md` (this entry)
+**Agent used:** Antigravity (Gemini 3.1 Pro)
+**Status after:** Phase 2 execution complete. Datasets and PyTorch Dataloaders are fully functional. Ready for Phase 3 (Classical Baselines).
+**Action needed from partner:** Pull latest. Verify the dataloader spectrogram test.
+
+---
+
 ### [2026-09-04 08:59 IST] | Phase: 2 — Data Pipeline
 
 **What changed:** 
