@@ -80,10 +80,10 @@ Then wait for my instructions before doing anything.
 
 | Phase | File | Status |
 |---|---|---|
-| 0 | `directives/00_dsp_fundamentals.md` | ✅ Done |
-| 1 | `directives/01_audiology.md` | ✅ Done |
-| 2 | `directives/02_classical_baselines.md` | 🟡 In Progress |
-| 3 | `directives/03_data_pipeline.md` | ⬜ Not Started |
+| 0 | `directives/00_dsp_fundamentals.md` | ✅ Resources studied; scripts pending |
+| 1 | `directives/01_audiology.md` | ✅ Resources studied; scripts pending |
+| 2 | `directives/02_data_pipeline.md` | 🟡 In Progress |
+| 3 | `directives/03_classical_baselines.md` | ⬜ Not Started |
 | 4 | `directives/04_1d_cnn_model.md` | ⬜ Not Started |
 | 5 | `directives/05_unet_film_model.md` | ⬜ Not Started |
 | 5b | `directives/05b_mamba_film_model.md` | ⬜ Not Started |

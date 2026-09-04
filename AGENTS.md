@@ -127,8 +127,8 @@ Errors are learning opportunities. When something breaks:
 |-------|------|-----------|--------|
 | 0 | Audio/DSP (Digital Signal Processing) Fundamentals | `directives/00_dsp_fundamentals.md` | [x] |
 | 1 | Audiology + Audiogram Generation | `directives/01_audiology.md` | [x] |
-| 2 | Classical Baselines: Wavelet DWT + MMSE-LSA | `directives/02_classical_baselines.md` | [/] |
-| 3 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | `directives/03_data_pipeline.md` | [ ] |
+| 2 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | `directives/02_data_pipeline.md` | [/] |
+| 3 | Classical Baselines: Wavelet DWT + MMSE-LSA | `directives/03_classical_baselines.md` | [ ] |
 | 4 | 1D CNN Model (Conv-TasNet style) | `directives/04_1d_cnn_model.md` | [ ] |
 | 5 | U-Net + Attention + FiLM (Core Contribution) | `directives/05_unet_film_model.md` | [ ] |
 | 5b | Mamba / State Space Model (SSM) + FiLM | `directives/05b_mamba_film_model.md` | [ ] |

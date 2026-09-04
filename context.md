@@ -25,9 +25,9 @@ ACTION: Output the context-reset block from AGENTS.md and stop.
 
 ## Current Project Phase
 
-**Active Phase:** Phase 2 — Classical Baselines: Wavelet DWT + MMSE-LSA  
-**Current Task:** Implementing Wavelet denoiser (Model 1) + MMSE-LSA filter (Model 2)  
-**Next Task:** Read `directives/02_classical_baselines.md` → run/write execution scripts
+**Active Phase:** Phase 2 — Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN)  
+**Current Task:** Setting up dataset pipeline + running Phase 0 & 1 execution scripts  
+**Next Task:** Read `directives/02_data_pipeline.md` → run/write execution scripts; also run `execution/00_verify_setup.py` and DSP/audiology scripts
 
 ---
 
@@ -35,10 +35,10 @@ ACTION: Output the context-reset block from AGENTS.md and stop.
 
 | Phase | Name | Status | Notes |
 |-------|------|--------|-------|
-| 0 | Audio/DSP Fundamentals | ✅ Done | Resources studied by Jwanil |
-| 1 | Audiology + Audiograms | ✅ Done | Resources studied by Jwanil |
-| 2 | Classical Baselines: Wavelet DWT + MMSE-LSA | 🟡 In Progress | Replaces Wiener filter (faculty feedback) |
-| 3 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | ⬜ Not Started | |
+| 0 | Audio/DSP Fundamentals | ✅ Done | Resources studied; execution scripts pending |
+| 1 | Audiology + Audiograms | ✅ Done | Resources studied; execution scripts pending |
+| 2 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | 🟡 In Progress | Must complete before baselines |
+| 3 | Classical Baselines: Wavelet DWT + MMSE-LSA | ⬜ Not Started | Replaces Wiener filter (faculty feedback) |
 | 4 | 1D CNN Model (Conv-TasNet) | ⬜ Not Started | Waveform-domain DL baseline |
 | 5 | U-Net + Attention + FiLM | ⬜ Not Started | Core contribution — complex masking + MetricGAN+ |
 | 5b | Mamba/SSM + FiLM | ⬜ Not Started | SOTA model — replaces Transformer plan |
@@ -208,14 +208,17 @@ Details of what was done, why, and any findings.
 
 ---
 
-## Phase 2 Open Tasks
+## Phase 2 Open Tasks (Data Pipeline)
 
-- [ ] Read `directives/02_classical_baselines.md` fully
-- [ ] Run/write `execution/02_wavelet_denoiser.py` — Wavelet DWT soft-thresholding denoiser
-- [ ] Run/write `execution/03_mmse_lsa_filter.py` — MMSE-LSA filter (industry standard HA baseline)
-- [ ] Test both on NOIZEUS sample audio clips
-- [ ] Compute PESQ (Perceptual Evaluation of Speech Quality), STOI (Short-Time Objective Intelligibility), SI-SDR (Scale-Invariant Signal-to-Distortion Ratio) scores for both baselines
-- [ ] Save results to `results/` with plots
+- [ ] Run `execution/00_verify_setup.py` — confirm all imports work
+- [ ] Run `execution/01_stft_visualize.py` — DSP fundamentals execution (Phase 0 script)
+- [ ] Run audiology / audiogram generation scripts (Phase 1 execution)
+- [ ] Read `directives/02_data_pipeline.md` fully
+- [ ] Download NOIZEUS dataset (free, small — use for immediate testing)
+- [ ] Apply for Clarity Challenge (CEC2/CEC3) dataset access at claritychallenge.org
+- [ ] Source TIMIT (check college library for LDC access) or use LibriSpeech as substitute
+- [ ] Build DataLoader and preprocessing pipeline in `execution/`
+- [ ] Verify pipeline outputs: clean/noisy pairs, correct sample rate, correct duration
 
 ## Decisions Made
 
@@ -254,11 +257,11 @@ Details of what was done, why, and any findings.
 | `docs/presentation.html` | Faculty pitch deck |
 | `directives/00_dsp_fundamentals.md` | Phase 0 SOP |
 | `directives/01_audiology.md` | Phase 1 SOP |
-| `directives/02_classical_baselines.md` | Phase 2 SOP — Wavelet + MMSE-LSA |
-| `directives/03_data_pipeline.md` | Phase 3 SOP |
+| `directives/02_data_pipeline.md` | Phase 2 SOP — Data Pipeline |
+| `directives/03_classical_baselines.md` | Phase 3 SOP — Wavelet + MMSE-LSA |
 | `directives/04_1d_cnn_model.md` | Phase 4 SOP — Conv-TasNet |
 | `directives/05_unet_film_model.md` | Phase 5 SOP — U-Net + FiLM (Core) |
 | `directives/05b_mamba_film_model.md` | Phase 5b SOP — Mamba/SSM + FiLM |
 | `directives/06_evaluation.md` | Phase 6 SOP — Full evaluation |
 | `directives/07_report.md` | Phase 7 SOP — Report and demo |
-| `execution/` | Numbered Python scripts (00–26+) |
+| `execution/` | Numbered Python scripts (00–+) |

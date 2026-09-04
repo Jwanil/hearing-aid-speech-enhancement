@@ -116,17 +116,17 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
-### [2026-09-04 06:57 IST] | Phase: 2 — Classical Baselines
+### [2026-09-04 06:57 IST] | Phase: 2 — Data Pipeline
 
-**What changed:** Phase 0 and Phase 1 marked complete. Phase 2 (Classical Baselines: Wavelet DWT + MMSE-LSA) set as active. Date timeline columns removed from `AGENTS.md`, `SESSION_START.md`, and `GEMINI.md` phase tables. Phase tracking switched to status-only.
+**What changed:** Phase 0 and Phase 1 marked complete (resource study done; execution scripts still pending). Phase 2 (Data Pipeline: TIMIT + Clarity + NOIZEUS + MUSAN) set as active. Date timeline columns removed from `AGENTS.md`, `SESSION_START.md` phase tables. Phase tracking switched to status-only. Directive file order corrected: `02_data_pipeline` comes before `03_classical_baselines`.
 **Files touched:**
-- `AGENTS.md` (Dates column removed from phase table, Phase 0/1 → [x], Phase 2 → [/])
-- `SESSION_START.md` (Dates column removed, status column added)
-- `context.md` (Active phase updated, new log entry, Phase 2 open tasks added)
+- `AGENTS.md` (Dates column removed, phase order corrected: Data Pipeline = Phase 2, Classical Baselines = Phase 3)
+- `SESSION_START.md` (Dates column removed, status column added, phase order corrected)
+- `context.md` (Active phase updated to Phase 2 Data Pipeline, new log entry, Phase 2 open tasks added)
 - `shared_context.md` (this entry)
 **Agent used:** Antigravity (Claude Sonnet 4.6)
-**Status after:** Phases 0 & 1 complete. Phase 2 in progress. Next: implement Wavelet DWT denoiser and MMSE-LSA filter in `execution/`.
-**Action needed from partner:** Pull latest. Note that open tasks in `context.md` have been updated to Phase 2 tasks.
+**Status after:** Phases 0 & 1 resource study complete (execution scripts pending). Phase 2 (Data Pipeline) in progress. Next: run Phase 0/1 execution scripts AND start building data pipeline.
+**Action needed from partner:** Pull latest. Phase order has changed — Data Pipeline is now Phase 2 (before Classical Baselines).
 
 ---
 
