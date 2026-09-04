@@ -121,7 +121,7 @@ These decisions have been made after faculty meeting + research sweep. They are 
 **What changed:** 
 - Datasets downloaded and verified on SSD: NOIZEUS, VoiceBank-DEMAND, MUSAN.
 - Fixed a macOS specific bug in `03a_build_metadata.py` where `._` hidden files caused torchaudio to crash.
-- Unlinked `data/metadata` from SSD to keep metadata CSVs on the Mac (since SSD was filled to 100% capacity by the raw downloads). 
+- Unlinked `data/metadata` from SSD to keep metadata CSVs on the Mac initially because SSD was filled to 100%. (Update: space was cleared on the SSD (27GB free), so the entire `data/` folder is now back to being a single symlink to the SSD, keeping everything unified).
 - Ran metadata builder successfully: 9,839 Train / 1,093 Val / 1,754 Test items.
 **Files touched:**
 - `context.md` (Checked off dataset and metadata tasks)
