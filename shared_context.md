@@ -123,6 +123,7 @@ These decisions have been made after faculty meeting + research sweep. They are 
 - Wrote `03c_data_pipeline.py` containing the `HearingAidDataset` and `DataLoader`. 
 - The dataloader maps processed `.wav` files and randomly assigns one of the generated audiogram profiles (normalized from 0-120dB to 0-1 range).
 - Tested dataloader: successfully generates batches of `noisy`, `clean`, `audiogram`, and `snr`. Spectrograms plotted and verified.
+- **Backported Dataset Audio to Phase 0 & 1:** Removed the synthetic audio generators from `01_stft_visualize.py` and `03_simulate_hearing_loss.py`. They now directly load the standardized `sp01.wav` from the dataset, generating much more realistic medical/spectrogram demonstrations. Updated the explanation docs to reflect this.
 **Files touched:**
 - `context.md` (checked off standardisation and dataloader tasks)
 - `execution/03b_standardize_audio.py` (NEW)

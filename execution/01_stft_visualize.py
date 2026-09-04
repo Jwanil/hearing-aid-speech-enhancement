@@ -60,56 +60,17 @@ TARGET_SR = 16_000   # 16 kHz — standard for speech enhancement models
 HF_CUTOFF_HZ = 3_000   # Remove everything above 3 kHz
 
 
-# ─── Helper: synthesise a voiced + fricative tone if no .wav supplied ─────────
-def synthesise_test_signal(sr: int = TARGET_SR, duration: float = 2.5) -> torch.Tensor:
-    """
-    Generates a synthetic speech-like signal:
-      - 0.0–1.0s: voiced vowel-like sound (100 Hz + harmonics)
-      - 1.0–1.5s: silence / transition
-      - 1.5–2.5s: fricative-like broadband noise burst
-    Returns shape (1, N) as a float32 tensor.
-    """
-    t = torch.linspace(0, duration, int(sr * duration))
-
-    # Voiced segment: fundamental + first 8 harmonics
-    voiced = sum(
-        0.4 / k * torch.sin(2 * np.pi * 100 * k * t)
-        for k in range(1, 9)
-    )
-    voiced = voiced / voiced.abs().max()
-
-    # Fricative: narrow-band noise centred around 5–8 kHz
-    noise = torch.randn_like(t)
-    # Band-pass by computing FFT, zeroing low bins, inverting
-    noise_fft = torch.fft.rfft(noise)
-    freqs = torch.fft.rfftfreq(noise.shape[-1], d=1.0 / sr)
-    mask = (freqs >= 4000) & (freqs <= 8000)
-    noise_fft[~mask] = 0
-    fricative = torch.fft.irfft(noise_fft, n=noise.shape[-1])
-    fricative = fricative / (fricative.abs().max() + 1e-9) * 0.6
-
-    # Combine: voiced for first 1 s, fricative for last 1 s
-    n = t.shape[0]
-    signal = voiced.clone()
-    start_fric = int(1.5 * sr)
-    end_voiced = int(1.0 * sr)
-    signal[end_voiced:start_fric] *= 0.05   # brief silence
-    signal[start_fric:] = fricative[start_fric:]
-
-    return signal.unsqueeze(0).float()   # (1, N)
-
-
 # ─── Load audio ────────────────────────────────────────────────────────────────
 def load_audio(wav_path: str | None) -> tuple[torch.Tensor, int]:
-    if wav_path and os.path.exists(wav_path):
-        waveform, sr = torchaudio.load(wav_path)
-        print(f"Loaded: {wav_path}  |  SR={sr} Hz  |  shape={waveform.shape}")
-    else:
-        if wav_path:
-            print(f"⚠  File not found: {wav_path}")
-        print("→ Generating synthetic voiced + fricative test signal …")
-        waveform = synthesise_test_signal(TARGET_SR)
-        sr = TARGET_SR
+    """Load a .wav file (defaults to NOIZEUS clean sp01 if not provided) and mix to mono."""
+    if not wav_path:
+        wav_path = os.path.join(ROOT, "data", "processed", "clean", "noizeus", "clean", "sp01.wav")
+        
+    if not os.path.exists(wav_path):
+        raise FileNotFoundError(f"Audio file not found: {wav_path}. Please run Phase 2 data standardisation first.")
+        
+    waveform, sr = torchaudio.load(wav_path)
+    print(f"Loaded: {wav_path}  |  SR={sr} Hz  |  shape={waveform.shape}")
 
     # Resample to target SR if needed
     if sr != TARGET_SR:

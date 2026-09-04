@@ -83,26 +83,17 @@ PROFILE_COLORS = ["#3498DB", "#E74C3C", "#2ECC71"]
 def load_audio_44k(wav_path: str | None) -> np.ndarray:
     """
     Load a .wav file and resample to 44100 Hz mono float64 (required by MSBG).
-    If no file supplied, use Phase 0's synthetic audio or generate a fresh tone.
+    If no file supplied, use a standard dataset file.
     """
-    fallback = os.path.join(DEMO_DIR, "00_original.wav")
+    if not wav_path:
+        # Default to a standardized dataset file if available
+        ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        wav_path = os.path.join(ROOT, "data", "processed", "clean", "noizeus", "clean", "sp01.wav")
+        
+    if not os.path.exists(wav_path):
+        raise FileNotFoundError(f"Audio file not found: {wav_path}. Please run Phase 2 data standardisation first.")
 
-    if wav_path and os.path.exists(wav_path):
-        source = wav_path
-    elif os.path.exists(fallback):
-        print(f"  No --wav supplied. Using Phase 0 demo: {fallback}")
-        source = fallback
-    else:
-        # Generate a 2-second speech-like signal
-        print("  No audio found. Generating synthetic signal …")
-        sr_tmp = 44100
-        t = np.linspace(0, 2.0, sr_tmp * 2)
-        # Voiced part
-        sig = sum(0.3 / k * np.sin(2 * np.pi * 100 * k * t) for k in range(1, 9))
-        sig = sig / (np.abs(sig).max() + 1e-9) * 0.5
-        tmp_path = os.path.join(DEMO_DIR, "_tmp_synth.wav")
-        sf.write(tmp_path, sig, sr_tmp)
-        source = tmp_path
+    source = wav_path
 
     waveform, sr = torchaudio.load(source)
 
