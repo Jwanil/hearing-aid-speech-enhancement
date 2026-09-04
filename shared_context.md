@@ -116,6 +116,42 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-04 08:59 IST] | Phase: 2 — Data Pipeline
+
+**What changed:** 
+- Datasets downloaded and verified on SSD: NOIZEUS, VoiceBank-DEMAND, MUSAN.
+- Fixed a macOS specific bug in `03a_build_metadata.py` where `._` hidden files caused torchaudio to crash.
+- Unlinked `data/metadata` from SSD to keep metadata CSVs on the Mac (since SSD was filled to 100% capacity by the raw downloads). 
+- Ran metadata builder successfully: 9,839 Train / 1,093 Val / 1,754 Test items.
+**Files touched:**
+- `context.md` (Checked off dataset and metadata tasks)
+- `execution/03a_build_metadata.py` (NEW — dataset manifest builder)
+- `data/metadata/train_manifest.csv`, `val_manifest.csv`, `test_manifest.csv`
+- `shared_context.md` (this entry)
+**Agent used:** Antigravity (Gemini 3.1 Pro)
+**Status after:** Data metadata generated. Ready for the PyTorch DataLoader and audio standardization.
+**Action needed from partner:** None for now.
+
+---
+
+### [2026-09-04 07:24 IST] | Phase: 2 — Data Pipeline
+
+**What changed:** Phase 1 execution complete. Phase 2 data pipeline planning in progress. Dataset storage strategy decided: all datasets go to SSD (`/Volumes/SANDISK/Minor Project/Data/`), project code stays on Mac. A symlink `data/` → SSD path keeps the codebase clean and portable.
+**Files touched:**
+- `context.md` (Phase 1 tasks ticked, Phase 2 task list updated)
+- `directives/01_audiology.md` (learnings log updated with pyclarity API discoveries)
+- `execution/02_audiogram_generator.py` (NEW — generates 3 test profiles + random audiograms)
+- `execution/03_simulate_hearing_loss.py` (NEW — MSBG hearing loss simulation)
+- `results/plots/01_audiograms_profiles.png`, `01_audiograms_random.png`, `01_hearing_loss_spectrograms.png`
+- `results/audio_demos/01_original_44k.wav`, `01_mild_flat_loss.wav`, `01_moderate_sloping_loss.wav`, `01_severe_hf_loss.wav`
+- `results/data/audiograms.json`
+- `shared_context.md` (this entry)
+**Agent used:** Antigravity (Claude Sonnet 4.6)
+**Status after:** Phase 0 & 1 execution complete. SSD at `/Volumes/SANDISK/Minor Project/Data/` confirmed (39 GB free). Ready to download datasets.
+**Action needed from partner:** Pull latest. Phase 2 (Data Pipeline) is active. Dataset downloads starting — see dataset guide in this session.
+
+---
+
 ### [2026-09-04 06:57 IST] | Phase: 2 — Data Pipeline
 
 **What changed:** Phase 0 and Phase 1 marked complete (resource study done; execution scripts still pending). Phase 2 (Data Pipeline: TIMIT + Clarity + NOIZEUS + MUSAN) set as active. Date timeline columns removed from `AGENTS.md`, `SESSION_START.md` phase tables. Phase tracking switched to status-only. Directive file order corrected: `02_data_pipeline` comes before `03_classical_baselines`.

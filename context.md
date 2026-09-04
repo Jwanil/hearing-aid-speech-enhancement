@@ -212,14 +212,16 @@ Details of what was done, why, and any findings.
 ## Phase 2 Open Tasks (Data Pipeline)
 
 - [x] Fixed bug in `execution/00_verify_setup.py` (assert_version called before definition; also added pesq + pywt checks)
+- [x] **Download NOIZEUS** to `data/raw/noisy/` and `data/raw/clean/`
+- [x] **Download MUSAN noise subset** to `data/raw/noise/`
+- [x] **Download VoiceBank-DEMAND** via SpeechBrain (or manually)
+- [x] **Write `execution/03a_build_metadata.py`:** parse filenames → generate `metadata/test_manifest.csv`
 - [x] Installed missing dependencies via `~/Library/Python/3.9/bin/pip3`: scipy, matplotlib, librosa, soundfile, PyWavelets, pystoi, torchmetrics, speechbrain, pyclarity
 - [x] Run `execution/00_verify_setup.py` — all pass ✅ (jupyter optional ⚠️, pesq replaced by torchmetrics)
 - [x] Created + ran `execution/01_stft_visualize.py` — waveform, spectrogram, HF removal plots generated
 - [x] Run `execution/02_audiogram_generator.py` — 3 project profiles + 8 random audiograms + JSON saved
 - [x] Run `execution/03_simulate_hearing_loss.py` — MSBG applied to all 3 profiles, 4 .wav files + spectrogram comparison saved
 - [ ] Read `directives/02_data_pipeline.md` fully
-- [ ] Download NOIZEUS dataset (free, small — use for immediate testing)
-- [ ] Apply for Clarity Challenge (CEC2/CEC3) dataset access at claritychallenge.org
 - [ ] Source TIMIT (check college library for LDC access) or use LibriSpeech as substitute
 - [ ] Build DataLoader and preprocessing pipeline in `execution/`
 - [ ] Verify pipeline outputs: clean/noisy pairs, correct sample rate, correct duration
