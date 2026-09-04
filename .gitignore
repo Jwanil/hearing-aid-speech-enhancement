@@ -34,3 +34,6 @@ Thumbs.db
 # IDE
 .vscode/settings.json
 .idea/
+
+# Dataset directory (stored on SSD via symlink — never commit)
+data/
