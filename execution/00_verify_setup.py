@@ -9,6 +9,11 @@ import sys
 
 checks = []
 
+def assert_version():
+    """Check Python version is 3.9+"""
+    major, minor = sys.version_info[:2]
+    assert (major, minor) >= (3, 9), f"Need Python 3.9+, got {major}.{minor}"
+
 def check(name, fn):
     try:
         fn()
@@ -16,56 +21,64 @@ def check(name, fn):
     except Exception as e:
         checks.append((name, False, str(e)))
 
-# Core
-check("Python 3.9+", lambda: assert_version())
+# --- Python version ---
+check("Python 3.9+", assert_version)
+
+# --- Core scientific stack ---
 check("torch", lambda: __import__("torch"))
 check("torchaudio", lambda: __import__("torchaudio"))
 check("numpy", lambda: __import__("numpy"))
 check("scipy", lambda: __import__("scipy"))
 check("matplotlib", lambda: __import__("matplotlib"))
 
-# Audio
+# --- Audio I/O ---
 check("librosa", lambda: __import__("librosa"))
 check("soundfile", lambda: __import__("soundfile"))
 
-# Speech enhancement
+# --- Wavelet (Phase 3 — Classical Baselines) ---
+check("pywavelets (PyWavelets)", lambda: __import__("pywt"))
+
+# --- Speech enhancement metrics ---
+check("pystoi", lambda: __import__("pystoi"))
+check("torchmetrics (replaces pesq)", lambda: __import__("torchmetrics"))
+
+# --- Speech enhancement framework ---
 check("speechbrain", lambda: __import__("speechbrain"))
 
-# Hearing-aid specific
+# --- Hearing-aid specific ---
 check("pyclarity (clarity.evaluator)", lambda: __import__("clarity.evaluator.msbg.msbg", fromlist=["Ear"]))
-check("pystoi", lambda: __import__("pystoi"))
 
-# Jupyter
-check("jupyter", lambda: __import__("notebook"))
+# --- Jupyter (optional — not required for scripts) ---
+check("jupyter / notebook (optional)", lambda: __import__("notebook"))
 
-def assert_version():
-    major, minor = sys.version_info[:2]
-    assert (major, minor) >= (3, 9), f"Need Python 3.9+, got {major}.{minor}"
-
-# Re-run assert_version properly
-try:
-    assert_version()
-    checks[0] = ("Python 3.9+", True, "")
-except AssertionError as e:
-    checks[0] = ("Python 3.9+", False, str(e))
-
-# Print results
-print("\n" + "="*50)
+# --- Print results ---
+print("\n" + "="*52)
 print("  ENVIRONMENT VERIFICATION")
-print("="*50)
+print("="*52)
+
+OPTIONAL = {"jupyter / notebook (optional)"}
 
 all_pass = True
 for name, passed, err in checks:
-    status = "✅" if passed else "❌"
+    is_optional = name in OPTIONAL
+    if passed:
+        status = "✅"
+    elif is_optional:
+        status = "⚠️ "
+    else:
+        status = "❌"
     print(f"  {status}  {name}")
     if not passed:
-        print(f"       ERROR: {err}")
-        all_pass = False
+        print(f"       └─ {'(optional) ' if is_optional else ''}ERROR: {err}")
+        if not is_optional:
+            all_pass = False
 
-print("="*50)
+print("="*52)
 if all_pass:
-    print("  All checks passed! Environment is ready.")
+    print("  ✅  All checks passed! Environment is ready.")
 else:
-    print("  Some checks failed. Install missing packages:")
-    print("  pip install torch torchaudio speechbrain pyclarity pystoi librosa soundfile")
-print("="*50 + "\n")
+    print("  ⚠️   Some checks failed. Run:")
+    print("  ~/Library/Python/3.9/bin/pip3 install torch torchaudio")
+    print("       speechbrain pyclarity pystoi torchmetrics")
+    print("       librosa soundfile PyWavelets scipy matplotlib")
+print("="*52 + "\n")

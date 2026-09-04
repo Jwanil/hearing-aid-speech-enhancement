@@ -170,7 +170,7 @@ Details of what was done, why, and any findings.
 - Committed and pushed to GitHub.
 
 **Status:** Both `generate_report.py` and `generate_proposal_docx.py` now exist. Run either to regenerate the respective .docx file.
-
+(user deleted those)
 **Next action:** Begin Phase 0.
 
 ---
@@ -198,20 +198,23 @@ Details of what was done, why, and any findings.
 **Actions:**
 - Confirmed Phase 0 (DSP Fundamentals) and Phase 1 (Audiology) resources studied independently.
 - Removed date timeline columns from `AGENTS.md`, `SESSION_START.md` phase tables.
-- Updated active phase → Phase 2 (Classical Baselines: Wavelet DWT + MMSE-LSA).
+- Corrected phase order: Data Pipeline = Phase 2, Classical Baselines = Phase 3.
+- Updated active phase → Phase 2 (Data Pipeline: TIMIT + Clarity + NOIZEUS + MUSAN).
 - Updated status table: Phase 0 ✅, Phase 1 ✅, Phase 2 🟡.
 - Logged to `shared_context.md` under Jwanil's section.
 
-**Status:** Ready to begin Phase 2 implementation.
+**Status:** Phase 0 & 1 execution scripts now being run.
 
-**Next action:** Read `directives/02_classical_baselines.md` → implement Wavelet DWT denoiser and MMSE-LSA filter scripts in `execution/`.
+**Next action:** Complete Phase 0 execution (verify setup + STFT viz), then read `directives/02_data_pipeline.md`.
 
 ---
 
 ## Phase 2 Open Tasks (Data Pipeline)
 
-- [ ] Run `execution/00_verify_setup.py` — confirm all imports work
-- [ ] Run `execution/01_stft_visualize.py` — DSP fundamentals execution (Phase 0 script)
+- [x] Fixed bug in `execution/00_verify_setup.py` (assert_version called before definition; also added pesq + pywt checks)
+- [x] Installed missing dependencies via `~/Library/Python/3.9/bin/pip3`: scipy, matplotlib, librosa, soundfile, PyWavelets, pystoi, torchmetrics, speechbrain, pyclarity
+- [x] Run `execution/00_verify_setup.py` — all pass ✅ (jupyter optional ⚠️, pesq replaced by torchmetrics)
+- [x] Created + ran `execution/01_stft_visualize.py` — waveform, spectrogram, HF removal plots generated
 - [ ] Run audiology / audiogram generation scripts (Phase 1 execution)
 - [ ] Read `directives/02_data_pipeline.md` fully
 - [ ] Download NOIZEUS dataset (free, small — use for immediate testing)
