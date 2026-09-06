@@ -343,10 +343,40 @@ The old file still described Wiener filter + 3 models and had wrong directive fi
 
 <!-- Agent: append Namya's entries below this line in reverse-chronological order (newest first) -->
 
-> ⚠️ **Namya — before your first entry:** Pull from GitHub, read `SESSION_START.md`, then read `docs/simple_guide.md`. Those two files will give you everything you need to start.
+> ⚠️ **Namya — URGENT: `context.md` has been removed from the repo.**
+>
+> If you have already pulled the repo, you may have a copy of **Jwanil's** `context.md` in your local folder. **Do NOT use it.** Delete it and create your own.
+>
+> **Your agent will be confused if it reads Jwanil's `context.md`** — it has Jwanil's task history, not yours.
+>
+> **Action required before starting work:**
+> 1. Delete the existing `context.md` in your local project folder.
+> 2. Create a new file called `context.md` in the same location.
+> 3. Paste this as the starting template:
+>
+> ```markdown
+> # context.md — Namya Session Log
+>
+> ## Current Phase
+> Phase 2 complete (Data Pipeline done by Jwanil). Phase 3 (Classical Baselines) is next.
+>
+> ## Open Tasks
+> - [ ] Read docs/project_overview.md (full project context)
+> - [ ] Read docs/simple_guide.md (plain-English explanation of everything)
+> - [ ] Read directives/03_classical_baselines.md
+> - [ ] Implement execution/04_wavelet_denoising.py
+> - [ ] Implement execution/05_mmse_lsa.py
+>
+> ## Session Log
+> <!-- Add entries here as you work -->
+> ```
+>
+> 4. `context.md` is now in `.gitignore` — it will never be committed. You keep it only on your own machine.
+>
+> **Before your first entry:** Pull from GitHub (`git pull`), read `SESSION_START.md`, then read `docs/simple_guide.md`.
 
 ---
 
-*(No entries yet — Namya has not started a session.)*
+*(No session entries yet — Namya has not started a session.)*
 
 ---

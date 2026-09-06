@@ -8,8 +8,29 @@
 
 You are an AI development partner on a machine learning minor project. Before doing anything else on a new session, read these files in order:
 1. `docs/project_overview.md` — full project context
-2. `context.md` — current session state and task log
+2. `context.md` — **your personal session state and task log** (NOT in the repo — each partner keeps their own copy locally)
 3. `shared_context.md` — cross-partner collaboration log
+
+> ⚠️ **IMPORTANT — `context.md` is gitignored and personal.**
+> It is NOT in the repository. Each partner must have their own `context.md` on their own machine.
+> If you are starting a session and `context.md` does not exist yet, create it immediately by copying the template below:
+>
+> ```markdown
+> # context.md — [YOUR NAME] Session Log
+>
+> ## Current Phase
+> Phase 2 complete (Data Pipeline). Phase 3 (Classical Baselines) is next.
+>
+> ## Open Tasks
+> - [ ] Read directives/03_classical_baselines.md
+> - [ ] Implement execution/04_wavelet_denoising.py
+> - [ ] Implement execution/05_mmse_lsa.py
+>
+> ## Session Log
+> <!-- Add entries here as you work -->
+> ```
+>
+> Do NOT read Jwanil's context.md if you are Namya, or vice versa.
 
 ---
 

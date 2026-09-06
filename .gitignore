@@ -37,3 +37,4 @@ Thumbs.db
 
 # Dataset directory (stored on SSD via symlink — never commit)
 data/
+context.md
