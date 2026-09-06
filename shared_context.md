@@ -116,6 +116,39 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-06 17:58 IST] | Phase: Docs
+
+**What changed:**
+- Created `phase_explanations/` folder in the project root.
+- Added `phase_0_to_2_breakdown.md` — full deep-dive covering every script, all code logic, all audio/ML terminology, all result graphs and audio files explained in detail, and how everything connects to Phases 3–6.
+- Committed and pushed (`c20b602`).
+**Files touched:**
+- `phase_explanations/phase_0_to_2_breakdown.md` (NEW)
+- `shared_context.md` (this entry)
+**Agent used:** Antigravity (Gemini 3.1 Pro)
+**Status after:** Phase explanations folder live on GitHub. Future phases (3, 4, 5, 6) will add their own breakdown docs here.
+**Action needed from partner:** Pull latest to get the new docs folder.
+
+---
+
+### [2026-09-06 17:35 IST] | Phase: Config / Housekeeping
+
+**What changed:**
+- Removed `context.md` from git tracking (`git rm --cached`) — it is now in `.gitignore`.
+- Updated `AGENTS.md` + `GEMINI.md`: added warning block explaining that `context.md` is personal/local per-partner, with a full template.
+- Updated `shared_context.md` Namya section: added urgent step-by-step instructions for her to delete Jwanil's `context.md` and create her own before starting.
+- Committed and pushed (`cec56f3`).
+**Files touched:**
+- `.gitignore` (added `context.md`)
+- `AGENTS.md` (warning block + template)
+- `GEMINI.md` (mirrored warning)
+- `shared_context.md` (Namya urgent note)
+**Agent used:** Antigravity (Gemini 3.1 Pro)
+**Status after:** `context.md` is fully personal. Never in the repo again.
+**Action needed from partner:** URGENT — Namya must delete the existing `context.md` from her local clone and create her own. See her section in `shared_context.md` for template.
+
+---
+
 ### [2026-09-04 09:08 IST] | Phase: 2 — Data Pipeline (Complete)
 
 **What changed:** 
