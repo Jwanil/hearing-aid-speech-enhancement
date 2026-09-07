@@ -347,6 +347,31 @@ The old file still described Wiener filter + 3 models and had wrong directive fi
 
 ---
 
-*(No entries yet — Namya has not started a session.)*
+### [2026-09-06 17:28 IST] | Phase: 3 — Classical Baselines (MMSE-LSA)
+
+**What changed:**
+- Started Phase 3 — Classical Baselines. Read `SESSION_START.md`, `AGENTS.md`, `context.md`, `shared_context.md`, and `directives/03_classical_baselines.md` at session start.
+- Implemented **`execution/04_mmse_lsa_filter.py`** — the MMSE-LSA (Minimum Mean Square Error – Log Spectral Amplitude) filter, per faculty instruction to implement MMSE-LSA first before Wavelet.
+- Implementation follows the Ephraim & Malah (1985) algorithm exactly as specified in the directive:
+  - STFT with 25 ms frame, 10 ms hop, Hann window
+  - Noise power bootstrapped from first 6 frames (~60 ms silence)
+  - Decision-directed a priori SNR (xi) with alpha=0.98
+  - MMSE-LSA gain using `scipy.special.exp1` (exponential integral E1)
+  - Online noise estimate update (minimum-statistics)
+  - ISTFT reconstruction using noisy-signal phase
+  - `postprocess_filter_output()` included: DC removal, length fix, peak normalisation
+- Script supports three modes: `--file <name>` (single file), `--all` (full dataset), `--test` (synthetic self-test, no dataset required)
+- Optional `--plot` flag saves waveform + spectrogram comparison to `results/plots/04_mmse_<filename>.png`
+- All output saved to `results/enhanced_mmse/`
+
+**Files touched:**
+- `execution/04_mmse_lsa_filter.py` (NEW — full MMSE-LSA implementation)
+- `shared_context.md` (this entry)
+
+**Agent used:** Antigravity (Claude Sonnet 4.6 Thinking)
+
+**Status after:** Phase 3 MMSE-LSA script complete. Ready to run `python execution/04_mmse_lsa_filter.py --test` to verify, then `--all --plot` on the NOIZEUS dataset. Wavelet denoiser (`execution/05_wavelet_denoiser.py`) is next.
+
+**Action needed from partner (Jwanil):** Pull latest. Run `python execution/04_mmse_lsa_filter.py --test` first to verify the math. Then run `--all --plot --limit 5` on 5 NOIZEUS files and do a listen test. Report if musical noise is audible — if so, we can tune the `alpha` or noise floor.
 
 ---

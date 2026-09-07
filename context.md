@@ -25,9 +25,9 @@ ACTION: Output the context-reset block from AGENTS.md and stop.
 
 ## Current Project Phase
 
-**Active Phase:** Phase 2 — Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN)  
-**Current Task:** Setting up dataset pipeline + running Phase 0 & 1 execution scripts  
-**Next Task:** Read `directives/02_data_pipeline.md` → run/write execution scripts; also run `execution/00_verify_setup.py` and DSP/audiology scripts
+**Active Phase:** Phase 3 — Classical Baselines: Wavelet DWT + MMSE-LSA  
+**Current Task:** MMSE-LSA filter implemented (`execution/04_mmse_lsa_filter.py`). Next: run self-test → run on NOIZEUS → implement Wavelet DWT  
+**Next Task:** Run `python execution/04_mmse_lsa_filter.py --test`, then `--all --plot --limit 5` on NOIZEUS. Write `execution/05_wavelet_denoiser.py`.
 
 ---
 
@@ -37,8 +37,8 @@ ACTION: Output the context-reset block from AGENTS.md and stop.
 |-------|------|--------|-------|
 | 0 | Audio/DSP Fundamentals | ✅ Done | Resources studied; execution scripts pending |
 | 1 | Audiology + Audiograms | ✅ Done | Resources studied; execution scripts pending |
-| 2 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | 🟡 In Progress | Must complete before baselines |
-| 3 | Classical Baselines: Wavelet DWT + MMSE-LSA | ⬜ Not Started | Replaces Wiener filter (faculty feedback) |
+| 2 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | ✅ Done | Datasets downloaded; standardised; DataLoader tested |
+| 3 | Classical Baselines: Wavelet DWT + MMSE-LSA | 🟡 In Progress | MMSE-LSA script done; need run + eval; Wavelet next |
 | 4 | 1D CNN Model (Conv-TasNet) | ⬜ Not Started | Waveform-domain DL baseline |
 | 5 | U-Net + Attention + FiLM | ⬜ Not Started | Core contribution — complex masking + MetricGAN+ |
 | 5b | Mamba/SSM + FiLM | ⬜ Not Started | SOTA model — replaces Transformer plan |
@@ -215,6 +215,24 @@ Details of what was done, why, and any findings.
 **Status:** Phase 0 & 1 execution scripts now being run.
 
 **Next action:** Complete Phase 0 execution (verify setup + STFT viz), then read `directives/02_data_pipeline.md`.
+
+---
+
+### [2026-09-06 17:28 IST] — Namya — Phase 3 started: MMSE-LSA filter implemented
+
+**Author:** Namya Shah (via Antigravity — Claude Sonnet 4.6 Thinking)
+
+**Actions:**
+- Read all session-start files: `SESSION_START.md`, `AGENTS.md`, `context.md`, `shared_context.md`, `directives/03_classical_baselines.md`.
+- Created `execution/04_mmse_lsa_filter.py` — full MMSE-LSA implementation per Ephraim & Malah (1985).
+- Algorithm: STFT (25 ms / 10 ms hop, Hann) → noise bootstrap → frame-by-frame decision-directed xi update (alpha=0.98) → MMSE-LSA gain via `scipy.special.exp1` → ISTFT → postprocess.
+- Output saved to `results/enhanced_mmse/`. Plots (waveform + spectrogram) to `results/plots/04_mmse_*.png`.
+- Script modes: `--test` (synthetic self-test), `--file <name>` (single), `--all [--limit N] [--plot]`.
+- Updated `shared_context.md` under NAMYA'S SESSION LOG.
+
+**Status:** Phase 3 MMSE-LSA script complete and saved.
+
+**Next action:** Run self-test (`--test`), then run on 5 NOIZEUS clips (`--all --plot --limit 5`). Do listen test. Then implement `execution/05_wavelet_denoiser.py`.
 
 ---
 
