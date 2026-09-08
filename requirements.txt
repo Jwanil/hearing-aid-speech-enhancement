@@ -1,0 +1,26 @@
+# ─── hearing-aid-speech-enhancement ────────────────────────────────────────────
+# Core dependencies for all execution/ scripts.
+# Install with:  pip install -r requirements.txt
+# Or use uv:     uv pip install -r requirements.txt
+#
+# Note: These must stay compatible with Python 3.11+ (Colab default) and 3.14+
+# (local dev). The pesq package requires C extension build — ensure gcc is present.
+
+# ── Audio I/O ────────────────────────────────────────────────────────────────
+soundfile>=0.12.1
+numpy>=1.24.0
+
+# ── Signal processing ────────────────────────────────────────────────────────
+scipy>=1.11.0
+pywavelets>=1.4.1        # Wavelet DWT (Phase 3)
+
+# ── Evaluation metrics ───────────────────────────────────────────────────────
+pesq>=0.0.4              # PESQ-WB (ITU-T P.862) — resolves IDE import on L41
+pystoi>=0.3.3            # STOI intelligibility metric
+
+# ── Visualisation ────────────────────────────────────────────────────────────
+matplotlib>=3.7.0
+
+# ── Deep learning (Phase 4+, GPU on Colab) ───────────────────────────────────
+# torch>=2.1.0           # uncomment when starting Phase 4
+# torchaudio>=2.1.0

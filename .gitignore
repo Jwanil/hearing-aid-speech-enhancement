@@ -41,3 +41,4 @@ context.md
 
 # Transferred dataset folder (full audio dataset — gigabytes, never commit)
 dataset/
+.venv
