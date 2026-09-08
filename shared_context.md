@@ -116,6 +116,25 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-08 17:33 IST] | Phase: 3 — Classical Baselines (MMSE-LSA Verified)
+
+**What changed:**
+- Verified Namya's `execution/04_mmse_lsa_filter.py` — implementation is algorithmically correct (Ephraim & Malah 1985, decision-directed xi, E1 exponential integral gain, online noise tracking).
+- Fixed 2 compatibility bugs for Jwanil's machine: `dataset/` → `data/` path; Python 3.9 `X | Y` type hints → `Optional[X]`; added `matplotlib.use("Agg")`.
+- Ran self-test: ✅ passed.
+- Ran on babble/0dB (30 files) with plots: ✅ 34% average RMS noise reduction.
+- Ran on entire NOIZEUS dataset (`--all`): ✅ **930/930 files**, all 8 noise types, 3 SNR levels.
+- Committed and pushed: `a7cfc0f`.
+**Files touched:**
+- `execution/04_mmse_lsa_filter.py` (PATCHED for cross-machine compatibility)
+- `results/plots/mmse_output_plots/` (61 spectrogram PNGs on GitHub)
+- `results/enhanced_mmse/noizeus/` (930 .wav files on disk only — not in git)
+**Agent used:** Antigravity (Gemini 3.1 Pro)
+**Status after:** MMSE-LSA verified and complete on Jwanil's machine. Output ready for Phase 6 evaluation.
+**Action needed from partner:** Namya should pull and note the 2 path/compatibility patches in her `04_mmse_lsa_filter.py`.
+
+---
+
 ### [2026-09-06 17:58 IST] | Phase: Docs
 
 **What changed:**
