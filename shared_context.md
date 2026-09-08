@@ -116,6 +116,17 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-09 02:48 IST] | Infra — Full Project Reorganisation
+
+**What changed (commit 03837c5):**
+- `execution/` root-level duplicate scripts removed (10 files). Scripts now exist ONLY in phase subfolders.
+- `execution/README.md` fully rewritten — shows exact structure + `uv run` commands for each phase
+- `results/plots/` — reorganised into `phase0_dsp/`, `phase1_audiology/`, `phase2_pipeline/`, `phase3_baselines/`
+- `results/audio_demos/` — reorganised into `phase0_dsp/`, `phase1_audiology/`
+**Impact on Namya:** `git pull` will update all paths. If you have local scripts referencing root-level execution paths, update to the phase subfolder paths.
+
+---
+
 ### [2026-09-09 02:44 IST] | Phase: 3 — Baseline Evaluation COMPLETE
 
 **What changed:**
