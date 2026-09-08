@@ -116,6 +116,21 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-09 03:06 IST] | Phase 3 — MMSE Bug Fixes + Correct Evaluation (commit 431d15f)
+
+**Critical bugs fixed in `04_mmse_lsa_filter.py`:**
+- Noise init from first 6 frames (speech frames!) → inflated by 32× at 15dB SNR → near-silence output. Fixed with offline bottom-20% energy frames.
+- Noise tracker grew during speech (18%/frame) instead of tracking minimum. Fixed with true sliding-minimum + bias correction.
+- ROOT path fixed in all 3 phase3 scripts (3 dirname levels not 2).
+
+**Corrected results (PESQ and SI-SDR now correctly positive):**
+- MMSE-LSA: PESQ +0.029, SI-SDR +0.765 dB (was PESQ -0.114 before fix — completely wrong)
+- Wavelet: STOI +0.004, SI-SDR +0.272 dB (unchanged, was correct)
+
+**Impact on Namya:** `git pull` to get fixed scripts. Old `results/enhanced_mmse/` WAVs were near-silence — already replaced with correct outputs (commit 431d15f).
+
+---
+
 ### [2026-09-09 02:48 IST] | Infra — Full Project Reorganisation
 
 **What changed (commit 03837c5):**
