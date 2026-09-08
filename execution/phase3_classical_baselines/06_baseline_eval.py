@@ -43,7 +43,7 @@ except ImportError:
     print("ERROR: pesq missing. Run with: uv run --with pesq ..."); sys.exit(1)
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent.parent
 
 DATA_ROOTS = [
     Path("/Volumes/SANDISK/Minor Project/Data/processed"),

@@ -71,7 +71,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 # ─── Project paths ────────────────────────────────────────────────────────────
-ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT       = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Actual data location — symlink to SSD (Jwanil) or dataset/ folder (Namya)
 # Try data/ first (Jwanil's setup), fall back to dataset/ (Namya's setup)
@@ -148,19 +148,57 @@ def mmse_lsa_filter(noisy_waveform: np.ndarray,
 
     n_freq, n_frames = mag.shape
 
-    # ── Step 2: Initial noise power estimate ─────────────────────────────────
-    # Use first 6 frames (~60 ms) as voice-activity-free noise reference.
-    # Shape: (n_freq, 1) -- broadcast-friendly column vector.
-    noise_est = (mag[:, :6] ** 2).mean(axis=1, keepdims=True)
-    noise_est = np.maximum(noise_est, 1e-10)   # avoid zero
+    # ── Step 2: Initial noise power estimate (OFFLINE — uses full signal) ────
+    #
+    # BUG FIX: The original code used the first 6 frames as noise reference.
+    # NOIZEUS files contain active speech from frame 1 — no leading silence.
+    # This caused noise_est ≈ total_power (speech + noise), inflating it by
+    # ~32× at 15 dB SNR, making gamma ≈ 1 everywhere and gain ≈ 0 (near-silence).
+    #
+    # FIX: Use the bottom 20% lowest-energy frames across the full signal.
+    # These correspond to pause/weak-speech frames where noise dominates.
+    # This is valid for offline processing (we have the full signal).
+    frame_power   = (mag ** 2).mean(axis=0)                    # (n_frames,) energy per frame
+    n_noise_frames = max(10, n_frames // 5)                    # bottom 20% of frames
+    noise_idxs    = np.argsort(frame_power)[:n_noise_frames]   # indices of quietest frames
+    noise_est     = (mag[:, noise_idxs] ** 2).mean(axis=1, keepdims=True)
+    noise_est     = np.maximum(noise_est, 1e-10)
 
-    # ── Step 3: Frame-by-frame MMSE-LSA processing ───────────────────────────
+    # ── Step 3: Minimum statistics tracker initialisation ────────────────────
+    #
+    # BUG FIX: The original tracker:
+    #   noise_est = 0.98 * noise_est + 0.02 * min(Y^2, noise_est * 10)
+    # During speech frames Y^2 >> noise_est, so min(...) = noise_est * 10.
+    # This made noise_est GROW by 18% per frame during speech — the exact
+    # opposite of minimum statistics.
+    #
+    # FIX: True sliding-minimum noise tracker (Cohen & Berdugo, 2002 style):
+    #   1. Smooth power spectrum with fast smoother (alpha=0.85, τ ≈ 6 frames)
+    #   2. Track the MINIMUM of the smoothed power over 1.5s sliding window
+    #   3. Apply bias correction × 2.0 (minimum of chi-squared underestimates mean)
+    MIN_WIN      = 150          # 1.5 s at 10 ms hop = 150 frames
+    SMOOTH_ALPHA = 0.85         # fast smoother for power estimate
+    smooth_power = noise_est.copy()                             # (n_freq, 1)
+    min_buffer   = np.tile(noise_est, (1, MIN_WIN))            # (n_freq, MIN_WIN) circular
+    buf_ptr      = 0
+
+    # ── Frame-by-frame MMSE-LSA processing ───────────────────────────────────
     xi    = np.ones((n_freq, 1))    # a priori SNR (xi_hat) initialised to 1
     A_hat = np.zeros((n_freq, 1))   # previous frame's enhanced magnitude
     G_out = np.zeros_like(mag)      # gain matrix G(k,n) -- filled in the loop
 
     for n in range(n_frames):
         Y_n = mag[:, n:n+1]   # current frame magnitude, shape (n_freq, 1)
+
+        # ── Minimum statistics noise update (before gain computation) ─────────
+        # Smooth the power estimate first (fast smoother tracks power envelope)
+        smooth_power = SMOOTH_ALPHA * smooth_power + (1.0 - SMOOTH_ALPHA) * Y_n ** 2
+        # Write into circular buffer
+        min_buffer[:, buf_ptr:buf_ptr + 1] = smooth_power
+        buf_ptr = (buf_ptr + 1) % MIN_WIN
+        # Noise = minimum in window × bias correction factor
+        noise_est = min_buffer.min(axis=1, keepdims=True) * 2.0
+        noise_est = np.maximum(noise_est, 1e-10)
 
         # ── Instantaneous (a posteriori) SNR ─────────────────────────────────
         # gamma(k,n) = |Y(k,n)|^2 / lambda_n(k,n)
@@ -184,7 +222,7 @@ def mmse_lsa_filter(noisy_waveform: np.ndarray,
         # v(k,n) = xi(k,n) * gamma(k,n) / (1 + xi(k,n))
         # G(k,n) = xi(k,n) / (1 + xi(k,n)) * exp(0.5 * E1(v))
         #
-        # E1(v) = ∫_v^∞ (e^-t / t) dt  -- the exponential integral
+        # E1(v) = integral_v^inf (e^-t / t) dt  — exponential integral
         # exp(0.5 * E1(v)) is the log-spectral-amplitude correction term that
         # reduces musical noise compared to the pure Wiener gain.
         v   = xi_n * gamma_n / (1.0 + xi_n)
@@ -195,12 +233,6 @@ def mmse_lsa_filter(noisy_waveform: np.ndarray,
 
         A_hat = G_n * Y_n                        # enhanced amplitude for next frame's xi
         G_out[:, n:n+1] = G_n
-
-        # ── Online noise estimate update (simple minimum-statistics) ─────────
-        # Track a slowly-decaying minimum of the power spectrum.
-        # 0.98/0.02 gives a ~50-frame (500 ms) forgetting window.
-        noise_est = 0.98 * noise_est + 0.02 * np.minimum(Y_n ** 2, noise_est * 10.0)
-        noise_est = np.maximum(noise_est, 1e-10)
 
     # ── Step 4: Reconstruct waveform ─────────────────────────────────────────
     enhanced_mag = G_out * mag                           # apply suppression gain
