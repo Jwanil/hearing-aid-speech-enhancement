@@ -70,13 +70,13 @@ import matplotlib.pyplot as plt
 # ─── Project paths ────────────────────────────────────────────────────────────
 ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Actual raw data location (Data/ at project root)
-DATA_ROOT  = os.path.join(ROOT, "Data")
+# Actual raw data location — transferred from Jwanil's SSD into dataset/ folder
+DATA_ROOT  = os.path.join(ROOT, "dataset")
 
-# Noisy files:  Data/processed/noisy/noizeus/<noise_type>/<snr_dB>/
+# Noisy files:  dataset/processed/noisy/noizeus/<noise_type>/<snr_dB>/
 NOISY_ROOT = os.path.join(DATA_ROOT, "processed", "noisy", "noizeus")
 
-# Clean files:  Data/processed/clean/noizeus/clean/
+# Clean files:  dataset/processed/clean/noizeus/clean/
 CLEAN_DIR  = os.path.join(DATA_ROOT, "processed", "clean", "noizeus", "clean")
 
 # Outputs mirror the noisy sub-tree:  results/enhanced_mmse/noizeus/<noise_type>/<snr_dB>/

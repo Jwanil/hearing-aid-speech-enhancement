@@ -37,3 +37,7 @@ Thumbs.db
 
 # Dataset directory (stored on SSD via symlink — never commit)
 data/
+context.md
+
+# Transferred dataset folder (full audio dataset — gigabytes, never commit)
+dataset/

@@ -116,6 +116,39 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-06 17:58 IST] | Phase: Docs
+
+**What changed:**
+- Created `phase_explanations/` folder in the project root.
+- Added `phase_0_to_2_breakdown.md` — full deep-dive covering every script, all code logic, all audio/ML terminology, all result graphs and audio files explained in detail, and how everything connects to Phases 3–6.
+- Committed and pushed (`c20b602`).
+**Files touched:**
+- `phase_explanations/phase_0_to_2_breakdown.md` (NEW)
+- `shared_context.md` (this entry)
+**Agent used:** Antigravity (Gemini 3.1 Pro)
+**Status after:** Phase explanations folder live on GitHub. Future phases (3, 4, 5, 6) will add their own breakdown docs here.
+**Action needed from partner:** Pull latest to get the new docs folder.
+
+---
+
+### [2026-09-06 17:35 IST] | Phase: Config / Housekeeping
+
+**What changed:**
+- Removed `context.md` from git tracking (`git rm --cached`) — it is now in `.gitignore`.
+- Updated `AGENTS.md` + `GEMINI.md`: added warning block explaining that `context.md` is personal/local per-partner, with a full template.
+- Updated `shared_context.md` Namya section: added urgent step-by-step instructions for her to delete Jwanil's `context.md` and create her own before starting.
+- Committed and pushed (`cec56f3`).
+**Files touched:**
+- `.gitignore` (added `context.md`)
+- `AGENTS.md` (warning block + template)
+- `GEMINI.md` (mirrored warning)
+- `shared_context.md` (Namya urgent note)
+**Agent used:** Antigravity (Gemini 3.1 Pro)
+**Status after:** `context.md` is fully personal. Never in the repo again.
+**Action needed from partner:** URGENT — Namya must delete the existing `context.md` from her local clone and create her own. See her section in `shared_context.md` for template.
+
+---
+
 ### [2026-09-04 09:08 IST] | Phase: 2 — Data Pipeline (Complete)
 
 **What changed:** 
@@ -343,7 +376,37 @@ The old file still described Wiener filter + 3 models and had wrong directive fi
 
 <!-- Agent: append Namya's entries below this line in reverse-chronological order (newest first) -->
 
-> ⚠️ **Namya — before your first entry:** Pull from GitHub, read `SESSION_START.md`, then read `docs/simple_guide.md`. Those two files will give you everything you need to start.
+> ⚠️ **Namya — URGENT: `context.md` has been removed from the repo.**
+>
+> If you have already pulled the repo, you may have a copy of **Jwanil's** `context.md` in your local folder. **Do NOT use it.** Delete it and create your own.
+>
+> **Your agent will be confused if it reads Jwanil's `context.md`** — it has Jwanil's task history, not yours.
+>
+> **Action required before starting work:**
+> 1. Delete the existing `context.md` in your local project folder.
+> 2. Create a new file called `context.md` in the same location.
+> 3. Paste this as the starting template:
+>
+> ```markdown
+> # context.md — Namya Session Log
+>
+> ## Current Phase
+> Phase 2 complete (Data Pipeline done by Jwanil). Phase 3 (Classical Baselines) is next.
+>
+> ## Open Tasks
+> - [ ] Read docs/project_overview.md (full project context)
+> - [ ] Read docs/simple_guide.md (plain-English explanation of everything)
+> - [ ] Read directives/03_classical_baselines.md
+> - [ ] Implement execution/04_wavelet_denoising.py
+> - [ ] Implement execution/05_mmse_lsa.py
+>
+> ## Session Log
+> <!-- Add entries here as you work -->
+> ```
+>
+> 4. `context.md` is now in `.gitignore` — it will never be committed. You keep it only on your own machine.
+>
+> **Before your first entry:** Pull from GitHub (`git pull`), read `SESSION_START.md`, then read `docs/simple_guide.md`.
 
 ---
 
@@ -373,5 +436,36 @@ The old file still described Wiener filter + 3 models and had wrong directive fi
 **Status after:** Phase 3 MMSE-LSA script complete. Ready to run `python execution/04_mmse_lsa_filter.py --test` to verify, then `--all --plot` on the NOIZEUS dataset. Wavelet denoiser (`execution/05_wavelet_denoiser.py`) is next.
 
 **Action needed from partner (Jwanil):** Pull latest. Run `python execution/04_mmse_lsa_filter.py --test` first to verify the math. Then run `--all --plot --limit 5` on 5 NOIZEUS files and do a listen test. Report if musical noise is audible — if so, we can tune the `alpha` or noise floor.
+
+---
+
+### [2026-09-08 17:09 IST] | Phase: 3 — MMSE-LSA verification + git sync + dataset integration
+
+**What changed:**
+- Dataset transferred from Jwanil's SSD into local `dataset/` folder (`dataset/processed/noisy/noizeus/`, `dataset/processed/clean/noizeus/clean/`, `dataset/raw/`, `dataset/metadata/`).
+- Pulled Jwanil's 3 new commits (c3a1962, c20b602, cec56f3) into local main branch:
+  - `context.md` removed from git tracking (now gitignored — each partner keeps their own locally).
+  - `phase_explanations/phase_0_to_2_breakdown.md` added by Jwanil.
+  - `shared_context.md` updated with Jwanil's Sept 6 session entries.
+- Updated `execution/04_mmse_lsa_filter.py`: changed `DATA_ROOT` path from `Data/` to `dataset/` (local folder name after transfer).
+- **Verified MMSE-LSA on real NOIZEUS dataset:**
+  - `--test` (synthetic signal): PASS — float32, values in [-1, +1], shape correct.
+  - `airport/5dB` — 3 speakers: all [OK], avg RMS 0.0914 -> 0.0710 (22% reduction).
+  - `babble/5dB` — 3 speakers: all [OK], avg RMS 0.0952 -> 0.0754 (20% reduction).
+  - `car/5dB` — 3 speakers: all [OK], avg RMS 0.0911 -> 0.0732 (19% reduction).
+- Created personal `context.md` (gitignored, local only) as per Jwanil's template instructions.
+- Committed and pushed to GitHub (now collaborator on `Jwanil/hearing-aid-speech-enhancement`).
+
+**Files touched:**
+- `execution/04_mmse_lsa_filter.py` (MODIFIED — DATA_ROOT: Data/ -> dataset/)
+- `shared_context.md` (MODIFIED — this entry)
+- `context.md` (NEW — local only, gitignored)
+- Received from Jwanil merge: `phase_explanations/phase_0_to_2_breakdown.md`, `.gitignore`, `AGENTS.md`, `GEMINI.md`
+
+**Agent used:** Antigravity (Claude Sonnet 4.6 Thinking)
+
+**Status after:** Phase 3 MMSE-LSA is fully complete and verified on real data. Next task: `execution/05_wavelet_denoiser.py`.
+
+**Action needed from Jwanil:** Pull latest. MMSE-LSA is running on `dataset/` folder now. If your machine uses a different folder name, update `DATA_ROOT` in `execution/04_mmse_lsa_filter.py` accordingly.
 
 ---
