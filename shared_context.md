@@ -116,6 +116,22 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-09 02:44 IST] | Phase: 3 — Baseline Evaluation COMPLETE
+
+**What changed:**
+- `execution/06_baseline_eval.py` — full STOI/PESQ/SI-SDR evaluation across 930 NOIZEUS files
+- `results/classical_baselines.csv` — 930 rows, per-file metrics for noisy/MMSE/Wavelet
+- `results/plots/` — 4 charts: STOI/PESQ/SI-SDR by noise type, STOI vs SNR line plot
+- `results/cli_output/06_baseline_eval.txt` — full terminal log (149.8s runtime)
+**Key numbers (overall mean):**
+  - Noisy STOI=0.813 PESQ=1.435 SI-SDR=6.71 dB
+  - MMSE-LSA: STOI −0.073, PESQ −0.114, SI-SDR −1.08 dB (ALL WORSE)
+  - Wavelet: STOI +0.004, PESQ −0.026, SI-SDR +0.27 dB (near-neutral)
+**Conclusion:** Classical methods cannot improve STOI/PESQ. Deep learning targets: STOI > 0.90, PESQ > 2.0
+**Commit:** c9a0fdf | **Agent:** Antigravity
+
+---
+
 ### [2026-09-09 01:58 IST] | Phase: Infra — Colab MCP Setup
 
 **What changed:**
