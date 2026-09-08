@@ -116,6 +116,28 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-09 01:58 IST] | Phase: Infra — Colab MCP Setup
+
+**What changed:**
+- `googlecolab/colab-mcp` investigated — **no Chrome extension needed**. Works via local WebSocket bridge (uvx starts WS server, Colab connects back, agent executes GPU cells)
+- `.agents/mcp_config.json` committed — auto-loads colab-mcp for both Antigravity and Claude Code when workspace is opened
+- `docs/colab_setup.md` — complete setup guide for both partners:
+  - `uv` install + MCP auto-config
+  - Google Drive data upload (Jwanil from SSD, Namya from local clone `dataset/`)
+  - Drive checkpoint save pattern + rclone download
+  - Git push from Colab with personal access token
+  - Real-time Colab collaboration (both can share the same notebook)
+- `AGENTS.md` + `GEMINI.md` updated with Colab/GPU training section
+**Agent used:** Antigravity (Gemini 3.1 Pro)
+**Status after:** Infrastructure ready for GPU training. Both partners just need to install `uv`, upload data to Drive once, then restart IDE.
+**Action needed from partner (Namya):**
+  1. `git pull` to get `.agents/mcp_config.json` and `docs/colab_setup.md`
+  2. Install `uv`: `pip install uv`
+  3. Upload `dataset/processed/` to `MyDrive/hearing-aid-data/processed/` on Google Drive
+  4. Restart Claude Code — colab-mcp auto-loads
+
+---
+
 ### [2026-09-08 18:17 IST] | Phase: 3 — Docs, Execution Org, CLI Logs
 
 **What changed:**

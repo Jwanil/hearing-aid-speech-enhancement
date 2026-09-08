@@ -1,200 +1,197 @@
 # Google Colab + Antigravity IDE Setup Guide
 
-> **Who this is for:** Both Jwanil and Namya. Read this once, set it up once.
-> After setup, the agent can write and run training code on Colab's GPU directly from the IDE.
+> **Who this is for:** Both Jwanil and Namya. Read once, set up once.
+> After setup, the AI agent can write and execute training code on Colab's GPU directly from the IDE.
 
 ---
 
-## What This Gives You
-
-Instead of manually writing notebook cells and switching between the IDE and Colab, the
-`colab-mcp` bridge lets the AI agent:
-- Execute Python code on Colab's T4/A100 GPU directly from the chat
-- Read training logs and loss curves back into the IDE
-- Run long training loops without you watching the browser
-
----
-
-## Architecture
+## How It Works (Architecture)
 
 ```
-Antigravity IDE (your local machine)
+Antigravity / Claude Code IDE
         │
-        │  colab-mcp MCP bridge (stdio)
+        │  colab-mcp MCP server (runs via uvx on your Mac)
+        │  — exposes tools: open_colab_browser_connection, execute_python, etc.
         ▼
-Colab-MCP Chrome Extension (browser)
+WebSocket server (localhost, random port, secure token)
         │
+        │  Colab notebook connects back via WebSocket
         ▼
-Google Colab Notebook (GPU runtime)
-  ├── Git clone of this repo (code)
-  └── Google Drive mount (data — 930 WAVs)
+Google Colab (browser, GPU runtime)
+  ├── Code sent here by the agent, executed on T4/A100
+  └── Output returned back to the agent in real-time
 ```
 
+**No Chrome extension required.** The bridge works entirely over a local WebSocket.
+When the agent calls `open_colab_browser_connection`, it:
+1. Starts a local WebSocket server with a one-time secure token
+2. Opens a Colab URL in your browser with the token embedded
+3. Colab connects back to your machine
+4. Live bridge established — agent can now execute cells on the GPU
+
 ---
 
-## One-Time Setup: 3 Parts
+## One-Time Setup
 
----
+### Prerequisites (both partners)
 
-### Part A — Agent Side (already done if you cloned the repo)
-
-The MCP config is committed at `.agents/mcp_config.json`. Antigravity picks it up automatically when you open this workspace.
-
-**Check it's working:** In a new Antigravity session, you should see `colab-mcp` listed in available tools. If not, restart the IDE.
-
-**Requires `uv` to be installed on your machine:**
+**1. Install `uv`**
 ```bash
 pip install uv
-# or
+# macOS alternative:
 brew install uv
 ```
+`uv` manages Python 3.13+ automatically — colab-mcp requires Python 3.13+.
+
+**2. MCP config** (already in the repo — nothing to do)
+
+The file `.agents/mcp_config.json` is committed in this repo:
+```json
+{
+  "mcpServers": {
+    "colab-mcp": {
+      "command": "uvx",
+      "args": ["git+https://github.com/googlecolab/colab-mcp"],
+      "timeout": 30000
+    }
+  }
+}
+```
+Antigravity (Jwanil) and Claude Code (Namya) both auto-load this when the workspace is opened.
+
+**3. Restart your IDE** after pulling the repo to activate the MCP.
 
 ---
 
-### Part B — Browser Side (each partner does this once)
+## Data Setup — Google Drive (each partner, once)
 
-#### 1. Install the Colab-MCP Chrome Extension
+The 930 processed NOIZEUS WAVs need to be on your Google Drive so Colab can mount them.
 
-Go to: **https://chromewebstore.google.com/detail/colab-mcp/aahmgnbckmpnhckaplnddkamoldcgnkj**
-
-Install it. No configuration needed — it auto-connects when you open Colab.
-
-> **Note:** Works in Chrome and Chrome-based browsers (Edge, Brave). Not supported in Firefox or Safari.
-
-#### 2. Open a Colab notebook and connect
-
-1. Go to **https://colab.research.google.com**
-2. Create a new notebook (or open an existing one)
-3. Click **Runtime → Change runtime type → T4 GPU** (free) or A100 (Colab Pro)
-4. Click **Connect** (top right)
-5. The extension icon in your browser toolbar should show a green dot — this means the bridge is live
-
----
-
-### Part C — Data Setup (each partner does this once on their Google account)
-
-The 930 processed NOIZEUS WAVs need to be on Google Drive so Colab can access them.
-
-#### Jwanil — upload from SSD
+### Jwanil — upload from SSD
 ```bash
-# Run this once on your Mac to upload the processed folder to Drive
-# Install rclone first: brew install rclone
-# Then configure: rclone config (choose Google Drive, follow prompts)
+# Option A: drag-and-drop in Google Drive browser
+# Upload: /Volumes/SANDISK/Minor Project/Data/processed/
+# Destination: MyDrive/hearing-aid-data/processed/
 
+# Option B: rclone (faster for large folders)
+brew install rclone
+rclone config   # choose Google Drive, follow OAuth prompts, name it "gdrive"
 rclone copy "/Volumes/SANDISK/Minor Project/Data/processed" \
-  "gdrive:hearing-aid-data/processed" \
-  --progress
+  "gdrive:hearing-aid-data/processed" --progress
 ```
 
-Or just drag-and-drop `data/processed/` into Google Drive manually (it's ~200MB for NOIZEUS).
-
-#### Namya — upload from local clone
-Same as above, but source is your local `dataset/processed/` folder:
+### Namya — upload from local clone
 ```bash
 rclone copy "dataset/processed" "gdrive:hearing-aid-data/processed" --progress
 ```
 
-**Target Drive path:** `MyDrive/hearing-aid-data/processed/`
-
-Expected structure after upload:
+**Expected Drive structure after upload:**
 ```
 MyDrive/
 └── hearing-aid-data/
     └── processed/
-        ├── clean/
-        │   └── noizeus/clean/*.wav    (30 files)
-        └── noisy/
-            └── noizeus/<noise_type>/<snr>/*.wav    (930 files)
+        ├── clean/noizeus/clean/*.wav       (30 files)
+        └── noisy/noizeus/<noise>/<snr>/*.wav   (930 files)
 ```
 
 ---
 
-## How to Use It (Every Session)
+## Starting a Colab Session (Every Time)
 
-1. Open Colab in Chrome with the extension installed
-2. Make sure your notebook has a GPU runtime connected
-3. Open Antigravity IDE in this workspace
-4. Tell the agent: **"Open a Colab session and run the Phase 4 training"**
-
-The agent will:
-- Send a `!git clone` command to Colab
-- Mount your Drive
-- Install dependencies
-- Run the training script
-- Report back loss values, checkpoints saved, etc.
+1. Make sure your IDE is open in this workspace with colab-mcp active
+2. Tell the agent: **"Open a Colab connection"**
+3. The agent calls `open_colab_browser_connection` — a Colab URL opens in your browser
+4. In Colab: **Runtime → Change runtime type → T4 GPU → Save**
+5. Click **Connect** (top right of Colab)
+6. The agent confirms the connection and begins executing cells
 
 ---
 
-## First Colab Cell Template
-
-The agent will generate this automatically, but here it is for reference:
+## First Session Setup Cell (agent sends this automatically)
 
 ```python
-# ── Cell 1: Setup ──────────────────────────────────────────
+# ── Setup: Clone repo + mount Drive + install deps ──────────────
 import os
 
-# Clone repo (always gets latest code from GitHub)
+# Always get latest code
 if not os.path.exists("hearing-aid-speech-enhancement"):
     !git clone https://github.com/Jwanil/hearing-aid-speech-enhancement.git
 %cd hearing-aid-speech-enhancement
-!git pull   # ensure latest
+!git pull
 
-# Mount Drive (your 930 WAVs live here)
+# Mount Google Drive (your 930 WAVs)
 from google.colab import drive
 drive.mount('/content/drive')
 
-# Symlink data so scripts find it at the expected path
-if not os.path.exists("data"):
-    os.symlink("/content/drive/MyDrive/hearing-aid-data", "data")
+# Symlink Drive data to expected path
+if os.path.exists("data"):
+    os.remove("data") if os.path.islink("data") else None
+os.symlink("/content/drive/MyDrive/hearing-aid-data", "data")
 
-# Install dependencies
-!pip install -q pywt soundfile torchaudio pyclarity pystoi pesq mamba-ssm
+# Verify data is accessible
+print("Noise types:", sorted(os.listdir("data/processed/noisy/noizeus")))
+
+# Install project dependencies
+!pip install -q pywt soundfile torchaudio pyclarity pystoi pesq
 
 print("Setup complete ✅")
-print("Data path:", os.listdir("data/processed/noisy/noizeus"))
 ```
 
 ---
 
-## Saving Checkpoints
+## Saving Checkpoints (Never Lose Training Progress)
 
-Checkpoints are saved to Drive so they survive Colab session resets:
+Colab sessions reset after ~12h or on disconnect. Always save to Drive:
 
 ```python
-# In training script — always save to Drive, not /content
 CKPT_DIR = "/content/drive/MyDrive/hearing-aid-data/checkpoints"
 os.makedirs(CKPT_DIR, exist_ok=True)
 
-torch.save(model.state_dict(), f"{CKPT_DIR}/phase4_cnn_epoch{epoch}.pt")
+# In your training loop:
+torch.save({
+    "epoch": epoch,
+    "model_state_dict": model.state_dict(),
+    "optimizer_state_dict": optimizer.state_dict(),
+    "loss": loss,
+}, f"{CKPT_DIR}/phase4_cnn_epoch{epoch:03d}.pt")
 ```
 
-After training, download the checkpoint locally:
+Download checkpoints locally when training is done:
 ```bash
-# On your Mac (using rclone):
+# Mac (rclone):
 rclone copy "gdrive:hearing-aid-data/checkpoints/" results/checkpoints/
 ```
 
 ---
 
-## Committing Results from Colab
-
-After training, push results back to GitHub from inside Colab:
+## Committing Results Back to GitHub (from Colab)
 
 ```python
-# Configure git identity in Colab (do once per session)
-!git config user.email "your@email.com"
-!git config user.name "Jwanil Modi"
+# Set git identity in Colab
+!git config user.email "23bit013@ldrp.ac.in"
+!git config user.name "Jwanil Modi"   # or Namya Shah
 
-# Add a GitHub token for push auth (use a fine-grained token with repo scope)
+# Use a GitHub fine-grained personal access token (repo scope)
+# Generate at: github.com → Settings → Developer Settings → Tokens
 import os
-GITHUB_TOKEN = "ghp_..."  # paste your token — don't commit this!
-!git remote set-url origin https://{GITHUB_TOKEN}@github.com/Jwanil/hearing-aid-speech-enhancement.git
+token = "ghp_..."  # paste your token — DO NOT commit this to the repo
+!git remote set-url origin https://{token}@github.com/Jwanil/hearing-aid-speech-enhancement.git
 
-# Commit and push results
-!git add results/
-!git commit -m "phase4: training results from Colab [auto]"
+# Push results
+!git add results/ shared_context.md
+!git commit -m "phase4: training results from Colab [Jwanil]"
 !git push
 ```
+
+---
+
+## Namya-Specific Notes
+
+- Your data path locally: `dataset/processed/` (not `data/`) — use this when uploading to Drive
+- Your IDE: Claude Code — `.agents/mcp_config.json` is auto-loaded from the repo
+- Your context file: `context.md` — local only, never commit it
+- Both partners can have the **same Colab notebook open simultaneously** — Google Colab supports real-time collaboration like Google Docs
+- Ask Jwanil to share the Colab notebook link the first time
 
 ---
 
@@ -202,19 +199,23 @@ GITHUB_TOKEN = "ghp_..."  # paste your token — don't commit this!
 
 | Problem | Fix |
 |---|---|
-| Extension icon is grey (not green) | Refresh the Colab tab; make sure the notebook runtime is connected |
-| Agent can't find colab-mcp tools | Restart Antigravity IDE; check `uv` is installed |
-| Drive not mounting | Re-run the `drive.mount()` cell; authorize in the popup |
-| `data/` symlink already exists | `os.remove("data")` then re-create |
-| Checkpoint lost after session | Always save to Drive path, not `/content/` |
-| Namya can't push to repo | Add Namya as a collaborator: GitHub → Settings → Collaborators |
+| colab-mcp not in agent tools | Restart IDE; ensure `uv` is installed (`uv --version`) |
+| Colab URL doesn't open | Call `open_colab_browser_connection` again; check browser popup blocker |
+| Drive not mounting | Re-run `drive.mount('/content/drive')` and authorize in the popup |
+| Data not found | Check symlink: `ls -la data/` should point to Drive |
+| Checkpoint lost | You saved to `/content/` not Drive — always use `CKPT_DIR` |
+| Push rejected from Colab | Token expired or missing repo scope — generate a new one |
+| "requires Python >=3.13" error | `uvx` handles this automatically — no action needed |
 
 ---
 
-## Namya-Specific Notes
+## Quick Reference
 
-- Your data is in `dataset/processed/` locally — use that path when uploading to Drive
-- Your IDE is Claude Code — the `.agents/mcp_config.json` in this repo will configure colab-mcp for you automatically when you open the workspace
-- Your context file is `context.md` — keep it local, never commit it
-- The Colab notebook is **shared** — you can open the same notebook Jwanil is using in your browser and both work on it simultaneously (Google Docs-style collaboration)
-
+| Task | Command / Action |
+|---|---|
+| Start Colab session | Tell agent: "Open a Colab connection" |
+| Check GPU available | `!nvidia-smi` in Colab |
+| Get latest code | `!git pull` in Colab |
+| Save checkpoint | `torch.save(...)` to `CKPT_DIR` |
+| Download checkpoint | `rclone copy "gdrive:hearing-aid-data/checkpoints/" results/checkpoints/` |
+| Check Drive data | `os.listdir("data/processed/noisy/noizeus")` |
