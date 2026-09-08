@@ -56,7 +56,7 @@ DATA_ROOT  = _data_candidate if os.path.isdir(_data_candidate) else _dataset_can
 NOISY_ROOT  = os.path.join(DATA_ROOT, "processed", "noisy", "noizeus")
 CLEAN_DIR   = os.path.join(DATA_ROOT, "processed", "clean", "noizeus", "clean")
 OUTPUT_ROOT = os.path.join(ROOT, "results", "enhanced_wavelet", "noizeus")
-PLOTS_DIR   = os.path.join(ROOT, "results", "plots", "wavelet_output_plots")
+PLOTS_DIR   = os.path.join(ROOT, "results", "plots", "phase3_baselines", "wavelet_output_plots")
 
 os.makedirs(OUTPUT_ROOT, exist_ok=True)
 os.makedirs(PLOTS_DIR,   exist_ok=True)

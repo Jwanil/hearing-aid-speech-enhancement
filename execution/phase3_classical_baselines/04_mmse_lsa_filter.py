@@ -87,7 +87,7 @@ CLEAN_DIR  = os.path.join(DATA_ROOT, "processed", "clean", "noizeus", "clean")
 
 # Outputs mirror the noisy sub-tree:  results/enhanced_mmse/noizeus/<noise_type>/<snr_dB>/
 OUTPUT_ROOT = os.path.join(ROOT, "results", "enhanced_mmse", "noizeus")
-PLOTS_DIR   = os.path.join(ROOT, "results", "plots", "mmse_output_plots")
+PLOTS_DIR   = os.path.join(ROOT, "results", "plots", "phase3_baselines", "mmse_output_plots")
 
 os.makedirs(OUTPUT_ROOT, exist_ok=True)
 os.makedirs(PLOTS_DIR,   exist_ok=True)
