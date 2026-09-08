@@ -270,7 +270,27 @@ The correct classes are `Audiogram` from `clarity.utils.audiogram` and `Ear` fro
 | `01_moderate_sloping_loss.wav` | MSBG with [10,15,30,50,65,80] dB HL | 's', 'sh', 'th', 'f' sounds become faint or absent. "Speech" sounds like "ee" |
 | `01_severe_hf_loss.wav` | MSBG with [10,10,35,65,85,90] dB HL | Very muffled. Consonants completely lost. Speech nearly unintelligible |
 
-**Critical connection to the project:** These `.wav` files prove what we're solving. Our three deep-learning models (1D CNN, U-Net, Mamba) will receive the severe/moderate version as input and must output something as close as possible to the original. The audiogram vector `[10,10,35,65,85,90]` / 120.0 will be the personalization signal — the model will know exactly which frequencies to boost and by how much.
+**Critical connection to the project — two separate things, don't confuse them:**
+
+The **MSBG simulator** and the **NOIZEUS dataset** serve completely different roles:
+
+| | MSBG Simulator (Phase 1) | NOIZEUS Dataset (Phase 2) |
+|---|---|---|
+| **What it models** | Cochlear (biological) hearing damage | Acoustic noise in the environment (airport, babble, car...) |
+| **Input → Output** | Clean speech → what a damaged ear perceives | Clean speech + real noise → noisy speech at 0/5/10 dB SNR |
+| **Files already exist?** | No — we generated them | Yes — pre-mixed in the dataset |
+| **Used for training?** | ❌ No — used for demonstration only | ✅ Yes — these are the training/test pairs |
+| **Used for conditioning?** | ✅ Yes — the audiogram profiles (dB HL values) become the FiLM conditioning vector | ❌ No |
+
+**What the model actually sees during training:**
+```
+Input:      NOIZEUS noisy speech (sp01_babble_sn0.wav) — real acoustic noise
+Condition:  Audiogram vector [10,10,35,65,85,90]/120.0 — hearing loss profile from Phase 1
+Target:     NOIZEUS clean speech (sp01.wav) — what the model must output
+```
+
+The MSBG `.wav` files (mild/moderate/severe) were generated in Phase 1 only to **demonstrate the problem** — to show what speech sounds like through a damaged ear, and to prove that our audiogram profiles are realistic. They are NOT fed to the model. The model trains on NOIZEUS clean/noisy pairs and learns to use the audiogram vector to decide which frequencies to boost during enhancement.
+
 
 ##### `01_hearing_loss_spectrograms.png`
 - **What you see:** 4 side-by-side spectrograms with a shared color scale (-80 dB to 0 dB). Left panel = Original. Next three panels = Mild, Moderate, Severe simulations.
