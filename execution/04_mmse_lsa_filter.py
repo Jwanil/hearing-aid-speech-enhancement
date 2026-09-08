@@ -61,27 +61,33 @@ Date: 2026-09-06
 import os
 import sys
 import argparse
+from typing import Optional
 import numpy as np
 import scipy.signal
 from scipy.special import exp1  # Exponential integral E1 -- core of MMSE-LSA gain
 import soundfile as sf
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 # ─── Project paths ────────────────────────────────────────────────────────────
 ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Actual raw data location — transferred from Jwanil's SSD into dataset/ folder
-DATA_ROOT  = os.path.join(ROOT, "dataset")
+# Actual data location — symlink to SSD (Jwanil) or dataset/ folder (Namya)
+# Try data/ first (Jwanil's setup), fall back to dataset/ (Namya's setup)
+_data_candidate = os.path.join(ROOT, "data")
+_dataset_candidate = os.path.join(ROOT, "dataset")
+DATA_ROOT  = _data_candidate if os.path.isdir(_data_candidate) else _dataset_candidate
 
-# Noisy files:  dataset/processed/noisy/noizeus/<noise_type>/<snr_dB>/
+# Noisy files:  data/processed/noisy/noizeus/<noise_type>/<snr_dB>/
 NOISY_ROOT = os.path.join(DATA_ROOT, "processed", "noisy", "noizeus")
 
-# Clean files:  dataset/processed/clean/noizeus/clean/
+# Clean files:  data/processed/clean/noizeus/clean/
 CLEAN_DIR  = os.path.join(DATA_ROOT, "processed", "clean", "noizeus", "clean")
 
 # Outputs mirror the noisy sub-tree:  results/enhanced_mmse/noizeus/<noise_type>/<snr_dB>/
 OUTPUT_ROOT = os.path.join(ROOT, "results", "enhanced_mmse", "noizeus")
-PLOTS_DIR   = os.path.join(ROOT, "results", "plots")
+PLOTS_DIR   = os.path.join(ROOT, "results", "plots", "mmse_output_plots")
 
 os.makedirs(OUTPUT_ROOT, exist_ok=True)
 os.makedirs(PLOTS_DIR,   exist_ok=True)
@@ -244,7 +250,7 @@ def postprocess_filter_output(enhanced: np.ndarray, original_length: int) -> np.
 
 def plot_comparison(noisy: np.ndarray,
                     enhanced: np.ndarray,
-                    clean: np.ndarray | None,
+                    clean: Optional[np.ndarray],
                     filename: str,
                     sr: int = TARGET_SR) -> str:
     """
@@ -291,7 +297,7 @@ def plot_comparison(noisy: np.ndarray,
 # FILE PROCESSING
 # ══════════════════════════════════════════════════════════════════════════════
 
-def _clean_path_for(noisy_basename: str) -> str | None:
+def _clean_path_for(noisy_basename: str) -> Optional[str]:
     """
     Derive the clean reference path for a given noisy filename.
 
@@ -400,8 +406,8 @@ def process_file(noisy_path: str, plot: bool = False) -> dict:
     }
 
 
-def collect_noisy_files(noise_type_filter: str | None = None,
-                        snr_filter: str | None = None) -> list[str]:
+def collect_noisy_files(noise_type_filter: Optional[str] = None,
+                        snr_filter: Optional[str] = None) -> list:
     """
     Walk Data/processed/noisy/noizeus/<noise_type>/<snr_dB>/ and collect all
     .wav paths, optionally restricting by noise type and/or SNR level.
@@ -454,9 +460,9 @@ def collect_noisy_files(noise_type_filter: str | None = None,
 
 
 def process_all(plot: bool = False,
-                limit: int | None = None,
-                noise_type_filter: str | None = None,
-                snr_filter: str | None = None) -> list[dict]:
+                limit: Optional[int] = None,
+                noise_type_filter: Optional[str] = None,
+                snr_filter: Optional[str] = None) -> list:
     """
     Process every .wav file found under Data/processed/noisy/noizeus/.
 
