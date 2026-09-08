@@ -116,6 +116,27 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-08 17:48 IST] | Phase: 3 — Classical Baselines (Wavelet DWT COMPLETE)
+
+**What changed:**
+- Implemented `execution/05_wavelet_denoising.py` — Wavelet DWT Classical Baseline 2.
+  - Donoho & Johnstone (1994) universal soft-threshold; db8 wavelet; 5 levels (250-8000 Hz at 16kHz)
+  - Same CLI interface as MMSE script; cross-machine path detection (`data/` vs `dataset/`)
+  - Outputs: `results/enhanced_wavelet/noizeus/`; plots: `results/plots/wavelet_output_plots/`
+- Ran self-test → ✅ passed
+- Ran babble/0dB (30 files, with plots) → ✅ 30/30
+- Ran full dataset (`--all`) → ✅ **930/930 files**, zero errors
+- Committed and pushed: `3185c53`
+**Files touched:**
+- `execution/05_wavelet_denoising.py` (NEW)
+- `results/plots/wavelet_output_plots/` (30 PNGs on GitHub)
+- `results/enhanced_wavelet/noizeus/` (930 .wav files on disk only)
+**Agent used:** Antigravity (Gemini 3.1 Pro)
+**Status after:** **Phase 3 COMPLETE** — both MMSE-LSA and Wavelet DWT baselines implemented, verified, and run on all 930 NOIZEUS files. Phase 3 complete on Jwanil's side.
+**Next action from partner:** Namya should pull latest; review `05_wavelet_denoising.py`; begin Phase 6 eval script if assigned.
+
+---
+
 ### [2026-09-08 17:33 IST] | Phase: 3 — Classical Baselines (MMSE-LSA Verified)
 
 **What changed:**
