@@ -116,6 +116,21 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-09-08 18:17 IST] | Phase: 3 — Docs, Execution Org, CLI Logs
+
+**What changed:**
+- `phase_explanations/phase_3_classical_baselines.md` — complete Phase 3 deep-dive (both MMSE and Wavelet, all terminology, all algorithm steps, results analysis, head-to-head table, Phase 6 connection)
+- `execution/` reorganised into phase subfolders: `phase0_dsp/`, `phase1_audiology/`, `phase2_data_pipeline/`, `phase3_classical_baselines/` — originals remain in root for backward compatibility
+- `execution/README.md` — master quick-reference for all scripts
+- `results/cli_output/04_mmse_lsa_filter_all_930_files.txt` — full MMSE terminal log (1,873 lines)
+- `results/cli_output/05_wavelet_denoising_all_930_files.txt` — full Wavelet terminal log (1,874 lines)
+- Committed and pushed: `6a07fd7`
+**Agent used:** Antigravity (Gemini 3.1 Pro)
+**Status after:** Phase 3 fully complete and documented on Jwanil's side.
+**Action needed from partner:** Pull latest; all Phase 3 scripts, docs, and outputs are now available.
+
+---
+
 ### [2026-09-08 17:48 IST] | Phase: 3 — Classical Baselines (Wavelet DWT COMPLETE)
 
 **What changed:**
