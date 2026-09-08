@@ -1,0 +1,971 @@
+2026-09-09 02:41:10,902 INFO Python 3.14.6 (main, Jun 23 2026, 15:46:31) [Clang 22.1.3 ] | Root: /Users/jwanilmodi/Web development/hearing-aid-speech-enhancement
+2026-09-09 02:41:10,902 INFO ======================================================================
+2026-09-09 02:41:10,902 INFO Phase 3 — Classical Baseline Evaluation
+2026-09-09 02:41:10,902 INFO Data: /Volumes/SANDISK/Minor Project/Data/processed
+2026-09-09 02:41:10,902 INFO ======================================================================
+2026-09-09 02:41:11,154 INFO [airport      0dB ] sp01 | STOI  noisy=0.641 mmse=0.576 wav=0.651 | PESQ  noisy=1.18 mmse=1.19 wav=1.18 | SI-SDR noisy=-0.9 mmse=2.3 wav=-0.7
+2026-09-09 02:41:11,384 INFO [airport      0dB ] sp02 | STOI  noisy=0.674 mmse=0.600 wav=0.681 | PESQ  noisy=1.25 mmse=1.13 wav=1.24 | SI-SDR noisy=-0.8 mmse=1.0 wav=-0.7
+2026-09-09 02:41:11,638 INFO [airport      0dB ] sp03 | STOI  noisy=0.700 mmse=0.659 wav=0.704 | PESQ  noisy=1.16 mmse=1.19 wav=1.16 | SI-SDR noisy=-0.4 mmse=4.3 wav=-0.4
+2026-09-09 02:41:11,785 INFO [airport      0dB ] sp04 | STOI  noisy=0.701 mmse=0.680 wav=0.704 | PESQ  noisy=1.18 mmse=1.14 wav=1.17 | SI-SDR noisy=-0.2 mmse=2.0 wav=-0.2
+2026-09-09 02:41:11,950 INFO [airport      0dB ] sp05 | STOI  noisy=0.707 mmse=0.649 wav=0.710 | PESQ  noisy=1.13 mmse=1.27 wav=1.13 | SI-SDR noisy=-0.5 mmse=2.7 wav=-0.4
+2026-09-09 02:41:12,142 INFO [airport      0dB ] sp06 | STOI  noisy=0.734 mmse=0.646 wav=0.734 | PESQ  noisy=1.15 mmse=1.07 wav=1.14 | SI-SDR noisy=-0.7 mmse=0.3 wav=-0.6
+2026-09-09 02:41:12,296 INFO [airport      0dB ] sp07 | STOI  noisy=0.702 mmse=0.673 wav=0.704 | PESQ  noisy=1.18 mmse=1.17 wav=1.17 | SI-SDR noisy=-0.8 mmse=2.3 wav=-0.6
+2026-09-09 02:41:12,494 INFO [airport      0dB ] sp08 | STOI  noisy=0.664 mmse=0.628 wav=0.666 | PESQ  noisy=1.21 mmse=1.14 wav=1.20 | SI-SDR noisy=-0.6 mmse=1.9 wav=-0.5
+2026-09-09 02:41:12,731 INFO [airport      0dB ] sp09 | STOI  noisy=0.688 mmse=0.594 wav=0.693 | PESQ  noisy=1.16 mmse=1.12 wav=1.16 | SI-SDR noisy=-0.5 mmse=-1.1 wav=-0.5
+2026-09-09 02:41:12,916 INFO [airport      0dB ] sp10 | STOI  noisy=0.671 mmse=0.634 wav=0.673 | PESQ  noisy=1.14 mmse=1.17 wav=1.14 | SI-SDR noisy=-0.8 mmse=1.4 wav=-0.7
+2026-09-09 02:41:13,090 INFO [airport      0dB ] sp11 | STOI  noisy=0.567 mmse=0.553 wav=0.571 | PESQ  noisy=1.08 mmse=1.20 wav=1.08 | SI-SDR noisy=-0.6 mmse=2.8 wav=-0.5
+2026-09-09 02:41:13,280 INFO [airport      0dB ] sp12 | STOI  noisy=0.702 mmse=0.640 wav=0.708 | PESQ  noisy=1.11 mmse=1.17 wav=1.10 | SI-SDR noisy=-0.4 mmse=1.9 wav=-0.3
+2026-09-09 02:41:13,438 INFO [airport      0dB ] sp13 | STOI  noisy=0.674 mmse=0.642 wav=0.685 | PESQ  noisy=1.12 mmse=1.23 wav=1.12 | SI-SDR noisy=-0.9 mmse=2.9 wav=-0.8
+2026-09-09 02:41:13,618 INFO [airport      0dB ] sp14 | STOI  noisy=0.651 mmse=0.640 wav=0.654 | PESQ  noisy=1.15 mmse=1.21 wav=1.15 | SI-SDR noisy=-0.1 mmse=2.4 wav=-0.0
+2026-09-09 02:41:13,788 INFO [airport      0dB ] sp15 | STOI  noisy=0.681 mmse=0.592 wav=0.683 | PESQ  noisy=1.09 mmse=1.09 wav=1.09 | SI-SDR noisy=-0.3 mmse=-0.7 wav=-0.3
+2026-09-09 02:41:13,987 INFO [airport      0dB ] sp16 | STOI  noisy=0.741 mmse=0.727 wav=0.742 | PESQ  noisy=1.10 mmse=1.38 wav=1.09 | SI-SDR noisy=-1.2 mmse=4.9 wav=-1.2
+2026-09-09 02:41:14,193 INFO [airport      0dB ] sp17 | STOI  noisy=0.597 mmse=0.631 wav=0.596 | PESQ  noisy=1.06 mmse=1.18 wav=1.06 | SI-SDR noisy=-0.6 mmse=4.0 wav=-0.5
+2026-09-09 02:41:14,357 INFO [airport      0dB ] sp18 | STOI  noisy=0.678 mmse=0.649 wav=0.680 | PESQ  noisy=1.09 mmse=1.16 wav=1.08 | SI-SDR noisy=-0.2 mmse=4.8 wav=-0.2
+2026-09-09 02:41:14,519 INFO [airport      0dB ] sp19 | STOI  noisy=0.630 mmse=0.595 wav=0.635 | PESQ  noisy=1.06 mmse=1.26 wav=1.06 | SI-SDR noisy=-0.8 mmse=6.1 wav=-0.7
+2026-09-09 02:41:14,687 INFO [airport      0dB ] sp20 | STOI  noisy=0.723 mmse=0.679 wav=0.724 | PESQ  noisy=1.11 mmse=1.26 wav=1.11 | SI-SDR noisy=-0.5 mmse=3.8 wav=-0.4
+2026-09-09 02:41:14,854 INFO [airport      0dB ] sp21 | STOI  noisy=0.627 mmse=0.577 wav=0.628 | PESQ  noisy=1.50 mmse=1.33 wav=1.53 | SI-SDR noisy=-0.5 mmse=1.2 wav=-0.4
+2026-09-09 02:41:15,084 INFO [airport      0dB ] sp22 | STOI  noisy=0.597 mmse=0.538 wav=0.599 | PESQ  noisy=1.15 mmse=1.10 wav=1.15 | SI-SDR noisy=-0.4 mmse=0.2 wav=-0.3
+2026-09-09 02:41:15,291 INFO [airport      0dB ] sp23 | STOI  noisy=0.703 mmse=0.601 wav=0.703 | PESQ  noisy=1.18 mmse=1.08 wav=1.17 | SI-SDR noisy=-1.0 mmse=-1.5 wav=-0.9
+2026-09-09 02:41:15,497 INFO [airport      0dB ] sp24 | STOI  noisy=0.572 mmse=0.536 wav=0.582 | PESQ  noisy=1.20 mmse=1.12 wav=1.20 | SI-SDR noisy=-0.3 mmse=-0.1 wav=-0.2
+2026-09-09 02:41:15,719 INFO [airport      0dB ] sp25 | STOI  noisy=0.677 mmse=0.605 wav=0.678 | PESQ  noisy=1.32 mmse=1.17 wav=1.31 | SI-SDR noisy=-0.3 mmse=0.3 wav=-0.2
+2026-09-09 02:41:15,932 INFO [airport      0dB ] sp26 | STOI  noisy=0.718 mmse=0.649 wav=0.719 | PESQ  noisy=1.11 mmse=1.07 wav=1.10 | SI-SDR noisy=-0.5 mmse=-0.0 wav=-0.5
+2026-09-09 02:41:16,078 INFO [airport      0dB ] sp27 | STOI  noisy=0.761 mmse=0.661 wav=0.762 | PESQ  noisy=1.11 mmse=1.09 wav=1.11 | SI-SDR noisy=-0.2 mmse=0.2 wav=-0.2
+2026-09-09 02:41:16,272 INFO [airport      0dB ] sp28 | STOI  noisy=0.723 mmse=0.694 wav=0.725 | PESQ  noisy=1.09 mmse=1.30 wav=1.09 | SI-SDR noisy=-0.4 mmse=3.2 wav=-0.4
+2026-09-09 02:41:16,427 INFO [airport      0dB ] sp29 | STOI  noisy=0.713 mmse=0.684 wav=0.719 | PESQ  noisy=1.12 mmse=1.11 wav=1.12 | SI-SDR noisy=-0.5 mmse=1.8 wav=-0.4
+2026-09-09 02:41:16,612 INFO [airport      0dB ] sp30 | STOI  noisy=0.702 mmse=0.643 wav=0.705 | PESQ  noisy=1.13 mmse=1.08 wav=1.13 | SI-SDR noisy=-0.3 mmse=0.1 wav=-0.3
+2026-09-09 02:41:16,755 INFO [airport      10dB] sp01 | STOI  noisy=0.865 mmse=0.786 wav=0.867 | PESQ  noisy=1.58 mmse=1.27 wav=1.56 | SI-SDR noisy=9.3 mmse=6.5 wav=9.5
+2026-09-09 02:41:16,907 INFO [airport      10dB] sp02 | STOI  noisy=0.888 mmse=0.802 wav=0.892 | PESQ  noisy=1.63 mmse=1.24 wav=1.58 | SI-SDR noisy=9.3 mmse=5.4 wav=9.5
+2026-09-09 02:41:17,082 INFO [airport      10dB] sp03 | STOI  noisy=0.925 mmse=0.832 wav=0.926 | PESQ  noisy=1.58 mmse=1.37 wav=1.55 | SI-SDR noisy=9.5 mmse=8.5 wav=9.5
+2026-09-09 02:41:17,207 INFO [airport      10dB] sp04 | STOI  noisy=0.890 mmse=0.826 wav=0.891 | PESQ  noisy=1.68 mmse=1.35 wav=1.65 | SI-SDR noisy=9.6 mmse=6.8 wav=9.6
+2026-09-09 02:41:17,343 INFO [airport      10dB] sp05 | STOI  noisy=0.928 mmse=0.821 wav=0.929 | PESQ  noisy=1.70 mmse=1.35 wav=1.66 | SI-SDR noisy=9.3 mmse=6.9 wav=9.3
+2026-09-09 02:41:17,670 INFO [airport      10dB] sp06 | STOI  noisy=0.886 mmse=0.823 wav=0.888 | PESQ  noisy=1.52 mmse=1.54 wav=1.50 | SI-SDR noisy=9.3 mmse=8.1 wav=9.5
+2026-09-09 02:41:17,801 INFO [airport      10dB] sp07 | STOI  noisy=0.919 mmse=0.816 wav=0.920 | PESQ  noisy=1.46 mmse=1.28 wav=1.44 | SI-SDR noisy=9.6 mmse=6.7 wav=9.7
+2026-09-09 02:41:17,953 INFO [airport      10dB] sp08 | STOI  noisy=0.856 mmse=0.791 wav=0.859 | PESQ  noisy=1.49 mmse=1.36 wav=1.47 | SI-SDR noisy=9.4 mmse=6.9 wav=9.6
+2026-09-09 02:41:18,124 INFO [airport      10dB] sp09 | STOI  noisy=0.844 mmse=0.738 wav=0.849 | PESQ  noisy=1.43 mmse=1.28 wav=1.42 | SI-SDR noisy=9.7 mmse=5.6 wav=9.9
+2026-09-09 02:41:18,282 INFO [airport      10dB] sp10 | STOI  noisy=0.860 mmse=0.775 wav=0.861 | PESQ  noisy=1.55 mmse=1.30 wav=1.52 | SI-SDR noisy=9.4 mmse=6.1 wav=9.5
+2026-09-09 02:41:18,429 INFO [airport      10dB] sp11 | STOI  noisy=0.906 mmse=0.806 wav=0.905 | PESQ  noisy=1.70 mmse=1.42 wav=1.66 | SI-SDR noisy=9.4 mmse=7.7 wav=9.5
+2026-09-09 02:41:18,582 INFO [airport      10dB] sp12 | STOI  noisy=0.916 mmse=0.843 wav=0.917 | PESQ  noisy=1.46 mmse=1.50 wav=1.45 | SI-SDR noisy=9.7 mmse=7.2 wav=9.9
+2026-09-09 02:41:18,727 INFO [airport      10dB] sp13 | STOI  noisy=0.901 mmse=0.792 wav=0.902 | PESQ  noisy=1.63 mmse=1.27 wav=1.59 | SI-SDR noisy=8.9 mmse=7.6 wav=9.0
+2026-09-09 02:41:18,879 INFO [airport      10dB] sp14 | STOI  noisy=0.819 mmse=0.750 wav=0.821 | PESQ  noisy=1.36 mmse=1.40 wav=1.36 | SI-SDR noisy=9.6 mmse=9.2 wav=9.8
+2026-09-09 02:41:19,033 INFO [airport      10dB] sp15 | STOI  noisy=0.869 mmse=0.772 wav=0.869 | PESQ  noisy=1.43 mmse=1.31 wav=1.42 | SI-SDR noisy=9.7 mmse=5.9 wav=9.8
+2026-09-09 02:41:19,177 INFO [airport      10dB] sp16 | STOI  noisy=0.871 mmse=0.855 wav=0.871 | PESQ  noisy=1.54 mmse=1.52 wav=1.52 | SI-SDR noisy=8.9 mmse=10.5 wav=9.0
+2026-09-09 02:41:19,319 INFO [airport      10dB] sp17 | STOI  noisy=0.808 mmse=0.773 wav=0.808 | PESQ  noisy=1.34 mmse=1.47 wav=1.33 | SI-SDR noisy=9.6 mmse=8.1 wav=9.7
+2026-09-09 02:41:19,459 INFO [airport      10dB] sp18 | STOI  noisy=0.857 mmse=0.794 wav=0.858 | PESQ  noisy=1.48 mmse=1.38 wav=1.46 | SI-SDR noisy=9.6 mmse=9.8 wav=9.7
+2026-09-09 02:41:19,599 INFO [airport      10dB] sp19 | STOI  noisy=0.826 mmse=0.787 wav=0.825 | PESQ  noisy=1.34 mmse=1.50 wav=1.33 | SI-SDR noisy=9.2 mmse=11.2 wav=9.3
+2026-09-09 02:41:19,741 INFO [airport      10dB] sp20 | STOI  noisy=0.897 mmse=0.837 wav=0.898 | PESQ  noisy=1.41 mmse=1.41 wav=1.39 | SI-SDR noisy=9.5 mmse=8.1 wav=9.7
+2026-09-09 02:41:19,880 INFO [airport      10dB] sp21 | STOI  noisy=0.916 mmse=0.806 wav=0.913 | PESQ  noisy=2.11 mmse=1.30 wav=2.02 | SI-SDR noisy=9.3 mmse=5.4 wav=9.6
+2026-09-09 02:41:20,048 INFO [airport      10dB] sp22 | STOI  noisy=0.850 mmse=0.755 wav=0.851 | PESQ  noisy=1.45 mmse=1.20 wav=1.44 | SI-SDR noisy=9.5 mmse=4.0 wav=9.6
+2026-09-09 02:41:20,202 INFO [airport      10dB] sp23 | STOI  noisy=0.897 mmse=0.797 wav=0.898 | PESQ  noisy=1.60 mmse=1.28 wav=1.56 | SI-SDR noisy=9.2 mmse=6.0 wav=9.4
+2026-09-09 02:41:20,363 INFO [airport      10dB] sp24 | STOI  noisy=0.866 mmse=0.775 wav=0.865 | PESQ  noisy=1.83 mmse=1.32 wav=1.78 | SI-SDR noisy=9.5 mmse=4.0 wav=9.6
+2026-09-09 02:41:20,519 INFO [airport      10dB] sp25 | STOI  noisy=0.869 mmse=0.776 wav=0.868 | PESQ  noisy=1.75 mmse=1.28 wav=1.70 | SI-SDR noisy=9.7 mmse=7.0 wav=9.8
+2026-09-09 02:41:20,658 INFO [airport      10dB] sp26 | STOI  noisy=0.916 mmse=0.830 wav=0.919 | PESQ  noisy=1.55 mmse=1.37 wav=1.51 | SI-SDR noisy=9.5 mmse=6.4 wav=9.7
+2026-09-09 02:41:20,796 INFO [airport      10dB] sp27 | STOI  noisy=0.924 mmse=0.811 wav=0.925 | PESQ  noisy=1.63 mmse=1.23 wav=1.59 | SI-SDR noisy=9.6 mmse=7.1 wav=9.7
+2026-09-09 02:41:20,939 INFO [airport      10dB] sp28 | STOI  noisy=0.931 mmse=0.814 wav=0.931 | PESQ  noisy=1.60 mmse=1.34 wav=1.57 | SI-SDR noisy=9.6 mmse=7.4 wav=9.7
+2026-09-09 02:41:21,076 INFO [airport      10dB] sp29 | STOI  noisy=0.903 mmse=0.816 wav=0.903 | PESQ  noisy=1.62 mmse=1.34 wav=1.58 | SI-SDR noisy=9.5 mmse=7.9 wav=9.6
+2026-09-09 02:41:21,219 INFO [airport      10dB] sp30 | STOI  noisy=0.930 mmse=0.844 wav=0.930 | PESQ  noisy=1.81 mmse=1.38 wav=1.73 | SI-SDR noisy=9.6 mmse=6.7 wav=9.7
+2026-09-09 02:41:21,363 INFO [airport      15dB] sp01 | STOI  noisy=0.985 mmse=0.870 wav=0.985 | PESQ  noisy=2.27 mmse=1.42 wav=2.19 | SI-SDR noisy=14.3 mmse=8.7 wav=14.4
+2026-09-09 02:41:21,531 INFO [airport      15dB] sp02 | STOI  noisy=0.950 mmse=0.838 wav=0.950 | PESQ  noisy=2.04 mmse=1.25 wav=1.94 | SI-SDR noisy=14.3 mmse=5.9 wav=14.5
+2026-09-09 02:41:21,668 INFO [airport      15dB] sp03 | STOI  noisy=0.961 mmse=0.873 wav=0.962 | PESQ  noisy=1.71 mmse=1.53 wav=1.67 | SI-SDR noisy=14.5 mmse=9.3 wav=14.6
+2026-09-09 02:41:21,795 INFO [airport      15dB] sp04 | STOI  noisy=0.966 mmse=0.867 wav=0.966 | PESQ  noisy=2.27 mmse=1.57 wav=2.22 | SI-SDR noisy=14.6 mmse=9.6 wav=14.6
+2026-09-09 02:41:21,940 INFO [airport      15dB] sp05 | STOI  noisy=0.954 mmse=0.849 wav=0.955 | PESQ  noisy=1.89 mmse=1.46 wav=1.86 | SI-SDR noisy=14.4 mmse=9.6 wav=14.4
+2026-09-09 02:41:22,073 INFO [airport      15dB] sp06 | STOI  noisy=0.943 mmse=0.857 wav=0.944 | PESQ  noisy=1.87 mmse=1.71 wav=1.81 | SI-SDR noisy=14.2 mmse=9.6 wav=14.4
+2026-09-09 02:41:22,202 INFO [airport      15dB] sp07 | STOI  noisy=0.952 mmse=0.831 wav=0.953 | PESQ  noisy=1.72 mmse=1.32 wav=1.68 | SI-SDR noisy=14.5 mmse=7.8 wav=14.8
+2026-09-09 02:41:22,354 INFO [airport      15dB] sp08 | STOI  noisy=0.939 mmse=0.841 wav=0.941 | PESQ  noisy=2.04 mmse=1.39 wav=1.96 | SI-SDR noisy=14.4 mmse=7.5 wav=14.6
+2026-09-09 02:41:22,506 INFO [airport      15dB] sp09 | STOI  noisy=0.918 mmse=0.808 wav=0.923 | PESQ  noisy=1.78 mmse=1.40 wav=1.76 | SI-SDR noisy=14.6 mmse=6.9 wav=14.8
+2026-09-09 02:41:22,649 INFO [airport      15dB] sp10 | STOI  noisy=0.928 mmse=0.805 wav=0.929 | PESQ  noisy=1.87 mmse=1.38 wav=1.83 | SI-SDR noisy=14.3 mmse=6.8 wav=14.5
+2026-09-09 02:41:22,791 INFO [airport      15dB] sp11 | STOI  noisy=0.890 mmse=0.799 wav=0.892 | PESQ  noisy=1.69 mmse=1.56 wav=1.67 | SI-SDR noisy=14.4 mmse=8.5 wav=14.7
+2026-09-09 02:41:22,940 INFO [airport      15dB] sp12 | STOI  noisy=0.956 mmse=0.860 wav=0.956 | PESQ  noisy=1.85 mmse=1.56 wav=1.80 | SI-SDR noisy=14.7 mmse=8.3 wav=14.8
+2026-09-09 02:41:23,077 INFO [airport      15dB] sp13 | STOI  noisy=0.925 mmse=0.826 wav=0.926 | PESQ  noisy=1.92 mmse=1.40 wav=1.86 | SI-SDR noisy=13.9 mmse=9.8 wav=14.1
+2026-09-09 02:41:23,222 INFO [airport      15dB] sp14 | STOI  noisy=0.913 mmse=0.811 wav=0.911 | PESQ  noisy=1.74 mmse=1.59 wav=1.71 | SI-SDR noisy=14.6 mmse=11.0 wav=14.9
+2026-09-09 02:41:23,366 INFO [airport      15dB] sp15 | STOI  noisy=0.939 mmse=0.826 wav=0.938 | PESQ  noisy=1.86 mmse=1.44 wav=1.81 | SI-SDR noisy=14.7 mmse=6.7 wav=14.9
+2026-09-09 02:41:23,502 INFO [airport      15dB] sp16 | STOI  noisy=0.917 mmse=0.898 wav=0.917 | PESQ  noisy=1.98 mmse=1.53 wav=1.92 | SI-SDR noisy=13.9 mmse=13.4 wav=14.0
+2026-09-09 02:41:23,635 INFO [airport      15dB] sp17 | STOI  noisy=0.894 mmse=0.826 wav=0.894 | PESQ  noisy=1.68 mmse=1.62 wav=1.65 | SI-SDR noisy=14.5 mmse=9.4 wav=14.7
+2026-09-09 02:41:23,760 INFO [airport      15dB] sp18 | STOI  noisy=0.902 mmse=0.824 wav=0.902 | PESQ  noisy=1.83 mmse=1.51 wav=1.78 | SI-SDR noisy=14.5 mmse=11.5 wav=14.6
+2026-09-09 02:41:23,886 INFO [airport      15dB] sp19 | STOI  noisy=0.882 mmse=0.826 wav=0.881 | PESQ  noisy=1.56 mmse=1.58 wav=1.54 | SI-SDR noisy=14.2 mmse=12.6 wav=14.4
+2026-09-09 02:41:24,018 INFO [airport      15dB] sp20 | STOI  noisy=0.939 mmse=0.869 wav=0.940 | PESQ  noisy=1.86 mmse=1.62 wav=1.78 | SI-SDR noisy=14.5 mmse=10.1 wav=14.8
+2026-09-09 02:41:24,153 INFO [airport      15dB] sp21 | STOI  noisy=0.968 mmse=0.837 wav=0.964 | PESQ  noisy=2.53 mmse=1.39 wav=2.36 | SI-SDR noisy=14.4 mmse=7.3 wav=14.5
+2026-09-09 02:41:24,297 INFO [airport      15dB] sp22 | STOI  noisy=0.927 mmse=0.824 wav=0.928 | PESQ  noisy=1.81 mmse=1.26 wav=1.75 | SI-SDR noisy=14.5 mmse=4.7 wav=14.6
+2026-09-09 02:41:24,437 INFO [airport      15dB] sp23 | STOI  noisy=0.965 mmse=0.858 wav=0.966 | PESQ  noisy=2.19 mmse=1.41 wav=2.10 | SI-SDR noisy=14.3 mmse=7.6 wav=14.4
+2026-09-09 02:41:24,596 INFO [airport      15dB] sp24 | STOI  noisy=0.912 mmse=0.808 wav=0.907 | PESQ  noisy=2.06 mmse=1.41 wav=1.97 | SI-SDR noisy=14.6 mmse=5.4 wav=14.9
+2026-09-09 02:41:24,747 INFO [airport      15dB] sp25 | STOI  noisy=0.939 mmse=0.838 wav=0.943 | PESQ  noisy=2.06 mmse=1.36 wav=2.00 | SI-SDR noisy=14.7 mmse=7.6 wav=15.0
+2026-09-09 02:41:24,894 INFO [airport      15dB] sp26 | STOI  noisy=0.967 mmse=0.859 wav=0.967 | PESQ  noisy=2.18 mmse=1.44 wav=2.05 | SI-SDR noisy=14.5 mmse=7.7 wav=14.7
+2026-09-09 02:41:25,037 INFO [airport      15dB] sp27 | STOI  noisy=0.960 mmse=0.836 wav=0.960 | PESQ  noisy=1.95 mmse=1.41 wav=1.89 | SI-SDR noisy=14.6 mmse=8.6 wav=14.8
+2026-09-09 02:41:25,176 INFO [airport      15dB] sp28 | STOI  noisy=0.978 mmse=0.857 wav=0.978 | PESQ  noisy=1.93 mmse=1.51 wav=1.85 | SI-SDR noisy=14.6 mmse=8.7 wav=14.7
+2026-09-09 02:41:25,311 INFO [airport      15dB] sp29 | STOI  noisy=0.962 mmse=0.869 wav=0.962 | PESQ  noisy=2.02 mmse=1.43 wav=1.94 | SI-SDR noisy=14.5 mmse=8.9 wav=14.7
+2026-09-09 02:41:25,452 INFO [airport      15dB] sp30 | STOI  noisy=0.959 mmse=0.862 wav=0.958 | PESQ  noisy=2.24 mmse=1.53 wav=2.10 | SI-SDR noisy=14.7 mmse=7.9 wav=14.8
+2026-09-09 02:41:25,641 INFO [airport      5dB ] sp01 | STOI  noisy=0.771 mmse=0.702 wav=0.772 | PESQ  noisy=1.34 mmse=1.22 wav=1.33 | SI-SDR noisy=4.3 mmse=5.1 wav=4.4
+2026-09-09 02:41:25,806 INFO [airport      5dB ] sp02 | STOI  noisy=0.790 mmse=0.721 wav=0.793 | PESQ  noisy=1.31 mmse=1.16 wav=1.30 | SI-SDR noisy=4.4 mmse=3.7 wav=4.6
+2026-09-09 02:41:25,964 INFO [airport      5dB ] sp03 | STOI  noisy=0.822 mmse=0.749 wav=0.824 | PESQ  noisy=1.30 mmse=1.27 wav=1.30 | SI-SDR noisy=4.5 mmse=6.0 wav=4.6
+2026-09-09 02:41:26,099 INFO [airport      5dB ] sp04 | STOI  noisy=0.787 mmse=0.750 wav=0.788 | PESQ  noisy=1.30 mmse=1.27 wav=1.29 | SI-SDR noisy=4.5 mmse=4.9 wav=4.5
+2026-09-09 02:41:26,245 INFO [airport      5dB ] sp05 | STOI  noisy=0.802 mmse=0.753 wav=0.806 | PESQ  noisy=1.22 mmse=1.37 wav=1.21 | SI-SDR noisy=4.3 mmse=6.0 wav=4.4
+2026-09-09 02:41:26,385 INFO [airport      5dB ] sp06 | STOI  noisy=0.793 mmse=0.754 wav=0.799 | PESQ  noisy=1.31 mmse=1.41 wav=1.30 | SI-SDR noisy=4.3 mmse=5.8 wav=4.4
+2026-09-09 02:41:26,518 INFO [airport      5dB ] sp07 | STOI  noisy=0.829 mmse=0.756 wav=0.830 | PESQ  noisy=1.37 mmse=1.18 wav=1.36 | SI-SDR noisy=4.6 mmse=3.9 wav=4.6
+2026-09-09 02:41:26,703 INFO [airport      5dB ] sp08 | STOI  noisy=0.753 mmse=0.693 wav=0.756 | PESQ  noisy=1.35 mmse=1.26 wav=1.34 | SI-SDR noisy=4.4 mmse=4.2 wav=4.6
+2026-09-09 02:41:26,867 INFO [airport      5dB ] sp09 | STOI  noisy=0.753 mmse=0.663 wav=0.762 | PESQ  noisy=1.33 mmse=1.17 wav=1.33 | SI-SDR noisy=4.7 mmse=3.6 wav=4.7
+2026-09-09 02:41:27,049 INFO [airport      5dB ] sp10 | STOI  noisy=0.797 mmse=0.748 wav=0.799 | PESQ  noisy=1.26 mmse=1.29 wav=1.25 | SI-SDR noisy=4.4 mmse=4.5 wav=4.5
+2026-09-09 02:41:27,243 INFO [airport      5dB ] sp11 | STOI  noisy=0.749 mmse=0.654 wav=0.751 | PESQ  noisy=1.21 mmse=1.17 wav=1.20 | SI-SDR noisy=4.4 mmse=3.6 wav=4.5
+2026-09-09 02:41:27,416 INFO [airport      5dB ] sp12 | STOI  noisy=0.784 mmse=0.740 wav=0.790 | PESQ  noisy=1.19 mmse=1.26 wav=1.19 | SI-SDR noisy=4.7 mmse=4.9 wav=4.8
+2026-09-09 02:41:27,567 INFO [airport      5dB ] sp13 | STOI  noisy=0.795 mmse=0.756 wav=0.801 | PESQ  noisy=1.32 mmse=1.33 wav=1.30 | SI-SDR noisy=4.1 mmse=6.3 wav=4.2
+2026-09-09 02:41:27,746 INFO [airport      5dB ] sp14 | STOI  noisy=0.691 mmse=0.644 wav=0.692 | PESQ  noisy=1.15 mmse=1.36 wav=1.15 | SI-SDR noisy=4.7 mmse=7.0 wav=4.9
+2026-09-09 02:41:27,913 INFO [airport      5dB ] sp15 | STOI  noisy=0.810 mmse=0.724 wav=0.811 | PESQ  noisy=1.22 mmse=1.24 wav=1.21 | SI-SDR noisy=4.7 mmse=3.7 wav=4.8
+2026-09-09 02:41:28,076 INFO [airport      5dB ] sp16 | STOI  noisy=0.802 mmse=0.778 wav=0.802 | PESQ  noisy=1.21 mmse=1.38 wav=1.20 | SI-SDR noisy=3.9 mmse=7.6 wav=4.0
+2026-09-09 02:41:28,234 INFO [airport      5dB ] sp17 | STOI  noisy=0.755 mmse=0.732 wav=0.755 | PESQ  noisy=1.12 mmse=1.26 wav=1.12 | SI-SDR noisy=4.5 mmse=5.8 wav=4.6
+2026-09-09 02:41:28,381 INFO [airport      5dB ] sp18 | STOI  noisy=0.754 mmse=0.716 wav=0.756 | PESQ  noisy=1.19 mmse=1.29 wav=1.18 | SI-SDR noisy=4.6 mmse=7.7 wav=4.7
+2026-09-09 02:41:28,533 INFO [airport      5dB ] sp19 | STOI  noisy=0.762 mmse=0.739 wav=0.763 | PESQ  noisy=1.15 mmse=1.42 wav=1.15 | SI-SDR noisy=4.3 mmse=8.4 wav=4.5
+2026-09-09 02:41:28,667 INFO [airport      5dB ] sp20 | STOI  noisy=0.829 mmse=0.771 wav=0.827 | PESQ  noisy=1.27 mmse=1.29 wav=1.26 | SI-SDR noisy=4.5 mmse=5.6 wav=4.7
+2026-09-09 02:41:28,808 INFO [airport      5dB ] sp21 | STOI  noisy=0.826 mmse=0.723 wav=0.819 | PESQ  noisy=1.77 mmse=1.25 wav=1.72 | SI-SDR noisy=4.3 mmse=4.3 wav=4.4
+2026-09-09 02:41:29,004 INFO [airport      5dB ] sp22 | STOI  noisy=0.714 mmse=0.665 wav=0.712 | PESQ  noisy=1.23 mmse=1.18 wav=1.23 | SI-SDR noisy=4.5 mmse=3.2 wav=4.7
+2026-09-09 02:41:29,147 INFO [airport      5dB ] sp23 | STOI  noisy=0.815 mmse=0.755 wav=0.818 | PESQ  noisy=1.43 mmse=1.24 wav=1.42 | SI-SDR noisy=4.2 mmse=4.4 wav=4.4
+2026-09-09 02:41:29,308 INFO [airport      5dB ] sp24 | STOI  noisy=0.692 mmse=0.628 wav=0.702 | PESQ  noisy=1.38 mmse=1.18 wav=1.36 | SI-SDR noisy=4.6 mmse=3.0 wav=4.8
+2026-09-09 02:41:29,472 INFO [airport      5dB ] sp25 | STOI  noisy=0.793 mmse=0.705 wav=0.795 | PESQ  noisy=1.56 mmse=1.26 wav=1.53 | SI-SDR noisy=4.8 mmse=3.6 wav=4.9
+2026-09-09 02:41:29,613 INFO [airport      5dB ] sp26 | STOI  noisy=0.857 mmse=0.808 wav=0.859 | PESQ  noisy=1.31 mmse=1.25 wav=1.30 | SI-SDR noisy=4.6 mmse=5.3 wav=4.7
+2026-09-09 02:41:29,753 INFO [airport      5dB ] sp27 | STOI  noisy=0.843 mmse=0.745 wav=0.844 | PESQ  noisy=1.30 mmse=1.23 wav=1.29 | SI-SDR noisy=4.6 mmse=4.7 wav=4.7
+2026-09-09 02:41:29,913 INFO [airport      5dB ] sp28 | STOI  noisy=0.850 mmse=0.770 wav=0.851 | PESQ  noisy=1.24 mmse=1.32 wav=1.23 | SI-SDR noisy=4.6 mmse=4.8 wav=4.6
+2026-09-09 02:41:30,055 INFO [airport      5dB ] sp29 | STOI  noisy=0.852 mmse=0.744 wav=0.852 | PESQ  noisy=1.40 mmse=1.22 wav=1.37 | SI-SDR noisy=4.5 mmse=5.0 wav=4.6
+2026-09-09 02:41:30,199 INFO [airport      5dB ] sp30 | STOI  noisy=0.818 mmse=0.786 wav=0.822 | PESQ  noisy=1.35 mmse=1.38 wav=1.33 | SI-SDR noisy=4.5 mmse=4.6 wav=4.7
+2026-09-09 02:41:30,402 INFO [babble       0dB ] sp01 | STOI  noisy=0.619 mmse=0.557 wav=0.622 | PESQ  noisy=1.19 mmse=1.15 wav=1.19 | SI-SDR noisy=-0.6 mmse=2.4 wav=-0.5
+2026-09-09 02:41:30,625 INFO [babble       0dB ] sp02 | STOI  noisy=0.655 mmse=0.601 wav=0.663 | PESQ  noisy=1.23 mmse=1.13 wav=1.22 | SI-SDR noisy=-0.6 mmse=0.0 wav=-0.5
+2026-09-09 02:41:30,865 INFO [babble       0dB ] sp03 | STOI  noisy=0.654 mmse=0.605 wav=0.656 | PESQ  noisy=1.13 mmse=1.17 wav=1.13 | SI-SDR noisy=-0.4 mmse=3.1 wav=-0.3
+2026-09-09 02:41:31,011 INFO [babble       0dB ] sp04 | STOI  noisy=0.655 mmse=0.580 wav=0.657 | PESQ  noisy=1.18 mmse=1.21 wav=1.17 | SI-SDR noisy=-0.6 mmse=1.5 wav=-0.5
+2026-09-09 02:41:31,175 INFO [babble       0dB ] sp05 | STOI  noisy=0.723 mmse=0.659 wav=0.725 | PESQ  noisy=1.15 mmse=1.25 wav=1.15 | SI-SDR noisy=-0.7 mmse=1.6 wav=-0.7
+2026-09-09 02:41:31,319 INFO [babble       0dB ] sp06 | STOI  noisy=0.652 mmse=0.598 wav=0.653 | PESQ  noisy=1.15 mmse=1.34 wav=1.15 | SI-SDR noisy=-0.7 mmse=3.2 wav=-0.5
+2026-09-09 02:41:31,496 INFO [babble       0dB ] sp07 | STOI  noisy=0.640 mmse=0.577 wav=0.642 | PESQ  noisy=1.17 mmse=1.15 wav=1.16 | SI-SDR noisy=-0.7 mmse=2.0 wav=-0.6
+2026-09-09 02:41:31,717 INFO [babble       0dB ] sp08 | STOI  noisy=0.670 mmse=0.633 wav=0.672 | PESQ  noisy=1.19 mmse=1.16 wav=1.19 | SI-SDR noisy=-0.9 mmse=0.7 wav=-0.8
+2026-09-09 02:41:31,912 INFO [babble       0dB ] sp09 | STOI  noisy=0.604 mmse=0.550 wav=0.609 | PESQ  noisy=1.10 mmse=1.11 wav=1.09 | SI-SDR noisy=-0.5 mmse=1.0 wav=-0.3
+2026-09-09 02:41:32,174 INFO [babble       0dB ] sp10 | STOI  noisy=0.663 mmse=0.625 wav=0.666 | PESQ  noisy=1.17 mmse=1.16 wav=1.16 | SI-SDR noisy=-0.7 mmse=-0.3 wav=-0.7
+2026-09-09 02:41:32,394 INFO [babble       0dB ] sp11 | STOI  noisy=0.574 mmse=0.553 wav=0.587 | PESQ  noisy=1.08 mmse=1.15 wav=1.08 | SI-SDR noisy=-0.6 mmse=2.5 wav=-0.6
+2026-09-09 02:41:32,585 INFO [babble       0dB ] sp12 | STOI  noisy=0.687 mmse=0.638 wav=0.699 | PESQ  noisy=1.11 mmse=1.17 wav=1.11 | SI-SDR noisy=-0.1 mmse=0.5 wav=-0.0
+2026-09-09 02:41:32,740 INFO [babble       0dB ] sp13 | STOI  noisy=0.631 mmse=0.595 wav=0.640 | PESQ  noisy=1.11 mmse=1.19 wav=1.11 | SI-SDR noisy=-1.1 mmse=2.4 wav=-1.0
+2026-09-09 02:41:32,965 INFO [babble       0dB ] sp14 | STOI  noisy=0.541 mmse=0.491 wav=0.541 | PESQ  noisy=1.07 mmse=1.24 wav=1.07 | SI-SDR noisy=-0.4 mmse=4.7 wav=-0.2
+2026-09-09 02:41:33,170 INFO [babble       0dB ] sp15 | STOI  noisy=0.599 mmse=0.537 wav=0.603 | PESQ  noisy=1.10 mmse=1.13 wav=1.09 | SI-SDR noisy=-0.4 mmse=1.4 wav=-0.3
+2026-09-09 02:41:33,382 INFO [babble       0dB ] sp16 | STOI  noisy=0.742 mmse=0.712 wav=0.746 | PESQ  noisy=1.11 mmse=1.23 wav=1.10 | SI-SDR noisy=-1.1 mmse=4.8 wav=-1.0
+2026-09-09 02:41:33,552 INFO [babble       0dB ] sp17 | STOI  noisy=0.611 mmse=0.587 wav=0.614 | PESQ  noisy=1.07 mmse=1.17 wav=1.07 | SI-SDR noisy=-0.4 mmse=2.8 wav=-0.3
+2026-09-09 02:41:33,742 INFO [babble       0dB ] sp18 | STOI  noisy=0.640 mmse=0.622 wav=0.643 | PESQ  noisy=1.10 mmse=1.20 wav=1.10 | SI-SDR noisy=-0.3 mmse=5.5 wav=-0.3
+2026-09-09 02:41:33,909 INFO [babble       0dB ] sp19 | STOI  noisy=0.619 mmse=0.601 wav=0.621 | PESQ  noisy=1.06 mmse=1.23 wav=1.06 | SI-SDR noisy=-0.7 mmse=6.1 wav=-0.5
+2026-09-09 02:41:34,077 INFO [babble       0dB ] sp20 | STOI  noisy=0.714 mmse=0.653 wav=0.716 | PESQ  noisy=1.13 mmse=1.25 wav=1.12 | SI-SDR noisy=-0.6 mmse=2.3 wav=-0.5
+2026-09-09 02:41:34,253 INFO [babble       0dB ] sp21 | STOI  noisy=0.585 mmse=0.532 wav=0.594 | PESQ  noisy=1.34 mmse=1.24 wav=1.33 | SI-SDR noisy=-0.6 mmse=2.2 wav=-0.5
+2026-09-09 02:41:34,604 INFO [babble       0dB ] sp22 | STOI  noisy=0.563 mmse=0.510 wav=0.570 | PESQ  noisy=1.13 mmse=1.10 wav=1.13 | SI-SDR noisy=-0.4 mmse=0.0 wav=-0.4
+2026-09-09 02:41:34,783 INFO [babble       0dB ] sp23 | STOI  noisy=0.681 mmse=0.621 wav=0.685 | PESQ  noisy=1.24 mmse=1.17 wav=1.24 | SI-SDR noisy=-0.6 mmse=0.4 wav=-0.5
+2026-09-09 02:41:34,967 INFO [babble       0dB ] sp24 | STOI  noisy=0.539 mmse=0.488 wav=0.547 | PESQ  noisy=1.17 mmse=1.12 wav=1.16 | SI-SDR noisy=-0.4 mmse=0.9 wav=-0.2
+2026-09-09 02:41:35,156 INFO [babble       0dB ] sp25 | STOI  noisy=0.581 mmse=0.507 wav=0.582 | PESQ  noisy=1.26 mmse=1.19 wav=1.25 | SI-SDR noisy=-0.4 mmse=1.6 wav=-0.2
+2026-09-09 02:41:35,336 INFO [babble       0dB ] sp26 | STOI  noisy=0.695 mmse=0.680 wav=0.702 | PESQ  noisy=1.13 mmse=1.21 wav=1.13 | SI-SDR noisy=-0.3 mmse=1.4 wav=-0.3
+2026-09-09 02:41:35,488 INFO [babble       0dB ] sp27 | STOI  noisy=0.716 mmse=0.652 wav=0.721 | PESQ  noisy=1.15 mmse=1.14 wav=1.15 | SI-SDR noisy=-0.1 mmse=1.9 wav=-0.0
+2026-09-09 02:41:35,682 INFO [babble       0dB ] sp28 | STOI  noisy=0.714 mmse=0.665 wav=0.718 | PESQ  noisy=1.10 mmse=1.18 wav=1.10 | SI-SDR noisy=-0.4 mmse=2.2 wav=-0.3
+2026-09-09 02:41:35,910 INFO [babble       0dB ] sp29 | STOI  noisy=0.720 mmse=0.697 wav=0.728 | PESQ  noisy=1.14 mmse=1.16 wav=1.14 | SI-SDR noisy=-0.6 mmse=2.4 wav=-0.6
+2026-09-09 02:41:36,067 INFO [babble       0dB ] sp30 | STOI  noisy=0.639 mmse=0.596 wav=0.651 | PESQ  noisy=1.17 mmse=1.20 wav=1.17 | SI-SDR noisy=-0.3 mmse=1.4 wav=-0.2
+2026-09-09 02:41:36,400 INFO [babble       10dB] sp01 | STOI  noisy=0.863 mmse=0.782 wav=0.866 | PESQ  noisy=1.53 mmse=1.32 wav=1.51 | SI-SDR noisy=9.3 mmse=7.0 wav=9.5
+2026-09-09 02:41:36,566 INFO [babble       10dB] sp02 | STOI  noisy=0.878 mmse=0.776 wav=0.880 | PESQ  noisy=1.58 mmse=1.23 wav=1.55 | SI-SDR noisy=9.4 mmse=5.0 wav=9.5
+2026-09-09 02:41:36,704 INFO [babble       10dB] sp03 | STOI  noisy=0.891 mmse=0.836 wav=0.893 | PESQ  noisy=1.51 mmse=1.39 wav=1.49 | SI-SDR noisy=9.5 mmse=7.6 wav=9.5
+2026-09-09 02:41:36,828 INFO [babble       10dB] sp04 | STOI  noisy=0.893 mmse=0.837 wav=0.894 | PESQ  noisy=1.71 mmse=1.40 wav=1.68 | SI-SDR noisy=9.6 mmse=7.0 wav=9.6
+2026-09-09 02:41:36,964 INFO [babble       10dB] sp05 | STOI  noisy=0.894 mmse=0.785 wav=0.895 | PESQ  noisy=1.56 mmse=1.30 wav=1.54 | SI-SDR noisy=9.4 mmse=7.1 wav=9.4
+2026-09-09 02:41:37,104 INFO [babble       10dB] sp06 | STOI  noisy=0.894 mmse=0.811 wav=0.895 | PESQ  noisy=1.61 mmse=1.57 wav=1.58 | SI-SDR noisy=9.3 mmse=8.2 wav=9.5
+2026-09-09 02:41:37,235 INFO [babble       10dB] sp07 | STOI  noisy=0.913 mmse=0.826 wav=0.914 | PESQ  noisy=1.63 mmse=1.36 wav=1.60 | SI-SDR noisy=9.5 mmse=6.8 wav=9.6
+2026-09-09 02:41:37,385 INFO [babble       10dB] sp08 | STOI  noisy=0.869 mmse=0.787 wav=0.872 | PESQ  noisy=1.62 mmse=1.39 wav=1.60 | SI-SDR noisy=9.4 mmse=6.8 wav=9.6
+2026-09-09 02:41:37,550 INFO [babble       10dB] sp09 | STOI  noisy=0.836 mmse=0.734 wav=0.846 | PESQ  noisy=1.38 mmse=1.26 wav=1.37 | SI-SDR noisy=9.6 mmse=5.6 wav=9.8
+2026-09-09 02:41:37,702 INFO [babble       10dB] sp10 | STOI  noisy=0.895 mmse=0.789 wav=0.895 | PESQ  noisy=1.59 mmse=1.31 wav=1.57 | SI-SDR noisy=9.4 mmse=5.9 wav=9.6
+2026-09-09 02:41:37,850 INFO [babble       10dB] sp11 | STOI  noisy=0.820 mmse=0.764 wav=0.826 | PESQ  noisy=1.41 mmse=1.50 wav=1.41 | SI-SDR noisy=9.5 mmse=8.2 wav=9.7
+2026-09-09 02:41:38,001 INFO [babble       10dB] sp12 | STOI  noisy=0.895 mmse=0.819 wav=0.899 | PESQ  noisy=1.40 mmse=1.55 wav=1.40 | SI-SDR noisy=9.8 mmse=6.9 wav=10.0
+2026-09-09 02:41:38,141 INFO [babble       10dB] sp13 | STOI  noisy=0.874 mmse=0.785 wav=0.882 | PESQ  noisy=1.62 mmse=1.33 wav=1.58 | SI-SDR noisy=8.9 mmse=7.6 wav=9.1
+2026-09-09 02:41:38,286 INFO [babble       10dB] sp14 | STOI  noisy=0.801 mmse=0.741 wav=0.806 | PESQ  noisy=1.35 mmse=1.53 wav=1.35 | SI-SDR noisy=9.6 mmse=9.2 wav=9.9
+2026-09-09 02:41:38,440 INFO [babble       10dB] sp15 | STOI  noisy=0.877 mmse=0.782 wav=0.878 | PESQ  noisy=1.44 mmse=1.32 wav=1.42 | SI-SDR noisy=9.7 mmse=5.4 wav=9.9
+2026-09-09 02:41:38,575 INFO [babble       10dB] sp16 | STOI  noisy=0.884 mmse=0.844 wav=0.885 | PESQ  noisy=1.44 mmse=1.50 wav=1.43 | SI-SDR noisy=8.9 mmse=10.3 wav=9.0
+2026-09-09 02:41:38,719 INFO [babble       10dB] sp17 | STOI  noisy=0.804 mmse=0.767 wav=0.805 | PESQ  noisy=1.31 mmse=1.45 wav=1.30 | SI-SDR noisy=9.6 mmse=8.7 wav=9.7
+2026-09-09 02:41:38,862 INFO [babble       10dB] sp18 | STOI  noisy=0.855 mmse=0.803 wav=0.856 | PESQ  noisy=1.45 mmse=1.44 wav=1.42 | SI-SDR noisy=9.6 mmse=10.3 wav=9.7
+2026-09-09 02:41:39,002 INFO [babble       10dB] sp19 | STOI  noisy=0.832 mmse=0.774 wav=0.834 | PESQ  noisy=1.31 mmse=1.46 wav=1.31 | SI-SDR noisy=9.3 mmse=11.6 wav=9.5
+2026-09-09 02:41:39,143 INFO [babble       10dB] sp20 | STOI  noisy=0.884 mmse=0.829 wav=0.884 | PESQ  noisy=1.46 mmse=1.45 wav=1.43 | SI-SDR noisy=9.5 mmse=8.7 wav=9.7
+2026-09-09 02:41:39,283 INFO [babble       10dB] sp21 | STOI  noisy=0.872 mmse=0.779 wav=0.876 | PESQ  noisy=1.93 mmse=1.31 wav=1.85 | SI-SDR noisy=9.3 mmse=6.3 wav=9.6
+2026-09-09 02:41:39,445 INFO [babble       10dB] sp22 | STOI  noisy=0.816 mmse=0.728 wav=0.818 | PESQ  noisy=1.46 mmse=1.22 wav=1.44 | SI-SDR noisy=9.4 mmse=4.0 wav=9.6
+2026-09-09 02:41:39,593 INFO [babble       10dB] sp23 | STOI  noisy=0.872 mmse=0.770 wav=0.873 | PESQ  noisy=1.71 mmse=1.29 wav=1.66 | SI-SDR noisy=9.3 mmse=6.1 wav=9.5
+2026-09-09 02:41:39,759 INFO [babble       10dB] sp24 | STOI  noisy=0.803 mmse=0.719 wav=0.813 | PESQ  noisy=1.52 mmse=1.20 wav=1.47 | SI-SDR noisy=9.7 mmse=4.0 wav=9.9
+2026-09-09 02:41:39,923 INFO [babble       10dB] sp25 | STOI  noisy=0.847 mmse=0.761 wav=0.849 | PESQ  noisy=1.76 mmse=1.29 wav=1.70 | SI-SDR noisy=9.7 mmse=6.1 wav=9.9
+2026-09-09 02:41:40,065 INFO [babble       10dB] sp26 | STOI  noisy=0.907 mmse=0.817 wav=0.911 | PESQ  noisy=1.66 mmse=1.35 wav=1.62 | SI-SDR noisy=9.6 mmse=6.3 wav=9.7
+2026-09-09 02:41:40,214 INFO [babble       10dB] sp27 | STOI  noisy=0.915 mmse=0.800 wav=0.916 | PESQ  noisy=1.62 mmse=1.30 wav=1.59 | SI-SDR noisy=9.5 mmse=7.1 wav=9.7
+2026-09-09 02:41:40,356 INFO [babble       10dB] sp28 | STOI  noisy=0.926 mmse=0.817 wav=0.926 | PESQ  noisy=1.56 mmse=1.48 wav=1.52 | SI-SDR noisy=9.7 mmse=6.6 wav=9.8
+2026-09-09 02:41:40,492 INFO [babble       10dB] sp29 | STOI  noisy=0.921 mmse=0.826 wav=0.924 | PESQ  noisy=1.61 mmse=1.33 wav=1.57 | SI-SDR noisy=9.5 mmse=6.6 wav=9.6
+2026-09-09 02:41:40,638 INFO [babble       10dB] sp30 | STOI  noisy=0.898 mmse=0.825 wav=0.901 | PESQ  noisy=1.70 mmse=1.47 wav=1.65 | SI-SDR noisy=9.6 mmse=6.7 wav=9.8
+2026-09-09 02:41:40,797 INFO [babble       15dB] sp01 | STOI  noisy=0.934 mmse=0.831 wav=0.934 | PESQ  noisy=1.85 mmse=1.35 wav=1.81 | SI-SDR noisy=14.3 mmse=8.1 wav=14.6
+2026-09-09 02:41:40,978 INFO [babble       15dB] sp02 | STOI  noisy=0.943 mmse=0.837 wav=0.943 | PESQ  noisy=2.07 mmse=1.28 wav=1.95 | SI-SDR noisy=14.3 mmse=6.1 wav=14.5
+2026-09-09 02:41:41,110 INFO [babble       15dB] sp03 | STOI  noisy=0.964 mmse=0.863 wav=0.965 | PESQ  noisy=1.88 mmse=1.37 wav=1.82 | SI-SDR noisy=14.4 mmse=8.7 wav=14.5
+2026-09-09 02:41:41,246 INFO [babble       15dB] sp04 | STOI  noisy=0.945 mmse=0.867 wav=0.946 | PESQ  noisy=2.12 mmse=1.46 wav=2.07 | SI-SDR noisy=14.5 mmse=8.5 wav=14.6
+2026-09-09 02:41:41,385 INFO [babble       15dB] sp05 | STOI  noisy=0.949 mmse=0.825 wav=0.950 | PESQ  noisy=2.03 mmse=1.41 wav=1.98 | SI-SDR noisy=14.3 mmse=8.7 wav=14.4
+2026-09-09 02:41:41,520 INFO [babble       15dB] sp06 | STOI  noisy=0.936 mmse=0.845 wav=0.937 | PESQ  noisy=2.02 mmse=1.66 wav=1.93 | SI-SDR noisy=14.3 mmse=9.2 wav=14.5
+2026-09-09 02:41:41,642 INFO [babble       15dB] sp07 | STOI  noisy=0.954 mmse=0.845 wav=0.954 | PESQ  noisy=1.87 mmse=1.36 wav=1.82 | SI-SDR noisy=14.5 mmse=7.9 wav=14.7
+2026-09-09 02:41:41,791 INFO [babble       15dB] sp08 | STOI  noisy=0.946 mmse=0.858 wav=0.947 | PESQ  noisy=2.03 mmse=1.54 wav=1.96 | SI-SDR noisy=14.3 mmse=7.9 wav=14.6
+2026-09-09 02:41:41,957 INFO [babble       15dB] sp09 | STOI  noisy=0.902 mmse=0.792 wav=0.906 | PESQ  noisy=1.80 mmse=1.42 wav=1.76 | SI-SDR noisy=14.7 mmse=6.9 wav=14.9
+2026-09-09 02:41:42,110 INFO [babble       15dB] sp10 | STOI  noisy=0.937 mmse=0.824 wav=0.938 | PESQ  noisy=1.91 mmse=1.37 wav=1.87 | SI-SDR noisy=14.4 mmse=7.0 wav=14.6
+2026-09-09 02:41:42,255 INFO [babble       15dB] sp11 | STOI  noisy=0.896 mmse=0.797 wav=0.899 | PESQ  noisy=1.78 mmse=1.56 wav=1.75 | SI-SDR noisy=14.4 mmse=8.8 wav=14.6
+2026-09-09 02:41:42,400 INFO [babble       15dB] sp12 | STOI  noisy=0.943 mmse=0.868 wav=0.944 | PESQ  noisy=1.82 mmse=1.60 wav=1.77 | SI-SDR noisy=14.7 mmse=8.3 wav=14.8
+2026-09-09 02:41:42,543 INFO [babble       15dB] sp13 | STOI  noisy=0.917 mmse=0.839 wav=0.920 | PESQ  noisy=1.98 mmse=1.43 wav=1.91 | SI-SDR noisy=13.9 mmse=10.0 wav=14.1
+2026-09-09 02:41:42,689 INFO [babble       15dB] sp14 | STOI  noisy=0.886 mmse=0.785 wav=0.888 | PESQ  noisy=1.73 mmse=1.58 wav=1.70 | SI-SDR noisy=14.6 mmse=11.1 wav=14.9
+2026-09-09 02:41:42,842 INFO [babble       15dB] sp15 | STOI  noisy=0.934 mmse=0.822 wav=0.933 | PESQ  noisy=1.82 mmse=1.42 wav=1.77 | SI-SDR noisy=14.7 mmse=6.6 wav=14.8
+2026-09-09 02:41:42,975 INFO [babble       15dB] sp16 | STOI  noisy=0.919 mmse=0.892 wav=0.920 | PESQ  noisy=1.98 mmse=1.59 wav=1.93 | SI-SDR noisy=13.9 mmse=12.5 wav=14.0
+2026-09-09 02:41:43,108 INFO [babble       15dB] sp17 | STOI  noisy=0.892 mmse=0.809 wav=0.892 | PESQ  noisy=1.69 mmse=1.64 wav=1.66 | SI-SDR noisy=14.5 mmse=9.8 wav=14.7
+2026-09-09 02:41:43,240 INFO [babble       15dB] sp18 | STOI  noisy=0.897 mmse=0.834 wav=0.897 | PESQ  noisy=1.80 mmse=1.58 wav=1.76 | SI-SDR noisy=14.6 mmse=11.9 wav=14.7
+2026-09-09 02:41:43,372 INFO [babble       15dB] sp19 | STOI  noisy=0.888 mmse=0.825 wav=0.888 | PESQ  noisy=1.57 mmse=1.57 wav=1.55 | SI-SDR noisy=14.2 mmse=12.6 wav=14.4
+2026-09-09 02:41:43,503 INFO [babble       15dB] sp20 | STOI  noisy=0.924 mmse=0.865 wav=0.924 | PESQ  noisy=1.82 mmse=1.56 wav=1.74 | SI-SDR noisy=14.5 mmse=9.9 wav=14.8
+2026-09-09 02:41:43,644 INFO [babble       15dB] sp21 | STOI  noisy=0.947 mmse=0.834 wav=0.947 | PESQ  noisy=2.43 mmse=1.39 wav=2.29 | SI-SDR noisy=14.3 mmse=7.1 wav=14.6
+2026-09-09 02:41:43,794 INFO [babble       15dB] sp22 | STOI  noisy=0.932 mmse=0.817 wav=0.931 | PESQ  noisy=2.04 mmse=1.26 wav=1.95 | SI-SDR noisy=14.5 mmse=4.7 wav=14.6
+2026-09-09 02:41:43,935 INFO [babble       15dB] sp23 | STOI  noisy=0.965 mmse=0.844 wav=0.965 | PESQ  noisy=2.19 mmse=1.36 wav=2.09 | SI-SDR noisy=14.3 mmse=7.2 wav=14.4
+2026-09-09 02:41:44,092 INFO [babble       15dB] sp24 | STOI  noisy=0.902 mmse=0.791 wav=0.902 | PESQ  noisy=2.10 mmse=1.41 wav=2.00 | SI-SDR noisy=14.6 mmse=5.8 wav=14.8
+2026-09-09 02:41:44,256 INFO [babble       15dB] sp25 | STOI  noisy=0.956 mmse=0.840 wav=0.956 | PESQ  noisy=2.31 mmse=1.40 wav=2.24 | SI-SDR noisy=14.7 mmse=7.4 wav=14.8
+2026-09-09 02:41:44,406 INFO [babble       15dB] sp26 | STOI  noisy=0.971 mmse=0.858 wav=0.972 | PESQ  noisy=2.26 mmse=1.45 wav=2.13 | SI-SDR noisy=14.5 mmse=7.3 wav=14.6
+2026-09-09 02:41:44,544 INFO [babble       15dB] sp27 | STOI  noisy=0.974 mmse=0.866 wav=0.972 | PESQ  noisy=2.20 mmse=1.44 wav=2.11 | SI-SDR noisy=14.6 mmse=9.4 wav=14.7
+2026-09-09 02:41:44,685 INFO [babble       15dB] sp28 | STOI  noisy=0.976 mmse=0.849 wav=0.976 | PESQ  noisy=2.07 mmse=1.65 wav=2.00 | SI-SDR noisy=14.6 mmse=8.5 wav=14.8
+2026-09-09 02:41:44,817 INFO [babble       15dB] sp29 | STOI  noisy=0.959 mmse=0.864 wav=0.959 | PESQ  noisy=1.84 mmse=1.44 wav=1.78 | SI-SDR noisy=14.5 mmse=9.1 wav=14.7
+2026-09-09 02:41:44,957 INFO [babble       15dB] sp30 | STOI  noisy=0.950 mmse=0.856 wav=0.953 | PESQ  noisy=2.26 mmse=1.61 wav=2.13 | SI-SDR noisy=14.6 mmse=8.3 wav=14.8
+2026-09-09 02:41:45,115 INFO [babble       5dB ] sp01 | STOI  noisy=0.776 mmse=0.690 wav=0.782 | PESQ  noisy=1.37 mmse=1.22 wav=1.36 | SI-SDR noisy=4.3 mmse=3.7 wav=4.5
+2026-09-09 02:41:45,296 INFO [babble       5dB ] sp02 | STOI  noisy=0.780 mmse=0.704 wav=0.784 | PESQ  noisy=1.42 mmse=1.19 wav=1.40 | SI-SDR noisy=4.4 mmse=3.8 wav=4.5
+2026-09-09 02:41:45,444 INFO [babble       5dB ] sp03 | STOI  noisy=0.761 mmse=0.707 wav=0.764 | PESQ  noisy=1.23 mmse=1.25 wav=1.23 | SI-SDR noisy=4.4 mmse=5.2 wav=4.5
+2026-09-09 02:41:45,574 INFO [babble       5dB ] sp04 | STOI  noisy=0.818 mmse=0.753 wav=0.819 | PESQ  noisy=1.38 mmse=1.31 wav=1.37 | SI-SDR noisy=4.6 mmse=4.6 wav=4.6
+2026-09-09 02:41:45,725 INFO [babble       5dB ] sp05 | STOI  noisy=0.774 mmse=0.700 wav=0.777 | PESQ  noisy=1.27 mmse=1.27 wav=1.26 | SI-SDR noisy=4.3 mmse=5.3 wav=4.4
+2026-09-09 02:41:45,869 INFO [babble       5dB ] sp06 | STOI  noisy=0.826 mmse=0.786 wav=0.828 | PESQ  noisy=1.40 mmse=1.43 wav=1.38 | SI-SDR noisy=4.2 mmse=6.1 wav=4.4
+2026-09-09 02:41:46,002 INFO [babble       5dB ] sp07 | STOI  noisy=0.780 mmse=0.723 wav=0.782 | PESQ  noisy=1.29 mmse=1.21 wav=1.28 | SI-SDR noisy=4.6 mmse=4.8 wav=4.7
+2026-09-09 02:41:46,163 INFO [babble       5dB ] sp08 | STOI  noisy=0.768 mmse=0.700 wav=0.772 | PESQ  noisy=1.37 mmse=1.27 wav=1.36 | SI-SDR noisy=4.4 mmse=4.6 wav=4.6
+2026-09-09 02:41:46,313 INFO [babble       5dB ] sp09 | STOI  noisy=0.719 mmse=0.651 wav=0.727 | PESQ  noisy=1.22 mmse=1.23 wav=1.22 | SI-SDR noisy=4.7 mmse=3.3 wav=4.9
+2026-09-09 02:41:46,462 INFO [babble       5dB ] sp10 | STOI  noisy=0.761 mmse=0.694 wav=0.764 | PESQ  noisy=1.26 mmse=1.28 wav=1.25 | SI-SDR noisy=4.3 mmse=3.4 wav=4.5
+2026-09-09 02:41:46,631 INFO [babble       5dB ] sp11 | STOI  noisy=0.691 mmse=0.623 wav=0.698 | PESQ  noisy=1.17 mmse=1.29 wav=1.16 | SI-SDR noisy=4.3 mmse=5.4 wav=4.4
+2026-09-09 02:41:46,791 INFO [babble       5dB ] sp12 | STOI  noisy=0.808 mmse=0.750 wav=0.818 | PESQ  noisy=1.22 mmse=1.29 wav=1.22 | SI-SDR noisy=4.5 mmse=4.3 wav=4.7
+2026-09-09 02:41:46,942 INFO [babble       5dB ] sp13 | STOI  noisy=0.790 mmse=0.729 wav=0.799 | PESQ  noisy=1.28 mmse=1.27 wav=1.27 | SI-SDR noisy=3.9 mmse=5.6 wav=4.1
+2026-09-09 02:41:47,107 INFO [babble       5dB ] sp14 | STOI  noisy=0.659 mmse=0.616 wav=0.663 | PESQ  noisy=1.13 mmse=1.37 wav=1.13 | SI-SDR noisy=4.7 mmse=7.2 wav=4.9
+2026-09-09 02:41:47,264 INFO [babble       5dB ] sp15 | STOI  noisy=0.733 mmse=0.651 wav=0.740 | PESQ  noisy=1.19 mmse=1.26 wav=1.19 | SI-SDR noisy=4.7 mmse=4.3 wav=4.8
+2026-09-09 02:41:47,414 INFO [babble       5dB ] sp16 | STOI  noisy=0.773 mmse=0.744 wav=0.774 | PESQ  noisy=1.15 mmse=1.31 wav=1.15 | SI-SDR noisy=3.9 mmse=8.2 wav=4.0
+2026-09-09 02:41:47,565 INFO [babble       5dB ] sp17 | STOI  noisy=0.746 mmse=0.725 wav=0.747 | PESQ  noisy=1.14 mmse=1.33 wav=1.13 | SI-SDR noisy=4.5 mmse=6.4 wav=4.6
+2026-09-09 02:41:47,720 INFO [babble       5dB ] sp18 | STOI  noisy=0.743 mmse=0.700 wav=0.745 | PESQ  noisy=1.16 mmse=1.20 wav=1.16 | SI-SDR noisy=4.7 mmse=7.6 wav=4.8
+2026-09-09 02:41:47,855 INFO [babble       5dB ] sp19 | STOI  noisy=0.748 mmse=0.728 wav=0.748 | PESQ  noisy=1.15 mmse=1.33 wav=1.14 | SI-SDR noisy=4.3 mmse=8.5 wav=4.4
+2026-09-09 02:41:47,994 INFO [babble       5dB ] sp20 | STOI  noisy=0.814 mmse=0.763 wav=0.814 | PESQ  noisy=1.27 mmse=1.35 wav=1.26 | SI-SDR noisy=4.6 mmse=6.3 wav=4.7
+2026-09-09 02:41:48,135 INFO [babble       5dB ] sp21 | STOI  noisy=0.785 mmse=0.718 wav=0.790 | PESQ  noisy=1.92 mmse=1.39 wav=1.84 | SI-SDR noisy=4.3 mmse=4.6 wav=4.5
+2026-09-09 02:41:48,306 INFO [babble       5dB ] sp22 | STOI  noisy=0.695 mmse=0.606 wav=0.696 | PESQ  noisy=1.26 mmse=1.18 wav=1.26 | SI-SDR noisy=4.5 mmse=1.4 wav=4.6
+2026-09-09 02:41:48,453 INFO [babble       5dB ] sp23 | STOI  noisy=0.750 mmse=0.676 wav=0.752 | PESQ  noisy=1.33 mmse=1.17 wav=1.32 | SI-SDR noisy=4.4 mmse=4.2 wav=4.5
+2026-09-09 02:41:48,623 INFO [babble       5dB ] sp24 | STOI  noisy=0.692 mmse=0.609 wav=0.704 | PESQ  noisy=1.30 mmse=1.11 wav=1.28 | SI-SDR noisy=4.6 mmse=2.5 wav=4.8
+2026-09-09 02:41:48,802 INFO [babble       5dB ] sp25 | STOI  noisy=0.729 mmse=0.701 wav=0.737 | PESQ  noisy=1.44 mmse=1.27 wav=1.42 | SI-SDR noisy=4.7 mmse=4.4 wav=4.9
+2026-09-09 02:41:48,939 INFO [babble       5dB ] sp26 | STOI  noisy=0.837 mmse=0.777 wav=0.839 | PESQ  noisy=1.29 mmse=1.25 wav=1.28 | SI-SDR noisy=4.4 mmse=4.2 wav=4.6
+2026-09-09 02:41:49,084 INFO [babble       5dB ] sp27 | STOI  noisy=0.835 mmse=0.756 wav=0.838 | PESQ  noisy=1.32 mmse=1.25 wav=1.31 | SI-SDR noisy=4.5 mmse=5.1 wav=4.6
+2026-09-09 02:41:49,238 INFO [babble       5dB ] sp28 | STOI  noisy=0.841 mmse=0.756 wav=0.842 | PESQ  noisy=1.26 mmse=1.34 wav=1.26 | SI-SDR noisy=4.7 mmse=4.9 wav=4.8
+2026-09-09 02:41:49,395 INFO [babble       5dB ] sp29 | STOI  noisy=0.844 mmse=0.768 wav=0.849 | PESQ  noisy=1.32 mmse=1.28 wav=1.31 | SI-SDR noisy=4.5 mmse=5.1 wav=4.6
+2026-09-09 02:41:49,540 INFO [babble       5dB ] sp30 | STOI  noisy=0.776 mmse=0.712 wav=0.782 | PESQ  noisy=1.36 mmse=1.34 wav=1.34 | SI-SDR noisy=4.6 mmse=4.7 wav=4.7
+2026-09-09 02:41:49,708 INFO [car          0dB ] sp01 | STOI  noisy=0.604 mmse=0.581 wav=0.614 | PESQ  noisy=1.15 mmse=1.18 wav=1.14 | SI-SDR noisy=-0.7 mmse=4.0 wav=-0.2
+2026-09-09 02:41:49,924 INFO [car          0dB ] sp02 | STOI  noisy=0.685 mmse=0.646 wav=0.694 | PESQ  noisy=1.21 mmse=1.19 wav=1.20 | SI-SDR noisy=-0.7 mmse=2.3 wav=-0.6
+2026-09-09 02:41:50,147 INFO [car          0dB ] sp03 | STOI  noisy=0.640 mmse=0.609 wav=0.644 | PESQ  noisy=1.09 mmse=1.12 wav=1.09 | SI-SDR noisy=-0.6 mmse=3.2 wav=-0.5
+2026-09-09 02:41:50,287 INFO [car          0dB ] sp04 | STOI  noisy=0.716 mmse=0.708 wav=0.718 | PESQ  noisy=1.15 mmse=1.20 wav=1.15 | SI-SDR noisy=-0.3 mmse=2.9 wav=-0.3
+2026-09-09 02:41:50,431 INFO [car          0dB ] sp05 | STOI  noisy=0.717 mmse=0.690 wav=0.721 | PESQ  noisy=1.12 mmse=1.31 wav=1.12 | SI-SDR noisy=-0.7 mmse=2.9 wav=-0.7
+2026-09-09 02:41:50,570 INFO [car          0dB ] sp06 | STOI  noisy=0.699 mmse=0.709 wav=0.704 | PESQ  noisy=1.13 mmse=1.29 wav=1.12 | SI-SDR noisy=-0.7 mmse=3.4 wav=-0.4
+2026-09-09 02:41:50,710 INFO [car          0dB ] sp07 | STOI  noisy=0.645 mmse=0.602 wav=0.646 | PESQ  noisy=1.13 mmse=1.12 wav=1.13 | SI-SDR noisy=-0.4 mmse=3.3 wav=-0.1
+2026-09-09 02:41:50,901 INFO [car          0dB ] sp08 | STOI  noisy=0.652 mmse=0.635 wav=0.658 | PESQ  noisy=1.17 mmse=1.24 wav=1.17 | SI-SDR noisy=-0.6 mmse=2.5 wav=-0.4
+2026-09-09 02:41:51,081 INFO [car          0dB ] sp09 | STOI  noisy=0.618 mmse=0.582 wav=0.633 | PESQ  noisy=1.08 mmse=1.16 wav=1.08 | SI-SDR noisy=-0.3 mmse=2.4 wav=-0.1
+2026-09-09 02:41:51,275 INFO [car          0dB ] sp10 | STOI  noisy=0.677 mmse=0.665 wav=0.691 | PESQ  noisy=1.12 mmse=1.16 wav=1.12 | SI-SDR noisy=-0.5 mmse=1.3 wav=-0.2
+2026-09-09 02:41:51,454 INFO [car          0dB ] sp11 | STOI  noisy=0.513 mmse=0.486 wav=0.525 | PESQ  noisy=1.07 mmse=1.13 wav=1.06 | SI-SDR noisy=-0.7 mmse=2.1 wav=-0.3
+2026-09-09 02:41:51,619 INFO [car          0dB ] sp12 | STOI  noisy=0.711 mmse=0.687 wav=0.725 | PESQ  noisy=1.10 mmse=1.18 wav=1.09 | SI-SDR noisy=-0.1 mmse=1.4 wav=0.2
+2026-09-09 02:41:51,769 INFO [car          0dB ] sp13 | STOI  noisy=0.630 mmse=0.636 wav=0.641 | PESQ  noisy=1.12 mmse=1.26 wav=1.10 | SI-SDR noisy=-1.1 mmse=3.9 wav=-0.8
+2026-09-09 02:41:51,956 INFO [car          0dB ] sp14 | STOI  noisy=0.562 mmse=0.593 wav=0.565 | PESQ  noisy=1.06 mmse=1.36 wav=1.06 | SI-SDR noisy=-0.3 mmse=5.5 wav=-0.1
+2026-09-09 02:41:52,159 INFO [car          0dB ] sp15 | STOI  noisy=0.584 mmse=0.584 wav=0.594 | PESQ  noisy=1.08 mmse=1.16 wav=1.07 | SI-SDR noisy=-0.4 mmse=2.5 wav=0.1
+2026-09-09 02:41:52,311 INFO [car          0dB ] sp16 | STOI  noisy=0.742 mmse=0.730 wav=0.744 | PESQ  noisy=1.09 mmse=1.37 wav=1.09 | SI-SDR noisy=-1.1 mmse=5.4 wav=-1.0
+2026-09-09 02:41:52,466 INFO [car          0dB ] sp17 | STOI  noisy=0.631 mmse=0.652 wav=0.637 | PESQ  noisy=1.06 mmse=1.24 wav=1.06 | SI-SDR noisy=-0.3 mmse=4.0 wav=-0.1
+2026-09-09 02:41:52,645 INFO [car          0dB ] sp18 | STOI  noisy=0.643 mmse=0.646 wav=0.647 | PESQ  noisy=1.08 mmse=1.23 wav=1.08 | SI-SDR noisy=-0.4 mmse=4.9 wav=-0.2
+2026-09-09 02:41:52,796 INFO [car          0dB ] sp19 | STOI  noisy=0.647 mmse=0.661 wav=0.651 | PESQ  noisy=1.06 mmse=1.28 wav=1.06 | SI-SDR noisy=-1.0 mmse=5.7 wav=-0.8
+2026-09-09 02:41:52,950 INFO [car          0dB ] sp20 | STOI  noisy=0.711 mmse=0.679 wav=0.715 | PESQ  noisy=1.11 mmse=1.31 wav=1.11 | SI-SDR noisy=-0.6 mmse=4.1 wav=-0.5
+2026-09-09 02:41:53,094 INFO [car          0dB ] sp21 | STOI  noisy=0.604 mmse=0.594 wav=0.616 | PESQ  noisy=1.30 mmse=1.36 wav=1.29 | SI-SDR noisy=-0.7 mmse=2.6 wav=-0.4
+2026-09-09 02:41:53,307 INFO [car          0dB ] sp22 | STOI  noisy=0.563 mmse=0.538 wav=0.564 | PESQ  noisy=1.09 mmse=1.11 wav=1.09 | SI-SDR noisy=-0.4 mmse=1.8 wav=-0.0
+2026-09-09 02:41:53,468 INFO [car          0dB ] sp23 | STOI  noisy=0.647 mmse=0.647 wav=0.651 | PESQ  noisy=1.21 mmse=1.14 wav=1.20 | SI-SDR noisy=-0.8 mmse=2.6 wav=-0.6
+2026-09-09 02:41:53,655 INFO [car          0dB ] sp24 | STOI  noisy=0.559 mmse=0.563 wav=0.572 | PESQ  noisy=1.17 mmse=1.16 wav=1.16 | SI-SDR noisy=-0.2 mmse=2.1 wav=0.1
+2026-09-09 02:41:53,824 INFO [car          0dB ] sp25 | STOI  noisy=0.604 mmse=0.621 wav=0.613 | PESQ  noisy=1.25 mmse=1.17 wav=1.23 | SI-SDR noisy=-0.3 mmse=3.1 wav=-0.0
+2026-09-09 02:41:53,981 INFO [car          0dB ] sp26 | STOI  noisy=0.729 mmse=0.748 wav=0.733 | PESQ  noisy=1.13 mmse=1.29 wav=1.12 | SI-SDR noisy=-0.4 mmse=3.2 wav=-0.3
+2026-09-09 02:41:54,132 INFO [car          0dB ] sp27 | STOI  noisy=0.676 mmse=0.652 wav=0.682 | PESQ  noisy=1.14 mmse=1.17 wav=1.13 | SI-SDR noisy=-0.6 mmse=2.8 wav=-0.5
+2026-09-09 02:41:54,306 INFO [car          0dB ] sp28 | STOI  noisy=0.734 mmse=0.727 wav=0.739 | PESQ  noisy=1.10 mmse=1.31 wav=1.10 | SI-SDR noisy=-0.1 mmse=3.8 wav=0.0
+2026-09-09 02:41:54,644 INFO [car          0dB ] sp29 | STOI  noisy=0.700 mmse=0.693 wav=0.709 | PESQ  noisy=1.11 mmse=1.25 wav=1.10 | SI-SDR noisy=-0.5 mmse=3.5 wav=-0.4
+2026-09-09 02:41:54,803 INFO [car          0dB ] sp30 | STOI  noisy=0.598 mmse=0.602 wav=0.618 | PESQ  noisy=1.14 mmse=1.24 wav=1.13 | SI-SDR noisy=-0.4 mmse=2.8 wav=-0.0
+2026-09-09 02:41:54,953 INFO [car          10dB] sp01 | STOI  noisy=0.824 mmse=0.741 wav=0.834 | PESQ  noisy=1.38 mmse=1.23 wav=1.36 | SI-SDR noisy=9.4 mmse=7.0 wav=9.9
+2026-09-09 02:41:55,108 INFO [car          10dB] sp02 | STOI  noisy=0.872 mmse=0.801 wav=0.873 | PESQ  noisy=1.54 mmse=1.20 wav=1.50 | SI-SDR noisy=9.3 mmse=5.2 wav=9.5
+2026-09-09 02:41:55,249 INFO [car          10dB] sp03 | STOI  noisy=0.878 mmse=0.820 wav=0.880 | PESQ  noisy=1.39 mmse=1.39 wav=1.38 | SI-SDR noisy=9.5 mmse=7.8 wav=9.6
+2026-09-09 02:41:55,378 INFO [car          10dB] sp04 | STOI  noisy=0.857 mmse=0.790 wav=0.859 | PESQ  noisy=1.46 mmse=1.26 wav=1.43 | SI-SDR noisy=9.6 mmse=6.6 wav=9.7
+2026-09-09 02:41:55,511 INFO [car          10dB] sp05 | STOI  noisy=0.873 mmse=0.798 wav=0.875 | PESQ  noisy=1.43 mmse=1.39 wav=1.41 | SI-SDR noisy=9.3 mmse=7.7 wav=9.4
+2026-09-09 02:41:55,648 INFO [car          10dB] sp06 | STOI  noisy=0.882 mmse=0.801 wav=0.889 | PESQ  noisy=1.41 mmse=1.47 wav=1.40 | SI-SDR noisy=9.3 mmse=7.5 wav=9.9
+2026-09-09 02:41:55,778 INFO [car          10dB] sp07 | STOI  noisy=0.889 mmse=0.816 wav=0.893 | PESQ  noisy=1.38 mmse=1.33 wav=1.36 | SI-SDR noisy=9.5 mmse=7.0 wav=9.9
+2026-09-09 02:41:55,924 INFO [car          10dB] sp08 | STOI  noisy=0.888 mmse=0.806 wav=0.894 | PESQ  noisy=1.48 mmse=1.28 wav=1.49 | SI-SDR noisy=9.3 mmse=5.1 wav=10.0
+2026-09-09 02:41:56,093 INFO [car          10dB] sp09 | STOI  noisy=0.806 mmse=0.732 wav=0.827 | PESQ  noisy=1.29 mmse=1.34 wav=1.31 | SI-SDR noisy=9.7 mmse=5.7 wav=10.3
+2026-09-09 02:41:56,243 INFO [car          10dB] sp10 | STOI  noisy=0.881 mmse=0.785 wav=0.883 | PESQ  noisy=1.40 mmse=1.32 wav=1.39 | SI-SDR noisy=9.4 mmse=6.3 wav=9.6
+2026-09-09 02:41:56,389 INFO [car          10dB] sp11 | STOI  noisy=0.831 mmse=0.743 wav=0.844 | PESQ  noisy=1.31 mmse=1.35 wav=1.32 | SI-SDR noisy=9.5 mmse=6.7 wav=10.0
+2026-09-09 02:41:56,532 INFO [car          10dB] sp12 | STOI  noisy=0.887 mmse=0.820 wav=0.893 | PESQ  noisy=1.33 mmse=1.51 wav=1.34 | SI-SDR noisy=9.7 mmse=7.0 wav=10.2
+2026-09-09 02:41:56,673 INFO [car          10dB] sp13 | STOI  noisy=0.858 mmse=0.803 wav=0.866 | PESQ  noisy=1.53 mmse=1.37 wav=1.50 | SI-SDR noisy=8.9 mmse=8.1 wav=9.1
+2026-09-09 02:41:56,826 INFO [car          10dB] sp14 | STOI  noisy=0.803 mmse=0.748 wav=0.810 | PESQ  noisy=1.34 mmse=1.51 wav=1.34 | SI-SDR noisy=9.6 mmse=9.5 wav=10.0
+2026-09-09 02:41:56,982 INFO [car          10dB] sp15 | STOI  noisy=0.869 mmse=0.789 wav=0.873 | PESQ  noisy=1.38 mmse=1.39 wav=1.38 | SI-SDR noisy=9.7 mmse=6.0 wav=10.0
+2026-09-09 02:41:57,119 INFO [car          10dB] sp16 | STOI  noisy=0.853 mmse=0.825 wav=0.854 | PESQ  noisy=1.39 mmse=1.66 wav=1.40 | SI-SDR noisy=8.9 mmse=10.2 wav=9.2
+2026-09-09 02:41:57,261 INFO [car          10dB] sp17 | STOI  noisy=0.853 mmse=0.794 wav=0.856 | PESQ  noisy=1.29 mmse=1.46 wav=1.29 | SI-SDR noisy=9.6 mmse=8.4 wav=9.8
+2026-09-09 02:41:57,402 INFO [car          10dB] sp18 | STOI  noisy=0.848 mmse=0.800 wav=0.850 | PESQ  noisy=1.34 mmse=1.52 wav=1.32 | SI-SDR noisy=9.6 mmse=10.0 wav=9.9
+2026-09-09 02:41:57,537 INFO [car          10dB] sp19 | STOI  noisy=0.838 mmse=0.805 wav=0.838 | PESQ  noisy=1.26 mmse=1.60 wav=1.26 | SI-SDR noisy=9.1 mmse=10.6 wav=9.4
+2026-09-09 02:41:57,675 INFO [car          10dB] sp20 | STOI  noisy=0.877 mmse=0.841 wav=0.877 | PESQ  noisy=1.48 mmse=1.53 wav=1.46 | SI-SDR noisy=9.5 mmse=8.6 wav=9.8
+2026-09-09 02:41:57,814 INFO [car          10dB] sp21 | STOI  noisy=0.848 mmse=0.786 wav=0.862 | PESQ  noisy=1.70 mmse=1.34 wav=1.67 | SI-SDR noisy=9.4 mmse=6.6 wav=10.2
+2026-09-09 02:41:57,968 INFO [car          10dB] sp22 | STOI  noisy=0.817 mmse=0.749 wav=0.821 | PESQ  noisy=1.36 mmse=1.19 wav=1.35 | SI-SDR noisy=9.4 mmse=4.1 wav=9.7
+2026-09-09 02:41:58,111 INFO [car          10dB] sp23 | STOI  noisy=0.878 mmse=0.805 wav=0.880 | PESQ  noisy=1.58 mmse=1.35 wav=1.55 | SI-SDR noisy=9.3 mmse=6.3 wav=9.5
+2026-09-09 02:41:58,275 INFO [car          10dB] sp24 | STOI  noisy=0.806 mmse=0.731 wav=0.815 | PESQ  noisy=1.56 mmse=1.31 wav=1.53 | SI-SDR noisy=9.6 mmse=4.8 wav=10.0
+2026-09-09 02:41:58,427 INFO [car          10dB] sp25 | STOI  noisy=0.846 mmse=0.803 wav=0.856 | PESQ  noisy=1.64 mmse=1.37 wav=1.62 | SI-SDR noisy=9.6 mmse=6.4 wav=9.9
+2026-09-09 02:41:58,565 INFO [car          10dB] sp26 | STOI  noisy=0.913 mmse=0.824 wav=0.914 | PESQ  noisy=1.55 mmse=1.34 wav=1.53 | SI-SDR noisy=9.5 mmse=6.4 wav=9.7
+2026-09-09 02:41:58,704 INFO [car          10dB] sp27 | STOI  noisy=0.913 mmse=0.815 wav=0.917 | PESQ  noisy=1.48 mmse=1.33 wav=1.47 | SI-SDR noisy=9.5 mmse=7.4 wav=9.9
+2026-09-09 02:41:58,842 INFO [car          10dB] sp28 | STOI  noisy=0.907 mmse=0.806 wav=0.910 | PESQ  noisy=1.45 mmse=1.53 wav=1.43 | SI-SDR noisy=9.7 mmse=7.7 wav=10.0
+2026-09-09 02:41:58,980 INFO [car          10dB] sp29 | STOI  noisy=0.907 mmse=0.837 wav=0.915 | PESQ  noisy=1.46 mmse=1.39 wav=1.45 | SI-SDR noisy=9.5 mmse=7.6 wav=10.0
+2026-09-09 02:41:59,123 INFO [car          10dB] sp30 | STOI  noisy=0.862 mmse=0.797 wav=0.873 | PESQ  noisy=1.55 mmse=1.54 wav=1.52 | SI-SDR noisy=9.6 mmse=6.7 wav=10.1
+2026-09-09 02:41:59,265 INFO [car          15dB] sp01 | STOI  noisy=0.929 mmse=0.840 wav=0.928 | PESQ  noisy=1.83 mmse=1.39 wav=1.80 | SI-SDR noisy=14.3 mmse=7.9 wav=14.7
+2026-09-09 02:41:59,424 INFO [car          15dB] sp02 | STOI  noisy=0.937 mmse=0.829 wav=0.939 | PESQ  noisy=1.99 mmse=1.24 wav=1.88 | SI-SDR noisy=14.3 mmse=6.1 wav=14.6
+2026-09-09 02:41:59,560 INFO [car          15dB] sp03 | STOI  noisy=0.949 mmse=0.861 wav=0.951 | PESQ  noisy=1.74 mmse=1.44 wav=1.70 | SI-SDR noisy=14.4 mmse=9.3 wav=14.7
+2026-09-09 02:41:59,686 INFO [car          15dB] sp04 | STOI  noisy=0.939 mmse=0.863 wav=0.939 | PESQ  noisy=1.87 mmse=1.47 wav=1.83 | SI-SDR noisy=14.5 mmse=8.4 wav=14.6
+2026-09-09 02:41:59,819 INFO [car          15dB] sp05 | STOI  noisy=0.930 mmse=0.833 wav=0.931 | PESQ  noisy=1.77 mmse=1.43 wav=1.74 | SI-SDR noisy=14.4 mmse=9.4 wav=14.5
+2026-09-09 02:41:59,950 INFO [car          15dB] sp06 | STOI  noisy=0.936 mmse=0.864 wav=0.937 | PESQ  noisy=1.77 mmse=1.70 wav=1.73 | SI-SDR noisy=14.2 mmse=9.6 wav=14.6
+2026-09-09 02:42:00,080 INFO [car          15dB] sp07 | STOI  noisy=0.948 mmse=0.844 wav=0.949 | PESQ  noisy=1.74 mmse=1.36 wav=1.70 | SI-SDR noisy=14.5 mmse=7.9 wav=14.8
+2026-09-09 02:42:00,239 INFO [car          15dB] sp08 | STOI  noisy=0.936 mmse=0.840 wav=0.940 | PESQ  noisy=1.79 mmse=1.40 wav=1.78 | SI-SDR noisy=14.4 mmse=7.5 wav=15.1
+2026-09-09 02:42:00,409 INFO [car          15dB] sp09 | STOI  noisy=0.895 mmse=0.787 wav=0.907 | PESQ  noisy=1.58 mmse=1.45 wav=1.58 | SI-SDR noisy=14.6 mmse=7.1 wav=15.1
+2026-09-09 02:42:00,568 INFO [car          15dB] sp10 | STOI  noisy=0.933 mmse=0.821 wav=0.935 | PESQ  noisy=1.69 mmse=1.38 wav=1.68 | SI-SDR noisy=14.4 mmse=7.0 wav=14.8
+2026-09-09 02:42:00,715 INFO [car          15dB] sp11 | STOI  noisy=0.900 mmse=0.804 wav=0.904 | PESQ  noisy=1.70 mmse=1.57 wav=1.69 | SI-SDR noisy=14.4 mmse=8.8 wav=14.9
+2026-09-09 02:42:00,860 INFO [car          15dB] sp12 | STOI  noisy=0.948 mmse=0.858 wav=0.949 | PESQ  noisy=1.69 mmse=1.58 wav=1.67 | SI-SDR noisy=14.7 mmse=8.4 wav=15.0
+2026-09-09 02:42:00,997 INFO [car          15dB] sp13 | STOI  noisy=0.924 mmse=0.837 wav=0.925 | PESQ  noisy=1.98 mmse=1.41 wav=1.93 | SI-SDR noisy=14.0 mmse=9.6 wav=14.2
+2026-09-09 02:42:01,141 INFO [car          15dB] sp14 | STOI  noisy=0.860 mmse=0.768 wav=0.866 | PESQ  noisy=1.55 mmse=1.60 wav=1.54 | SI-SDR noisy=14.6 mmse=11.0 wav=15.3
+2026-09-09 02:42:01,342 INFO [car          15dB] sp15 | STOI  noisy=0.911 mmse=0.798 wav=0.911 | PESQ  noisy=1.73 mmse=1.43 wav=1.71 | SI-SDR noisy=14.7 mmse=6.7 wav=15.0
+2026-09-09 02:42:01,484 INFO [car          15dB] sp16 | STOI  noisy=0.909 mmse=0.897 wav=0.909 | PESQ  noisy=1.68 mmse=1.72 wav=1.66 | SI-SDR noisy=13.9 mmse=13.6 wav=14.1
+2026-09-09 02:42:01,621 INFO [car          15dB] sp17 | STOI  noisy=0.897 mmse=0.822 wav=0.896 | PESQ  noisy=1.61 mmse=1.59 wav=1.58 | SI-SDR noisy=14.5 mmse=9.5 wav=14.7
+2026-09-09 02:42:01,757 INFO [car          15dB] sp18 | STOI  noisy=0.915 mmse=0.831 wav=0.915 | PESQ  noisy=1.73 mmse=1.63 wav=1.69 | SI-SDR noisy=14.6 mmse=11.7 wav=14.8
+2026-09-09 02:42:01,892 INFO [car          15dB] sp19 | STOI  noisy=0.888 mmse=0.831 wav=0.888 | PESQ  noisy=1.48 mmse=1.66 wav=1.48 | SI-SDR noisy=14.2 mmse=12.5 wav=14.8
+2026-09-09 02:42:02,026 INFO [car          15dB] sp20 | STOI  noisy=0.922 mmse=0.862 wav=0.922 | PESQ  noisy=1.75 mmse=1.70 wav=1.71 | SI-SDR noisy=14.5 mmse=10.1 wav=15.0
+2026-09-09 02:42:02,164 INFO [car          15dB] sp21 | STOI  noisy=0.940 mmse=0.830 wav=0.940 | PESQ  noisy=2.26 mmse=1.42 wav=2.19 | SI-SDR noisy=14.4 mmse=7.4 wav=15.1
+2026-09-09 02:42:02,311 INFO [car          15dB] sp22 | STOI  noisy=0.903 mmse=0.795 wav=0.905 | PESQ  noisy=1.74 mmse=1.26 wav=1.69 | SI-SDR noisy=14.5 mmse=4.9 wav=14.7
+2026-09-09 02:42:02,456 INFO [car          15dB] sp23 | STOI  noisy=0.947 mmse=0.840 wav=0.949 | PESQ  noisy=1.94 mmse=1.40 wav=1.88 | SI-SDR noisy=14.3 mmse=7.5 wav=14.6
+2026-09-09 02:42:02,617 INFO [car          15dB] sp24 | STOI  noisy=0.901 mmse=0.802 wav=0.897 | PESQ  noisy=1.98 mmse=1.44 wav=1.91 | SI-SDR noisy=14.6 mmse=5.7 wav=15.0
+2026-09-09 02:42:02,767 INFO [car          15dB] sp25 | STOI  noisy=0.926 mmse=0.844 wav=0.931 | PESQ  noisy=1.98 mmse=1.41 wav=1.94 | SI-SDR noisy=14.6 mmse=7.9 wav=15.0
+2026-09-09 02:42:02,906 INFO [car          15dB] sp26 | STOI  noisy=0.964 mmse=0.852 wav=0.963 | PESQ  noisy=2.02 mmse=1.42 wav=1.92 | SI-SDR noisy=14.5 mmse=7.5 wav=14.7
+2026-09-09 02:42:03,048 INFO [car          15dB] sp27 | STOI  noisy=0.958 mmse=0.858 wav=0.958 | PESQ  noisy=1.98 mmse=1.40 wav=1.91 | SI-SDR noisy=14.5 mmse=8.8 wav=14.8
+2026-09-09 02:42:03,197 INFO [car          15dB] sp28 | STOI  noisy=0.964 mmse=0.847 wav=0.964 | PESQ  noisy=1.89 mmse=1.65 wav=1.85 | SI-SDR noisy=14.6 mmse=8.8 wav=14.8
+2026-09-09 02:42:03,335 INFO [car          15dB] sp29 | STOI  noisy=0.958 mmse=0.865 wav=0.960 | PESQ  noisy=1.90 mmse=1.47 wav=1.84 | SI-SDR noisy=14.5 mmse=8.9 wav=14.8
+2026-09-09 02:42:03,480 INFO [car          15dB] sp30 | STOI  noisy=0.949 mmse=0.850 wav=0.951 | PESQ  noisy=2.12 mmse=1.51 wav=2.01 | SI-SDR noisy=14.6 mmse=7.7 wav=14.9
+2026-09-09 02:42:03,635 INFO [car          5dB ] sp01 | STOI  noisy=0.708 mmse=0.675 wav=0.714 | PESQ  noisy=1.26 mmse=1.27 wav=1.26 | SI-SDR noisy=4.3 mmse=5.6 wav=4.6
+2026-09-09 02:42:03,809 INFO [car          5dB ] sp02 | STOI  noisy=0.776 mmse=0.725 wav=0.784 | PESQ  noisy=1.34 mmse=1.24 wav=1.33 | SI-SDR noisy=4.3 mmse=4.2 wav=4.6
+2026-09-09 02:42:03,961 INFO [car          5dB ] sp03 | STOI  noisy=0.762 mmse=0.742 wav=0.764 | PESQ  noisy=1.20 mmse=1.27 wav=1.19 | SI-SDR noisy=4.6 mmse=6.0 wav=4.7
+2026-09-09 02:42:04,102 INFO [car          5dB ] sp04 | STOI  noisy=0.810 mmse=0.750 wav=0.812 | PESQ  noisy=1.31 mmse=1.35 wav=1.30 | SI-SDR noisy=4.6 mmse=5.3 wav=4.7
+2026-09-09 02:42:04,249 INFO [car          5dB ] sp05 | STOI  noisy=0.796 mmse=0.720 wav=0.802 | PESQ  noisy=1.18 mmse=1.35 wav=1.17 | SI-SDR noisy=4.5 mmse=6.1 wav=4.7
+2026-09-09 02:42:04,393 INFO [car          5dB ] sp06 | STOI  noisy=0.766 mmse=0.719 wav=0.764 | PESQ  noisy=1.19 mmse=1.33 wav=1.18 | SI-SDR noisy=4.3 mmse=6.1 wav=4.7
+2026-09-09 02:42:04,533 INFO [car          5dB ] sp07 | STOI  noisy=0.788 mmse=0.756 wav=0.793 | PESQ  noisy=1.19 mmse=1.26 wav=1.19 | SI-SDR noisy=4.5 mmse=5.6 wav=4.9
+2026-09-09 02:42:04,709 INFO [car          5dB ] sp08 | STOI  noisy=0.782 mmse=0.759 wav=0.787 | PESQ  noisy=1.28 mmse=1.35 wav=1.28 | SI-SDR noisy=4.4 mmse=4.9 wav=4.7
+2026-09-09 02:42:04,870 INFO [car          5dB ] sp09 | STOI  noisy=0.732 mmse=0.685 wav=0.744 | PESQ  noisy=1.16 mmse=1.28 wav=1.16 | SI-SDR noisy=4.6 mmse=4.4 wav=4.9
+2026-09-09 02:42:05,049 INFO [car          5dB ] sp10 | STOI  noisy=0.759 mmse=0.714 wav=0.763 | PESQ  noisy=1.18 mmse=1.31 wav=1.17 | SI-SDR noisy=4.4 mmse=4.7 wav=4.8
+2026-09-09 02:42:05,234 INFO [car          5dB ] sp11 | STOI  noisy=0.690 mmse=0.681 wav=0.701 | PESQ  noisy=1.15 mmse=1.40 wav=1.16 | SI-SDR noisy=4.4 mmse=5.9 wav=4.7
+2026-09-09 02:42:05,424 INFO [car          5dB ] sp12 | STOI  noisy=0.812 mmse=0.785 wav=0.822 | PESQ  noisy=1.18 mmse=1.43 wav=1.18 | SI-SDR noisy=4.7 mmse=5.3 wav=4.9
+2026-09-09 02:42:05,579 INFO [car          5dB ] sp13 | STOI  noisy=0.663 mmse=0.616 wav=0.668 | PESQ  noisy=1.26 mmse=1.28 wav=1.24 | SI-SDR noisy=4.0 mmse=5.9 wav=4.3
+2026-09-09 02:42:05,747 INFO [car          5dB ] sp14 | STOI  noisy=0.690 mmse=0.690 wav=0.699 | PESQ  noisy=1.14 mmse=1.51 wav=1.15 | SI-SDR noisy=4.6 mmse=7.4 wav=4.9
+2026-09-09 02:42:05,919 INFO [car          5dB ] sp15 | STOI  noisy=0.756 mmse=0.724 wav=0.760 | PESQ  noisy=1.17 mmse=1.33 wav=1.17 | SI-SDR noisy=4.7 mmse=4.9 wav=5.0
+2026-09-09 02:42:06,066 INFO [car          5dB ] sp16 | STOI  noisy=0.811 mmse=0.799 wav=0.817 | PESQ  noisy=1.16 mmse=1.61 wav=1.16 | SI-SDR noisy=3.8 mmse=8.1 wav=4.1
+2026-09-09 02:42:06,216 INFO [car          5dB ] sp17 | STOI  noisy=0.705 mmse=0.707 wav=0.710 | PESQ  noisy=1.09 mmse=1.34 wav=1.09 | SI-SDR noisy=4.5 mmse=6.6 wav=4.9
+2026-09-09 02:42:06,359 INFO [car          5dB ] sp18 | STOI  noisy=0.722 mmse=0.694 wav=0.725 | PESQ  noisy=1.15 mmse=1.25 wav=1.14 | SI-SDR noisy=4.7 mmse=7.3 wav=4.9
+2026-09-09 02:42:06,507 INFO [car          5dB ] sp19 | STOI  noisy=0.731 mmse=0.735 wav=0.738 | PESQ  noisy=1.13 mmse=1.42 wav=1.13 | SI-SDR noisy=4.2 mmse=8.7 wav=4.6
+2026-09-09 02:42:06,650 INFO [car          5dB ] sp20 | STOI  noisy=0.814 mmse=0.779 wav=0.815 | PESQ  noisy=1.22 mmse=1.40 wav=1.21 | SI-SDR noisy=4.5 mmse=6.6 wav=4.7
+2026-09-09 02:42:06,792 INFO [car          5dB ] sp21 | STOI  noisy=0.739 mmse=0.712 wav=0.754 | PESQ  noisy=1.42 mmse=1.26 wav=1.39 | SI-SDR noisy=4.3 mmse=4.5 wav=5.0
+2026-09-09 02:42:06,967 INFO [car          5dB ] sp22 | STOI  noisy=0.704 mmse=0.672 wav=0.707 | PESQ  noisy=1.17 mmse=1.22 wav=1.17 | SI-SDR noisy=4.5 mmse=3.5 wav=4.7
+2026-09-09 02:42:07,283 INFO [car          5dB ] sp23 | STOI  noisy=0.760 mmse=0.726 wav=0.764 | PESQ  noisy=1.29 mmse=1.29 wav=1.29 | SI-SDR noisy=4.3 mmse=4.7 wav=4.6
+2026-09-09 02:42:07,493 INFO [car          5dB ] sp24 | STOI  noisy=0.669 mmse=0.626 wav=0.685 | PESQ  noisy=1.34 mmse=1.24 wav=1.32 | SI-SDR noisy=4.7 mmse=3.4 wav=5.0
+2026-09-09 02:42:07,653 INFO [car          5dB ] sp25 | STOI  noisy=0.714 mmse=0.721 wav=0.725 | PESQ  noisy=1.38 mmse=1.31 wav=1.37 | SI-SDR noisy=4.7 mmse=5.0 wav=5.0
+2026-09-09 02:42:07,800 INFO [car          5dB ] sp26 | STOI  noisy=0.814 mmse=0.778 wav=0.824 | PESQ  noisy=1.20 mmse=1.33 wav=1.20 | SI-SDR noisy=4.5 mmse=5.2 wav=4.9
+2026-09-09 02:42:07,945 INFO [car          5dB ] sp27 | STOI  noisy=0.791 mmse=0.742 wav=0.803 | PESQ  noisy=1.26 mmse=1.27 wav=1.25 | SI-SDR noisy=4.6 mmse=6.0 wav=5.0
+2026-09-09 02:42:08,108 INFO [car          5dB ] sp28 | STOI  noisy=0.843 mmse=0.771 wav=0.847 | PESQ  noisy=1.21 mmse=1.48 wav=1.20 | SI-SDR noisy=4.7 mmse=6.0 wav=5.0
+2026-09-09 02:42:08,245 INFO [car          5dB ] sp29 | STOI  noisy=0.809 mmse=0.771 wav=0.815 | PESQ  noisy=1.21 mmse=1.30 wav=1.21 | SI-SDR noisy=4.5 mmse=6.0 wav=4.8
+2026-09-09 02:42:08,391 INFO [car          5dB ] sp30 | STOI  noisy=0.766 mmse=0.748 wav=0.780 | PESQ  noisy=1.30 mmse=1.43 wav=1.29 | SI-SDR noisy=4.6 mmse=5.0 wav=4.9
+2026-09-09 02:42:08,575 INFO [exhibition   0dB ] sp01 | STOI  noisy=0.664 mmse=0.589 wav=0.674 | PESQ  noisy=1.14 mmse=1.13 wav=1.13 | SI-SDR noisy=-0.7 mmse=3.1 wav=-0.1
+2026-09-09 02:42:08,738 INFO [exhibition   0dB ] sp02 | STOI  noisy=0.727 mmse=0.671 wav=0.735 | PESQ  noisy=1.16 mmse=1.08 wav=1.14 | SI-SDR noisy=-0.9 mmse=-0.3 wav=-0.6
+2026-09-09 02:42:08,914 INFO [exhibition   0dB ] sp03 | STOI  noisy=0.716 mmse=0.633 wav=0.719 | PESQ  noisy=1.09 mmse=1.04 wav=1.08 | SI-SDR noisy=-0.5 mmse=-1.1 wav=-0.4
+2026-09-09 02:42:09,051 INFO [exhibition   0dB ] sp04 | STOI  noisy=0.802 mmse=0.742 wav=0.804 | PESQ  noisy=1.14 mmse=1.06 wav=1.13 | SI-SDR noisy=-0.4 mmse=-2.6 wav=-0.3
+2026-09-09 02:42:09,241 INFO [exhibition   0dB ] sp05 | STOI  noisy=0.754 mmse=0.667 wav=0.757 | PESQ  noisy=1.13 mmse=1.16 wav=1.13 | SI-SDR noisy=-0.7 mmse=1.7 wav=-0.6
+2026-09-09 02:42:09,408 INFO [exhibition   0dB ] sp06 | STOI  noisy=0.725 mmse=0.669 wav=0.727 | PESQ  noisy=1.14 mmse=1.15 wav=1.13 | SI-SDR noisy=-0.9 mmse=1.5 wav=-0.5
+2026-09-09 02:42:09,546 INFO [exhibition   0dB ] sp07 | STOI  noisy=0.728 mmse=0.673 wav=0.731 | PESQ  noisy=1.14 mmse=1.11 wav=1.13 | SI-SDR noisy=-0.3 mmse=3.3 wav=0.1
+2026-09-09 02:42:09,738 INFO [exhibition   0dB ] sp08 | STOI  noisy=0.736 mmse=0.687 wav=0.739 | PESQ  noisy=1.17 mmse=1.18 wav=1.16 | SI-SDR noisy=-0.7 mmse=1.8 wav=-0.1
+2026-09-09 02:42:09,939 INFO [exhibition   0dB ] sp09 | STOI  noisy=0.751 mmse=0.667 wav=0.754 | PESQ  noisy=1.09 mmse=1.09 wav=1.08 | SI-SDR noisy=-0.5 mmse=-3.3 wav=-0.2
+2026-09-09 02:42:10,117 INFO [exhibition   0dB ] sp10 | STOI  noisy=0.800 mmse=0.709 wav=0.806 | PESQ  noisy=1.18 mmse=1.09 wav=1.17 | SI-SDR noisy=-0.7 mmse=-3.6 wav=-0.4
+2026-09-09 02:42:10,301 INFO [exhibition   0dB ] sp11 | STOI  noisy=0.642 mmse=0.610 wav=0.657 | PESQ  noisy=1.09 mmse=1.16 wav=1.08 | SI-SDR noisy=-0.6 mmse=3.0 wav=-0.1
+2026-09-09 02:42:10,485 INFO [exhibition   0dB ] sp12 | STOI  noisy=0.734 mmse=0.643 wav=0.742 | PESQ  noisy=1.10 mmse=1.13 wav=1.09 | SI-SDR noisy=-0.2 mmse=1.1 wav=0.2
+2026-09-09 02:42:10,662 INFO [exhibition   0dB ] sp13 | STOI  noisy=0.698 mmse=0.642 wav=0.706 | PESQ  noisy=1.14 mmse=1.29 wav=1.13 | SI-SDR noisy=-1.1 mmse=2.6 wav=-0.8
+2026-09-09 02:42:10,824 INFO [exhibition   0dB ] sp14 | STOI  noisy=0.660 mmse=0.590 wav=0.665 | PESQ  noisy=1.11 mmse=1.18 wav=1.11 | SI-SDR noisy=-0.4 mmse=0.5 wav=0.0
+2026-09-09 02:42:10,986 INFO [exhibition   0dB ] sp15 | STOI  noisy=0.661 mmse=0.572 wav=0.667 | PESQ  noisy=1.07 mmse=1.07 wav=1.06 | SI-SDR noisy=-0.3 mmse=0.5 wav=0.1
+2026-09-09 02:42:11,138 INFO [exhibition   0dB ] sp16 | STOI  noisy=0.782 mmse=0.765 wav=0.789 | PESQ  noisy=1.10 mmse=1.31 wav=1.09 | SI-SDR noisy=-1.0 mmse=4.9 wav=-0.8
+2026-09-09 02:42:11,296 INFO [exhibition   0dB ] sp17 | STOI  noisy=0.647 mmse=0.628 wav=0.650 | PESQ  noisy=1.07 mmse=1.11 wav=1.06 | SI-SDR noisy=-0.4 mmse=1.4 wav=-0.1
+2026-09-09 02:42:11,505 INFO [exhibition   0dB ] sp18 | STOI  noisy=0.686 mmse=0.656 wav=0.690 | PESQ  noisy=1.08 mmse=1.20 wav=1.08 | SI-SDR noisy=-0.5 mmse=5.3 wav=-0.3
+2026-09-09 02:42:11,661 INFO [exhibition   0dB ] sp19 | STOI  noisy=0.740 mmse=0.697 wav=0.743 | PESQ  noisy=1.11 mmse=1.11 wav=1.11 | SI-SDR noisy=-0.8 mmse=0.3 wav=-0.6
+2026-09-09 02:42:11,814 INFO [exhibition   0dB ] sp20 | STOI  noisy=0.806 mmse=0.732 wav=0.805 | PESQ  noisy=1.16 mmse=1.15 wav=1.14 | SI-SDR noisy=-0.5 mmse=-1.6 wav=-0.3
+2026-09-09 02:42:11,961 INFO [exhibition   0dB ] sp21 | STOI  noisy=0.672 mmse=0.590 wav=0.682 | PESQ  noisy=1.32 mmse=1.18 wav=1.26 | SI-SDR noisy=-0.5 mmse=2.2 wav=0.3
+2026-09-09 02:42:12,202 INFO [exhibition   0dB ] sp22 | STOI  noisy=0.635 mmse=0.555 wav=0.637 | PESQ  noisy=1.11 mmse=1.10 wav=1.10 | SI-SDR noisy=-0.5 mmse=1.0 wav=-0.1
+2026-09-09 02:42:12,573 INFO [exhibition   0dB ] sp23 | STOI  noisy=0.704 mmse=0.597 wav=0.709 | PESQ  noisy=1.19 mmse=1.10 wav=1.17 | SI-SDR noisy=-0.6 mmse=0.4 wav=-0.2
+2026-09-09 02:42:12,806 INFO [exhibition   0dB ] sp24 | STOI  noisy=0.623 mmse=0.519 wav=0.624 | PESQ  noisy=1.20 mmse=1.06 wav=1.17 | SI-SDR noisy=-0.5 mmse=-3.2 wav=-0.0
+2026-09-09 02:42:12,988 INFO [exhibition   0dB ] sp25 | STOI  noisy=0.660 mmse=0.609 wav=0.667 | PESQ  noisy=1.19 mmse=1.10 wav=1.16 | SI-SDR noisy=-0.2 mmse=2.9 wav=0.5
+2026-09-09 02:42:13,150 INFO [exhibition   0dB ] sp26 | STOI  noisy=0.761 mmse=0.694 wav=0.764 | PESQ  noisy=1.13 mmse=1.18 wav=1.12 | SI-SDR noisy=-0.4 mmse=1.5 wav=-0.2
+2026-09-09 02:42:13,306 INFO [exhibition   0dB ] sp27 | STOI  noisy=0.768 mmse=0.707 wav=0.776 | PESQ  noisy=1.17 mmse=1.20 wav=1.16 | SI-SDR noisy=-0.3 mmse=2.7 wav=-0.0
+2026-09-09 02:42:13,483 INFO [exhibition   0dB ] sp28 | STOI  noisy=0.776 mmse=0.668 wav=0.782 | PESQ  noisy=1.11 mmse=1.24 wav=1.10 | SI-SDR noisy=-0.5 mmse=2.8 wav=-0.1
+2026-09-09 02:42:13,679 INFO [exhibition   0dB ] sp29 | STOI  noisy=0.832 mmse=0.722 wav=0.841 | PESQ  noisy=1.14 mmse=1.06 wav=1.13 | SI-SDR noisy=-0.4 mmse=-2.5 wav=-0.2
+2026-09-09 02:42:13,830 INFO [exhibition   0dB ] sp30 | STOI  noisy=0.661 mmse=0.613 wav=0.669 | PESQ  noisy=1.14 mmse=1.21 wav=1.13 | SI-SDR noisy=-0.4 mmse=2.6 wav=0.0
+2026-09-09 02:42:13,979 INFO [exhibition   10dB] sp01 | STOI  noisy=0.847 mmse=0.759 wav=0.855 | PESQ  noisy=1.34 mmse=1.27 wav=1.33 | SI-SDR noisy=9.4 mmse=7.2 wav=10.0
+2026-09-09 02:42:14,163 INFO [exhibition   10dB] sp02 | STOI  noisy=0.915 mmse=0.796 wav=0.918 | PESQ  noisy=1.60 mmse=1.18 wav=1.54 | SI-SDR noisy=9.3 mmse=4.5 wav=9.7
+2026-09-09 02:42:14,342 INFO [exhibition   10dB] sp03 | STOI  noisy=0.833 mmse=0.724 wav=0.835 | PESQ  noisy=1.25 mmse=1.33 wav=1.24 | SI-SDR noisy=9.5 mmse=8.6 wav=9.8
+2026-09-09 02:42:14,468 INFO [exhibition   10dB] sp04 | STOI  noisy=0.936 mmse=0.816 wav=0.938 | PESQ  noisy=1.57 mmse=1.31 wav=1.55 | SI-SDR noisy=9.5 mmse=6.6 wav=9.6
+2026-09-09 02:42:14,606 INFO [exhibition   10dB] sp05 | STOI  noisy=0.920 mmse=0.806 wav=0.923 | PESQ  noisy=1.35 mmse=1.32 wav=1.33 | SI-SDR noisy=9.3 mmse=7.8 wav=9.5
+2026-09-09 02:42:14,738 INFO [exhibition   10dB] sp06 | STOI  noisy=0.913 mmse=0.804 wav=0.918 | PESQ  noisy=1.42 mmse=1.53 wav=1.40 | SI-SDR noisy=9.2 mmse=8.2 wav=9.7
+2026-09-09 02:42:14,871 INFO [exhibition   10dB] sp07 | STOI  noisy=0.916 mmse=0.794 wav=0.919 | PESQ  noisy=1.46 mmse=1.18 wav=1.43 | SI-SDR noisy=9.5 mmse=6.2 wav=9.9
+2026-09-09 02:42:15,040 INFO [exhibition   10dB] sp08 | STOI  noisy=0.909 mmse=0.807 wav=0.914 | PESQ  noisy=1.48 mmse=1.37 wav=1.48 | SI-SDR noisy=9.4 mmse=6.6 wav=9.9
+2026-09-09 02:42:15,201 INFO [exhibition   10dB] sp09 | STOI  noisy=0.871 mmse=0.745 wav=0.886 | PESQ  noisy=1.28 mmse=1.22 wav=1.28 | SI-SDR noisy=9.6 mmse=5.5 wav=10.2
+2026-09-09 02:42:15,353 INFO [exhibition   10dB] sp10 | STOI  noisy=0.941 mmse=0.811 wav=0.942 | PESQ  noisy=1.50 mmse=1.22 wav=1.48 | SI-SDR noisy=9.3 mmse=5.0 wav=9.7
+2026-09-09 02:42:15,508 INFO [exhibition   10dB] sp11 | STOI  noisy=0.874 mmse=0.755 wav=0.882 | PESQ  noisy=1.30 mmse=1.42 wav=1.29 | SI-SDR noisy=9.4 mmse=7.3 wav=10.0
+2026-09-09 02:42:15,660 INFO [exhibition   10dB] sp12 | STOI  noisy=0.939 mmse=0.833 wav=0.944 | PESQ  noisy=1.42 mmse=1.29 wav=1.40 | SI-SDR noisy=9.7 mmse=6.4 wav=10.1
+2026-09-09 02:42:15,797 INFO [exhibition   10dB] sp13 | STOI  noisy=0.888 mmse=0.769 wav=0.895 | PESQ  noisy=1.62 mmse=1.30 wav=1.57 | SI-SDR noisy=9.0 mmse=7.9 wav=9.4
+2026-09-09 02:42:15,950 INFO [exhibition   10dB] sp14 | STOI  noisy=0.861 mmse=0.775 wav=0.866 | PESQ  noisy=1.35 mmse=1.51 wav=1.35 | SI-SDR noisy=9.6 mmse=8.7 wav=10.3
+2026-09-09 02:42:16,105 INFO [exhibition   10dB] sp15 | STOI  noisy=0.914 mmse=0.799 wav=0.919 | PESQ  noisy=1.34 mmse=1.39 wav=1.34 | SI-SDR noisy=9.7 mmse=6.1 wav=10.2
+2026-09-09 02:42:16,250 INFO [exhibition   10dB] sp16 | STOI  noisy=0.941 mmse=0.873 wav=0.941 | PESQ  noisy=1.39 mmse=1.63 wav=1.38 | SI-SDR noisy=8.9 mmse=11.1 wav=9.2
+2026-09-09 02:42:16,406 INFO [exhibition   10dB] sp17 | STOI  noisy=0.928 mmse=0.806 wav=0.930 | PESQ  noisy=1.39 mmse=1.46 wav=1.36 | SI-SDR noisy=9.5 mmse=7.2 wav=9.8
+2026-09-09 02:42:16,555 INFO [exhibition   10dB] sp18 | STOI  noisy=0.918 mmse=0.817 wav=0.921 | PESQ  noisy=1.30 mmse=1.47 wav=1.28 | SI-SDR noisy=9.6 mmse=10.0 wav=9.9
+2026-09-09 02:42:16,700 INFO [exhibition   10dB] sp19 | STOI  noisy=0.862 mmse=0.778 wav=0.864 | PESQ  noisy=1.23 mmse=1.41 wav=1.22 | SI-SDR noisy=9.2 mmse=10.6 wav=9.8
+2026-09-09 02:42:16,846 INFO [exhibition   10dB] sp20 | STOI  noisy=0.947 mmse=0.857 wav=0.946 | PESQ  noisy=1.57 mmse=1.52 wav=1.55 | SI-SDR noisy=9.6 mmse=9.0 wav=10.0
+2026-09-09 02:42:16,988 INFO [exhibition   10dB] sp21 | STOI  noisy=0.897 mmse=0.768 wav=0.900 | PESQ  noisy=1.75 mmse=1.19 wav=1.67 | SI-SDR noisy=9.3 mmse=5.8 wav=10.1
+2026-09-09 02:42:17,154 INFO [exhibition   10dB] sp22 | STOI  noisy=0.840 mmse=0.737 wav=0.844 | PESQ  noisy=1.32 mmse=1.24 wav=1.31 | SI-SDR noisy=9.5 mmse=4.3 wav=10.1
+2026-09-09 02:42:17,326 INFO [exhibition   10dB] sp23 | STOI  noisy=0.917 mmse=0.805 wav=0.920 | PESQ  noisy=1.54 mmse=1.29 wav=1.51 | SI-SDR noisy=9.3 mmse=6.6 wav=9.7
+2026-09-09 02:42:17,496 INFO [exhibition   10dB] sp24 | STOI  noisy=0.793 mmse=0.700 wav=0.812 | PESQ  noisy=1.45 mmse=1.24 wav=1.41 | SI-SDR noisy=9.6 mmse=5.0 wav=10.4
+2026-09-09 02:42:17,654 INFO [exhibition   10dB] sp25 | STOI  noisy=0.817 mmse=0.698 wav=0.822 | PESQ  noisy=1.45 mmse=1.23 wav=1.41 | SI-SDR noisy=9.7 mmse=7.0 wav=10.3
+2026-09-09 02:42:17,797 INFO [exhibition   10dB] sp26 | STOI  noisy=0.947 mmse=0.836 wav=0.952 | PESQ  noisy=1.51 mmse=1.36 wav=1.50 | SI-SDR noisy=9.5 mmse=6.3 wav=10.0
+2026-09-09 02:42:17,942 INFO [exhibition   10dB] sp27 | STOI  noisy=0.921 mmse=0.808 wav=0.923 | PESQ  noisy=1.56 mmse=1.32 wav=1.53 | SI-SDR noisy=9.6 mmse=7.5 wav=10.0
+2026-09-09 02:42:18,085 INFO [exhibition   10dB] sp28 | STOI  noisy=0.966 mmse=0.835 wav=0.968 | PESQ  noisy=1.44 mmse=1.47 wav=1.41 | SI-SDR noisy=9.7 mmse=7.3 wav=10.1
+2026-09-09 02:42:18,227 INFO [exhibition   10dB] sp29 | STOI  noisy=0.956 mmse=0.840 wav=0.960 | PESQ  noisy=1.66 mmse=1.26 wav=1.61 | SI-SDR noisy=9.5 mmse=6.8 wav=9.8
+2026-09-09 02:42:18,452 INFO [exhibition   10dB] sp30 | STOI  noisy=0.897 mmse=0.799 wav=0.907 | PESQ  noisy=1.55 mmse=1.41 wav=1.50 | SI-SDR noisy=9.6 mmse=6.7 wav=10.1
+2026-09-09 02:42:18,673 INFO [exhibition   15dB] sp01 | STOI  noisy=0.921 mmse=0.827 wav=0.922 | PESQ  noisy=1.70 mmse=1.39 wav=1.68 | SI-SDR noisy=14.4 mmse=8.5 wav=15.1
+2026-09-09 02:42:18,837 INFO [exhibition   15dB] sp02 | STOI  noisy=0.951 mmse=0.828 wav=0.954 | PESQ  noisy=1.88 mmse=1.30 wav=1.80 | SI-SDR noisy=14.3 mmse=6.2 wav=15.0
+2026-09-09 02:42:18,974 INFO [exhibition   15dB] sp03 | STOI  noisy=0.934 mmse=0.842 wav=0.936 | PESQ  noisy=1.65 mmse=1.41 wav=1.60 | SI-SDR noisy=14.5 mmse=9.8 wav=14.8
+2026-09-09 02:42:19,101 INFO [exhibition   15dB] sp04 | STOI  noisy=0.969 mmse=0.863 wav=0.971 | PESQ  noisy=1.87 mmse=1.51 wav=1.82 | SI-SDR noisy=14.6 mmse=8.5 wav=14.7
+2026-09-09 02:42:19,233 INFO [exhibition   15dB] sp05 | STOI  noisy=0.981 mmse=0.876 wav=0.982 | PESQ  noisy=1.96 mmse=1.52 wav=1.88 | SI-SDR noisy=14.3 mmse=9.7 wav=14.5
+2026-09-09 02:42:19,369 INFO [exhibition   15dB] sp06 | STOI  noisy=0.958 mmse=0.876 wav=0.962 | PESQ  noisy=1.70 mmse=1.71 wav=1.67 | SI-SDR noisy=14.3 mmse=9.8 wav=14.9
+2026-09-09 02:42:19,497 INFO [exhibition   15dB] sp07 | STOI  noisy=0.969 mmse=0.848 wav=0.971 | PESQ  noisy=1.77 mmse=1.38 wav=1.72 | SI-SDR noisy=14.5 mmse=7.8 wav=15.0
+2026-09-09 02:42:19,642 INFO [exhibition   15dB] sp08 | STOI  noisy=0.965 mmse=0.855 wav=0.968 | PESQ  noisy=1.93 mmse=1.43 wav=1.86 | SI-SDR noisy=14.3 mmse=7.7 wav=15.0
+2026-09-09 02:42:19,797 INFO [exhibition   15dB] sp09 | STOI  noisy=0.916 mmse=0.806 wav=0.925 | PESQ  noisy=1.48 mmse=1.39 wav=1.48 | SI-SDR noisy=14.6 mmse=7.3 wav=15.3
+2026-09-09 02:42:19,945 INFO [exhibition   15dB] sp10 | STOI  noisy=0.962 mmse=0.829 wav=0.963 | PESQ  noisy=1.68 mmse=1.28 wav=1.67 | SI-SDR noisy=14.3 mmse=7.2 wav=14.8
+2026-09-09 02:42:20,093 INFO [exhibition   15dB] sp11 | STOI  noisy=0.949 mmse=0.795 wav=0.950 | PESQ  noisy=1.83 mmse=1.38 wav=1.77 | SI-SDR noisy=14.4 mmse=8.4 wav=14.9
+2026-09-09 02:42:20,235 INFO [exhibition   15dB] sp12 | STOI  noisy=0.966 mmse=0.860 wav=0.972 | PESQ  noisy=1.63 mmse=1.65 wav=1.60 | SI-SDR noisy=14.7 mmse=8.3 wav=15.4
+2026-09-09 02:42:20,370 INFO [exhibition   15dB] sp13 | STOI  noisy=0.959 mmse=0.837 wav=0.965 | PESQ  noisy=1.94 mmse=1.39 wav=1.83 | SI-SDR noisy=14.0 mmse=9.5 wav=14.5
+2026-09-09 02:42:20,509 INFO [exhibition   15dB] sp14 | STOI  noisy=0.920 mmse=0.787 wav=0.922 | PESQ  noisy=1.71 mmse=1.48 wav=1.67 | SI-SDR noisy=14.6 mmse=10.8 wav=15.2
+2026-09-09 02:42:20,657 INFO [exhibition   15dB] sp15 | STOI  noisy=0.961 mmse=0.821 wav=0.962 | PESQ  noisy=1.69 mmse=1.46 wav=1.68 | SI-SDR noisy=14.7 mmse=6.8 wav=15.2
+2026-09-09 02:42:20,793 INFO [exhibition   15dB] sp16 | STOI  noisy=0.978 mmse=0.900 wav=0.978 | PESQ  noisy=1.69 mmse=1.70 wav=1.65 | SI-SDR noisy=13.9 mmse=13.2 wav=14.3
+2026-09-09 02:42:20,927 INFO [exhibition   15dB] sp17 | STOI  noisy=0.960 mmse=0.834 wav=0.960 | PESQ  noisy=1.55 mmse=1.61 wav=1.53 | SI-SDR noisy=14.5 mmse=9.8 wav=15.0
+2026-09-09 02:42:21,061 INFO [exhibition   15dB] sp18 | STOI  noisy=0.964 mmse=0.842 wav=0.966 | PESQ  noisy=1.65 mmse=1.68 wav=1.59 | SI-SDR noisy=14.6 mmse=11.6 wav=15.0
+2026-09-09 02:42:21,192 INFO [exhibition   15dB] sp19 | STOI  noisy=0.932 mmse=0.838 wav=0.932 | PESQ  noisy=1.48 mmse=1.75 wav=1.47 | SI-SDR noisy=14.2 mmse=13.0 wav=14.8
+2026-09-09 02:42:21,326 INFO [exhibition   15dB] sp20 | STOI  noisy=0.977 mmse=0.875 wav=0.975 | PESQ  noisy=1.84 mmse=1.67 wav=1.79 | SI-SDR noisy=14.5 mmse=10.6 wav=15.0
+2026-09-09 02:42:21,468 INFO [exhibition   15dB] sp21 | STOI  noisy=0.941 mmse=0.804 wav=0.944 | PESQ  noisy=2.11 mmse=1.33 wav=2.03 | SI-SDR noisy=14.3 mmse=7.5 wav=15.2
+2026-09-09 02:42:21,630 INFO [exhibition   15dB] sp22 | STOI  noisy=0.938 mmse=0.813 wav=0.939 | PESQ  noisy=1.91 mmse=1.25 wav=1.82 | SI-SDR noisy=14.5 mmse=5.0 wav=14.9
+2026-09-09 02:42:21,774 INFO [exhibition   15dB] sp23 | STOI  noisy=0.948 mmse=0.823 wav=0.951 | PESQ  noisy=1.88 mmse=1.33 wav=1.81 | SI-SDR noisy=14.3 mmse=7.7 wav=14.9
+2026-09-09 02:42:21,932 INFO [exhibition   15dB] sp24 | STOI  noisy=0.882 mmse=0.769 wav=0.889 | PESQ  noisy=1.98 mmse=1.37 wav=1.92 | SI-SDR noisy=14.6 mmse=6.0 wav=15.3
+2026-09-09 02:42:22,099 INFO [exhibition   15dB] sp25 | STOI  noisy=0.923 mmse=0.800 wav=0.927 | PESQ  noisy=1.93 mmse=1.24 wav=1.86 | SI-SDR noisy=14.6 mmse=7.8 wav=15.1
+2026-09-09 02:42:22,236 INFO [exhibition   15dB] sp26 | STOI  noisy=0.981 mmse=0.869 wav=0.982 | PESQ  noisy=1.86 mmse=1.47 wav=1.77 | SI-SDR noisy=14.5 mmse=7.7 wav=15.0
+2026-09-09 02:42:22,371 INFO [exhibition   15dB] sp27 | STOI  noisy=0.943 mmse=0.823 wav=0.945 | PESQ  noisy=1.90 mmse=1.40 wav=1.82 | SI-SDR noisy=14.5 mmse=9.3 wav=15.0
+2026-09-09 02:42:22,507 INFO [exhibition   15dB] sp28 | STOI  noisy=0.990 mmse=0.859 wav=0.990 | PESQ  noisy=1.88 mmse=1.61 wav=1.83 | SI-SDR noisy=14.6 mmse=9.0 wav=14.9
+2026-09-09 02:42:22,638 INFO [exhibition   15dB] sp29 | STOI  noisy=0.986 mmse=0.881 wav=0.988 | PESQ  noisy=2.13 mmse=1.40 wav=2.03 | SI-SDR noisy=14.5 mmse=9.1 wav=14.8
+2026-09-09 02:42:22,778 INFO [exhibition   15dB] sp30 | STOI  noisy=0.943 mmse=0.852 wav=0.946 | PESQ  noisy=2.11 mmse=1.59 wav=1.98 | SI-SDR noisy=14.6 mmse=8.1 wav=15.2
+2026-09-09 02:42:22,942 INFO [exhibition   5dB ] sp01 | STOI  noisy=0.771 mmse=0.666 wav=0.776 | PESQ  noisy=1.22 mmse=1.09 wav=1.21 | SI-SDR noisy=4.3 mmse=2.7 wav=4.7
+2026-09-09 02:42:23,115 INFO [exhibition   5dB ] sp02 | STOI  noisy=0.803 mmse=0.679 wav=0.809 | PESQ  noisy=1.26 mmse=1.17 wav=1.24 | SI-SDR noisy=4.3 mmse=3.3 wav=4.7
+2026-09-09 02:42:23,266 INFO [exhibition   5dB ] sp03 | STOI  noisy=0.767 mmse=0.692 wav=0.771 | PESQ  noisy=1.16 mmse=1.26 wav=1.15 | SI-SDR noisy=4.5 mmse=6.6 wav=4.8
+2026-09-09 02:42:23,393 INFO [exhibition   5dB ] sp04 | STOI  noisy=0.856 mmse=0.768 wav=0.859 | PESQ  noisy=1.29 mmse=1.31 wav=1.27 | SI-SDR noisy=4.5 mmse=4.8 wav=4.7
+2026-09-09 02:42:23,541 INFO [exhibition   5dB ] sp05 | STOI  noisy=0.867 mmse=0.762 wav=0.871 | PESQ  noisy=1.34 mmse=1.20 wav=1.32 | SI-SDR noisy=4.3 mmse=3.2 wav=4.4
+2026-09-09 02:42:23,675 INFO [exhibition   5dB ] sp06 | STOI  noisy=0.853 mmse=0.792 wav=0.858 | PESQ  noisy=1.26 mmse=1.39 wav=1.25 | SI-SDR noisy=4.2 mmse=5.5 wav=4.7
+2026-09-09 02:42:23,811 INFO [exhibition   5dB ] sp07 | STOI  noisy=0.825 mmse=0.728 wav=0.827 | PESQ  noisy=1.20 mmse=1.19 wav=1.18 | SI-SDR noisy=4.5 mmse=5.5 wav=5.0
+2026-09-09 02:42:24,000 INFO [exhibition   5dB ] sp08 | STOI  noisy=0.843 mmse=0.771 wav=0.853 | PESQ  noisy=1.25 mmse=1.26 wav=1.23 | SI-SDR noisy=4.4 mmse=4.6 wav=5.0
+2026-09-09 02:42:24,173 INFO [exhibition   5dB ] sp09 | STOI  noisy=0.826 mmse=0.717 wav=0.835 | PESQ  noisy=1.16 mmse=1.14 wav=1.16 | SI-SDR noisy=4.6 mmse=2.0 wav=5.0
+2026-09-09 02:42:24,336 INFO [exhibition   5dB ] sp10 | STOI  noisy=0.849 mmse=0.738 wav=0.849 | PESQ  noisy=1.19 mmse=1.23 wav=1.18 | SI-SDR noisy=4.3 mmse=3.6 wav=4.7
+2026-09-09 02:42:24,495 INFO [exhibition   5dB ] sp11 | STOI  noisy=0.830 mmse=0.733 wav=0.837 | PESQ  noisy=1.22 mmse=1.16 wav=1.22 | SI-SDR noisy=4.4 mmse=3.3 wav=4.8
+2026-09-09 02:42:24,658 INFO [exhibition   5dB ] sp12 | STOI  noisy=0.874 mmse=0.776 wav=0.881 | PESQ  noisy=1.18 mmse=1.32 wav=1.17 | SI-SDR noisy=4.7 mmse=4.6 wav=5.1
+2026-09-09 02:42:24,802 INFO [exhibition   5dB ] sp13 | STOI  noisy=0.828 mmse=0.723 wav=0.838 | PESQ  noisy=1.33 mmse=1.23 wav=1.31 | SI-SDR noisy=4.0 mmse=5.2 wav=4.4
+2026-09-09 02:42:24,960 INFO [exhibition   5dB ] sp14 | STOI  noisy=0.726 mmse=0.663 wav=0.737 | PESQ  noisy=1.14 mmse=1.40 wav=1.13 | SI-SDR noisy=4.5 mmse=7.4 wav=5.1
+2026-09-09 02:42:25,119 INFO [exhibition   5dB ] sp15 | STOI  noisy=0.794 mmse=0.697 wav=0.796 | PESQ  noisy=1.15 mmse=1.25 wav=1.14 | SI-SDR noisy=4.7 mmse=4.6 wav=5.3
+2026-09-09 02:42:25,257 INFO [exhibition   5dB ] sp16 | STOI  noisy=0.882 mmse=0.843 wav=0.884 | PESQ  noisy=1.23 mmse=1.24 wav=1.23 | SI-SDR noisy=3.9 mmse=4.6 wav=4.1
+2026-09-09 02:42:25,403 INFO [exhibition   5dB ] sp17 | STOI  noisy=0.783 mmse=0.734 wav=0.786 | PESQ  noisy=1.11 mmse=1.30 wav=1.11 | SI-SDR noisy=4.6 mmse=6.3 wav=4.8
+2026-09-09 02:42:25,558 INFO [exhibition   5dB ] sp18 | STOI  noisy=0.822 mmse=0.729 wav=0.826 | PESQ  noisy=1.17 mmse=1.31 wav=1.16 | SI-SDR noisy=4.5 mmse=7.4 wav=4.8
+2026-09-09 02:42:25,697 INFO [exhibition   5dB ] sp19 | STOI  noisy=0.804 mmse=0.740 wav=0.806 | PESQ  noisy=1.20 mmse=1.24 wav=1.19 | SI-SDR noisy=4.3 mmse=5.3 wav=4.6
+2026-09-09 02:42:25,839 INFO [exhibition   5dB ] sp20 | STOI  noisy=0.867 mmse=0.798 wav=0.868 | PESQ  noisy=1.24 mmse=1.44 wav=1.24 | SI-SDR noisy=4.6 mmse=6.2 wav=4.9
+2026-09-09 02:42:25,982 INFO [exhibition   5dB ] sp21 | STOI  noisy=0.793 mmse=0.692 wav=0.809 | PESQ  noisy=1.47 mmse=1.24 wav=1.42 | SI-SDR noisy=4.3 mmse=5.2 wav=5.3
+2026-09-09 02:42:26,182 INFO [exhibition   5dB ] sp22 | STOI  noisy=0.746 mmse=0.609 wav=0.749 | PESQ  noisy=1.21 mmse=1.09 wav=1.19 | SI-SDR noisy=4.5 mmse=0.4 wav=4.9
+2026-09-09 02:42:26,331 INFO [exhibition   5dB ] sp23 | STOI  noisy=0.801 mmse=0.691 wav=0.803 | PESQ  noisy=1.29 mmse=1.23 wav=1.28 | SI-SDR noisy=4.3 mmse=4.7 wav=4.8
+2026-09-09 02:42:26,516 INFO [exhibition   5dB ] sp24 | STOI  noisy=0.704 mmse=0.586 wav=0.714 | PESQ  noisy=1.30 mmse=1.18 wav=1.27 | SI-SDR noisy=4.5 mmse=3.7 wav=5.5
+2026-09-09 02:42:26,681 INFO [exhibition   5dB ] sp25 | STOI  noisy=0.763 mmse=0.689 wav=0.768 | PESQ  noisy=1.35 mmse=1.20 wav=1.31 | SI-SDR noisy=4.6 mmse=4.5 wav=5.2
+2026-09-09 02:42:26,829 INFO [exhibition   5dB ] sp26 | STOI  noisy=0.861 mmse=0.755 wav=0.868 | PESQ  noisy=1.20 mmse=1.18 wav=1.19 | SI-SDR noisy=4.5 mmse=4.7 wav=4.9
+2026-09-09 02:42:26,982 INFO [exhibition   5dB ] sp27 | STOI  noisy=0.880 mmse=0.759 wav=0.882 | PESQ  noisy=1.41 mmse=1.14 wav=1.37 | SI-SDR noisy=4.6 mmse=2.7 wav=4.9
+2026-09-09 02:42:27,148 INFO [exhibition   5dB ] sp28 | STOI  noisy=0.892 mmse=0.777 wav=0.896 | PESQ  noisy=1.23 mmse=1.33 wav=1.22 | SI-SDR noisy=4.5 mmse=5.4 wav=4.8
+2026-09-09 02:42:27,311 INFO [exhibition   5dB ] sp29 | STOI  noisy=0.897 mmse=0.796 wav=0.901 | PESQ  noisy=1.28 mmse=1.29 wav=1.26 | SI-SDR noisy=4.6 mmse=5.6 wav=4.9
+2026-09-09 02:42:27,460 INFO [exhibition   5dB ] sp30 | STOI  noisy=0.813 mmse=0.726 wav=0.825 | PESQ  noisy=1.33 mmse=1.31 wav=1.30 | SI-SDR noisy=4.6 mmse=4.3 wav=5.1
+2026-09-09 02:42:27,628 INFO [restaurant   0dB ] sp01 | STOI  noisy=0.644 mmse=0.545 wav=0.647 | PESQ  noisy=1.27 mmse=1.08 wav=1.27 | SI-SDR noisy=-0.5 mmse=-0.6 wav=-0.4
+2026-09-09 02:42:27,890 INFO [restaurant   0dB ] sp02 | STOI  noisy=0.684 mmse=0.572 wav=0.688 | PESQ  noisy=1.23 mmse=1.09 wav=1.22 | SI-SDR noisy=-0.6 mmse=0.2 wav=-0.5
+2026-09-09 02:42:28,070 INFO [restaurant   0dB ] sp03 | STOI  noisy=0.677 mmse=0.589 wav=0.677 | PESQ  noisy=1.12 mmse=1.10 wav=1.11 | SI-SDR noisy=-0.8 mmse=1.4 wav=-0.7
+2026-09-09 02:42:28,220 INFO [restaurant   0dB ] sp04 | STOI  noisy=0.694 mmse=0.607 wav=0.695 | PESQ  noisy=1.25 mmse=1.19 wav=1.25 | SI-SDR noisy=-0.5 mmse=0.3 wav=-0.5
+2026-09-09 02:42:28,462 INFO [restaurant   0dB ] sp05 | STOI  noisy=0.756 mmse=0.670 wav=0.760 | PESQ  noisy=1.24 mmse=1.25 wav=1.23 | SI-SDR noisy=-0.7 mmse=2.9 wav=-0.6
+2026-09-09 02:42:28,634 INFO [restaurant   0dB ] sp06 | STOI  noisy=0.717 mmse=0.657 wav=0.721 | PESQ  noisy=1.18 mmse=1.20 wav=1.17 | SI-SDR noisy=-0.8 mmse=1.5 wav=-0.7
+2026-09-09 02:42:28,793 INFO [restaurant   0dB ] sp07 | STOI  noisy=0.754 mmse=0.669 wav=0.756 | PESQ  noisy=1.19 mmse=1.14 wav=1.18 | SI-SDR noisy=-0.6 mmse=-0.2 wav=-0.6
+2026-09-09 02:42:29,045 INFO [restaurant   0dB ] sp08 | STOI  noisy=0.700 mmse=0.621 wav=0.704 | PESQ  noisy=1.26 mmse=1.23 wav=1.26 | SI-SDR noisy=-0.5 mmse=0.8 wav=-0.4
+2026-09-09 02:42:29,223 INFO [restaurant   0dB ] sp09 | STOI  noisy=0.636 mmse=0.547 wav=0.644 | PESQ  noisy=1.16 mmse=1.12 wav=1.16 | SI-SDR noisy=-0.4 mmse=1.7 wav=-0.3
+2026-09-09 02:42:29,416 INFO [restaurant   0dB ] sp10 | STOI  noisy=0.677 mmse=0.619 wav=0.679 | PESQ  noisy=1.14 mmse=1.18 wav=1.13 | SI-SDR noisy=-0.7 mmse=0.1 wav=-0.6
+2026-09-09 02:42:29,624 INFO [restaurant   0dB ] sp11 | STOI  noisy=0.601 mmse=0.564 wav=0.616 | PESQ  noisy=1.11 mmse=1.14 wav=1.11 | SI-SDR noisy=-0.8 mmse=1.8 wav=-0.7
+2026-09-09 02:42:29,785 INFO [restaurant   0dB ] sp12 | STOI  noisy=0.746 mmse=0.693 wav=0.760 | PESQ  noisy=1.11 mmse=1.16 wav=1.11 | SI-SDR noisy=-0.1 mmse=-0.6 wav=-0.1
+2026-09-09 02:42:29,945 INFO [restaurant   0dB ] sp13 | STOI  noisy=0.653 mmse=0.597 wav=0.666 | PESQ  noisy=1.14 mmse=1.17 wav=1.14 | SI-SDR noisy=-0.9 mmse=2.4 wav=-0.8
+2026-09-09 02:42:30,118 INFO [restaurant   0dB ] sp14 | STOI  noisy=0.555 mmse=0.529 wav=0.563 | PESQ  noisy=1.06 mmse=1.17 wav=1.06 | SI-SDR noisy=-0.4 mmse=3.2 wav=-0.2
+2026-09-09 02:42:30,310 INFO [restaurant   0dB ] sp15 | STOI  noisy=0.600 mmse=0.525 wav=0.603 | PESQ  noisy=1.12 mmse=1.09 wav=1.12 | SI-SDR noisy=-0.3 mmse=0.8 wav=-0.2
+2026-09-09 02:42:30,607 INFO [restaurant   0dB ] sp16 | STOI  noisy=0.728 mmse=0.672 wav=0.730 | PESQ  noisy=1.14 mmse=1.27 wav=1.13 | SI-SDR noisy=-1.0 mmse=0.2 wav=-1.0
+2026-09-09 02:42:30,773 INFO [restaurant   0dB ] sp17 | STOI  noisy=0.678 mmse=0.620 wav=0.680 | PESQ  noisy=1.08 mmse=1.12 wav=1.08 | SI-SDR noisy=-0.2 mmse=1.8 wav=-0.1
+2026-09-09 02:42:31,061 INFO [restaurant   0dB ] sp18 | STOI  noisy=0.657 mmse=0.614 wav=0.660 | PESQ  noisy=1.10 mmse=1.19 wav=1.10 | SI-SDR noisy=-0.4 mmse=2.4 wav=-0.4
+2026-09-09 02:42:31,283 INFO [restaurant   0dB ] sp19 | STOI  noisy=0.640 mmse=0.575 wav=0.641 | PESQ  noisy=1.07 mmse=1.13 wav=1.07 | SI-SDR noisy=-0.8 mmse=3.5 wav=-0.7
+2026-09-09 02:42:31,460 INFO [restaurant   0dB ] sp20 | STOI  noisy=0.705 mmse=0.641 wav=0.704 | PESQ  noisy=1.12 mmse=1.23 wav=1.12 | SI-SDR noisy=-0.3 mmse=3.2 wav=-0.3
+2026-09-09 02:42:31,627 INFO [restaurant   0dB ] sp21 | STOI  noisy=0.714 mmse=0.624 wav=0.721 | PESQ  noisy=1.46 mmse=1.21 wav=1.45 | SI-SDR noisy=-0.7 mmse=-1.9 wav=-0.6
+2026-09-09 02:42:31,905 INFO [restaurant   0dB ] sp22 | STOI  noisy=0.610 mmse=0.523 wav=0.614 | PESQ  noisy=1.08 mmse=1.05 wav=1.08 | SI-SDR noisy=-0.4 mmse=0.8 wav=-0.3
+2026-09-09 02:42:32,076 INFO [restaurant   0dB ] sp23 | STOI  noisy=0.699 mmse=0.599 wav=0.702 | PESQ  noisy=1.30 mmse=1.15 wav=1.29 | SI-SDR noisy=-0.8 mmse=1.1 wav=-0.7
+2026-09-09 02:42:32,354 INFO [restaurant   0dB ] sp24 | STOI  noisy=0.604 mmse=0.538 wav=0.612 | PESQ  noisy=1.21 mmse=1.14 wav=1.20 | SI-SDR noisy=-0.3 mmse=0.4 wav=-0.0
+2026-09-09 02:42:32,577 INFO [restaurant   0dB ] sp25 | STOI  noisy=0.692 mmse=0.588 wav=0.698 | PESQ  noisy=1.44 mmse=1.11 wav=1.42 | SI-SDR noisy=-0.3 mmse=0.7 wav=-0.2
+2026-09-09 02:42:32,792 INFO [restaurant   0dB ] sp26 | STOI  noisy=0.794 mmse=0.698 wav=0.796 | PESQ  noisy=1.18 mmse=1.19 wav=1.18 | SI-SDR noisy=-0.5 mmse=-0.6 wav=-0.4
+2026-09-09 02:42:32,975 INFO [restaurant   0dB ] sp27 | STOI  noisy=0.791 mmse=0.712 wav=0.796 | PESQ  noisy=1.18 mmse=1.13 wav=1.18 | SI-SDR noisy=-0.3 mmse=0.5 wav=-0.3
+2026-09-09 02:42:33,178 INFO [restaurant   0dB ] sp28 | STOI  noisy=0.857 mmse=0.734 wav=0.859 | PESQ  noisy=1.16 mmse=1.13 wav=1.16 | SI-SDR noisy=-0.6 mmse=-0.0 wav=-0.6
+2026-09-09 02:42:33,351 INFO [restaurant   0dB ] sp29 | STOI  noisy=0.773 mmse=0.713 wav=0.781 | PESQ  noisy=1.15 mmse=1.17 wav=1.14 | SI-SDR noisy=-0.4 mmse=1.6 wav=-0.4
+2026-09-09 02:42:33,554 INFO [restaurant   0dB ] sp30 | STOI  noisy=0.669 mmse=0.575 wav=0.680 | PESQ  noisy=1.17 mmse=1.09 wav=1.17 | SI-SDR noisy=-0.4 mmse=-1.4 wav=-0.3
+2026-09-09 02:42:33,712 INFO [restaurant   10dB] sp01 | STOI  noisy=0.870 mmse=0.754 wav=0.872 | PESQ  noisy=1.66 mmse=1.23 wav=1.64 | SI-SDR noisy=9.3 mmse=6.6 wav=9.5
+2026-09-09 02:42:33,901 INFO [restaurant   10dB] sp02 | STOI  noisy=0.905 mmse=0.786 wav=0.907 | PESQ  noisy=1.72 mmse=1.20 wav=1.66 | SI-SDR noisy=9.3 mmse=5.0 wav=9.4
+2026-09-09 02:42:34,042 INFO [restaurant   10dB] sp03 | STOI  noisy=0.910 mmse=0.822 wav=0.912 | PESQ  noisy=1.53 mmse=1.34 wav=1.50 | SI-SDR noisy=9.5 mmse=8.3 wav=9.6
+2026-09-09 02:42:34,221 INFO [restaurant   10dB] sp04 | STOI  noisy=0.939 mmse=0.837 wav=0.940 | PESQ  noisy=1.80 mmse=1.29 wav=1.78 | SI-SDR noisy=9.6 mmse=5.9 wav=9.6
+2026-09-09 02:42:34,372 INFO [restaurant   10dB] sp05 | STOI  noisy=0.916 mmse=0.805 wav=0.917 | PESQ  noisy=1.59 mmse=1.43 wav=1.56 | SI-SDR noisy=9.3 mmse=7.3 wav=9.4
+2026-09-09 02:42:34,539 INFO [restaurant   10dB] sp06 | STOI  noisy=0.897 mmse=0.800 wav=0.901 | PESQ  noisy=1.46 mmse=1.37 wav=1.43 | SI-SDR noisy=9.2 mmse=7.9 wav=9.6
+2026-09-09 02:42:34,665 INFO [restaurant   10dB] sp07 | STOI  noisy=0.914 mmse=0.814 wav=0.915 | PESQ  noisy=1.56 mmse=1.69 wav=1.53 | SI-SDR noisy=9.5 mmse=7.3 wav=9.7
+2026-09-09 02:42:34,822 INFO [restaurant   10dB] sp08 | STOI  noisy=0.898 mmse=0.787 wav=0.899 | PESQ  noisy=1.74 mmse=1.30 wav=1.69 | SI-SDR noisy=9.4 mmse=5.9 wav=9.6
+2026-09-09 02:42:34,995 INFO [restaurant   10dB] sp09 | STOI  noisy=0.860 mmse=0.742 wav=0.865 | PESQ  noisy=1.55 mmse=1.34 wav=1.53 | SI-SDR noisy=9.7 mmse=5.3 wav=9.9
+2026-09-09 02:42:35,148 INFO [restaurant   10dB] sp10 | STOI  noisy=0.886 mmse=0.770 wav=0.886 | PESQ  noisy=1.51 mmse=1.27 wav=1.49 | SI-SDR noisy=9.3 mmse=5.9 wav=9.5
+2026-09-09 02:42:35,297 INFO [restaurant   10dB] sp11 | STOI  noisy=0.856 mmse=0.769 wav=0.857 | PESQ  noisy=1.44 mmse=1.41 wav=1.43 | SI-SDR noisy=9.5 mmse=7.8 wav=9.7
+2026-09-09 02:42:35,449 INFO [restaurant   10dB] sp12 | STOI  noisy=0.934 mmse=0.827 wav=0.936 | PESQ  noisy=1.61 mmse=1.36 wav=1.58 | SI-SDR noisy=9.6 mmse=6.3 wav=9.8
+2026-09-09 02:42:35,594 INFO [restaurant   10dB] sp13 | STOI  noisy=0.919 mmse=0.801 wav=0.924 | PESQ  noisy=1.72 mmse=1.38 wav=1.67 | SI-SDR noisy=9.0 mmse=8.3 wav=9.1
+2026-09-09 02:42:35,751 INFO [restaurant   10dB] sp14 | STOI  noisy=0.860 mmse=0.768 wav=0.861 | PESQ  noisy=1.47 mmse=1.36 wav=1.46 | SI-SDR noisy=9.6 mmse=8.3 wav=9.8
+2026-09-09 02:42:35,902 INFO [restaurant   10dB] sp15 | STOI  noisy=0.895 mmse=0.776 wav=0.898 | PESQ  noisy=1.48 mmse=1.30 wav=1.46 | SI-SDR noisy=9.7 mmse=5.0 wav=9.9
+2026-09-09 02:42:36,041 INFO [restaurant   10dB] sp16 | STOI  noisy=0.869 mmse=0.865 wav=0.870 | PESQ  noisy=1.48 mmse=1.48 wav=1.47 | SI-SDR noisy=8.9 mmse=10.8 wav=9.1
+2026-09-09 02:42:36,176 INFO [restaurant   10dB] sp17 | STOI  noisy=0.859 mmse=0.801 wav=0.859 | PESQ  noisy=1.38 mmse=1.51 wav=1.37 | SI-SDR noisy=9.4 mmse=8.2 wav=9.5
+2026-09-09 02:42:36,330 INFO [restaurant   10dB] sp18 | STOI  noisy=0.880 mmse=0.797 wav=0.881 | PESQ  noisy=1.47 mmse=1.32 wav=1.43 | SI-SDR noisy=9.6 mmse=9.3 wav=9.7
+2026-09-09 02:42:36,481 INFO [restaurant   10dB] sp19 | STOI  noisy=0.864 mmse=0.817 wav=0.866 | PESQ  noisy=1.51 mmse=1.50 wav=1.46 | SI-SDR noisy=9.2 mmse=10.6 wav=9.3
+2026-09-09 02:42:36,625 INFO [restaurant   10dB] sp20 | STOI  noisy=0.867 mmse=0.818 wav=0.868 | PESQ  noisy=1.48 mmse=1.45 wav=1.45 | SI-SDR noisy=9.5 mmse=8.3 wav=9.7
+2026-09-09 02:42:36,773 INFO [restaurant   10dB] sp21 | STOI  noisy=0.877 mmse=0.775 wav=0.880 | PESQ  noisy=1.89 mmse=1.32 wav=1.81 | SI-SDR noisy=9.3 mmse=6.2 wav=9.6
+2026-09-09 02:42:36,935 INFO [restaurant   10dB] sp22 | STOI  noisy=0.886 mmse=0.769 wav=0.890 | PESQ  noisy=1.45 mmse=1.18 wav=1.42 | SI-SDR noisy=9.5 mmse=4.0 wav=9.6
+2026-09-09 02:42:37,080 INFO [restaurant   10dB] sp23 | STOI  noisy=0.941 mmse=0.795 wav=0.942 | PESQ  noisy=1.83 mmse=1.20 wav=1.77 | SI-SDR noisy=9.3 mmse=5.3 wav=9.4
+2026-09-09 02:42:37,238 INFO [restaurant   10dB] sp24 | STOI  noisy=0.816 mmse=0.719 wav=0.830 | PESQ  noisy=1.64 mmse=1.33 wav=1.60 | SI-SDR noisy=9.6 mmse=5.1 wav=9.8
+2026-09-09 02:42:37,551 INFO [restaurant   10dB] sp25 | STOI  noisy=0.895 mmse=0.814 wav=0.896 | PESQ  noisy=1.81 mmse=1.35 wav=1.79 | SI-SDR noisy=9.6 mmse=6.4 wav=9.8
+2026-09-09 02:42:37,698 INFO [restaurant   10dB] sp26 | STOI  noisy=0.933 mmse=0.831 wav=0.934 | PESQ  noisy=1.57 mmse=1.37 wav=1.53 | SI-SDR noisy=9.5 mmse=6.1 wav=9.7
+2026-09-09 02:42:37,839 INFO [restaurant   10dB] sp27 | STOI  noisy=0.929 mmse=0.806 wav=0.931 | PESQ  noisy=1.60 mmse=1.26 wav=1.56 | SI-SDR noisy=9.6 mmse=6.4 wav=9.7
+2026-09-09 02:42:37,977 INFO [restaurant   10dB] sp28 | STOI  noisy=0.924 mmse=0.817 wav=0.924 | PESQ  noisy=1.53 mmse=1.48 wav=1.51 | SI-SDR noisy=9.7 mmse=7.5 wav=9.8
+2026-09-09 02:42:38,112 INFO [restaurant   10dB] sp29 | STOI  noisy=0.930 mmse=0.842 wav=0.933 | PESQ  noisy=1.84 mmse=1.40 wav=1.77 | SI-SDR noisy=9.5 mmse=7.9 wav=9.6
+2026-09-09 02:42:38,255 INFO [restaurant   10dB] sp30 | STOI  noisy=0.909 mmse=0.820 wav=0.913 | PESQ  noisy=1.80 mmse=1.42 wav=1.72 | SI-SDR noisy=9.6 mmse=6.4 wav=9.8
+2026-09-09 02:42:38,396 INFO [restaurant   15dB] sp01 | STOI  noisy=0.957 mmse=0.839 wav=0.956 | PESQ  noisy=2.01 mmse=1.41 wav=1.96 | SI-SDR noisy=14.4 mmse=7.8 wav=14.6
+2026-09-09 02:42:38,545 INFO [restaurant   15dB] sp02 | STOI  noisy=0.950 mmse=0.838 wav=0.952 | PESQ  noisy=2.22 mmse=1.26 wav=2.06 | SI-SDR noisy=14.3 mmse=6.1 wav=14.4
+2026-09-09 02:42:38,680 INFO [restaurant   15dB] sp03 | STOI  noisy=0.948 mmse=0.855 wav=0.950 | PESQ  noisy=1.88 mmse=1.45 wav=1.80 | SI-SDR noisy=14.5 mmse=9.4 wav=14.6
+2026-09-09 02:42:38,807 INFO [restaurant   15dB] sp04 | STOI  noisy=0.958 mmse=0.846 wav=0.958 | PESQ  noisy=2.00 mmse=1.38 wav=1.96 | SI-SDR noisy=14.5 mmse=8.3 wav=14.6
+2026-09-09 02:42:38,946 INFO [restaurant   15dB] sp05 | STOI  noisy=0.956 mmse=0.826 wav=0.957 | PESQ  noisy=1.89 mmse=1.37 wav=1.84 | SI-SDR noisy=14.3 mmse=9.0 wav=14.3
+2026-09-09 02:42:39,079 INFO [restaurant   15dB] sp06 | STOI  noisy=0.955 mmse=0.852 wav=0.956 | PESQ  noisy=1.90 mmse=1.57 wav=1.85 | SI-SDR noisy=14.2 mmse=9.0 wav=14.5
+2026-09-09 02:42:39,209 INFO [restaurant   15dB] sp07 | STOI  noisy=0.976 mmse=0.849 wav=0.976 | PESQ  noisy=2.07 mmse=1.35 wav=1.99 | SI-SDR noisy=14.6 mmse=7.2 wav=14.7
+2026-09-09 02:42:39,357 INFO [restaurant   15dB] sp08 | STOI  noisy=0.945 mmse=0.844 wav=0.946 | PESQ  noisy=1.98 mmse=1.44 wav=1.91 | SI-SDR noisy=14.4 mmse=8.1 wav=14.6
+2026-09-09 02:42:39,502 INFO [restaurant   15dB] sp09 | STOI  noisy=0.929 mmse=0.793 wav=0.932 | PESQ  noisy=1.96 mmse=1.47 wav=1.91 | SI-SDR noisy=14.6 mmse=7.3 wav=14.9
+2026-09-09 02:42:39,646 INFO [restaurant   15dB] sp10 | STOI  noisy=0.958 mmse=0.825 wav=0.959 | PESQ  noisy=2.04 mmse=1.41 wav=1.98 | SI-SDR noisy=14.3 mmse=6.5 wav=14.5
+2026-09-09 02:42:39,791 INFO [restaurant   15dB] sp11 | STOI  noisy=0.932 mmse=0.797 wav=0.932 | PESQ  noisy=1.80 mmse=1.54 wav=1.76 | SI-SDR noisy=14.4 mmse=8.2 wav=14.7
+2026-09-09 02:42:39,933 INFO [restaurant   15dB] sp12 | STOI  noisy=0.969 mmse=0.852 wav=0.969 | PESQ  noisy=1.84 mmse=1.46 wav=1.79 | SI-SDR noisy=14.7 mmse=7.9 wav=14.9
+2026-09-09 02:42:40,065 INFO [restaurant   15dB] sp13 | STOI  noisy=0.960 mmse=0.844 wav=0.960 | PESQ  noisy=2.11 mmse=1.38 wav=2.02 | SI-SDR noisy=13.9 mmse=9.8 wav=14.0
+2026-09-09 02:42:40,212 INFO [restaurant   15dB] sp14 | STOI  noisy=0.919 mmse=0.815 wav=0.918 | PESQ  noisy=1.74 mmse=1.51 wav=1.70 | SI-SDR noisy=14.6 mmse=10.7 wav=14.8
+2026-09-09 02:42:40,365 INFO [restaurant   15dB] sp15 | STOI  noisy=0.942 mmse=0.814 wav=0.943 | PESQ  noisy=1.73 mmse=1.43 wav=1.69 | SI-SDR noisy=14.7 mmse=6.9 wav=15.0
+2026-09-09 02:42:40,504 INFO [restaurant   15dB] sp16 | STOI  noisy=0.931 mmse=0.910 wav=0.931 | PESQ  noisy=1.87 mmse=1.72 wav=1.83 | SI-SDR noisy=13.9 mmse=14.2 wav=13.9
+2026-09-09 02:42:40,637 INFO [restaurant   15dB] sp17 | STOI  noisy=0.922 mmse=0.831 wav=0.921 | PESQ  noisy=1.71 mmse=1.64 wav=1.67 | SI-SDR noisy=14.6 mmse=9.9 wav=14.7
+2026-09-09 02:42:40,770 INFO [restaurant   15dB] sp18 | STOI  noisy=0.931 mmse=0.840 wav=0.931 | PESQ  noisy=1.92 mmse=1.55 wav=1.86 | SI-SDR noisy=14.6 mmse=11.4 wav=14.7
+2026-09-09 02:42:40,901 INFO [restaurant   15dB] sp19 | STOI  noisy=0.908 mmse=0.838 wav=0.907 | PESQ  noisy=1.58 mmse=1.57 wav=1.56 | SI-SDR noisy=14.2 mmse=12.5 wav=14.5
+2026-09-09 02:42:41,038 INFO [restaurant   15dB] sp20 | STOI  noisy=0.949 mmse=0.879 wav=0.949 | PESQ  noisy=1.97 mmse=1.65 wav=1.86 | SI-SDR noisy=14.5 mmse=10.9 wav=14.7
+2026-09-09 02:42:41,180 INFO [restaurant   15dB] sp21 | STOI  noisy=0.971 mmse=0.849 wav=0.968 | PESQ  noisy=2.39 mmse=1.41 wav=2.25 | SI-SDR noisy=14.3 mmse=7.3 wav=14.6
+2026-09-09 02:42:41,334 INFO [restaurant   15dB] sp22 | STOI  noisy=0.924 mmse=0.812 wav=0.926 | PESQ  noisy=2.04 mmse=1.31 wav=1.93 | SI-SDR noisy=14.5 mmse=4.8 wav=14.7
+2026-09-09 02:42:41,469 INFO [restaurant   15dB] sp23 | STOI  noisy=0.941 mmse=0.828 wav=0.946 | PESQ  noisy=1.87 mmse=1.34 wav=1.79 | SI-SDR noisy=14.3 mmse=7.4 wav=14.8
+2026-09-09 02:42:41,632 INFO [restaurant   15dB] sp24 | STOI  noisy=0.916 mmse=0.799 wav=0.918 | PESQ  noisy=2.17 mmse=1.44 wav=2.07 | SI-SDR noisy=14.6 mmse=5.8 wav=14.7
+2026-09-09 02:42:41,791 INFO [restaurant   15dB] sp25 | STOI  noisy=0.963 mmse=0.841 wav=0.964 | PESQ  noisy=2.30 mmse=1.35 wav=2.21 | SI-SDR noisy=14.7 mmse=6.9 wav=14.9
+2026-09-09 02:42:41,929 INFO [restaurant   15dB] sp26 | STOI  noisy=0.982 mmse=0.858 wav=0.982 | PESQ  noisy=2.33 mmse=1.40 wav=2.17 | SI-SDR noisy=14.5 mmse=7.4 wav=14.6
+2026-09-09 02:42:42,073 INFO [restaurant   15dB] sp27 | STOI  noisy=0.968 mmse=0.859 wav=0.968 | PESQ  noisy=2.05 mmse=1.48 wav=1.97 | SI-SDR noisy=14.5 mmse=8.8 wav=14.7
+2026-09-09 02:42:42,215 INFO [restaurant   15dB] sp28 | STOI  noisy=0.982 mmse=0.866 wav=0.983 | PESQ  noisy=1.96 mmse=1.62 wav=1.88 | SI-SDR noisy=14.7 mmse=9.1 wav=14.8
+2026-09-09 02:42:42,353 INFO [restaurant   15dB] sp29 | STOI  noisy=0.984 mmse=0.872 wav=0.984 | PESQ  noisy=2.12 mmse=1.41 wav=2.03 | SI-SDR noisy=14.5 mmse=8.7 wav=14.6
+2026-09-09 02:42:42,497 INFO [restaurant   15dB] sp30 | STOI  noisy=0.972 mmse=0.863 wav=0.974 | PESQ  noisy=2.40 mmse=1.58 wav=2.22 | SI-SDR noisy=14.6 mmse=8.0 wav=14.7
+2026-09-09 02:42:42,670 INFO [restaurant   5dB ] sp01 | STOI  noisy=0.752 mmse=0.673 wav=0.752 | PESQ  noisy=1.31 mmse=1.18 wav=1.30 | SI-SDR noisy=4.4 mmse=5.2 wav=4.6
+2026-09-09 02:42:42,839 INFO [restaurant   5dB ] sp02 | STOI  noisy=0.830 mmse=0.739 wav=0.835 | PESQ  noisy=1.42 mmse=1.18 wav=1.40 | SI-SDR noisy=4.3 mmse=3.9 wav=4.4
+2026-09-09 02:42:42,995 INFO [restaurant   5dB ] sp03 | STOI  noisy=0.824 mmse=0.757 wav=0.828 | PESQ  noisy=1.34 mmse=1.26 wav=1.34 | SI-SDR noisy=4.3 mmse=6.2 wav=4.4
+2026-09-09 02:42:43,124 INFO [restaurant   5dB ] sp04 | STOI  noisy=0.821 mmse=0.762 wav=0.822 | PESQ  noisy=1.41 mmse=1.21 wav=1.39 | SI-SDR noisy=4.6 mmse=4.2 wav=4.6
+2026-09-09 02:42:43,263 INFO [restaurant   5dB ] sp05 | STOI  noisy=0.827 mmse=0.711 wav=0.831 | PESQ  noisy=1.27 mmse=1.24 wav=1.26 | SI-SDR noisy=4.5 mmse=3.7 wav=4.5
+2026-09-09 02:42:43,427 INFO [restaurant   5dB ] sp06 | STOI  noisy=0.833 mmse=0.780 wav=0.837 | PESQ  noisy=1.30 mmse=1.35 wav=1.28 | SI-SDR noisy=4.1 mmse=5.5 wav=4.3
+2026-09-09 02:42:43,564 INFO [restaurant   5dB ] sp07 | STOI  noisy=0.848 mmse=0.738 wav=0.850 | PESQ  noisy=1.32 mmse=1.18 wav=1.31 | SI-SDR noisy=4.5 mmse=3.8 wav=4.6
+2026-09-09 02:42:43,779 INFO [restaurant   5dB ] sp08 | STOI  noisy=0.807 mmse=0.696 wav=0.811 | PESQ  noisy=1.45 mmse=1.24 wav=1.44 | SI-SDR noisy=4.3 mmse=4.5 wav=4.4
+2026-09-09 02:42:43,951 INFO [restaurant   5dB ] sp09 | STOI  noisy=0.786 mmse=0.660 wav=0.794 | PESQ  noisy=1.22 mmse=1.10 wav=1.21 | SI-SDR noisy=4.5 mmse=1.8 wav=4.6
+2026-09-09 02:42:44,140 INFO [restaurant   5dB ] sp10 | STOI  noisy=0.832 mmse=0.738 wav=0.835 | PESQ  noisy=1.35 mmse=1.23 wav=1.34 | SI-SDR noisy=4.3 mmse=4.0 wav=4.4
+2026-09-09 02:42:44,332 INFO [restaurant   5dB ] sp11 | STOI  noisy=0.747 mmse=0.683 wav=0.754 | PESQ  noisy=1.21 mmse=1.22 wav=1.21 | SI-SDR noisy=4.4 mmse=3.8 wav=4.6
+2026-09-09 02:42:44,511 INFO [restaurant   5dB ] sp12 | STOI  noisy=0.832 mmse=0.767 wav=0.843 | PESQ  noisy=1.26 mmse=1.33 wav=1.26 | SI-SDR noisy=4.6 mmse=5.0 wav=4.8
+2026-09-09 02:42:44,658 INFO [restaurant   5dB ] sp13 | STOI  noisy=0.793 mmse=0.757 wav=0.803 | PESQ  noisy=1.24 mmse=1.25 wav=1.23 | SI-SDR noisy=4.0 mmse=6.3 wav=4.1
+2026-09-09 02:42:44,824 INFO [restaurant   5dB ] sp14 | STOI  noisy=0.726 mmse=0.669 wav=0.734 | PESQ  noisy=1.17 mmse=1.29 wav=1.17 | SI-SDR noisy=4.6 mmse=5.8 wav=4.7
+2026-09-09 02:42:44,980 INFO [restaurant   5dB ] sp15 | STOI  noisy=0.823 mmse=0.728 wav=0.823 | PESQ  noisy=1.27 mmse=1.21 wav=1.26 | SI-SDR noisy=4.7 mmse=3.0 wav=4.8
+2026-09-09 02:42:45,158 INFO [restaurant   5dB ] sp16 | STOI  noisy=0.819 mmse=0.802 wav=0.819 | PESQ  noisy=1.28 mmse=1.40 wav=1.27 | SI-SDR noisy=3.9 mmse=8.4 wav=4.0
+2026-09-09 02:42:45,309 INFO [restaurant   5dB ] sp17 | STOI  noisy=0.696 mmse=0.638 wav=0.697 | PESQ  noisy=1.14 mmse=1.17 wav=1.14 | SI-SDR noisy=4.6 mmse=6.2 wav=4.7
+2026-09-09 02:42:45,483 INFO [restaurant   5dB ] sp18 | STOI  noisy=0.783 mmse=0.711 wav=0.785 | PESQ  noisy=1.22 mmse=1.26 wav=1.21 | SI-SDR noisy=4.5 mmse=6.6 wav=4.6
+2026-09-09 02:42:45,626 INFO [restaurant   5dB ] sp19 | STOI  noisy=0.753 mmse=0.697 wav=0.754 | PESQ  noisy=1.15 mmse=1.33 wav=1.15 | SI-SDR noisy=4.2 mmse=7.9 wav=4.4
+2026-09-09 02:42:45,765 INFO [restaurant   5dB ] sp20 | STOI  noisy=0.803 mmse=0.745 wav=0.803 | PESQ  noisy=1.25 mmse=1.32 wav=1.24 | SI-SDR noisy=4.5 mmse=6.5 wav=4.7
+2026-09-09 02:42:45,908 INFO [restaurant   5dB ] sp21 | STOI  noisy=0.819 mmse=0.712 wav=0.832 | PESQ  noisy=1.59 mmse=1.21 wav=1.56 | SI-SDR noisy=4.3 mmse=2.9 wav=4.5
+2026-09-09 02:42:46,093 INFO [restaurant   5dB ] sp22 | STOI  noisy=0.708 mmse=0.598 wav=0.710 | PESQ  noisy=1.18 mmse=1.12 wav=1.18 | SI-SDR noisy=4.4 mmse=2.2 wav=4.6
+2026-09-09 02:42:46,252 INFO [restaurant   5dB ] sp23 | STOI  noisy=0.853 mmse=0.759 wav=0.855 | PESQ  noisy=1.42 mmse=1.27 wav=1.40 | SI-SDR noisy=4.1 mmse=4.6 wav=4.3
+2026-09-09 02:42:46,428 INFO [restaurant   5dB ] sp24 | STOI  noisy=0.737 mmse=0.639 wav=0.750 | PESQ  noisy=1.41 mmse=1.19 wav=1.40 | SI-SDR noisy=4.6 mmse=3.1 wav=4.7
+2026-09-09 02:42:46,590 INFO [restaurant   5dB ] sp25 | STOI  noisy=0.750 mmse=0.672 wav=0.753 | PESQ  noisy=1.42 mmse=1.18 wav=1.39 | SI-SDR noisy=4.5 mmse=3.5 wav=4.6
+2026-09-09 02:42:46,744 INFO [restaurant   5dB ] sp26 | STOI  noisy=0.852 mmse=0.686 wav=0.853 | PESQ  noisy=1.42 mmse=1.29 wav=1.40 | SI-SDR noisy=4.5 mmse=2.9 wav=4.5
+2026-09-09 02:42:46,888 INFO [restaurant   5dB ] sp27 | STOI  noisy=0.860 mmse=0.748 wav=0.863 | PESQ  noisy=1.40 mmse=1.24 wav=1.38 | SI-SDR noisy=4.7 mmse=5.1 wav=4.8
+2026-09-09 02:42:47,049 INFO [restaurant   5dB ] sp28 | STOI  noisy=0.874 mmse=0.765 wav=0.877 | PESQ  noisy=1.24 mmse=1.22 wav=1.23 | SI-SDR noisy=4.7 mmse=4.9 wav=4.8
+2026-09-09 02:42:47,188 INFO [restaurant   5dB ] sp29 | STOI  noisy=0.843 mmse=0.772 wav=0.851 | PESQ  noisy=1.26 mmse=1.28 wav=1.25 | SI-SDR noisy=4.4 mmse=4.8 wav=4.6
+2026-09-09 02:42:47,339 INFO [restaurant   5dB ] sp30 | STOI  noisy=0.787 mmse=0.718 wav=0.799 | PESQ  noisy=1.35 mmse=1.34 wav=1.34 | SI-SDR noisy=4.8 mmse=4.9 wav=4.9
+2026-09-09 02:42:47,546 INFO [station      0dB ] sp01 | STOI  noisy=0.663 mmse=0.584 wav=0.655 | PESQ  noisy=1.17 mmse=1.07 wav=1.16 | SI-SDR noisy=-0.7 mmse=-0.2 wav=-0.6
+2026-09-09 02:42:47,717 INFO [station      0dB ] sp02 | STOI  noisy=0.681 mmse=0.638 wav=0.683 | PESQ  noisy=1.20 mmse=1.18 wav=1.19 | SI-SDR noisy=-0.5 mmse=1.5 wav=-0.4
+2026-09-09 02:42:47,899 INFO [station      0dB ] sp03 | STOI  noisy=0.664 mmse=0.625 wav=0.668 | PESQ  noisy=1.14 mmse=1.19 wav=1.14 | SI-SDR noisy=-0.4 mmse=2.7 wav=-0.4
+2026-09-09 02:42:48,040 INFO [station      0dB ] sp04 | STOI  noisy=0.714 mmse=0.687 wav=0.716 | PESQ  noisy=1.14 mmse=1.32 wav=1.14 | SI-SDR noisy=-0.6 mmse=2.7 wav=-0.5
+2026-09-09 02:42:48,189 INFO [station      0dB ] sp05 | STOI  noisy=0.695 mmse=0.667 wav=0.700 | PESQ  noisy=1.10 mmse=1.36 wav=1.10 | SI-SDR noisy=-0.6 mmse=3.2 wav=-0.6
+2026-09-09 02:42:48,368 INFO [station      0dB ] sp06 | STOI  noisy=0.627 mmse=0.597 wav=0.629 | PESQ  noisy=1.12 mmse=1.11 wav=1.11 | SI-SDR noisy=-0.6 mmse=1.8 wav=-0.3
+2026-09-09 02:42:48,511 INFO [station      0dB ] sp07 | STOI  noisy=0.636 mmse=0.585 wav=0.640 | PESQ  noisy=1.15 mmse=1.11 wav=1.13 | SI-SDR noisy=-0.4 mmse=2.3 wav=-0.1
+2026-09-09 02:42:48,703 INFO [station      0dB ] sp08 | STOI  noisy=0.625 mmse=0.597 wav=0.628 | PESQ  noisy=1.14 mmse=1.25 wav=1.14 | SI-SDR noisy=-0.7 mmse=1.8 wav=-0.5
+2026-09-09 02:42:48,918 INFO [station      0dB ] sp09 | STOI  noisy=0.679 mmse=0.600 wav=0.684 | PESQ  noisy=1.15 mmse=1.07 wav=1.15 | SI-SDR noisy=-0.3 mmse=-2.6 wav=-0.2
+2026-09-09 02:42:49,120 INFO [station      0dB ] sp10 | STOI  noisy=0.659 mmse=0.631 wav=0.662 | PESQ  noisy=1.12 mmse=1.19 wav=1.11 | SI-SDR noisy=-0.7 mmse=2.0 wav=-0.6
+2026-09-09 02:42:49,292 INFO [station      0dB ] sp11 | STOI  noisy=0.553 mmse=0.580 wav=0.558 | PESQ  noisy=1.06 mmse=1.17 wav=1.06 | SI-SDR noisy=-0.6 mmse=3.4 wav=-0.5
+2026-09-09 02:42:49,470 INFO [station      0dB ] sp12 | STOI  noisy=0.678 mmse=0.683 wav=0.693 | PESQ  noisy=1.08 mmse=1.21 wav=1.08 | SI-SDR noisy=-0.3 mmse=2.7 wav=-0.0
+2026-09-09 02:42:49,699 INFO [station      0dB ] sp13 | STOI  noisy=0.662 mmse=0.608 wav=0.665 | PESQ  noisy=1.22 mmse=1.15 wav=1.21 | SI-SDR noisy=-1.0 mmse=-0.3 wav=-0.9
+2026-09-09 02:42:49,875 INFO [station      0dB ] sp14 | STOI  noisy=0.546 mmse=0.555 wav=0.553 | PESQ  noisy=1.05 mmse=1.35 wav=1.05 | SI-SDR noisy=-0.3 mmse=4.9 wav=-0.1
+2026-09-09 02:42:50,060 INFO [station      0dB ] sp15 | STOI  noisy=0.598 mmse=0.592 wav=0.602 | PESQ  noisy=1.07 mmse=1.21 wav=1.07 | SI-SDR noisy=-0.5 mmse=1.8 wav=-0.3
+2026-09-09 02:42:50,229 INFO [station      0dB ] sp16 | STOI  noisy=0.740 mmse=0.732 wav=0.744 | PESQ  noisy=1.07 mmse=1.34 wav=1.07 | SI-SDR noisy=-1.3 mmse=5.0 wav=-1.3
+2026-09-09 02:42:50,386 INFO [station      0dB ] sp17 | STOI  noisy=0.574 mmse=0.555 wav=0.577 | PESQ  noisy=1.05 mmse=1.20 wav=1.05 | SI-SDR noisy=-0.8 mmse=3.2 wav=-0.7
+2026-09-09 02:42:50,531 INFO [station      0dB ] sp18 | STOI  noisy=0.626 mmse=0.634 wav=0.633 | PESQ  noisy=1.06 mmse=1.21 wav=1.06 | SI-SDR noisy=-0.4 mmse=4.4 wav=-0.3
+2026-09-09 02:42:50,697 INFO [station      0dB ] sp19 | STOI  noisy=0.708 mmse=0.650 wav=0.706 | PESQ  noisy=1.13 mmse=1.25 wav=1.13 | SI-SDR noisy=-0.7 mmse=0.5 wav=-0.7
+2026-09-09 02:42:50,844 INFO [station      0dB ] sp20 | STOI  noisy=0.704 mmse=0.673 wav=0.704 | PESQ  noisy=1.09 mmse=1.32 wav=1.09 | SI-SDR noisy=-0.5 mmse=3.3 wav=-0.4
+2026-09-09 02:42:50,992 INFO [station      0dB ] sp21 | STOI  noisy=0.595 mmse=0.540 wav=0.609 | PESQ  noisy=1.53 mmse=1.19 wav=1.46 | SI-SDR noisy=-0.7 mmse=1.4 wav=-0.2
+2026-09-09 02:42:51,173 INFO [station      0dB ] sp22 | STOI  noisy=0.603 mmse=0.591 wav=0.605 | PESQ  noisy=1.12 mmse=1.18 wav=1.11 | SI-SDR noisy=-0.6 mmse=1.7 wav=-0.4
+2026-09-09 02:42:51,344 INFO [station      0dB ] sp23 | STOI  noisy=0.635 mmse=0.642 wav=0.641 | PESQ  noisy=1.15 mmse=1.15 wav=1.14 | SI-SDR noisy=-0.7 mmse=2.2 wav=-0.4
+2026-09-09 02:42:51,537 INFO [station      0dB ] sp24 | STOI  noisy=0.548 mmse=0.547 wav=0.562 | PESQ  noisy=1.16 mmse=1.16 wav=1.15 | SI-SDR noisy=-0.3 mmse=1.7 wav=0.2
+2026-09-09 02:42:51,706 INFO [station      0dB ] sp25 | STOI  noisy=0.583 mmse=0.581 wav=0.584 | PESQ  noisy=1.21 mmse=1.12 wav=1.20 | SI-SDR noisy=-0.4 mmse=1.8 wav=-0.2
+2026-09-09 02:42:51,867 INFO [station      0dB ] sp26 | STOI  noisy=0.753 mmse=0.660 wav=0.755 | PESQ  noisy=1.15 mmse=1.08 wav=1.15 | SI-SDR noisy=-0.6 mmse=-0.6 wav=-0.6
+2026-09-09 02:42:52,015 INFO [station      0dB ] sp27 | STOI  noisy=0.714 mmse=0.708 wav=0.715 | PESQ  noisy=1.13 mmse=1.26 wav=1.12 | SI-SDR noisy=-0.4 mmse=3.0 wav=-0.2
+2026-09-09 02:42:52,183 INFO [station      0dB ] sp28 | STOI  noisy=0.701 mmse=0.685 wav=0.705 | PESQ  noisy=1.08 mmse=1.30 wav=1.08 | SI-SDR noisy=-0.5 mmse=3.2 wav=-0.4
+2026-09-09 02:42:52,406 INFO [station      0dB ] sp29 | STOI  noisy=0.727 mmse=0.646 wav=0.736 | PESQ  noisy=1.17 mmse=1.12 wav=1.17 | SI-SDR noisy=-0.6 mmse=0.5 wav=-0.5
+2026-09-09 02:42:52,562 INFO [station      0dB ] sp30 | STOI  noisy=0.606 mmse=0.617 wav=0.619 | PESQ  noisy=1.14 mmse=1.26 wav=1.13 | SI-SDR noisy=-0.3 mmse=2.2 wav=-0.2
+2026-09-09 02:42:52,724 INFO [station      10dB] sp01 | STOI  noisy=0.840 mmse=0.774 wav=0.846 | PESQ  noisy=1.43 mmse=1.33 wav=1.43 | SI-SDR noisy=9.4 mmse=6.7 wav=9.8
+2026-09-09 02:42:52,902 INFO [station      10dB] sp02 | STOI  noisy=0.874 mmse=0.765 wav=0.879 | PESQ  noisy=1.48 mmse=1.22 wav=1.44 | SI-SDR noisy=9.3 mmse=4.9 wav=9.7
+2026-09-09 02:42:53,035 INFO [station      10dB] sp03 | STOI  noisy=0.910 mmse=0.840 wav=0.911 | PESQ  noisy=1.45 mmse=1.38 wav=1.43 | SI-SDR noisy=9.4 mmse=7.8 wav=9.5
+2026-09-09 02:42:53,163 INFO [station      10dB] sp04 | STOI  noisy=0.898 mmse=0.850 wav=0.898 | PESQ  noisy=1.65 mmse=1.37 wav=1.63 | SI-SDR noisy=9.6 mmse=6.7 wav=9.6
+2026-09-09 02:42:53,298 INFO [station      10dB] sp05 | STOI  noisy=0.892 mmse=0.803 wav=0.893 | PESQ  noisy=1.40 mmse=1.37 wav=1.38 | SI-SDR noisy=9.4 mmse=7.7 wav=9.5
+2026-09-09 02:42:53,429 INFO [station      10dB] sp06 | STOI  noisy=0.873 mmse=0.818 wav=0.875 | PESQ  noisy=1.46 mmse=1.62 wav=1.45 | SI-SDR noisy=9.2 mmse=8.0 wav=9.5
+2026-09-09 02:42:53,557 INFO [station      10dB] sp07 | STOI  noisy=0.882 mmse=0.785 wav=0.885 | PESQ  noisy=1.40 mmse=1.29 wav=1.39 | SI-SDR noisy=9.5 mmse=6.5 wav=9.9
+2026-09-09 02:42:53,706 INFO [station      10dB] sp08 | STOI  noisy=0.872 mmse=0.804 wav=0.875 | PESQ  noisy=1.59 mmse=1.33 wav=1.57 | SI-SDR noisy=9.3 mmse=6.2 wav=9.6
+2026-09-09 02:42:53,874 INFO [station      10dB] sp09 | STOI  noisy=0.811 mmse=0.733 wav=0.821 | PESQ  noisy=1.35 mmse=1.36 wav=1.36 | SI-SDR noisy=9.6 mmse=5.6 wav=9.9
+2026-09-09 02:42:54,215 INFO [station      10dB] sp10 | STOI  noisy=0.849 mmse=0.774 wav=0.851 | PESQ  noisy=1.34 mmse=1.30 wav=1.34 | SI-SDR noisy=9.4 mmse=5.9 wav=9.7
+2026-09-09 02:42:54,367 INFO [station      10dB] sp11 | STOI  noisy=0.861 mmse=0.748 wav=0.866 | PESQ  noisy=1.41 mmse=1.33 wav=1.40 | SI-SDR noisy=9.4 mmse=6.8 wav=9.6
+2026-09-09 02:42:54,517 INFO [station      10dB] sp12 | STOI  noisy=0.887 mmse=0.811 wav=0.889 | PESQ  noisy=1.34 mmse=1.50 wav=1.33 | SI-SDR noisy=9.7 mmse=7.0 wav=10.0
+2026-09-09 02:42:54,679 INFO [station      10dB] sp13 | STOI  noisy=0.903 mmse=0.779 wav=0.906 | PESQ  noisy=1.71 mmse=1.29 wav=1.66 | SI-SDR noisy=8.9 mmse=7.8 wav=9.1
+2026-09-09 02:42:54,827 INFO [station      10dB] sp14 | STOI  noisy=0.832 mmse=0.772 wav=0.829 | PESQ  noisy=1.35 mmse=1.55 wav=1.35 | SI-SDR noisy=9.6 mmse=9.2 wav=9.9
+2026-09-09 02:42:54,992 INFO [station      10dB] sp15 | STOI  noisy=0.882 mmse=0.789 wav=0.882 | PESQ  noisy=1.40 mmse=1.39 wav=1.39 | SI-SDR noisy=9.7 mmse=5.8 wav=9.8
+2026-09-09 02:42:55,128 INFO [station      10dB] sp16 | STOI  noisy=0.846 mmse=0.840 wav=0.846 | PESQ  noisy=1.35 mmse=1.64 wav=1.34 | SI-SDR noisy=8.9 mmse=10.8 wav=9.0
+2026-09-09 02:42:55,269 INFO [station      10dB] sp17 | STOI  noisy=0.815 mmse=0.773 wav=0.816 | PESQ  noisy=1.25 mmse=1.44 wav=1.25 | SI-SDR noisy=9.6 mmse=8.2 wav=9.8
+2026-09-09 02:42:55,423 INFO [station      10dB] sp18 | STOI  noisy=0.841 mmse=0.775 wav=0.842 | PESQ  noisy=1.37 mmse=1.43 wav=1.35 | SI-SDR noisy=9.6 mmse=9.7 wav=9.8
+2026-09-09 02:42:55,562 INFO [station      10dB] sp19 | STOI  noisy=0.801 mmse=0.775 wav=0.802 | PESQ  noisy=1.26 mmse=1.56 wav=1.26 | SI-SDR noisy=9.3 mmse=10.7 wav=9.6
+2026-09-09 02:42:55,703 INFO [station      10dB] sp20 | STOI  noisy=0.882 mmse=0.833 wav=0.882 | PESQ  noisy=1.44 mmse=1.46 wav=1.42 | SI-SDR noisy=9.5 mmse=8.5 wav=9.7
+2026-09-09 02:42:55,842 INFO [station      10dB] sp21 | STOI  noisy=0.906 mmse=0.777 wav=0.904 | PESQ  noisy=1.86 mmse=1.28 wav=1.77 | SI-SDR noisy=9.3 mmse=6.7 wav=9.5
+2026-09-09 02:42:56,054 INFO [station      10dB] sp22 | STOI  noisy=0.852 mmse=0.727 wav=0.850 | PESQ  noisy=1.63 mmse=1.15 wav=1.59 | SI-SDR noisy=9.5 mmse=3.9 wav=9.7
+2026-09-09 02:42:56,194 INFO [station      10dB] sp23 | STOI  noisy=0.936 mmse=0.791 wav=0.935 | PESQ  noisy=1.67 mmse=1.25 wav=1.62 | SI-SDR noisy=9.3 mmse=5.9 wav=9.4
+2026-09-09 02:42:56,369 INFO [station      10dB] sp24 | STOI  noisy=0.820 mmse=0.763 wav=0.825 | PESQ  noisy=1.64 mmse=1.40 wav=1.62 | SI-SDR noisy=9.5 mmse=4.8 wav=9.7
+2026-09-09 02:42:56,519 INFO [station      10dB] sp25 | STOI  noisy=0.840 mmse=0.798 wav=0.853 | PESQ  noisy=1.59 mmse=1.38 wav=1.57 | SI-SDR noisy=9.6 mmse=6.5 wav=9.9
+2026-09-09 02:42:56,660 INFO [station      10dB] sp26 | STOI  noisy=0.940 mmse=0.822 wav=0.941 | PESQ  noisy=1.62 mmse=1.31 wav=1.56 | SI-SDR noisy=9.5 mmse=6.3 wav=9.6
+2026-09-09 02:42:56,804 INFO [station      10dB] sp27 | STOI  noisy=0.898 mmse=0.806 wav=0.896 | PESQ  noisy=1.47 mmse=1.23 wav=1.45 | SI-SDR noisy=9.5 mmse=7.2 wav=9.7
+2026-09-09 02:42:56,944 INFO [station      10dB] sp28 | STOI  noisy=0.913 mmse=0.812 wav=0.913 | PESQ  noisy=1.53 mmse=1.51 wav=1.51 | SI-SDR noisy=9.6 mmse=7.0 wav=9.7
+2026-09-09 02:42:57,080 INFO [station      10dB] sp29 | STOI  noisy=0.920 mmse=0.841 wav=0.925 | PESQ  noisy=1.55 mmse=1.43 wav=1.53 | SI-SDR noisy=9.5 mmse=7.6 wav=9.7
+2026-09-09 02:42:57,244 INFO [station      10dB] sp30 | STOI  noisy=0.877 mmse=0.805 wav=0.879 | PESQ  noisy=1.63 mmse=1.44 wav=1.59 | SI-SDR noisy=9.6 mmse=6.2 wav=9.8
+2026-09-09 02:42:57,395 INFO [station      15dB] sp01 | STOI  noisy=0.942 mmse=0.818 wav=0.941 | PESQ  noisy=1.79 mmse=1.32 wav=1.75 | SI-SDR noisy=14.3 mmse=7.9 wav=14.5
+2026-09-09 02:42:57,576 INFO [station      15dB] sp02 | STOI  noisy=0.949 mmse=0.808 wav=0.950 | PESQ  noisy=1.96 mmse=1.22 wav=1.87 | SI-SDR noisy=14.3 mmse=5.9 wav=14.5
+2026-09-09 02:42:57,711 INFO [station      15dB] sp03 | STOI  noisy=0.963 mmse=0.868 wav=0.964 | PESQ  noisy=1.77 mmse=1.44 wav=1.72 | SI-SDR noisy=14.5 mmse=9.1 wav=14.6
+2026-09-09 02:42:57,839 INFO [station      15dB] sp04 | STOI  noisy=0.979 mmse=0.876 wav=0.980 | PESQ  noisy=2.06 mmse=1.39 wav=2.01 | SI-SDR noisy=14.6 mmse=8.8 wav=14.7
+2026-09-09 02:42:57,978 INFO [station      15dB] sp05 | STOI  noisy=0.924 mmse=0.824 wav=0.925 | PESQ  noisy=1.80 mmse=1.39 wav=1.77 | SI-SDR noisy=14.3 mmse=8.9 wav=14.4
+2026-09-09 02:42:58,113 INFO [station      15dB] sp06 | STOI  noisy=0.918 mmse=0.851 wav=0.921 | PESQ  noisy=1.76 mmse=1.71 wav=1.72 | SI-SDR noisy=14.2 mmse=9.6 wav=14.7
+2026-09-09 02:42:58,245 INFO [station      15dB] sp07 | STOI  noisy=0.949 mmse=0.857 wav=0.950 | PESQ  noisy=1.81 mmse=1.41 wav=1.78 | SI-SDR noisy=14.6 mmse=7.7 wav=14.8
+2026-09-09 02:42:58,395 INFO [station      15dB] sp08 | STOI  noisy=0.945 mmse=0.853 wav=0.947 | PESQ  noisy=1.96 mmse=1.39 wav=1.90 | SI-SDR noisy=14.4 mmse=7.3 wav=14.7
+2026-09-09 02:42:58,550 INFO [station      15dB] sp09 | STOI  noisy=0.876 mmse=0.801 wav=0.882 | PESQ  noisy=1.72 mmse=1.45 wav=1.69 | SI-SDR noisy=14.6 mmse=7.0 wav=14.9
+2026-09-09 02:42:58,701 INFO [station      15dB] sp10 | STOI  noisy=0.966 mmse=0.825 wav=0.966 | PESQ  noisy=1.90 mmse=1.31 wav=1.83 | SI-SDR noisy=14.3 mmse=7.6 wav=14.5
+2026-09-09 02:42:58,849 INFO [station      15dB] sp11 | STOI  noisy=0.911 mmse=0.818 wav=0.911 | PESQ  noisy=1.70 mmse=1.60 wav=1.68 | SI-SDR noisy=14.4 mmse=8.5 wav=14.6
+2026-09-09 02:42:58,994 INFO [station      15dB] sp12 | STOI  noisy=0.964 mmse=0.848 wav=0.964 | PESQ  noisy=1.93 mmse=1.43 wav=1.87 | SI-SDR noisy=14.7 mmse=8.4 wav=14.9
+2026-09-09 02:42:59,131 INFO [station      15dB] sp13 | STOI  noisy=0.921 mmse=0.828 wav=0.922 | PESQ  noisy=1.94 mmse=1.41 wav=1.88 | SI-SDR noisy=14.0 mmse=9.6 wav=14.1
+2026-09-09 02:42:59,278 INFO [station      15dB] sp14 | STOI  noisy=0.886 mmse=0.812 wav=0.886 | PESQ  noisy=1.66 mmse=1.55 wav=1.64 | SI-SDR noisy=14.6 mmse=10.6 wav=14.9
+2026-09-09 02:42:59,431 INFO [station      15dB] sp15 | STOI  noisy=0.935 mmse=0.821 wav=0.934 | PESQ  noisy=1.80 mmse=1.42 wav=1.77 | SI-SDR noisy=14.7 mmse=6.5 wav=14.9
+2026-09-09 02:42:59,564 INFO [station      15dB] sp16 | STOI  noisy=0.940 mmse=0.906 wav=0.940 | PESQ  noisy=1.85 mmse=1.66 wav=1.80 | SI-SDR noisy=13.9 mmse=14.0 wav=14.0
+2026-09-09 02:42:59,699 INFO [station      15dB] sp17 | STOI  noisy=0.898 mmse=0.808 wav=0.898 | PESQ  noisy=1.65 mmse=1.61 wav=1.62 | SI-SDR noisy=14.6 mmse=9.4 wav=14.8
+2026-09-09 02:42:59,831 INFO [station      15dB] sp18 | STOI  noisy=0.890 mmse=0.818 wav=0.891 | PESQ  noisy=1.67 mmse=1.56 wav=1.62 | SI-SDR noisy=14.6 mmse=11.7 wav=14.8
+2026-09-09 02:42:59,962 INFO [station      15dB] sp19 | STOI  noisy=0.887 mmse=0.827 wav=0.887 | PESQ  noisy=1.54 mmse=1.85 wav=1.54 | SI-SDR noisy=14.2 mmse=13.3 wav=14.7
+2026-09-09 02:43:00,099 INFO [station      15dB] sp20 | STOI  noisy=0.912 mmse=0.857 wav=0.911 | PESQ  noisy=1.77 mmse=1.59 wav=1.71 | SI-SDR noisy=14.5 mmse=10.1 wav=14.8
+2026-09-09 02:43:00,239 INFO [station      15dB] sp21 | STOI  noisy=0.959 mmse=0.827 wav=0.955 | PESQ  noisy=2.51 mmse=1.36 wav=2.35 | SI-SDR noisy=14.4 mmse=7.2 wav=14.7
+2026-09-09 02:43:00,389 INFO [station      15dB] sp22 | STOI  noisy=0.933 mmse=0.825 wav=0.934 | PESQ  noisy=1.82 mmse=1.27 wav=1.77 | SI-SDR noisy=14.5 mmse=4.4 wav=14.8
+2026-09-09 02:43:00,533 INFO [station      15dB] sp23 | STOI  noisy=0.964 mmse=0.855 wav=0.964 | PESQ  noisy=2.07 mmse=1.37 wav=2.00 | SI-SDR noisy=14.3 mmse=7.5 wav=14.5
+2026-09-09 02:43:00,691 INFO [station      15dB] sp24 | STOI  noisy=0.874 mmse=0.794 wav=0.874 | PESQ  noisy=1.98 mmse=1.38 wav=1.91 | SI-SDR noisy=14.6 mmse=5.4 wav=15.0
+2026-09-09 02:43:00,837 INFO [station      15dB] sp25 | STOI  noisy=0.939 mmse=0.853 wav=0.939 | PESQ  noisy=2.10 mmse=1.43 wav=2.05 | SI-SDR noisy=14.7 mmse=7.3 wav=14.9
+2026-09-09 02:43:00,975 INFO [station      15dB] sp26 | STOI  noisy=0.969 mmse=0.851 wav=0.970 | PESQ  noisy=2.01 mmse=1.42 wav=1.90 | SI-SDR noisy=14.5 mmse=7.2 wav=14.7
+2026-09-09 02:43:01,116 INFO [station      15dB] sp27 | STOI  noisy=0.951 mmse=0.843 wav=0.949 | PESQ  noisy=1.84 mmse=1.41 wav=1.80 | SI-SDR noisy=14.5 mmse=8.9 wav=14.9
+2026-09-09 02:43:01,257 INFO [station      15dB] sp28 | STOI  noisy=0.975 mmse=0.846 wav=0.975 | PESQ  noisy=1.83 mmse=1.57 wav=1.78 | SI-SDR noisy=14.6 mmse=8.4 wav=14.8
+2026-09-09 02:43:01,389 INFO [station      15dB] sp29 | STOI  noisy=0.948 mmse=0.854 wav=0.948 | PESQ  noisy=1.93 mmse=1.45 wav=1.87 | SI-SDR noisy=14.5 mmse=8.8 wav=14.7
+2026-09-09 02:43:01,527 INFO [station      15dB] sp30 | STOI  noisy=0.947 mmse=0.854 wav=0.947 | PESQ  noisy=2.18 mmse=1.52 wav=2.08 | SI-SDR noisy=14.6 mmse=7.6 wav=14.8
+2026-09-09 02:43:01,682 INFO [station      5dB ] sp01 | STOI  noisy=0.733 mmse=0.704 wav=0.744 | PESQ  noisy=1.23 mmse=1.26 wav=1.22 | SI-SDR noisy=4.4 mmse=5.3 wav=4.9
+2026-09-09 02:43:01,875 INFO [station      5dB ] sp02 | STOI  noisy=0.756 mmse=0.723 wav=0.765 | PESQ  noisy=1.30 mmse=1.25 wav=1.29 | SI-SDR noisy=4.4 mmse=4.1 wav=4.7
+2026-09-09 02:43:02,012 INFO [station      5dB ] sp03 | STOI  noisy=0.789 mmse=0.750 wav=0.792 | PESQ  noisy=1.23 mmse=1.34 wav=1.23 | SI-SDR noisy=4.6 mmse=6.2 wav=4.7
+2026-09-09 02:43:02,149 INFO [station      5dB ] sp04 | STOI  noisy=0.865 mmse=0.787 wav=0.865 | PESQ  noisy=1.40 mmse=1.21 wav=1.39 | SI-SDR noisy=4.5 mmse=2.8 wav=4.5
+2026-09-09 02:43:02,319 INFO [station      5dB ] sp05 | STOI  noisy=0.870 mmse=0.763 wav=0.871 | PESQ  noisy=1.43 mmse=1.22 wav=1.41 | SI-SDR noisy=4.3 mmse=5.2 wav=4.3
+2026-09-09 02:43:02,463 INFO [station      5dB ] sp06 | STOI  noisy=0.759 mmse=0.743 wav=0.764 | PESQ  noisy=1.23 mmse=1.54 wav=1.23 | SI-SDR noisy=4.2 mmse=5.4 wav=4.5
+2026-09-09 02:43:02,604 INFO [station      5dB ] sp07 | STOI  noisy=0.781 mmse=0.734 wav=0.786 | PESQ  noisy=1.20 mmse=1.26 wav=1.19 | SI-SDR noisy=4.6 mmse=5.3 wav=4.9
+2026-09-09 02:43:02,761 INFO [station      5dB ] sp08 | STOI  noisy=0.743 mmse=0.732 wav=0.751 | PESQ  noisy=1.24 mmse=1.29 wav=1.24 | SI-SDR noisy=4.5 mmse=4.7 wav=4.9
+2026-09-09 02:43:02,935 INFO [station      5dB ] sp09 | STOI  noisy=0.687 mmse=0.664 wav=0.704 | PESQ  noisy=1.16 mmse=1.28 wav=1.17 | SI-SDR noisy=4.7 mmse=4.0 wav=5.0
+2026-09-09 02:43:03,093 INFO [station      5dB ] sp10 | STOI  noisy=0.768 mmse=0.716 wav=0.769 | PESQ  noisy=1.20 mmse=1.32 wav=1.19 | SI-SDR noisy=4.3 mmse=4.3 wav=4.4
+2026-09-09 02:43:03,250 INFO [station      5dB ] sp11 | STOI  noisy=0.689 mmse=0.663 wav=0.698 | PESQ  noisy=1.13 mmse=1.39 wav=1.13 | SI-SDR noisy=4.4 mmse=5.7 wav=4.6
+2026-09-09 02:43:03,431 INFO [station      5dB ] sp12 | STOI  noisy=0.867 mmse=0.777 wav=0.868 | PESQ  noisy=1.35 mmse=1.22 wav=1.33 | SI-SDR noisy=4.6 mmse=4.7 wav=4.7
+2026-09-09 02:43:03,575 INFO [station      5dB ] sp13 | STOI  noisy=0.737 mmse=0.728 wav=0.750 | PESQ  noisy=1.25 mmse=1.34 wav=1.24 | SI-SDR noisy=4.1 mmse=6.3 wav=4.3
+2026-09-09 02:43:03,734 INFO [station      5dB ] sp14 | STOI  noisy=0.682 mmse=0.692 wav=0.685 | PESQ  noisy=1.13 mmse=1.48 wav=1.13 | SI-SDR noisy=4.6 mmse=7.2 wav=4.8
+2026-09-09 02:43:03,933 INFO [station      5dB ] sp15 | STOI  noisy=0.795 mmse=0.714 wav=0.792 | PESQ  noisy=1.23 mmse=1.22 wav=1.23 | SI-SDR noisy=4.6 mmse=3.6 wav=4.7
+2026-09-09 02:43:04,076 INFO [station      5dB ] sp16 | STOI  noisy=0.816 mmse=0.770 wav=0.819 | PESQ  noisy=1.17 mmse=1.38 wav=1.16 | SI-SDR noisy=3.9 mmse=7.1 wav=4.1
+2026-09-09 02:43:04,227 INFO [station      5dB ] sp17 | STOI  noisy=0.781 mmse=0.709 wav=0.781 | PESQ  noisy=1.22 mmse=1.21 wav=1.22 | SI-SDR noisy=4.5 mmse=4.8 wav=4.6
+2026-09-09 02:43:04,385 INFO [station      5dB ] sp18 | STOI  noisy=0.710 mmse=0.688 wav=0.713 | PESQ  noisy=1.17 mmse=1.24 wav=1.16 | SI-SDR noisy=4.7 mmse=7.0 wav=4.8
+2026-09-09 02:43:04,529 INFO [station      5dB ] sp19 | STOI  noisy=0.713 mmse=0.681 wav=0.714 | PESQ  noisy=1.11 mmse=1.42 wav=1.11 | SI-SDR noisy=4.2 mmse=8.4 wav=4.4
+2026-09-09 02:43:04,674 INFO [station      5dB ] sp20 | STOI  noisy=0.815 mmse=0.768 wav=0.816 | PESQ  noisy=1.21 mmse=1.38 wav=1.20 | SI-SDR noisy=4.5 mmse=6.1 wav=4.7
+2026-09-09 02:43:04,844 INFO [station      5dB ] sp21 | STOI  noisy=0.824 mmse=0.696 wav=0.821 | PESQ  noisy=1.62 mmse=1.25 wav=1.56 | SI-SDR noisy=4.3 mmse=3.8 wav=4.5
+2026-09-09 02:43:05,018 INFO [station      5dB ] sp22 | STOI  noisy=0.750 mmse=0.688 wav=0.753 | PESQ  noisy=1.18 mmse=1.17 wav=1.18 | SI-SDR noisy=4.4 mmse=3.1 wav=4.5
+2026-09-09 02:43:05,158 INFO [station      5dB ] sp23 | STOI  noisy=0.803 mmse=0.761 wav=0.806 | PESQ  noisy=1.38 mmse=1.40 wav=1.37 | SI-SDR noisy=4.3 mmse=4.4 wav=4.5
+2026-09-09 02:43:05,331 INFO [station      5dB ] sp24 | STOI  noisy=0.685 mmse=0.665 wav=0.694 | PESQ  noisy=1.30 mmse=1.32 wav=1.29 | SI-SDR noisy=4.6 mmse=3.1 wav=4.9
+2026-09-09 02:43:05,478 INFO [station      5dB ] sp25 | STOI  noisy=0.705 mmse=0.692 wav=0.709 | PESQ  noisy=1.35 mmse=1.34 wav=1.34 | SI-SDR noisy=4.6 mmse=4.9 wav=4.8
+2026-09-09 02:43:05,623 INFO [station      5dB ] sp26 | STOI  noisy=0.805 mmse=0.783 wav=0.814 | PESQ  noisy=1.22 mmse=1.43 wav=1.21 | SI-SDR noisy=4.6 mmse=4.7 wav=4.8
+2026-09-09 02:43:05,879 INFO [station      5dB ] sp27 | STOI  noisy=0.849 mmse=0.784 wav=0.854 | PESQ  noisy=1.26 mmse=1.27 wav=1.25 | SI-SDR noisy=4.5 mmse=5.3 wav=4.6
+2026-09-09 02:43:06,080 INFO [station      5dB ] sp28 | STOI  noisy=0.859 mmse=0.754 wav=0.860 | PESQ  noisy=1.30 mmse=1.21 wav=1.29 | SI-SDR noisy=4.6 mmse=4.3 wav=4.7
+2026-09-09 02:43:06,224 INFO [station      5dB ] sp29 | STOI  noisy=0.807 mmse=0.783 wav=0.813 | PESQ  noisy=1.24 mmse=1.40 wav=1.24 | SI-SDR noisy=4.4 mmse=5.8 wav=4.6
+2026-09-09 02:43:06,378 INFO [station      5dB ] sp30 | STOI  noisy=0.751 mmse=0.716 wav=0.758 | PESQ  noisy=1.32 mmse=1.44 wav=1.31 | SI-SDR noisy=4.6 mmse=4.7 wav=4.8
+2026-09-09 02:43:06,551 INFO [street       0dB ] sp01 | STOI  noisy=0.590 mmse=0.552 wav=0.599 | PESQ  noisy=1.12 mmse=1.12 wav=1.11 | SI-SDR noisy=-0.8 mmse=2.5 wav=-0.2
+2026-09-09 02:43:06,767 INFO [street       0dB ] sp02 | STOI  noisy=0.734 mmse=0.650 wav=0.738 | PESQ  noisy=1.23 mmse=1.11 wav=1.22 | SI-SDR noisy=-0.8 mmse=1.4 wav=-0.6
+2026-09-09 02:43:06,979 INFO [street       0dB ] sp03 | STOI  noisy=0.668 mmse=0.601 wav=0.669 | PESQ  noisy=1.10 mmse=1.13 wav=1.10 | SI-SDR noisy=-0.5 mmse=1.9 wav=-0.3
+2026-09-09 02:43:07,113 INFO [street       0dB ] sp04 | STOI  noisy=0.653 mmse=0.625 wav=0.655 | PESQ  noisy=1.14 mmse=1.14 wav=1.13 | SI-SDR noisy=-0.5 mmse=1.9 wav=-0.4
+2026-09-09 02:43:07,273 INFO [street       0dB ] sp05 | STOI  noisy=0.674 mmse=0.635 wav=0.681 | PESQ  noisy=1.11 mmse=1.29 wav=1.10 | SI-SDR noisy=-0.8 mmse=1.9 wav=-0.8
+2026-09-09 02:43:07,420 INFO [street       0dB ] sp06 | STOI  noisy=0.734 mmse=0.698 wav=0.738 | PESQ  noisy=1.15 mmse=1.27 wav=1.15 | SI-SDR noisy=-0.9 mmse=2.4 wav=-0.8
+2026-09-09 02:43:07,556 INFO [street       0dB ] sp07 | STOI  noisy=0.672 mmse=0.630 wav=0.674 | PESQ  noisy=1.13 mmse=1.09 wav=1.12 | SI-SDR noisy=-0.4 mmse=-0.5 wav=-0.2
+2026-09-09 02:43:07,740 INFO [street       0dB ] sp08 | STOI  noisy=0.639 mmse=0.597 wav=0.639 | PESQ  noisy=1.16 mmse=1.24 wav=1.14 | SI-SDR noisy=-0.6 mmse=1.5 wav=-0.2
+2026-09-09 02:43:07,919 INFO [street       0dB ] sp09 | STOI  noisy=0.605 mmse=0.525 wav=0.621 | PESQ  noisy=1.10 mmse=1.14 wav=1.10 | SI-SDR noisy=-0.3 mmse=1.4 wav=-0.3
+2026-09-09 02:43:08,121 INFO [street       0dB ] sp10 | STOI  noisy=0.682 mmse=0.656 wav=0.684 | PESQ  noisy=1.11 mmse=1.13 wav=1.11 | SI-SDR noisy=-0.7 mmse=1.3 wav=-0.6
+2026-09-09 02:43:08,300 INFO [street       0dB ] sp11 | STOI  noisy=0.601 mmse=0.581 wav=0.596 | PESQ  noisy=1.13 mmse=1.11 wav=1.10 | SI-SDR noisy=-0.6 mmse=2.5 wav=-0.2
+2026-09-09 02:43:08,489 INFO [street       0dB ] sp12 | STOI  noisy=0.680 mmse=0.612 wav=0.691 | PESQ  noisy=1.09 mmse=1.08 wav=1.09 | SI-SDR noisy=-0.2 mmse=-1.7 wav=-0.0
+2026-09-09 02:43:08,639 INFO [street       0dB ] sp13 | STOI  noisy=0.579 mmse=0.588 wav=0.586 | PESQ  noisy=1.10 mmse=1.19 wav=1.09 | SI-SDR noisy=-1.2 mmse=3.1 wav=-0.9
+2026-09-09 02:43:08,817 INFO [street       0dB ] sp14 | STOI  noisy=0.615 mmse=0.582 wav=0.619 | PESQ  noisy=1.08 mmse=1.24 wav=1.08 | SI-SDR noisy=-0.3 mmse=2.8 wav=-0.1
+2026-09-09 02:43:09,039 INFO [street       0dB ] sp15 | STOI  noisy=0.633 mmse=0.615 wav=0.641 | PESQ  noisy=1.08 mmse=1.17 wav=1.07 | SI-SDR noisy=-0.2 mmse=2.7 wav=0.3
+2026-09-09 02:43:09,193 INFO [street       0dB ] sp16 | STOI  noisy=0.738 mmse=0.678 wav=0.740 | PESQ  noisy=1.11 mmse=1.27 wav=1.10 | SI-SDR noisy=-1.1 mmse=3.8 wav=-0.8
+2026-09-09 02:43:09,417 INFO [street       0dB ] sp17 | STOI  noisy=0.661 mmse=0.653 wav=0.665 | PESQ  noisy=1.08 mmse=1.23 wav=1.08 | SI-SDR noisy=-0.5 mmse=5.5 wav=-0.4
+2026-09-09 02:43:09,610 INFO [street       0dB ] sp18 | STOI  noisy=0.653 mmse=0.622 wav=0.658 | PESQ  noisy=1.08 mmse=1.13 wav=1.07 | SI-SDR noisy=-0.4 mmse=4.5 wav=-0.2
+2026-09-09 02:43:09,761 INFO [street       0dB ] sp19 | STOI  noisy=0.604 mmse=0.525 wav=0.605 | PESQ  noisy=1.06 mmse=1.20 wav=1.06 | SI-SDR noisy=-0.7 mmse=1.7 wav=-0.6
+2026-09-09 02:43:09,909 INFO [street       0dB ] sp20 | STOI  noisy=0.733 mmse=0.695 wav=0.737 | PESQ  noisy=1.09 mmse=1.26 wav=1.09 | SI-SDR noisy=-0.5 mmse=3.1 wav=-0.4
+2026-09-09 02:43:10,056 INFO [street       0dB ] sp21 | STOI  noisy=0.662 mmse=0.655 wav=0.666 | PESQ  noisy=1.24 mmse=1.23 wav=1.23 | SI-SDR noisy=-0.7 mmse=2.5 wav=-0.6
+2026-09-09 02:43:10,254 INFO [street       0dB ] sp22 | STOI  noisy=0.629 mmse=0.598 wav=0.632 | PESQ  noisy=1.10 mmse=1.12 wav=1.10 | SI-SDR noisy=-0.5 mmse=-1.5 wav=-0.3
+2026-09-09 02:43:10,419 INFO [street       0dB ] sp23 | STOI  noisy=0.724 mmse=0.650 wav=0.724 | PESQ  noisy=1.19 mmse=1.12 wav=1.18 | SI-SDR noisy=-0.7 mmse=1.6 wav=-0.5
+2026-09-09 02:43:10,607 INFO [street       0dB ] sp24 | STOI  noisy=0.560 mmse=0.503 wav=0.566 | PESQ  noisy=1.17 mmse=1.11 wav=1.13 | SI-SDR noisy=-0.4 mmse=-0.2 wav=0.1
+2026-09-09 02:43:10,772 INFO [street       0dB ] sp25 | STOI  noisy=0.625 mmse=0.627 wav=0.631 | PESQ  noisy=1.21 mmse=1.26 wav=1.20 | SI-SDR noisy=-0.4 mmse=2.7 wav=-0.3
+2026-09-09 02:43:10,923 INFO [street       0dB ] sp26 | STOI  noisy=0.795 mmse=0.732 wav=0.799 | PESQ  noisy=1.15 mmse=1.17 wav=1.14 | SI-SDR noisy=-0.4 mmse=0.7 wav=-0.2
+2026-09-09 02:43:11,082 INFO [street       0dB ] sp27 | STOI  noisy=0.745 mmse=0.700 wav=0.756 | PESQ  noisy=1.15 mmse=1.23 wav=1.14 | SI-SDR noisy=-0.4 mmse=3.2 wav=-0.1
+2026-09-09 02:43:11,244 INFO [street       0dB ] sp28 | STOI  noisy=0.717 mmse=0.701 wav=0.725 | PESQ  noisy=1.10 mmse=1.28 wav=1.09 | SI-SDR noisy=-0.5 mmse=2.9 wav=-0.2
+2026-09-09 02:43:11,413 INFO [street       0dB ] sp29 | STOI  noisy=0.716 mmse=0.690 wav=0.727 | PESQ  noisy=1.10 mmse=1.22 wav=1.10 | SI-SDR noisy=-0.5 mmse=2.6 wav=-0.4
+2026-09-09 02:43:11,563 INFO [street       0dB ] sp30 | STOI  noisy=0.699 mmse=0.657 wav=0.705 | PESQ  noisy=1.19 mmse=1.19 wav=1.16 | SI-SDR noisy=-0.2 mmse=0.4 wav=-0.0
+2026-09-09 02:43:11,706 INFO [street       10dB] sp01 | STOI  noisy=0.890 mmse=0.783 wav=0.890 | PESQ  noisy=1.55 mmse=1.27 wav=1.53 | SI-SDR noisy=9.3 mmse=5.3 wav=9.4
+2026-09-09 02:43:11,902 INFO [street       10dB] sp02 | STOI  noisy=0.886 mmse=0.779 wav=0.890 | PESQ  noisy=1.80 mmse=1.23 wav=1.73 | SI-SDR noisy=9.3 mmse=4.8 wav=9.5
+2026-09-09 02:43:12,035 INFO [street       10dB] sp03 | STOI  noisy=0.887 mmse=0.823 wav=0.891 | PESQ  noisy=1.39 mmse=1.37 wav=1.37 | SI-SDR noisy=9.5 mmse=8.4 wav=9.7
+2026-09-09 02:43:12,166 INFO [street       10dB] sp04 | STOI  noisy=0.909 mmse=0.832 wav=0.911 | PESQ  noisy=1.50 mmse=1.37 wav=1.47 | SI-SDR noisy=9.5 mmse=7.4 wav=9.6
+2026-09-09 02:43:12,301 INFO [street       10dB] sp05 | STOI  noisy=0.902 mmse=0.806 wav=0.904 | PESQ  noisy=1.42 mmse=1.57 wav=1.40 | SI-SDR noisy=9.3 mmse=9.4 wav=9.5
+2026-09-09 02:43:12,439 INFO [street       10dB] sp06 | STOI  noisy=0.909 mmse=0.819 wav=0.912 | PESQ  noisy=1.44 mmse=1.49 wav=1.42 | SI-SDR noisy=9.2 mmse=8.0 wav=9.6
+2026-09-09 02:43:12,570 INFO [street       10dB] sp07 | STOI  noisy=0.912 mmse=0.840 wav=0.914 | PESQ  noisy=1.54 mmse=1.41 wav=1.52 | SI-SDR noisy=9.5 mmse=8.5 wav=10.0
+2026-09-09 02:43:12,719 INFO [street       10dB] sp08 | STOI  noisy=0.899 mmse=0.812 wav=0.905 | PESQ  noisy=1.55 mmse=1.35 wav=1.49 | SI-SDR noisy=9.3 mmse=6.9 wav=10.0
+2026-09-09 02:43:12,888 INFO [street       10dB] sp09 | STOI  noisy=0.775 mmse=0.686 wav=0.794 | PESQ  noisy=1.27 mmse=1.26 wav=1.28 | SI-SDR noisy=9.6 mmse=6.2 wav=10.3
+2026-09-09 02:43:13,041 INFO [street       10dB] sp10 | STOI  noisy=0.865 mmse=0.763 wav=0.865 | PESQ  noisy=1.42 mmse=1.23 wav=1.38 | SI-SDR noisy=9.3 mmse=5.8 wav=9.7
+2026-09-09 02:43:13,193 INFO [street       10dB] sp11 | STOI  noisy=0.883 mmse=0.752 wav=0.890 | PESQ  noisy=1.41 mmse=1.33 wav=1.40 | SI-SDR noisy=9.5 mmse=6.0 wav=9.8
+2026-09-09 02:43:13,349 INFO [street       10dB] sp12 | STOI  noisy=0.868 mmse=0.786 wav=0.870 | PESQ  noisy=1.33 mmse=1.37 wav=1.30 | SI-SDR noisy=9.7 mmse=7.7 wav=10.3
+2026-09-09 02:43:13,593 INFO [street       10dB] sp13 | STOI  noisy=0.867 mmse=0.807 wav=0.875 | PESQ  noisy=1.72 mmse=1.35 wav=1.68 | SI-SDR noisy=8.9 mmse=8.0 wav=9.1
+2026-09-09 02:43:13,733 INFO [street       10dB] sp14 | STOI  noisy=0.838 mmse=0.739 wav=0.844 | PESQ  noisy=1.40 mmse=1.45 wav=1.39 | SI-SDR noisy=9.6 mmse=8.1 wav=10.0
+2026-09-09 02:43:13,892 INFO [street       10dB] sp15 | STOI  noisy=0.839 mmse=0.756 wav=0.840 | PESQ  noisy=1.35 mmse=1.27 wav=1.34 | SI-SDR noisy=9.7 mmse=6.2 wav=10.4
+2026-09-09 02:43:14,029 INFO [street       10dB] sp16 | STOI  noisy=0.855 mmse=0.838 wav=0.854 | PESQ  noisy=1.42 mmse=1.36 wav=1.41 | SI-SDR noisy=8.9 mmse=9.0 wav=9.0
+2026-09-09 02:43:14,179 INFO [street       10dB] sp17 | STOI  noisy=0.818 mmse=0.763 wav=0.819 | PESQ  noisy=1.36 mmse=1.41 wav=1.35 | SI-SDR noisy=9.5 mmse=8.3 wav=9.6
+2026-09-09 02:43:14,323 INFO [street       10dB] sp18 | STOI  noisy=0.866 mmse=0.813 wav=0.868 | PESQ  noisy=1.47 mmse=1.77 wav=1.45 | SI-SDR noisy=9.6 mmse=11.7 wav=9.8
+2026-09-09 02:43:14,493 INFO [street       10dB] sp19 | STOI  noisy=0.865 mmse=0.809 wav=0.866 | PESQ  noisy=1.27 mmse=1.37 wav=1.27 | SI-SDR noisy=9.2 mmse=9.9 wav=9.6
+2026-09-09 02:43:14,636 INFO [street       10dB] sp20 | STOI  noisy=0.867 mmse=0.840 wav=0.868 | PESQ  noisy=1.42 mmse=1.73 wav=1.39 | SI-SDR noisy=9.5 mmse=9.3 wav=10.0
+2026-09-09 02:43:14,773 INFO [street       10dB] sp21 | STOI  noisy=0.900 mmse=0.802 wav=0.905 | PESQ  noisy=1.81 mmse=1.40 wav=1.74 | SI-SDR noisy=9.3 mmse=7.4 wav=9.9
+2026-09-09 02:43:14,928 INFO [street       10dB] sp22 | STOI  noisy=0.804 mmse=0.724 wav=0.814 | PESQ  noisy=1.31 mmse=1.22 wav=1.30 | SI-SDR noisy=9.5 mmse=4.6 wav=10.1
+2026-09-09 02:43:15,071 INFO [street       10dB] sp23 | STOI  noisy=0.844 mmse=0.762 wav=0.847 | PESQ  noisy=1.48 mmse=1.29 wav=1.43 | SI-SDR noisy=9.3 mmse=6.5 wav=10.1
+2026-09-09 02:43:15,238 INFO [street       10dB] sp24 | STOI  noisy=0.790 mmse=0.703 wav=0.803 | PESQ  noisy=1.48 mmse=1.32 wav=1.45 | SI-SDR noisy=9.6 mmse=5.4 wav=10.0
+2026-09-09 02:43:15,380 INFO [street       10dB] sp25 | STOI  noisy=0.818 mmse=0.783 wav=0.826 | PESQ  noisy=1.52 mmse=1.34 wav=1.49 | SI-SDR noisy=9.6 mmse=6.7 wav=10.1
+2026-09-09 02:43:15,526 INFO [street       10dB] sp26 | STOI  noisy=0.901 mmse=0.793 wav=0.903 | PESQ  noisy=1.53 mmse=1.29 wav=1.49 | SI-SDR noisy=9.5 mmse=6.1 wav=9.7
+2026-09-09 02:43:15,666 INFO [street       10dB] sp27 | STOI  noisy=0.914 mmse=0.832 wav=0.912 | PESQ  noisy=1.53 mmse=1.32 wav=1.51 | SI-SDR noisy=9.5 mmse=7.6 wav=9.6
+2026-09-09 02:43:15,804 INFO [street       10dB] sp28 | STOI  noisy=0.932 mmse=0.820 wav=0.932 | PESQ  noisy=1.59 mmse=1.43 wav=1.56 | SI-SDR noisy=9.6 mmse=6.2 wav=9.7
+2026-09-09 02:43:15,943 INFO [street       10dB] sp29 | STOI  noisy=0.910 mmse=0.821 wav=0.915 | PESQ  noisy=1.41 mmse=1.33 wav=1.39 | SI-SDR noisy=9.5 mmse=7.2 wav=10.2
+2026-09-09 02:43:16,087 INFO [street       10dB] sp30 | STOI  noisy=0.874 mmse=0.806 wav=0.879 | PESQ  noisy=1.58 mmse=1.65 wav=1.54 | SI-SDR noisy=9.7 mmse=7.2 wav=10.0
+2026-09-09 02:43:16,239 INFO [street       15dB] sp01 | STOI  noisy=0.921 mmse=0.836 wav=0.921 | PESQ  noisy=1.74 mmse=1.41 wav=1.71 | SI-SDR noisy=14.3 mmse=8.1 wav=14.9
+2026-09-09 02:43:16,407 INFO [street       15dB] sp02 | STOI  noisy=0.953 mmse=0.835 wav=0.954 | PESQ  noisy=1.87 mmse=1.32 wav=1.79 | SI-SDR noisy=14.3 mmse=6.0 wav=14.9
+2026-09-09 02:43:16,538 INFO [street       15dB] sp03 | STOI  noisy=0.944 mmse=0.841 wav=0.946 | PESQ  noisy=1.80 mmse=1.47 wav=1.75 | SI-SDR noisy=14.5 mmse=9.3 wav=14.6
+2026-09-09 02:43:16,666 INFO [street       15dB] sp04 | STOI  noisy=0.937 mmse=0.852 wav=0.938 | PESQ  noisy=1.75 mmse=1.42 wav=1.70 | SI-SDR noisy=14.5 mmse=8.1 wav=14.7
+2026-09-09 02:43:16,805 INFO [street       15dB] sp05 | STOI  noisy=0.936 mmse=0.849 wav=0.939 | PESQ  noisy=1.69 mmse=1.62 wav=1.64 | SI-SDR noisy=14.3 mmse=9.9 wav=14.6
+2026-09-09 02:43:16,939 INFO [street       15dB] sp06 | STOI  noisy=0.937 mmse=0.841 wav=0.941 | PESQ  noisy=1.77 mmse=1.62 wav=1.72 | SI-SDR noisy=14.2 mmse=9.6 wav=15.1
+2026-09-09 02:43:17,066 INFO [street       15dB] sp07 | STOI  noisy=0.934 mmse=0.847 wav=0.937 | PESQ  noisy=1.68 mmse=1.48 wav=1.63 | SI-SDR noisy=14.6 mmse=9.0 wav=15.1
+2026-09-09 02:43:17,217 INFO [street       15dB] sp08 | STOI  noisy=0.959 mmse=0.867 wav=0.960 | PESQ  noisy=1.81 mmse=1.42 wav=1.70 | SI-SDR noisy=14.3 mmse=8.1 wav=15.0
+2026-09-09 02:43:17,381 INFO [street       15dB] sp09 | STOI  noisy=0.910 mmse=0.800 wav=0.922 | PESQ  noisy=1.59 mmse=1.44 wav=1.60 | SI-SDR noisy=14.6 mmse=7.1 wav=15.1
+2026-09-09 02:43:17,537 INFO [street       15dB] sp10 | STOI  noisy=0.951 mmse=0.794 wav=0.953 | PESQ  noisy=1.80 mmse=1.26 wav=1.76 | SI-SDR noisy=14.4 mmse=6.1 wav=14.8
+2026-09-09 02:43:17,684 INFO [street       15dB] sp11 | STOI  noisy=0.885 mmse=0.788 wav=0.885 | PESQ  noisy=1.75 mmse=1.49 wav=1.72 | SI-SDR noisy=14.4 mmse=8.6 wav=14.7
+2026-09-09 02:43:17,830 INFO [street       15dB] sp12 | STOI  noisy=0.917 mmse=0.858 wav=0.925 | PESQ  noisy=1.60 mmse=1.61 wav=1.58 | SI-SDR noisy=14.7 mmse=8.7 wav=15.2
+2026-09-09 02:43:17,976 INFO [street       15dB] sp13 | STOI  noisy=0.931 mmse=0.831 wav=0.934 | PESQ  noisy=1.90 mmse=1.45 wav=1.85 | SI-SDR noisy=14.0 mmse=9.7 wav=14.3
+2026-09-09 02:43:18,125 INFO [street       15dB] sp14 | STOI  noisy=0.875 mmse=0.792 wav=0.884 | PESQ  noisy=1.53 mmse=1.73 wav=1.52 | SI-SDR noisy=14.6 mmse=11.4 wav=15.4
+2026-09-09 02:43:18,276 INFO [street       15dB] sp15 | STOI  noisy=0.938 mmse=0.815 wav=0.940 | PESQ  noisy=1.64 mmse=1.43 wav=1.62 | SI-SDR noisy=14.7 mmse=6.8 wav=15.4
+2026-09-09 02:43:18,415 INFO [street       15dB] sp16 | STOI  noisy=0.915 mmse=0.910 wav=0.915 | PESQ  noisy=1.71 mmse=1.72 wav=1.65 | SI-SDR noisy=13.9 mmse=13.6 wav=14.3
+2026-09-09 02:43:18,556 INFO [street       15dB] sp17 | STOI  noisy=0.871 mmse=0.809 wav=0.872 | PESQ  noisy=1.58 mmse=1.50 wav=1.53 | SI-SDR noisy=14.6 mmse=9.5 wav=14.8
+2026-09-09 02:43:18,697 INFO [street       15dB] sp18 | STOI  noisy=0.888 mmse=0.824 wav=0.888 | PESQ  noisy=1.73 mmse=1.58 wav=1.68 | SI-SDR noisy=14.6 mmse=11.6 wav=14.8
+2026-09-09 02:43:18,833 INFO [street       15dB] sp19 | STOI  noisy=0.876 mmse=0.819 wav=0.878 | PESQ  noisy=1.50 mmse=1.78 wav=1.50 | SI-SDR noisy=14.2 mmse=13.0 wav=14.9
+2026-09-09 02:43:18,973 INFO [street       15dB] sp20 | STOI  noisy=0.926 mmse=0.866 wav=0.924 | PESQ  noisy=1.88 mmse=1.60 wav=1.75 | SI-SDR noisy=14.5 mmse=11.0 wav=15.0
+2026-09-09 02:43:19,123 INFO [street       15dB] sp21 | STOI  noisy=0.951 mmse=0.827 wav=0.948 | PESQ  noisy=2.40 mmse=1.39 wav=2.23 | SI-SDR noisy=14.4 mmse=7.5 wav=14.6
+2026-09-09 02:43:19,278 INFO [street       15dB] sp22 | STOI  noisy=0.888 mmse=0.770 wav=0.889 | PESQ  noisy=1.67 mmse=1.24 wav=1.64 | SI-SDR noisy=14.4 mmse=4.9 wav=15.1
+2026-09-09 02:43:19,419 INFO [street       15dB] sp23 | STOI  noisy=0.963 mmse=0.860 wav=0.963 | PESQ  noisy=2.15 mmse=1.40 wav=2.06 | SI-SDR noisy=14.3 mmse=7.6 wav=14.4
+2026-09-09 02:43:19,578 INFO [street       15dB] sp24 | STOI  noisy=0.851 mmse=0.735 wav=0.857 | PESQ  noisy=1.98 mmse=1.33 wav=1.91 | SI-SDR noisy=14.6 mmse=5.5 wav=15.1
+2026-09-09 02:43:19,727 INFO [street       15dB] sp25 | STOI  noisy=0.900 mmse=0.794 wav=0.901 | PESQ  noisy=2.04 mmse=1.36 wav=1.99 | SI-SDR noisy=14.7 mmse=7.9 wav=15.0
+2026-09-09 02:43:19,870 INFO [street       15dB] sp26 | STOI  noisy=0.980 mmse=0.844 wav=0.981 | PESQ  noisy=2.17 mmse=1.31 wav=2.08 | SI-SDR noisy=14.5 mmse=6.8 wav=14.8
+2026-09-09 02:43:20,011 INFO [street       15dB] sp27 | STOI  noisy=0.979 mmse=0.854 wav=0.977 | PESQ  noisy=1.93 mmse=1.39 wav=1.85 | SI-SDR noisy=14.5 mmse=9.3 wav=14.8
+2026-09-09 02:43:20,151 INFO [street       15dB] sp28 | STOI  noisy=0.970 mmse=0.852 wav=0.970 | PESQ  noisy=1.70 mmse=1.59 wav=1.62 | SI-SDR noisy=14.6 mmse=9.4 wav=14.9
+2026-09-09 02:43:20,284 INFO [street       15dB] sp29 | STOI  noisy=0.936 mmse=0.840 wav=0.936 | PESQ  noisy=2.01 mmse=1.40 wav=1.93 | SI-SDR noisy=14.5 mmse=8.9 wav=14.6
+2026-09-09 02:43:20,422 INFO [street       15dB] sp30 | STOI  noisy=0.939 mmse=0.831 wav=0.944 | PESQ  noisy=2.15 mmse=1.40 wav=1.98 | SI-SDR noisy=14.7 mmse=7.0 wav=15.0
+2026-09-09 02:43:20,598 INFO [street       5dB ] sp01 | STOI  noisy=0.740 mmse=0.655 wav=0.742 | PESQ  noisy=1.27 mmse=1.28 wav=1.26 | SI-SDR noisy=4.3 mmse=5.8 wav=4.6
+2026-09-09 02:43:20,800 INFO [street       5dB ] sp02 | STOI  noisy=0.747 mmse=0.667 wav=0.756 | PESQ  noisy=1.30 mmse=1.16 wav=1.28 | SI-SDR noisy=4.4 mmse=2.6 wav=4.6
+2026-09-09 02:43:20,956 INFO [street       5dB ] sp03 | STOI  noisy=0.721 mmse=0.672 wav=0.723 | PESQ  noisy=1.13 mmse=1.28 wav=1.12 | SI-SDR noisy=4.5 mmse=6.7 wav=4.8
+2026-09-09 02:43:21,099 INFO [street       5dB ] sp04 | STOI  noisy=0.805 mmse=0.756 wav=0.806 | PESQ  noisy=1.38 mmse=1.25 wav=1.37 | SI-SDR noisy=4.4 mmse=4.2 wav=4.4
+2026-09-09 02:43:21,244 INFO [street       5dB ] sp05 | STOI  noisy=0.774 mmse=0.731 wav=0.781 | PESQ  noisy=1.17 mmse=1.33 wav=1.17 | SI-SDR noisy=4.4 mmse=6.0 wav=4.6
+2026-09-09 02:43:21,377 INFO [street       5dB ] sp06 | STOI  noisy=0.752 mmse=0.738 wav=0.759 | PESQ  noisy=1.22 mmse=1.43 wav=1.21 | SI-SDR noisy=4.3 mmse=6.9 wav=4.9
+2026-09-09 02:43:21,510 INFO [street       5dB ] sp07 | STOI  noisy=0.760 mmse=0.734 wav=0.764 | PESQ  noisy=1.20 mmse=1.30 wav=1.19 | SI-SDR noisy=4.5 mmse=6.4 wav=5.0
+2026-09-09 02:43:21,675 INFO [street       5dB ] sp08 | STOI  noisy=0.721 mmse=0.674 wav=0.724 | PESQ  noisy=1.29 mmse=1.18 wav=1.29 | SI-SDR noisy=4.4 mmse=4.1 wav=4.6
+2026-09-09 02:43:21,862 INFO [street       5dB ] sp09 | STOI  noisy=0.776 mmse=0.705 wav=0.783 | PESQ  noisy=1.17 mmse=1.25 wav=1.17 | SI-SDR noisy=4.6 mmse=6.4 wav=5.0
+2026-09-09 02:43:22,017 INFO [street       5dB ] sp10 | STOI  noisy=0.762 mmse=0.707 wav=0.764 | PESQ  noisy=1.20 mmse=1.23 wav=1.19 | SI-SDR noisy=4.4 mmse=3.7 wav=4.5
+2026-09-09 02:43:22,181 INFO [street       5dB ] sp11 | STOI  noisy=0.717 mmse=0.640 wav=0.728 | PESQ  noisy=1.18 mmse=1.19 wav=1.17 | SI-SDR noisy=4.5 mmse=3.7 wav=4.9
+2026-09-09 02:43:22,350 INFO [street       5dB ] sp12 | STOI  noisy=0.844 mmse=0.783 wav=0.854 | PESQ  noisy=1.18 mmse=1.39 wav=1.18 | SI-SDR noisy=4.8 mmse=6.5 wav=5.2
+2026-09-09 02:43:22,654 INFO [street       5dB ] sp13 | STOI  noisy=0.754 mmse=0.736 wav=0.765 | PESQ  noisy=1.24 mmse=1.41 wav=1.23 | SI-SDR noisy=3.9 mmse=6.3 wav=4.2
+2026-09-09 02:43:22,825 INFO [street       5dB ] sp14 | STOI  noisy=0.703 mmse=0.683 wav=0.713 | PESQ  noisy=1.13 mmse=1.49 wav=1.13 | SI-SDR noisy=4.7 mmse=7.3 wav=5.4
+2026-09-09 02:43:23,004 INFO [street       5dB ] sp15 | STOI  noisy=0.729 mmse=0.672 wav=0.734 | PESQ  noisy=1.13 mmse=1.24 wav=1.12 | SI-SDR noisy=4.7 mmse=4.4 wav=5.4
+2026-09-09 02:43:23,145 INFO [street       5dB ] sp16 | STOI  noisy=0.791 mmse=0.774 wav=0.791 | PESQ  noisy=1.17 mmse=1.46 wav=1.17 | SI-SDR noisy=3.8 mmse=8.7 wav=3.9
+2026-09-09 02:43:23,296 INFO [street       5dB ] sp17 | STOI  noisy=0.816 mmse=0.738 wav=0.815 | PESQ  noisy=1.14 mmse=1.27 wav=1.14 | SI-SDR noisy=4.5 mmse=5.7 wav=4.7
+2026-09-09 02:43:23,450 INFO [street       5dB ] sp18 | STOI  noisy=0.738 mmse=0.724 wav=0.742 | PESQ  noisy=1.17 mmse=1.35 wav=1.16 | SI-SDR noisy=4.6 mmse=9.3 wav=4.8
+2026-09-09 02:43:23,598 INFO [street       5dB ] sp19 | STOI  noisy=0.814 mmse=0.773 wav=0.816 | PESQ  noisy=1.15 mmse=1.35 wav=1.15 | SI-SDR noisy=4.2 mmse=8.4 wav=4.5
+2026-09-09 02:43:23,742 INFO [street       5dB ] sp20 | STOI  noisy=0.773 mmse=0.729 wav=0.773 | PESQ  noisy=1.25 mmse=1.34 wav=1.23 | SI-SDR noisy=4.4 mmse=6.5 wav=4.8
+2026-09-09 02:43:23,883 INFO [street       5dB ] sp21 | STOI  noisy=0.733 mmse=0.678 wav=0.742 | PESQ  noisy=1.39 mmse=1.28 wav=1.34 | SI-SDR noisy=4.3 mmse=5.2 wav=5.2
+2026-09-09 02:43:24,045 INFO [street       5dB ] sp22 | STOI  noisy=0.733 mmse=0.662 wav=0.737 | PESQ  noisy=1.21 mmse=1.16 wav=1.21 | SI-SDR noisy=4.6 mmse=1.0 wav=4.7
+2026-09-09 02:43:24,194 INFO [street       5dB ] sp23 | STOI  noisy=0.808 mmse=0.732 wav=0.809 | PESQ  noisy=1.42 mmse=1.22 wav=1.40 | SI-SDR noisy=4.3 mmse=3.5 wav=4.4
+2026-09-09 02:43:24,375 INFO [street       5dB ] sp24 | STOI  noisy=0.722 mmse=0.713 wav=0.731 | PESQ  noisy=1.35 mmse=1.36 wav=1.34 | SI-SDR noisy=4.6 mmse=3.2 wav=4.7
+2026-09-09 02:43:24,535 INFO [street       5dB ] sp25 | STOI  noisy=0.692 mmse=0.639 wav=0.694 | PESQ  noisy=1.36 mmse=1.23 wav=1.33 | SI-SDR noisy=4.6 mmse=3.8 wav=4.9
+2026-09-09 02:43:24,678 INFO [street       5dB ] sp26 | STOI  noisy=0.831 mmse=0.760 wav=0.840 | PESQ  noisy=1.21 mmse=1.21 wav=1.20 | SI-SDR noisy=4.5 mmse=3.9 wav=4.7
+2026-09-09 02:43:24,820 INFO [street       5dB ] sp27 | STOI  noisy=0.820 mmse=0.741 wav=0.828 | PESQ  noisy=1.28 mmse=1.23 wav=1.26 | SI-SDR noisy=4.6 mmse=5.4 wav=5.0
+2026-09-09 02:43:24,966 INFO [street       5dB ] sp28 | STOI  noisy=0.859 mmse=0.772 wav=0.863 | PESQ  noisy=1.24 mmse=1.31 wav=1.23 | SI-SDR noisy=4.6 mmse=5.2 wav=4.9
+2026-09-09 02:43:25,103 INFO [street       5dB ] sp29 | STOI  noisy=0.829 mmse=0.778 wav=0.839 | PESQ  noisy=1.23 mmse=1.37 wav=1.21 | SI-SDR noisy=4.5 mmse=6.3 wav=5.0
+2026-09-09 02:43:25,256 INFO [street       5dB ] sp30 | STOI  noisy=0.702 mmse=0.679 wav=0.714 | PESQ  noisy=1.25 mmse=1.31 wav=1.22 | SI-SDR noisy=4.6 mmse=4.5 wav=5.0
+2026-09-09 02:43:25,499 INFO [train        0dB ] sp01 | STOI  noisy=0.616 mmse=0.551 wav=0.619 | PESQ  noisy=1.17 mmse=1.17 wav=1.15 | SI-SDR noisy=-0.7 mmse=2.7 wav=0.0
+2026-09-09 02:43:25,693 INFO [train        0dB ] sp02 | STOI  noisy=0.714 mmse=0.683 wav=0.727 | PESQ  noisy=1.15 mmse=1.16 wav=1.13 | SI-SDR noisy=-0.6 mmse=1.7 wav=-0.1
+2026-09-09 02:43:25,882 INFO [train        0dB ] sp03 | STOI  noisy=0.584 mmse=0.532 wav=0.584 | PESQ  noisy=1.08 mmse=1.14 wav=1.07 | SI-SDR noisy=-0.5 mmse=4.2 wav=-0.2
+2026-09-09 02:43:26,026 INFO [train        0dB ] sp04 | STOI  noisy=0.678 mmse=0.614 wav=0.682 | PESQ  noisy=1.18 mmse=1.22 wav=1.17 | SI-SDR noisy=-0.3 mmse=1.9 wav=-0.3
+2026-09-09 02:43:26,180 INFO [train        0dB ] sp05 | STOI  noisy=0.725 mmse=0.668 wav=0.724 | PESQ  noisy=1.12 mmse=1.19 wav=1.11 | SI-SDR noisy=-0.6 mmse=3.2 wav=-0.3
+2026-09-09 02:43:26,343 INFO [train        0dB ] sp06 | STOI  noisy=0.690 mmse=0.654 wav=0.691 | PESQ  noisy=1.15 mmse=1.22 wav=1.13 | SI-SDR noisy=-0.6 mmse=4.3 wav=-0.1
+2026-09-09 02:43:26,489 INFO [train        0dB ] sp07 | STOI  noisy=0.688 mmse=0.603 wav=0.681 | PESQ  noisy=1.20 mmse=1.12 wav=1.18 | SI-SDR noisy=-0.5 mmse=2.6 wav=-0.1
+2026-09-09 02:43:26,677 INFO [train        0dB ] sp08 | STOI  noisy=0.738 mmse=0.683 wav=0.739 | PESQ  noisy=1.21 mmse=1.22 wav=1.20 | SI-SDR noisy=-0.5 mmse=2.8 wav=0.0
+2026-09-09 02:43:26,842 INFO [train        0dB ] sp09 | STOI  noisy=0.647 mmse=0.573 wav=0.647 | PESQ  noisy=1.07 mmse=1.12 wav=1.06 | SI-SDR noisy=-0.1 mmse=1.8 wav=0.5
+2026-09-09 02:43:27,023 INFO [train        0dB ] sp10 | STOI  noisy=0.724 mmse=0.679 wav=0.726 | PESQ  noisy=1.14 mmse=1.14 wav=1.11 | SI-SDR noisy=-0.6 mmse=2.3 wav=-0.1
+2026-09-09 02:43:27,214 INFO [train        0dB ] sp11 | STOI  noisy=0.615 mmse=0.575 wav=0.618 | PESQ  noisy=1.08 mmse=1.19 wav=1.08 | SI-SDR noisy=-0.6 mmse=2.6 wav=-0.1
+2026-09-09 02:43:27,389 INFO [train        0dB ] sp12 | STOI  noisy=0.691 mmse=0.646 wav=0.698 | PESQ  noisy=1.10 mmse=1.14 wav=1.08 | SI-SDR noisy=-0.5 mmse=1.0 wav=-0.1
+2026-09-09 02:43:27,544 INFO [train        0dB ] sp13 | STOI  noisy=0.671 mmse=0.623 wav=0.676 | PESQ  noisy=1.14 mmse=1.27 wav=1.12 | SI-SDR noisy=-1.0 mmse=4.2 wav=-0.6
+2026-09-09 02:43:27,742 INFO [train        0dB ] sp14 | STOI  noisy=0.578 mmse=0.546 wav=0.583 | PESQ  noisy=1.07 mmse=1.22 wav=1.06 | SI-SDR noisy=-0.3 mmse=5.6 wav=0.3
+2026-09-09 02:43:27,937 INFO [train        0dB ] sp15 | STOI  noisy=0.652 mmse=0.604 wav=0.655 | PESQ  noisy=1.08 mmse=1.16 wav=1.07 | SI-SDR noisy=-0.3 mmse=1.7 wav=0.2
+2026-09-09 02:43:28,100 INFO [train        0dB ] sp16 | STOI  noisy=0.695 mmse=0.672 wav=0.703 | PESQ  noisy=1.10 mmse=1.30 wav=1.10 | SI-SDR noisy=-1.1 mmse=4.8 wav=-0.8
+2026-09-09 02:43:28,266 INFO [train        0dB ] sp17 | STOI  noisy=0.610 mmse=0.590 wav=0.609 | PESQ  noisy=1.06 mmse=1.15 wav=1.06 | SI-SDR noisy=-0.4 mmse=3.5 wav=-0.2
+2026-09-09 02:43:28,442 INFO [train        0dB ] sp18 | STOI  noisy=0.660 mmse=0.629 wav=0.662 | PESQ  noisy=1.08 mmse=1.20 wav=1.08 | SI-SDR noisy=-0.4 mmse=4.2 wav=-0.1
+2026-09-09 02:43:28,593 INFO [train        0dB ] sp19 | STOI  noisy=0.615 mmse=0.588 wav=0.617 | PESQ  noisy=1.08 mmse=1.22 wav=1.07 | SI-SDR noisy=-0.9 mmse=6.0 wav=-0.3
+2026-09-09 02:43:28,741 INFO [train        0dB ] sp20 | STOI  noisy=0.747 mmse=0.686 wav=0.748 | PESQ  noisy=1.13 mmse=1.21 wav=1.12 | SI-SDR noisy=-0.6 mmse=2.9 wav=-0.2
+2026-09-09 02:43:28,912 INFO [train        0dB ] sp21 | STOI  noisy=0.656 mmse=0.595 wav=0.657 | PESQ  noisy=1.30 mmse=1.13 wav=1.21 | SI-SDR noisy=-0.8 mmse=2.3 wav=0.0
+2026-09-09 02:43:29,127 INFO [train        0dB ] sp22 | STOI  noisy=0.608 mmse=0.583 wav=0.611 | PESQ  noisy=1.10 mmse=1.14 wav=1.09 | SI-SDR noisy=-0.5 mmse=0.3 wav=-0.1
+2026-09-09 02:43:29,294 INFO [train        0dB ] sp23 | STOI  noisy=0.675 mmse=0.633 wav=0.676 | PESQ  noisy=1.20 mmse=1.19 wav=1.18 | SI-SDR noisy=-0.7 mmse=1.7 wav=-0.2
+2026-09-09 02:43:29,496 INFO [train        0dB ] sp24 | STOI  noisy=0.588 mmse=0.510 wav=0.594 | PESQ  noisy=1.20 mmse=1.09 wav=1.14 | SI-SDR noisy=-0.5 mmse=1.0 wav=0.3
+2026-09-09 02:43:29,667 INFO [train        0dB ] sp25 | STOI  noisy=0.622 mmse=0.542 wav=0.623 | PESQ  noisy=1.26 mmse=1.16 wav=1.21 | SI-SDR noisy=-0.5 mmse=2.3 wav=0.1
+2026-09-09 02:43:29,818 INFO [train        0dB ] sp26 | STOI  noisy=0.779 mmse=0.710 wav=0.781 | PESQ  noisy=1.15 mmse=1.18 wav=1.13 | SI-SDR noisy=-0.6 mmse=2.2 wav=-0.3
+2026-09-09 02:43:29,971 INFO [train        0dB ] sp27 | STOI  noisy=0.785 mmse=0.733 wav=0.792 | PESQ  noisy=1.19 mmse=1.20 wav=1.15 | SI-SDR noisy=-0.5 mmse=3.3 wav=0.1
+2026-09-09 02:43:30,175 INFO [train        0dB ] sp28 | STOI  noisy=0.750 mmse=0.662 wav=0.752 | PESQ  noisy=1.14 mmse=1.23 wav=1.12 | SI-SDR noisy=-0.4 mmse=2.4 wav=-0.1
+2026-09-09 02:43:30,328 INFO [train        0dB ] sp29 | STOI  noisy=0.681 mmse=0.651 wav=0.699 | PESQ  noisy=1.11 mmse=1.18 wav=1.10 | SI-SDR noisy=-0.5 mmse=3.2 wav=-0.1
+2026-09-09 02:43:30,481 INFO [train        0dB ] sp30 | STOI  noisy=0.606 mmse=0.565 wav=0.611 | PESQ  noisy=1.17 mmse=1.23 wav=1.15 | SI-SDR noisy=-0.3 mmse=2.6 wav=0.1
+2026-09-09 02:43:30,644 INFO [train        10dB] sp01 | STOI  noisy=0.845 mmse=0.762 wav=0.852 | PESQ  noisy=1.40 mmse=1.27 wav=1.37 | SI-SDR noisy=9.4 mmse=6.8 wav=10.2
+2026-09-09 02:43:30,840 INFO [train        10dB] sp02 | STOI  noisy=0.881 mmse=0.785 wav=0.892 | PESQ  noisy=1.54 mmse=1.28 wav=1.49 | SI-SDR noisy=9.3 mmse=5.3 wav=9.9
+2026-09-09 02:43:30,976 INFO [train        10dB] sp03 | STOI  noisy=0.793 mmse=0.727 wav=0.796 | PESQ  noisy=1.26 mmse=1.30 wav=1.23 | SI-SDR noisy=9.6 mmse=8.7 wav=10.0
+2026-09-09 02:43:31,107 INFO [train        10dB] sp04 | STOI  noisy=0.915 mmse=0.838 wav=0.916 | PESQ  noisy=1.38 mmse=1.26 wav=1.36 | SI-SDR noisy=9.5 mmse=7.1 wav=9.7
+2026-09-09 02:43:31,243 INFO [train        10dB] sp05 | STOI  noisy=0.916 mmse=0.821 wav=0.920 | PESQ  noisy=1.37 mmse=1.37 wav=1.33 | SI-SDR noisy=9.3 mmse=7.8 wav=9.7
+2026-09-09 02:43:31,380 INFO [train        10dB] sp06 | STOI  noisy=0.888 mmse=0.812 wav=0.891 | PESQ  noisy=1.38 mmse=1.48 wav=1.34 | SI-SDR noisy=9.3 mmse=8.5 wav=9.9
+2026-09-09 02:43:31,517 INFO [train        10dB] sp07 | STOI  noisy=0.892 mmse=0.794 wav=0.895 | PESQ  noisy=1.40 mmse=1.28 wav=1.36 | SI-SDR noisy=9.5 mmse=6.8 wav=10.1
+2026-09-09 02:43:31,663 INFO [train        10dB] sp08 | STOI  noisy=0.923 mmse=0.839 wav=0.927 | PESQ  noisy=1.48 mmse=1.42 wav=1.46 | SI-SDR noisy=9.4 mmse=6.6 wav=10.2
+2026-09-09 02:43:31,834 INFO [train        10dB] sp09 | STOI  noisy=0.855 mmse=0.752 wav=0.871 | PESQ  noisy=1.23 mmse=1.34 wav=1.22 | SI-SDR noisy=9.6 mmse=6.3 wav=10.8
+2026-09-09 02:43:31,992 INFO [train        10dB] sp10 | STOI  noisy=0.900 mmse=0.768 wav=0.900 | PESQ  noisy=1.39 mmse=1.25 wav=1.37 | SI-SDR noisy=9.3 mmse=5.5 wav=9.9
+2026-09-09 02:43:32,139 INFO [train        10dB] sp11 | STOI  noisy=0.835 mmse=0.725 wav=0.838 | PESQ  noisy=1.34 mmse=1.31 wav=1.31 | SI-SDR noisy=9.4 mmse=7.7 wav=10.1
+2026-09-09 02:43:32,286 INFO [train        10dB] sp12 | STOI  noisy=0.915 mmse=0.805 wav=0.922 | PESQ  noisy=1.38 mmse=1.41 wav=1.37 | SI-SDR noisy=9.7 mmse=6.7 wav=10.3
+2026-09-09 02:43:32,425 INFO [train        10dB] sp13 | STOI  noisy=0.892 mmse=0.785 wav=0.899 | PESQ  noisy=1.57 mmse=1.32 wav=1.49 | SI-SDR noisy=9.0 mmse=8.8 wav=9.7
+2026-09-09 02:43:32,572 INFO [train        10dB] sp14 | STOI  noisy=0.798 mmse=0.746 wav=0.810 | PESQ  noisy=1.35 mmse=1.54 wav=1.34 | SI-SDR noisy=9.6 mmse=9.9 wav=10.6
+2026-09-09 02:43:32,726 INFO [train        10dB] sp15 | STOI  noisy=0.867 mmse=0.760 wav=0.872 | PESQ  noisy=1.32 mmse=1.35 wav=1.30 | SI-SDR noisy=9.7 mmse=5.8 wav=10.4
+2026-09-09 02:43:32,864 INFO [train        10dB] sp16 | STOI  noisy=0.907 mmse=0.878 wav=0.907 | PESQ  noisy=1.43 mmse=1.65 wav=1.41 | SI-SDR noisy=8.9 mmse=11.3 wav=9.4
+2026-09-09 02:43:33,008 INFO [train        10dB] sp17 | STOI  noisy=0.876 mmse=0.798 wav=0.877 | PESQ  noisy=1.27 mmse=1.40 wav=1.27 | SI-SDR noisy=9.5 mmse=7.9 wav=9.8
+2026-09-09 02:43:33,149 INFO [train        10dB] sp18 | STOI  noisy=0.873 mmse=0.796 wav=0.876 | PESQ  noisy=1.30 mmse=1.45 wav=1.28 | SI-SDR noisy=9.7 mmse=10.4 wav=10.1
+2026-09-09 02:43:33,290 INFO [train        10dB] sp19 | STOI  noisy=0.833 mmse=0.786 wav=0.834 | PESQ  noisy=1.29 mmse=1.58 wav=1.29 | SI-SDR noisy=9.2 mmse=11.3 wav=9.9
+2026-09-09 02:43:33,427 INFO [train        10dB] sp20 | STOI  noisy=0.899 mmse=0.828 wav=0.898 | PESQ  noisy=1.44 mmse=1.58 wav=1.41 | SI-SDR noisy=9.5 mmse=8.7 wav=10.2
+2026-09-09 02:43:33,567 INFO [train        10dB] sp21 | STOI  noisy=0.874 mmse=0.766 wav=0.885 | PESQ  noisy=1.73 mmse=1.23 wav=1.60 | SI-SDR noisy=9.3 mmse=6.4 wav=10.8
+2026-09-09 02:43:33,730 INFO [train        10dB] sp22 | STOI  noisy=0.784 mmse=0.682 wav=0.785 | PESQ  noisy=1.37 mmse=1.18 wav=1.34 | SI-SDR noisy=9.5 mmse=4.1 wav=10.1
+2026-09-09 02:43:33,873 INFO [train        10dB] sp23 | STOI  noisy=0.878 mmse=0.780 wav=0.877 | PESQ  noisy=1.48 mmse=1.23 wav=1.42 | SI-SDR noisy=9.3 mmse=6.2 wav=10.0
+2026-09-09 02:43:34,058 INFO [train        10dB] sp24 | STOI  noisy=0.787 mmse=0.698 wav=0.798 | PESQ  noisy=1.58 mmse=1.30 wav=1.50 | SI-SDR noisy=9.6 mmse=4.9 wav=10.6
+2026-09-09 02:43:34,218 INFO [train        10dB] sp25 | STOI  noisy=0.809 mmse=0.706 wav=0.807 | PESQ  noisy=1.51 mmse=1.20 wav=1.44 | SI-SDR noisy=9.7 mmse=7.0 wav=10.5
+2026-09-09 02:43:34,356 INFO [train        10dB] sp26 | STOI  noisy=0.917 mmse=0.821 wav=0.921 | PESQ  noisy=1.45 mmse=1.34 wav=1.41 | SI-SDR noisy=9.6 mmse=6.5 wav=10.0
+2026-09-09 02:43:34,495 INFO [train        10dB] sp27 | STOI  noisy=0.900 mmse=0.798 wav=0.903 | PESQ  noisy=1.56 mmse=1.35 wav=1.51 | SI-SDR noisy=9.6 mmse=7.8 wav=10.2
+2026-09-09 02:43:34,634 INFO [train        10dB] sp28 | STOI  noisy=0.950 mmse=0.827 wav=0.954 | PESQ  noisy=1.39 mmse=1.47 wav=1.36 | SI-SDR noisy=9.6 mmse=7.4 wav=10.1
+2026-09-09 02:43:34,771 INFO [train        10dB] sp29 | STOI  noisy=0.911 mmse=0.826 wav=0.924 | PESQ  noisy=1.47 mmse=1.44 wav=1.44 | SI-SDR noisy=9.5 mmse=7.8 wav=10.1
+2026-09-09 02:43:34,912 INFO [train        10dB] sp30 | STOI  noisy=0.852 mmse=0.769 wav=0.861 | PESQ  noisy=1.58 mmse=1.41 wav=1.51 | SI-SDR noisy=9.7 mmse=6.8 wav=10.2
+2026-09-09 02:43:35,060 INFO [train        5dB ] sp01 | STOI  noisy=0.755 mmse=0.683 wav=0.764 | PESQ  noisy=1.22 mmse=1.20 wav=1.19 | SI-SDR noisy=4.3 mmse=5.6 wav=5.1
+2026-09-09 02:43:35,264 INFO [train        5dB ] sp02 | STOI  noisy=0.790 mmse=0.710 wav=0.796 | PESQ  noisy=1.31 mmse=1.25 wav=1.28 | SI-SDR noisy=4.4 mmse=4.5 wav=4.9
+2026-09-09 02:43:35,425 INFO [train        5dB ] sp03 | STOI  noisy=0.757 mmse=0.713 wav=0.758 | PESQ  noisy=1.16 mmse=1.24 wav=1.16 | SI-SDR noisy=4.4 mmse=5.8 wav=4.6
+2026-09-09 02:43:35,555 INFO [train        5dB ] sp04 | STOI  noisy=0.785 mmse=0.682 wav=0.787 | PESQ  noisy=1.23 mmse=1.23 wav=1.21 | SI-SDR noisy=4.6 mmse=5.6 wav=4.7
+2026-09-09 02:43:35,695 INFO [train        5dB ] sp05 | STOI  noisy=0.808 mmse=0.739 wav=0.813 | PESQ  noisy=1.21 mmse=1.37 wav=1.19 | SI-SDR noisy=4.4 mmse=6.2 wav=4.6
+2026-09-09 02:43:35,832 INFO [train        5dB ] sp06 | STOI  noisy=0.825 mmse=0.736 wav=0.829 | PESQ  noisy=1.33 mmse=1.33 wav=1.30 | SI-SDR noisy=4.2 mmse=6.4 wav=4.8
+2026-09-09 02:43:35,963 INFO [train        5dB ] sp07 | STOI  noisy=0.798 mmse=0.704 wav=0.797 | PESQ  noisy=1.27 mmse=1.19 wav=1.24 | SI-SDR noisy=4.4 mmse=4.8 wav=4.9
+2026-09-09 02:43:36,129 INFO [train        5dB ] sp08 | STOI  noisy=0.847 mmse=0.775 wav=0.853 | PESQ  noisy=1.29 mmse=1.25 wav=1.27 | SI-SDR noisy=4.3 mmse=3.9 wav=5.0
+2026-09-09 02:43:36,299 INFO [train        5dB ] sp09 | STOI  noisy=0.749 mmse=0.651 wav=0.757 | PESQ  noisy=1.12 mmse=1.21 wav=1.11 | SI-SDR noisy=4.6 mmse=4.3 wav=5.4
+2026-09-09 02:43:36,472 INFO [train        5dB ] sp10 | STOI  noisy=0.828 mmse=0.724 wav=0.831 | PESQ  noisy=1.20 mmse=1.16 wav=1.18 | SI-SDR noisy=4.3 mmse=4.0 wav=4.8
+2026-09-09 02:43:36,635 INFO [train        5dB ] sp11 | STOI  noisy=0.750 mmse=0.667 wav=0.755 | PESQ  noisy=1.15 mmse=1.25 wav=1.13 | SI-SDR noisy=4.4 mmse=6.0 wav=5.4
+2026-09-09 02:43:36,785 INFO [train        5dB ] sp12 | STOI  noisy=0.826 mmse=0.746 wav=0.838 | PESQ  noisy=1.17 mmse=1.36 wav=1.15 | SI-SDR noisy=4.7 mmse=5.6 wav=5.4
+2026-09-09 02:43:36,926 INFO [train        5dB ] sp13 | STOI  noisy=0.739 mmse=0.673 wav=0.750 | PESQ  noisy=1.33 mmse=1.34 wav=1.27 | SI-SDR noisy=4.0 mmse=7.4 wav=4.6
+2026-09-09 02:43:37,087 INFO [train        5dB ] sp14 | STOI  noisy=0.693 mmse=0.646 wav=0.701 | PESQ  noisy=1.15 mmse=1.37 wav=1.13 | SI-SDR noisy=4.6 mmse=7.7 wav=5.6
+2026-09-09 02:43:37,249 INFO [train        5dB ] sp15 | STOI  noisy=0.809 mmse=0.711 wav=0.808 | PESQ  noisy=1.19 mmse=1.26 wav=1.17 | SI-SDR noisy=4.7 mmse=4.8 wav=5.6
+2026-09-09 02:43:37,388 INFO [train        5dB ] sp16 | STOI  noisy=0.852 mmse=0.800 wav=0.853 | PESQ  noisy=1.21 mmse=1.38 wav=1.19 | SI-SDR noisy=3.9 mmse=8.5 wav=4.3
+2026-09-09 02:43:37,537 INFO [train        5dB ] sp17 | STOI  noisy=0.765 mmse=0.716 wav=0.766 | PESQ  noisy=1.11 mmse=1.29 wav=1.10 | SI-SDR noisy=4.6 mmse=5.9 wav=4.9
+2026-09-09 02:43:37,692 INFO [train        5dB ] sp18 | STOI  noisy=0.779 mmse=0.721 wav=0.783 | PESQ  noisy=1.16 mmse=1.32 wav=1.14 | SI-SDR noisy=4.5 mmse=8.3 wav=5.0
+2026-09-09 02:43:37,843 INFO [train        5dB ] sp19 | STOI  noisy=0.744 mmse=0.747 wav=0.748 | PESQ  noisy=1.12 mmse=1.44 wav=1.11 | SI-SDR noisy=4.2 mmse=9.7 wav=5.1
+2026-09-09 02:43:37,989 INFO [train        5dB ] sp20 | STOI  noisy=0.814 mmse=0.773 wav=0.817 | PESQ  noisy=1.25 mmse=1.46 wav=1.24 | SI-SDR noisy=4.5 mmse=6.6 wav=5.1
+2026-09-09 02:43:38,129 INFO [train        5dB ] sp21 | STOI  noisy=0.802 mmse=0.710 wav=0.809 | PESQ  noisy=1.56 mmse=1.25 wav=1.44 | SI-SDR noisy=4.3 mmse=5.7 wav=5.3
+2026-09-09 02:43:38,292 INFO [train        5dB ] sp22 | STOI  noisy=0.705 mmse=0.641 wav=0.714 | PESQ  noisy=1.19 mmse=1.13 wav=1.17 | SI-SDR noisy=4.4 mmse=2.8 wav=5.0
+2026-09-09 02:43:38,446 INFO [train        5dB ] sp23 | STOI  noisy=0.774 mmse=0.662 wav=0.772 | PESQ  noisy=1.24 mmse=1.12 wav=1.20 | SI-SDR noisy=4.2 mmse=4.7 wav=4.8
+2026-09-09 02:43:38,614 INFO [train        5dB ] sp24 | STOI  noisy=0.668 mmse=0.583 wav=0.674 | PESQ  noisy=1.29 mmse=1.17 wav=1.24 | SI-SDR noisy=4.6 mmse=3.3 wav=5.5
+2026-09-09 02:43:38,769 INFO [train        5dB ] sp25 | STOI  noisy=0.764 mmse=0.706 wav=0.773 | PESQ  noisy=1.36 mmse=1.21 wav=1.29 | SI-SDR noisy=4.6 mmse=5.4 wav=5.5
+2026-09-09 02:43:38,910 INFO [train        5dB ] sp26 | STOI  noisy=0.840 mmse=0.766 wav=0.847 | PESQ  noisy=1.22 mmse=1.30 wav=1.19 | SI-SDR noisy=4.5 mmse=5.2 wav=5.2
+2026-09-09 02:43:39,053 INFO [train        5dB ] sp27 | STOI  noisy=0.826 mmse=0.742 wav=0.831 | PESQ  noisy=1.23 mmse=1.24 wav=1.21 | SI-SDR noisy=4.5 mmse=5.7 wav=5.0
+2026-09-09 02:43:39,202 INFO [train        5dB ] sp28 | STOI  noisy=0.856 mmse=0.780 wav=0.861 | PESQ  noisy=1.21 mmse=1.33 wav=1.18 | SI-SDR noisy=4.6 mmse=5.9 wav=5.2
+2026-09-09 02:43:39,337 INFO [train        5dB ] sp29 | STOI  noisy=0.824 mmse=0.753 wav=0.835 | PESQ  noisy=1.20 mmse=1.32 wav=1.19 | SI-SDR noisy=4.4 mmse=5.7 wav=4.9
+2026-09-09 02:43:39,483 INFO [train        5dB ] sp30 | STOI  noisy=0.790 mmse=0.734 wav=0.801 | PESQ  noisy=1.31 mmse=1.37 wav=1.25 | SI-SDR noisy=4.6 mmse=5.4 wav=5.2
+2026-09-09 02:43:39,495 INFO CSV → /Users/jwanilmodi/Web development/hearing-aid-speech-enhancement/results/classical_baselines.csv  (930 rows)
+2026-09-09 02:43:39,495 INFO 
+======================================================================
+2026-09-09 02:43:39,495 INFO OVERALL MEAN (all noise types, all SNRs)
+2026-09-09 02:43:39,495 INFO ======================================================================
+2026-09-09 02:43:39,495 INFO Metric        Noisy   MMSE-LSA    Wavelet    MMSE Δ     Wav Δ
+2026-09-09 02:43:39,495 INFO ----------------------------------------------------------------------
+2026-09-09 02:43:39,495 INFO   STOI        0.813      0.741      0.817    -0.073    +0.004
+2026-09-09 02:43:39,495 INFO   PESQ        1.435      1.321      1.409    -0.114    -0.026
+2026-09-09 02:43:39,495 INFO   SI-SDR      6.708      5.628      6.980    -1.080    +0.272
+2026-09-09 02:43:39,495 INFO 
+──────────────────────────────────────────────────────────────────────
+2026-09-09 02:43:39,495 INFO STOI BY NOISE TYPE
+2026-09-09 02:43:39,495 INFO   Noise             Noisy     MMSE  Wavelet    MMSE Δ     Wav Δ
+2026-09-09 02:43:39,495 INFO   airport           0.823    0.750    0.824    -0.072    +0.002
+2026-09-09 02:43:39,496 INFO   babble            0.805    0.733    0.808    -0.071    +0.003
+2026-09-09 02:43:39,496 INFO   car               0.798    0.748    0.804    -0.050    +0.005
+2026-09-09 02:43:39,496 INFO   exhibition        0.848    0.752    0.852    -0.096    +0.004
+2026-09-09 02:43:39,496 INFO   restaurant        0.834    0.743    0.837    -0.091    +0.003
+2026-09-09 02:43:39,496 INFO   station           0.807    0.745    0.810    -0.062    +0.003
+2026-09-09 02:43:39,496 INFO   street            0.807    0.740    0.811    -0.067    +0.004
+2026-09-09 02:43:39,496 INFO   train             0.776    0.705    0.780    -0.071    +0.004
+2026-09-09 02:43:39,496 INFO 
+──────────────────────────────────────────────────────────────────────
+2026-09-09 02:43:39,496 INFO STOI BY SNR LEVEL
+2026-09-09 02:43:39,496 INFO   SNR           Noisy     MMSE  Wavelet
+2026-09-09 02:43:39,496 INFO   0dB           0.671    0.625    0.675
+2026-09-09 02:43:39,496 INFO   5dB           0.782    0.720    0.787
+2026-09-09 02:43:39,496 INFO   10dB          0.878    0.793    0.882
+2026-09-09 02:43:39,496 INFO   15dB          0.938    0.837    0.939
+2026-09-09 02:43:40,173 INFO Plot → /Users/jwanilmodi/Web development/hearing-aid-speech-enhancement/results/plots/baseline_stoi.png
+2026-09-09 02:43:40,387 INFO Plot → /Users/jwanilmodi/Web development/hearing-aid-speech-enhancement/results/plots/baseline_pesq.png
+2026-09-09 02:43:40,572 INFO Plot → /Users/jwanilmodi/Web development/hearing-aid-speech-enhancement/results/plots/baseline_sisdr.png
+2026-09-09 02:43:40,677 INFO Plot → /Users/jwanilmodi/Web development/hearing-aid-speech-enhancement/results/plots/baseline_stoi_vs_snr.png
+2026-09-09 02:43:40,677 INFO 
+Done in 149.8s
