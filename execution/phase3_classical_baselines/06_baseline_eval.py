@@ -33,12 +33,12 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 try:
-    from pystoi import stoi as compute_stoi
+    from pystoi import stoi as compute_stoi  # type: ignore[import-untyped]
 except ImportError:
     print("ERROR: pystoi missing. Run with: uv run --with pystoi ..."); sys.exit(1)
 
 try:
-    from pesq import pesq as compute_pesq
+    from pesq import pesq as compute_pesq  # type: ignore[import-untyped]
 except ImportError:
     print("ERROR: pesq missing. Run with: uv run --with pesq ..."); sys.exit(1)
 
