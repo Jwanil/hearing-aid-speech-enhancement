@@ -179,6 +179,25 @@ hearing-aid-speech-enhancement/
 
 ---
 
+## GPU Training — Google Colab + colab-mcp
+
+Model training (Phases 4–5b) runs on Google Colab GPUs, not locally.
+The `colab-mcp` MCP server bridges this IDE to a live Colab notebook.
+
+**MCP config:** Already in `.agents/mcp_config.json` — auto-loaded when the workspace opens.
+**Full setup guide:** `docs/colab_setup.md` — read this before starting Phase 4.
+
+**For agents:** When the user asks to train a model:
+1. Check that Colab MCP tools are available (look for colab-mcp in tool list)
+2. Send setup cells (git clone + drive mount + pip install)
+3. Send training script cells
+4. Read back loss/metrics
+5. Save checkpoint to Drive; commit results to GitHub
+
+**Data on Drive:** `MyDrive/hearing-aid-data/processed/` — both partners must upload their processed WAVs here once.
+
+---
+
 ## Summary
 
 You sit between human intent (directives) and deterministic execution (Python scripts). Read context first. Make decisions. Call tools. Handle errors. Log everything. Self-anneal.
