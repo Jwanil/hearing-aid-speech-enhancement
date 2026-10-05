@@ -588,3 +588,46 @@ The old file still described Wiener filter + 3 models and had wrong directive fi
 **Action needed from Jwanil:** Pull latest. MMSE-LSA is running on `dataset/` folder now. If your machine uses a different folder name, update `DATA_ROOT` in `execution/04_mmse_lsa_filter.py` accordingly.
 
 ---
+
+### [2026-10-05 05:28 IST] | Phase: 4 \u2014 1D CNN (Conv-TasNet) implementation + Colab training started
+
+**What changed:** Phase 4 (1D CNN model) fully implemented. 30-epoch training kicked off on Google Colab T4 GPU.
+
+**Implementation decisions and rationale:**
+
+| Decision | Rationale |
+|---|---|
+| Conv-TasNet via Asteroid | Industry-standard waveform-domain model; reference implementation available; eliminates STFT phase problem |
+| VoiceBank-DEMAND-16k (HuggingFace) | Standard DNN SE benchmark; 11,572 train pairs; matches every published Conv-TasNet result |
+| Negative SI-SDR loss | Differentiable, scale-invariant; directly optimises what we measure; standard for waveform models |
+| batch=8, 30 epochs | batch=4 + 50 epochs = 25 hrs > Colab limit; batch=8 + 30 epochs \u2248 7.5 hrs, safe within one session |
+| Checkpoint every epoch | Protects against Colab session resets; Drive saves persist across resets |
+| Experiment A vs B | Directive 04 core question: does MMSE pre-filtering help or hurt the CNN? |
+
+**Bugs fixed before training (would have wasted GPU time):**
+1. Broken imports: Python cannot import modules whose names start with digits (`10_model_1d_cnn`, `04_mmse_lsa_filter`) \u2014 fixed with `importlib.util.spec_from_file_location()`
+2. Non-existent `execution/utils.py` import \u2014 removed
+3. NOIZEUS speaker filename parsing: `sp01_babble_sn5.wav`.split('_')[0] = `sp01` (correct), previously was `_sp01` (wrong)
+4. Timing arithmetic: 50 epochs \u00d7 batch=4 \u2248 25 hrs; fixed to 30 epochs \u00d7 batch=8 \u2248 7.5 hrs
+
+**Proof-of-concept training result (5 epochs, 200 batches each):**
+- Epoch 1 avg loss: -9.27 dB
+- Epoch 5 avg loss: -12.75 dB
+- Smooth, consistent improvement \u2014 model is learning correctly
+
+**Files touched:**
+- `execution/phase4_1d_cnn/10_model_1d_cnn.py` (NEW \u2014 ConvTasNet definition)
+- `execution/phase4_1d_cnn/11_train_1d_cnn.py` (NEW \u2014 training loop, batch=8, 30 epochs)
+- `execution/phase4_1d_cnn/12_eval_1d_cnn.py` (NEW \u2014 NOIZEUS eval, Exp A & B)
+- `context.md` (UPDATED \u2014 phase 4 in progress)
+- `shared_context.md` (UPDATED \u2014 this entry)
+
+**Agent used:** Antigravity (Gemini 3.1 Pro / Claude Sonnet 4.6 Thinking)
+
+**Status after:** Full 30-epoch training running on Colab T4. Checkpoints saving to `MyDrive/hearing-aid-data/checkpoints/phase4_1d_cnn_epochXXX.pt` every epoch.
+
+**Action needed from Namya:**
+- Pull the new `execution/phase4_1d_cnn/` scripts
+- When Jwanil shares the best checkpoint, run `12_eval_1d_cnn.py` to verify Exp A vs B results
+
+---
