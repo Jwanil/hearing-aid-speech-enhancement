@@ -97,20 +97,31 @@ class HearingAidDatasetV2(torch.utils.data.Dataset):
         return clean + scale * noise
 
 
-def build_filelists(data_dir, pattern_clean="**/clean/**/noizeus/**/*.wav", pattern_noise="**/noise/**/*.wav", pattern_rir="**/rir/**/*.wav"):
-    """Helper to build file lists. Matches VoiceBank/NOIZEUS tree: data/processed/{clean,noisy}/noizeus/...
-    Falls back to scanning processed csv-style layout."""
+def _no_dot(files):
+    return [f for f in files if not os.path.basename(f).startswith("._") and "/._" not in f]
+
+
+def build_filelists(data_dir, pattern_clean="voicebank/clean_trainset_28spk_wav/*.wav",
+                   pattern_noise="musan/**/*.wav", pattern_rir="rir/**/*.wav"):
+    """Maps to data/processed tree (verified counts Oct 15):
+       clean:  11071  voicebank/clean_trainset_28spk_wav/*.wav   (11572 - 500 dot ghosts = 11071 real)
+       noise:    930  musan/noise/**.wav
+       rir:    60000  rir/**.wav  (largeroom/mediumroom/smallroom, dotfiles excluded)
+       NOIZEUS (clean/noizeus) is eval-only, not training clean."""
     import glob
-    # Primary: match repo's data/processed layout — clean/noizeus, noisy/noizeus, etc.
-    clean = sorted(glob.glob(os.path.join(data_dir, "**/clean/**/*.wav"), recursive=True))
-    if not clean:
-        clean = sorted(glob.glob(os.path.join(data_dir, "**/clean_*.wav"), recursive=True))
-    if not clean:
-        clean = sorted(glob.glob(os.path.join(data_dir, "**/*clean*/**/*.wav"), recursive=True))
-    noise = sorted(glob.glob(os.path.join(data_dir, pattern_noise), recursive=True))
-    rir = sorted(glob.glob(os.path.join(data_dir, pattern_rir), recursive=True))
-    # Fallback scan for noise as any wav not in clean, if glob missed
-    if not noise and clean:
-        all_wav = sorted(glob.glob(os.path.join(data_dir, "**/*.wav"), recursive=True))
-        noise = [p for p in all_wav if p not in set(clean)]
+    # Clean = VoiceBank clean_trainset_28spk_wav only (NOIZEUS excluded from training)
+    clean_candidates = sorted(glob.glob(os.path.join(data_dir, pattern_clean), recursive=True))
+    if not clean_candidates:
+        alt = sorted(glob.glob(os.path.join(data_dir, "voicebank/clean_*.wav"), recursive=True))
+        alt += sorted(glob.glob(os.path.join(data_dir, "**/clean_trainset*/**/*.wav"), recursive=True))
+        clean_candidates = alt
+    clean = _no_dot(clean_candidates)
+
+    # Noise = MUSAN only (not RIR, not VoiceBank noisy — those have speech leakage)
+    noise_candidates = sorted(glob.glob(os.path.join(data_dir, pattern_noise), recursive=True))
+    noise = _no_dot(noise_candidates)
+
+    # RIR = openSLR26 simulated (rir/ contains largeroom/mediumroom/smallroom)
+    rir_candidates = sorted(glob.glob(os.path.join(data_dir, pattern_rir), recursive=True))
+    rir = _no_dot(rir_candidates)
     return clean, noise, rir
