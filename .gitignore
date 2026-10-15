@@ -42,3 +42,6 @@ context.md
 # Transferred dataset folder (full audio dataset — gigabytes, never commit)
 dataset/
 .venv
+
+# MCP secrets (contains RunPod / API keys — never commit)
+.agents/mcp_config.json
