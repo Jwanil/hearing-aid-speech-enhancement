@@ -76,7 +76,9 @@ class CompositeLoss(nn.Module):
         # p=0.3 compressed complex: |.|^p * exp(j angle)
         comp_clean = clean_spec.abs().pow(self.p) * torch.exp(1j * clean_spec.angle())
         comp_enh = enh_spec.abs().pow(self.p) * torch.exp(1j * enh_spec.angle())
-        L_comp = F.mse_loss(comp_enh.abs(), comp_clean.abs()) + 0.5 * F.mse_loss(comp_enh, comp_clean)
+        L_comp = F.mse_loss(comp_enh.abs(), comp_clean.abs()) + 0.5 * (
+            F.mse_loss(comp_enh.real, comp_clean.real) + F.mse_loss(comp_enh.imag, comp_clean.imag)
+        )
 
         speech_mask = (clean_spec.abs() > clean_spec.abs().max() * 10 ** (-40 / 20)).float()
         over = F.relu(0.3 - m_mag) * speech_mask
