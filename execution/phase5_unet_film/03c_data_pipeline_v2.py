@@ -8,6 +8,38 @@ import torch
 import torchaudio
 
 
+def _fft_convolve(signal, kernel):
+    """FFT-based equivalent of the pipeline's padded ``conv1d`` call.
+
+    ``torch.nn.functional.conv1d`` performs cross-correlation (not mathematical
+    convolution), so the kernel must be reversed before FFT multiplication.
+    The crop reproduces ``padding=K//2`` followed by ``[:, :L]`` for both odd
+    and even kernel lengths.
+
+    Args:
+        signal: One-dimensional signal of length ``L``.
+        kernel: One-dimensional kernel of length ``K``.
+
+    Returns:
+        One-dimensional result of length ``L``.
+    """
+    if signal.ndim != 1 or kernel.ndim != 1:
+        raise ValueError("_fft_convolve expects one-dimensional signal and kernel")
+    L, K = signal.shape[0], kernel.shape[0]
+    if K == 0:
+        raise ValueError("_fft_convolve requires a non-empty kernel")
+    if L == 0:
+        return signal.clone()
+
+    N = L + K - 1
+    N_fft = 1 << (N - 1).bit_length()
+    signal_fft = torch.fft.rfft(signal, n=N_fft)
+    kernel_fft = torch.fft.rfft(kernel.flip(0), n=N_fft)
+    full = torch.fft.irfft(signal_fft * kernel_fft, n=N_fft)[:N]
+    start = K - 1 - (K // 2)
+    return full[start:start + L]
+
+
 class HearingAidDatasetV2(torch.utils.data.Dataset):
     def __init__(self, clean_files, noise_files, rir_files, audiograms_json, segment=64000, sr=16000):
         self.clean = clean_files if isinstance(clean_files, list) else list(clean_files)
@@ -71,8 +103,8 @@ class HearingAidDatasetV2(torch.utils.data.Dataset):
             rir = rir.mean(0)[:8000]
             if rir.numel() > 0:
                 rir = rir / (rir.abs().max() + 1e-8)
-                noisy = torch.nn.functional.conv1d(noisy.unsqueeze(0), rir.view(1, 1, -1), padding=rir.shape[0] // 2).squeeze(0)[:, :self.segment]
-                clean = torch.nn.functional.conv1d(clean.unsqueeze(0), rir.view(1, 1, -1), padding=rir.shape[0] // 2).squeeze(0)[:, :self.segment]
+                noisy = _fft_convolve(noisy.squeeze(0), rir)[:self.segment].unsqueeze(0)
+                clean = _fft_convolve(clean.squeeze(0), rir)[:self.segment].unsqueeze(0)
 
         peak = max(float(noisy.abs().max()), float(clean.abs().max()))
         if peak > 0.95:

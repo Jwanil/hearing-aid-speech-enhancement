@@ -155,6 +155,8 @@ def train_phase_a(args):
                 noisy_spec = torch.stft(noisy.squeeze(1), n_fft=args.n_fft, hop_length=64, window=window, center=True, return_complex=True)
                 loss, logs = criterion(enh, clean, noisy_spec, m_real, m_imag, m_mag, clean_spec)
                 loss = loss / args.accum
+                if step % 100 == 0:
+                    print(f"  step {step}/{len(train_loader)} loss {float(loss * args.accum):.4f}")
 
             if use_scaler:
                 scaler.scale(loss).backward()
