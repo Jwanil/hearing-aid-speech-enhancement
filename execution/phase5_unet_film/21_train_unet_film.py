@@ -45,6 +45,7 @@ class CompositeLoss(nn.Module):
         self.l_comp = lambda_comp; self.l_asym = lambda_asym
         self.l_gain = lambda_gain; self.l_cons = lambda_cons
         self.mrstft_scales = [(256, 64), (512, 128), (1024, 256)]
+        self.complex_eps = 1e-4
 
     def forward(self, est_wav, clean_wav, noisy_spec, m_real, m_imag, m_mag, clean_spec):
         if pairwise_neg_sisdr is not None:
@@ -73,9 +74,14 @@ class CompositeLoss(nn.Module):
 
         enh_spec = torch.complex(m_real * noisy_spec.real - m_imag * noisy_spec.imag,
                                  m_real * noisy_spec.imag + m_imag * noisy_spec.real)
-        # p=0.3 compressed complex: |.|^p * exp(j angle)
-        comp_clean = clean_spec.abs().pow(self.p) * torch.exp(1j * clean_spec.angle())
-        comp_enh = enh_spec.abs().pow(self.p) * torch.exp(1j * enh_spec.angle())
+        # p=0.3 compressed complex. Use a magnitude floor and multiply by the
+        # unit complex value directly: abs().pow(p) has an infinite derivative
+        # at zero for p<1, which produces NaN gradients under bf16 autocast on
+        # silent STFT bins.
+        clean_mag = clean_spec.abs().clamp_min(self.complex_eps)
+        enh_mag = enh_spec.abs().clamp_min(self.complex_eps)
+        comp_clean = clean_spec * clean_mag.pow(self.p - 1.0)
+        comp_enh = enh_spec * enh_mag.pow(self.p - 1.0)
         L_comp = F.mse_loss(comp_enh.abs(), comp_clean.abs()) + 0.5 * (
             F.mse_loss(comp_enh.real, comp_clean.real) + F.mse_loss(comp_enh.imag, comp_clean.imag)
         )
@@ -154,6 +160,8 @@ def train_phase_a(args):
                 clean_spec = torch.stft(clean.squeeze(1), n_fft=args.n_fft, hop_length=64, window=window, center=True, return_complex=True)
                 noisy_spec = torch.stft(noisy.squeeze(1), n_fft=args.n_fft, hop_length=64, window=window, center=True, return_complex=True)
                 loss, logs = criterion(enh, clean, noisy_spec, m_real, m_imag, m_mag, clean_spec)
+                if not torch.isfinite(loss):
+                    raise FloatingPointError(f"non-finite Phase A loss at epoch={epoch + 1} step={step}")
                 loss = loss / args.accum
                 if step % 100 == 0:
                     print(f"  step {step}/{len(train_loader)} loss {float(loss * args.accum):.4f}")
@@ -162,6 +170,8 @@ def train_phase_a(args):
                 scaler.scale(loss).backward()
             else:
                 loss.backward()
+            if any(p.grad is not None and not torch.isfinite(p.grad).all() for p in model.parameters()):
+                raise FloatingPointError(f"non-finite Phase A gradient at epoch={epoch + 1} step={step}")
             if (step + 1) % args.accum == 0:
                 if use_scaler:
                     scaler.unscale_(optimizer)
