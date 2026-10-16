@@ -114,6 +114,67 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 <!-- Agent: append Jwanil's entries below this line in reverse-chronological order (newest first) -->
 
+### [2026-10-16 12:05 IST] | Phase: 5 — Fixed NaN Gradients in CompositeLoss
+
+**What changed:**
+- Diagnosed the reported `train nan val nan` after a real-data bf16 reproduction. Dataset/model forward values were finite, but the compressed-complex loss generated non-finite gradients because `abs().pow(0.3)` is singular at zero/silent STFT bins.
+- Updated `execution/phase5_unet_film/21_train_unet_film.py` to floor complex magnitudes at `1e-4` and compute the compressed complex representation as `spec * clamped_mag.pow(p - 1)`. Added fail-fast loss/gradient checks with epoch and step numbers.
+
+**Files touched:**
+- `execution/phase5_unet_film/21_train_unet_film.py`
+- `context.md`
+- `shared_context.md`
+
+**Agent used:** OmniRush
+
+**Status after:** Three real-data CPU bf16-autocast optimizer steps completed with finite losses and gradients. Commit `e6f9742` was pushed to `main`. The prior NaN epoch is invalid and must not be used as a checkpoint. The pod must pull the NaN fix before rerunning Phase A.
+
+**Action needed from partner:** Pull the forthcoming NaN-fix commit on the pod and restart Phase A from scratch; preserve any valid checkpoint only after a finite epoch is reported.
+
+---
+
+### [2026-10-16 11:14 IST] | Phase: 5 — Corrected FFT RIR Convolution + Training Progress Logging
+
+**What changed:**
+- Replaced the CPU-heavy 8,000-tap time-domain RIR `conv1d` in `execution/phase5_unet_film/03c_data_pipeline_v2.py` with `_fft_convolve`.
+- Corrected the initial proposed FFT formulation: PyTorch `conv1d` is cross-correlation, so the FFT path reverses the kernel and crops from `K - 1 - (K // 2)` to match the original padded output for odd and even kernels.
+- Added a Phase A loss print every 100 steps in `execution/phase5_unet_film/21_train_unet_film.py`.
+
+**Files touched:**
+- `execution/phase5_unet_film/03c_data_pipeline_v2.py`
+- `execution/phase5_unet_film/21_train_unet_film.py`
+- `shared_context.md`
+
+**Agent used:** OmniRush
+
+**Status after:** Exact float64 comparison passes for `(64000, 8000)` and odd/even kernel cases; syntax and whitespace checks pass. A local exact-shape float32 probe measured `201.6x` speedup (`1.7740s` time-domain vs `0.0088s` FFT) with `5.10e-05` max absolute numerical difference. Code commit `51d83cd` was pushed to `main`. RunPod pod `rcf3s0xldlni9o` is still `RUNNING` on an RTX 4090, but its MCP log stream only contains startup logs and does not expose the manually launched training process/checkpoint state.
+
+**Action needed from partner:** None for the code change. Before restarting training, inspect the pod through its console terminal/SSH or transfer the checkpoint; do not stop or restart it based only on the ambiguous 0% GPU read.
+
+---
+
+### [2026-10-16 08:37 IST] | Agent Runtime — Added GRAVITAS Skills & Invariants
+
+**What changed:**
+- Integrated the [`udaysharmadev/Gravitas`](https://github.com/udaysharmadev/Gravitas) reliability runtime into Antigravity.
+- Installed 4 skills (`gravitas`, `gravitas-highstakes`, `gravitas-python`, `gravitas-typescript`) into both global configuration (`~/.gemini/config/skills/`) and project workspace (`.agents/skills/`).
+- Added `gravitas-invariants.md` rule to `.agents/rules/` and `~/.gemini/config/rules/` (enforcing ground before mutating, stay in declared scope, evidence-backed completion, no exact-retry, contract satisfaction, and uncertainty honesty).
+- Deployed native Antigravity plugin `gravitas-native` in `~/.gemini/config/plugins/`.
+
+**Files touched:**
+- `.agents/skills/gravitas/*`
+- `.agents/skills/gravitas-highstakes/*`
+- `.agents/skills/gravitas-python/*`
+- `.agents/skills/gravitas-typescript/*`
+- `.agents/rules/gravitas-invariants.md`
+- `~/.gemini/config/skills/*`
+- `~/.gemini/config/rules/*`
+- `~/.gemini/config/plugins/gravitas-native/*`
+- `context.md`
+- `shared_context.md`
+
+**Status after:** Gravitas skills and invariants active across all agent turns.
+
 ---
 
 ### [2026-09-09 03:06 IST] | Phase 3 — MMSE Bug Fixes + Correct Evaluation (commit 431d15f)
