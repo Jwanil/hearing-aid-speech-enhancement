@@ -1,6 +1,6 @@
 # execution/phase5_unet_film/20_model_unet_film.py
 # Directive 05 Rev 2.1 — CausalUNetCRM (U-Net + Attention + Per-Stage FiLM + Polar CRM)
-# Arch: STFT n_fft=256 hop=64 Hann center=False -> Causal Encoder 4-stage depthwise+SE
+# Arch: STFT n_fft=256 hop=64 Hann center=True (training COLA) -> Causal Encoder 4-stage depthwise+SE
 #       -> Bottleneck causal attention + FiLM0(256) -> Decoder 3-stage FiLM+skip -> Polar CRM |M|<=1
 # Params: ~770k (base) / 310k (tiny). Verify via: python 20_model_unet_film.py
 
@@ -22,6 +22,15 @@ class AudiogramEmbedding(nn.Module):
         self.register_buffer("freqs_dense", torch.linspace(250, 8000, self.n_freq))
         F_A = np.log2(np.array([250, 500, 1000, 2000, 4000, 8000], dtype=np.float32))
         self.register_buffer("F_A", torch.tensor(F_A))
+        target_hz = torch.linspace(0, sr / 2, self.n_freq).clamp(250, 8000)
+        target_pos = ((torch.log2(target_hz) - self.F_A[0]) /
+                      (self.F_A[-1] - self.F_A[0]) * (len(F_A) - 1))
+        left = target_pos.floor().long().clamp(0, len(F_A) - 1)
+        right = (left + 1).clamp(max=len(F_A) - 1)
+        weight = (target_pos - left.float()).clamp(0, 1)
+        self.register_buffer("interp_left", left)
+        self.register_buffer("interp_right", right)
+        self.register_buffer("interp_weight", weight)
         # W_erb: 64 x F — try load from results, else random softmax (row-normalized gammatone proxy)
         W_erb = self._load_or_init_W_erb(n_erb, self.n_freq)
         self.register_buffer("W_erb", W_erb)  # (64, F), not trainable
@@ -51,8 +60,14 @@ class AudiogramEmbedding(nn.Module):
                         W_t = F.interpolate(W_t, size=n_freq, mode="linear", align_corners=True).squeeze(0)
                         W = W_t.numpy()
                     W = torch.from_numpy(W).float()
-                    # row-normalize via softmax for stability if not already
-                    W = F.softmax(W, dim=-1)
+                    # Preserve a precomputed nonnegative filterbank. Softmax is
+                    # only appropriate for unconstrained logits; applying it to
+                    # W_erb.npy would destroy its sparse triangular bands.
+                    if torch.isfinite(W).all() and bool((W >= 0).all()):
+                        row_sum = W.sum(dim=-1, keepdim=True).clamp_min(1e-8)
+                        W = W / row_sum
+                    else:
+                        W = F.softmax(W, dim=-1)
                     print(f"[AudiogramEmbedding] Loaded W_erb from {p} shape {W.shape}")
                     return W
                 except Exception as e:
@@ -76,9 +91,14 @@ class AudiogramEmbedding(nn.Module):
         return emb, hl_dense
 
     def _interp_log(self, a):
-        # Linear interp on log2-spaced 6 points -> F bins (Pchip approximated as linear for speed; directive allows it)
-        a_exp = a.unsqueeze(1)  # (B,1,6)
-        hl_dense = F.interpolate(a_exp, size=self.n_freq, mode="linear", align_corners=True).squeeze(1)
+        # Interpolate the six audiogram thresholds on the log-frequency axis.
+        # STFT bins are linearly spaced in Hz, so F.interpolate would be the
+        # wrong geometry even though the source audiogram frequencies are
+        # octave-spaced.
+        left = a.index_select(1, self.interp_left)
+        right = a.index_select(1, self.interp_right)
+        weight = self.interp_weight.unsqueeze(0)
+        hl_dense = left * (1.0 - weight) + right * weight
         return hl_dense * self.spline_scale  # (B,F)
 
 

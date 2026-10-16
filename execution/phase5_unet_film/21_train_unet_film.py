@@ -115,7 +115,7 @@ def build_dataloaders(args):
     if not clean:
         raise FileNotFoundError(f"No clean files found under {args.data_dir}. Check --data_dir and globs.")
     if not noise:
-        print(f"WARNING: no noise files found under {args.data_dir} — training without additive noise")
+        raise FileNotFoundError(f"No MUSAN noise files found under {args.data_dir}; refusing to train without noise augmentation.")
     full = HearingAidDatasetV2(clean, noise, rir, args.audiograms, segment=args.segment, sr=16000)
     n_val = max(1, int(len(full) * 0.05))
     n_train = len(full) - n_val
@@ -135,7 +135,7 @@ def train_phase_a(args):
     criterion = CompositeLoss(p=0.3)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=1e-4, betas=(0.9, 0.999))
     use_scaler = (args.mixed_precision == "fp16")
-    scaler = torch.cuda.amp.GradScaler(enabled=use_scaler)
+    scaler = torch.amp.GradScaler("cuda", enabled=use_scaler)
     amp_dtype = torch.bfloat16 if args.mixed_precision == "bf16" else torch.float16
     use_amp = (args.mixed_precision in ("bf16", "fp16"))
 
@@ -154,7 +154,7 @@ def train_phase_a(args):
 
             # Specs needed for loss
             window = model.window
-            with torch.cuda.amp.autocast(dtype=amp_dtype, enabled=use_amp):
+            with torch.amp.autocast("cuda", dtype=amp_dtype, enabled=use_amp):
                 enh, (m_real, m_imag, m_mag, m_phase), _ = model(noisy, audiogram)
                 # Specs for loss — center=True required for Hann COLA (training; streaming harness keeps causal buffer separately)
                 clean_spec = torch.stft(clean.squeeze(1), n_fft=args.n_fft, hop_length=64, window=window, center=True, return_complex=True)
@@ -204,6 +204,8 @@ def train_phase_a(args):
                 clean_spec = torch.stft(clean.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
                 noisy_spec = torch.stft(noisy.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
                 loss, _ = criterion(enh, clean, noisy_spec, m_real, m_imag, m_mag, clean_spec)
+                if not torch.isfinite(loss):
+                    raise FloatingPointError(f"non-finite Phase A validation loss at epoch={epoch + 1}")
                 val_loss += float(loss)
         val_loss /= max(1, len(val_loader))
         train_loss = running / max(1, len(train_loader))
@@ -241,14 +243,14 @@ def train_phase_b(args):
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr_b, weight_decay=1e-4)
     use_scaler_b = (args.mixed_precision == "fp16")
     amp_dtype = torch.bfloat16 if args.mixed_precision == "bf16" else torch.float16
-    scaler = torch.cuda.amp.GradScaler(enabled=use_scaler_b)
+    scaler = torch.amp.GradScaler("cuda", enabled=use_scaler_b)
     use_amp_b = (args.mixed_precision in ("bf16", "fp16"))
     os.makedirs(args.ckpt_dir, exist_ok=True)
     for epoch in range(args.epochs):
         model.train()
         for batch in train_loader:
             noisy = batch["noisy"].to(device); clean = batch["clean"].to(device); audiogram = batch["audiogram"].to(device)
-            with torch.cuda.amp.autocast(dtype=amp_dtype, enabled=use_amp_b):
+            with torch.amp.autocast("cuda", dtype=amp_dtype, enabled=use_amp_b):
                 enh, (m_real, m_imag, m_mag, m_phase), _ = model(noisy, audiogram)
                 clean_spec = torch.stft(clean.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
                 noisy_spec = torch.stft(noisy.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)

@@ -45,6 +45,10 @@ class HearingAidDatasetV2(torch.utils.data.Dataset):
         self.clean = clean_files if isinstance(clean_files, list) else list(clean_files)
         self.noise = noise_files if isinstance(noise_files, list) else list(noise_files)
         self.rir = rir_files if isinstance(rir_files, list) else (list(rir_files) if rir_files else [])
+        if not self.clean:
+            raise ValueError("HearingAidDatasetV2 requires at least one clean file")
+        if not self.noise:
+            raise ValueError("HearingAidDatasetV2 requires at least one noise file")
         # audiograms_json may be dict path or already-loaded dict
         if isinstance(audiograms_json, dict):
             ag_data = audiograms_json
@@ -76,6 +80,8 @@ class HearingAidDatasetV2(torch.utils.data.Dataset):
                 ag_data[f"random_{i}"] = jitter
         self.audiograms = ag_data
         self.keys = list(self.audiograms.keys())
+        if not self.keys:
+            raise ValueError("HearingAidDatasetV2 requires at least one audiogram")
         self.segment = segment
         self.sr = sr
 
@@ -116,7 +122,7 @@ class HearingAidDatasetV2(torch.utils.data.Dataset):
     def _crop_pad(self, wav, length=None):
         L = length or self.segment
         if wav.shape[-1] > L:
-            s = torch.randint(0, wav.shape[-1] - L, (1,)).item()
+            s = torch.randint(0, wav.shape[-1] - L + 1, (1,)).item()
             return wav[:, s:s+L]
         elif wav.shape[-1] < L:
             return torch.nn.functional.pad(wav, (0, L - wav.shape[-1]))
