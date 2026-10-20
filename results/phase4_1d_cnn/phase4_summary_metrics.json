@@ -1,0 +1,21 @@
+{
+  "dataset": "VoiceBank-DEMAND testset",
+  "sample_count": 824,
+  "sampling_rate": 16000,
+  "checkpoint": "1d_cnn_best.pt",
+  "stoi": {
+    "noisy": 0.9202508120921038,
+    "cnn": 0.9350012471929839,
+    "delta": 0.014750435100880144
+  },
+  "pesq": {
+    "noisy": 1.935520679337307,
+    "cnn": 2.5091915051045928,
+    "delta": 0.5736708257672858
+  },
+  "sisdr": {
+    "noisy": 8.451493565153639,
+    "cnn": 19.649304224449455,
+    "delta": 11.197810659295817
+  }
+}
