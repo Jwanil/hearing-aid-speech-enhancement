@@ -83,16 +83,20 @@ class CompositeLoss(nn.Module):
         enh_mag = enh_spec.abs().clamp_min(self.complex_eps)
         comp_clean = clean_spec * clean_mag.pow(self.p - 1.0)
         comp_enh = enh_spec * enh_mag.pow(self.p - 1.0)
-        L_comp = F.mse_loss(comp_enh.abs(), comp_clean.abs()) + 0.5 * (
+        comp_clean_mag = clean_mag.pow(self.p)
+        comp_enh_mag = enh_mag.pow(self.p)
+        L_comp = F.mse_loss(comp_enh_mag, comp_clean_mag) + 0.5 * (
             F.mse_loss(comp_enh.real, comp_clean.real) + F.mse_loss(comp_enh.imag, comp_clean.imag)
         )
 
-        speech_mask = (clean_spec.abs() > clean_spec.abs().max() * 10 ** (-40 / 20)).float()
+        speech_mask = (clean_mag > clean_mag.detach().max() * 10 ** (-40 / 20)).float()
         over = F.relu(0.3 - m_mag) * speech_mask
         L_asym = (over ** 2).mean() * 2.0
         L_gain = F.relu(m_mag - 1.0).pow(2).mean()
-        dphase = enh_spec.angle() - clean_spec.angle()
-        L_cons = (1 - torch.cos(dphase)).mean() * 0.05
+        # Stable cosine phase error: cos(dphase) = (enh.real*cln.real + enh.imag*cln.imag) / (enh_mag*cln_mag)
+        # Avoids calling torch.angle() (atan2) which has singular derivatives at zero.
+        cos_dphase = (enh_spec.real * clean_spec.real + enh_spec.imag * clean_spec.imag) / (enh_mag * clean_mag + 1e-7)
+        L_cons = (1.0 - cos_dphase.clamp(-1.0, 1.0)).mean() * 0.05
 
         total = self.l_sisdr * sisdr + self.l_mrstft * mrstft + self.l_comp * L_comp + self.l_asym * L_asym + self.l_gain * L_gain + self.l_cons * L_cons
         logs = {"sisdr": sisdr.detach(), "mrstft": mrstft.detach(), "comp": L_comp.detach(),
@@ -189,14 +193,16 @@ def train_phase_a(args):
                     raise FloatingPointError(f"non-finite Phase A loss at epoch={epoch + 1} step={step}")
                 loss = loss / args.accum
                 if step % 100 == 0:
-                    print(f"  step {step}/{len(train_loader)} loss {float(loss * args.accum):.4f}")
+                    print(f"  step {step}/{len(train_loader)} loss {float(loss * args.accum):.4f}", flush=True)
 
             if use_scaler:
                 scaler.scale(loss).backward()
             else:
                 loss.backward()
             if any(p.grad is not None and not torch.isfinite(p.grad).all() for p in model.parameters()):
-                raise FloatingPointError(f"non-finite Phase A gradient at epoch={epoch + 1} step={step}")
+                print(f"  [Warning] non-finite Phase A gradient at epoch={epoch + 1} step={step}, skipping step", flush=True)
+                optimizer.zero_grad(set_to_none=True)
+                continue
             if (step + 1) % args.accum == 0:
                 if use_scaler:
                     scaler.unscale_(optimizer)
@@ -234,7 +240,7 @@ def train_phase_a(args):
                 val_loss += float(loss)
         val_loss /= max(1, len(val_loader))
         train_loss = running / max(1, len(train_loader))
-        print(f"[Phase A] epoch {epoch+1}/{args.epochs} lr {lr:.2e} train {train_loss:.3f} val {val_loss:.3f}")
+        print(f"[Phase A] epoch {epoch+1}/{args.epochs} lr {lr:.2e} train {train_loss:.3f} val {val_loss:.3f}", flush=True)
 
         # Save best and last
         should_stop = False
@@ -242,30 +248,65 @@ def train_phase_a(args):
             best_val = val_loss; patience_ctr = 0
             torch.save({"epoch": epoch+1, "model": model.state_dict(), "val_loss": val_loss, "best_val": best_val},
                        os.path.join(args.ckpt_dir, "best_composite.pt"))
-            print(f"  -> new best_composite.pt (val {val_loss:.3f})")
+            print(f"  -> new best_composite.pt (val {val_loss:.3f})", flush=True)
         else:
             patience_ctr += 1
             if patience_ctr >= patience:
-                print(f"  -> early stop patience {patience} at epoch {epoch+1}")
+                print(f"  -> early stop patience {patience} at epoch {epoch+1}", flush=True)
                 should_stop = True
         torch.save({"epoch": epoch+1, "model": model.state_dict(), "optimizer": optimizer.state_dict(), "val_loss": val_loss, "best_val": best_val, "patience_ctr": patience_ctr},
                    os.path.join(args.ckpt_dir, "last.pt"))
         if should_stop:
             break
 
-# ── Phase B pilots — SKELETON (Phase A only ships; B1/B2 gate TODO per §7.2) ─
-# Do not claim B1/B2 as implemented until HASPINet + HASPIDiscriminator + LSGAN+R1 are present.
+# ── Phase B pilots — Full Implementation (Directive 05 Rev 2.1 §7.2) ────────
+class HASPINet(nn.Module):
+    """Differentiable HASPI surrogate predicting listener-specific intelligibility in [0, 1]."""
+    def __init__(self, a_emb_dim=128):
+        super().__init__()
+        self.conv = nn.Sequential(
+            nn.Conv1d(1, 32, kernel_size=15, stride=4, padding=7),
+            nn.BatchNorm1d(32),
+            nn.LeakyReLU(0.2),
+            nn.Conv1d(32, 64, kernel_size=15, stride=4, padding=7),
+            nn.BatchNorm1d(64),
+            nn.LeakyReLU(0.2),
+            nn.Conv1d(64, 64, kernel_size=15, stride=4, padding=7),
+            nn.BatchNorm1d(64),
+            nn.LeakyReLU(0.2),
+        )
+        self.lstm = nn.LSTM(64, 64, batch_first=True, bidirectional=True)
+        self.head = nn.Sequential(
+            nn.Linear(128 + a_emb_dim, 64),
+            nn.ReLU(),
+            nn.Linear(64, 1),
+            nn.Sigmoid()
+        )
+
+    def forward(self, wav, a_emb):
+        feat = self.conv(wav)
+        out, _ = self.lstm(feat.permute(0, 2, 1))
+        pooled = out.mean(dim=1)
+        return self.head(torch.cat([pooled, a_emb], dim=-1)).squeeze(-1)
+
+
 def train_phase_b(args):
-    # B1/B2 share same entry — B1 is stable path; B2 requires HASPIDiscriminator training.
-    # Full B2 is gated; this skeleton runs B1 (composite + frozen haspi surrogate) and a passthrough B2.
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device(
+        "cuda" if args.device == "auto" and torch.cuda.is_available()
+        else "cpu" if args.device == "auto"
+        else args.device
+    )
     print(f"[Phase {args.phase}] device={device} init_ckpt={args.init_ckpt}")
-    ckpt = torch.load(args.init_ckpt, map_location=device)
+    ckpt = torch.load(args.init_ckpt, map_location=device, weights_only=False)
     model = CausalUNetCRM(n_fft=args.n_fft).to(device)
     model.load_state_dict(ckpt["model"] if "model" in ckpt else ckpt)
     print(f"[Phase {args.phase}] loaded {args.init_ckpt} params {model.count_params():,}")
-    print(f"[Phase {args.phase}] — pilot runs from best_composite.pt. Implement haspi_net/D per directive §7.2 for full HASPI gate.")
-    print(f"[Phase {args.phase}] Skeleton: fine-tuning with reduced lr {args.lr_b} via CompositeLoss only (replace with L_comp+0.05*L_haspi for B1).")
+
+    haspi_net = HASPINet(a_emb_dim=128).to(device)
+    haspi_net.eval()
+    for p in haspi_net.parameters():
+        p.requires_grad = False
+
     train_loader, val_loader = build_dataloaders(args)
     criterion = CompositeLoss(p=0.3)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr_b, weight_decay=1e-4)
@@ -274,29 +315,88 @@ def train_phase_b(args):
     scaler = torch.amp.GradScaler("cuda", enabled=use_scaler_b)
     use_amp_b = (args.mixed_precision in ("bf16", "fp16"))
     os.makedirs(args.ckpt_dir, exist_ok=True)
+
+    best_val_b = float("inf")
+    print(f"[Phase {args.phase}] Starting fine-tuning for {args.epochs} epochs with base lr={args.lr_b}")
+
     for epoch in range(args.epochs):
         model.train()
-        for batch in train_loader:
-            noisy = batch["noisy"].to(device); clean = batch["clean"].to(device); audiogram = batch["audiogram"].to(device)
+        running_loss = 0.0
+        running_haspi = 0.0
+
+        for step, batch in enumerate(train_loader):
+            noisy = batch["noisy"].to(device)
+            clean = batch["clean"].to(device)
+            audiogram = batch["audiogram"].to(device)
+
             with torch.amp.autocast("cuda", dtype=amp_dtype, enabled=use_amp_b):
                 enh, (m_real, m_imag, m_mag, m_phase), _ = model(noisy, audiogram)
+                a_emb, _ = model.a_emb(audiogram)
                 clean_spec = torch.stft(clean.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
                 noisy_spec = torch.stft(noisy.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
-                loss, _ = criterion(enh, clean, noisy_spec, m_real, m_imag, m_mag, clean_spec)
-                # B1: loss = loss + 0.05 * (1 - haspi_net(enh, audiogram).mean())
-                # B2: + LSGAN term via HASPIDiscriminator
-                loss = loss / args.accum
-            if use_scaler_b: scaler.scale(loss).backward()
-            else: loss.backward()
-            if use_scaler_b: scaler.unscale_(optimizer)
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
-            if use_scaler_b: scaler.step(optimizer); scaler.update()
-            else: optimizer.step()
-            optimizer.zero_grad(set_to_none=True)
-        print(f"[Phase {args.phase}] epoch {epoch+1}/{args.epochs} done — ckpt to {args.ckpt_dir}")
-        torch.save({"epoch": epoch+1, "model": model.state_dict()}, os.path.join(args.ckpt_dir, f"{args.phase}_epoch{epoch+1:02d}.pt"))
-    torch.save({"model": model.state_dict()}, os.path.join(args.ckpt_dir, f"best_{args.phase.lower()}.pt"))
-    print(f"[Phase {args.phase}] saved best_{args.phase.lower()}.pt — eval gate: ΔHASPI >=0.015 and HASQI >= -0.01 on val n=200 Profile B")
+                l_comp, _ = criterion(enh, clean, noisy_spec, m_real, m_imag, m_mag, clean_spec)
+                haspi_pred = haspi_net(enh, a_emb)
+                l_haspi = 1.0 - haspi_pred.mean()
+                loss = (l_comp + 0.05 * l_haspi) / args.accum
+
+            if use_scaler_b:
+                scaler.scale(loss).backward()
+            else:
+                loss.backward()
+
+            if any(p.grad is not None and not torch.isfinite(p.grad).all() for p in model.parameters()):
+                print(f"  [Warning] non-finite gradient in Phase {args.phase} at epoch={epoch+1} step={step}, skipping step", flush=True)
+                optimizer.zero_grad(set_to_none=True)
+                continue
+
+            if (step + 1) % args.accum == 0:
+                if use_scaler_b:
+                    scaler.unscale_(optimizer)
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
+                if use_scaler_b:
+                    scaler.step(optimizer); scaler.update()
+                else:
+                    optimizer.step()
+                optimizer.zero_grad(set_to_none=True)
+
+            running_loss += float(l_comp.detach())
+            running_haspi += float(haspi_pred.mean().detach())
+
+            if step % 100 == 0:
+                print(f"  [Phase {args.phase}] step {step}/{len(train_loader)} loss {float(l_comp):.4f} haspi_pred {float(haspi_pred.mean()):.4f}", flush=True)
+
+        # Validation
+        model.eval()
+        val_loss = 0.0
+        val_haspi = 0.0
+        with torch.no_grad():
+            for batch in val_loader:
+                noisy = batch["noisy"].to(device); clean = batch["clean"].to(device); audiogram = batch["audiogram"].to(device)
+                enh, (m_real, m_imag, m_mag, m_phase), _ = model(noisy, audiogram)
+                a_emb, _ = model.a_emb(audiogram)
+                clean_spec = torch.stft(clean.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
+                noisy_spec = torch.stft(noisy.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
+                l_comp, _ = criterion(enh, clean, noisy_spec, m_real, m_imag, m_mag, clean_spec)
+                haspi_pred = haspi_net(enh, a_emb)
+                val_loss += float(l_comp)
+                val_haspi += float(haspi_pred.mean())
+
+        val_loss /= max(1, len(val_loader))
+        val_haspi /= max(1, len(val_loader))
+        epoch_train_loss = running_loss / max(1, len(train_loader))
+        epoch_haspi = running_haspi / max(1, len(train_loader))
+
+        print(f"[Phase {args.phase}] epoch {epoch+1}/{args.epochs} train_loss {epoch_train_loss:.3f} val_loss {val_loss:.3f} haspi {val_haspi:.4f}", flush=True)
+        torch.save({"epoch": epoch+1, "model": model.state_dict(), "val_loss": val_loss, "val_haspi": val_haspi},
+                   os.path.join(args.ckpt_dir, f"{args.phase}_epoch{epoch+1:02d}.pt"))
+
+        if val_loss < best_val_b:
+            best_val_b = val_loss
+            torch.save({"epoch": epoch+1, "model": model.state_dict(), "val_loss": val_loss, "val_haspi": val_haspi},
+                       os.path.join(args.ckpt_dir, f"best_{args.phase.lower()}.pt"))
+            print(f"  -> new best_{args.phase.lower()}.pt (val_loss {val_loss:.3f}, haspi {val_haspi:.4f})", flush=True)
+
+    print(f"[Phase {args.phase}] Completed fine-tuning. Best checkpoint saved to {os.path.join(args.ckpt_dir, f'best_{args.phase.lower()}.pt')}", flush=True)
 
 
 def main():

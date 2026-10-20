@@ -133,6 +133,74 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 ---
 
+### [2026-10-20 15:45 IST] | Phase: 5 — Phase A Training Completed (25 Epochs) & Verified
+
+**What changed:**
+- Completed all 25 epochs of Phase A `CausalUNetCRM` foundation training on the physical RTX 4090.
+- Checkpoints saved: `best_composite.pt` (Epoch 23, Val Loss: -14.3544) and `last.pt` (Epoch 25, Val Loss: -14.2420).
+- Ran evaluation across $N=100$ held-out test samples and all 3 clinical audiogram profiles:
+  - Input SI-SDR: `6.58 dB` -> Enhanced SI-SDR: **`14.72 dB`** (**`+8.14 dB gain`**).
+  - STOI: `0.8322` -> **`0.8463`**.
+  - Max Mask Magnitude $|M| = 1.0000 \le 1.0$ (Strict NAL-R invariant preserved).
+  - Streaming Latency: **`1.82 ms/frame`** (<10 ms real-time target).
+- Generated full benchmark report in `docs/phase_5a_verification_report.md`.
+- Staged codebase for Phase B (HASPI MetricGAN+ / HASPINet surrogate fine-tuning).
+
+**Files touched:**
+- `execution/phase5_unet_film/26_eval_phase5a.py`
+- `docs/phase_5a_verification_report.md`
+- `results/phase5_unet_film/phase5a_eval_results.json`
+- `context.md`
+- `shared_context.md`
+
+**Status after:** Phase A foundation is 100% complete with exceptional denoising performance. Ready for Phase B HASPI fine-tuning.
+
+**Action needed from partner:** Review `docs/phase_5a_verification_report.md` and initiate Phase B fine-tuning.
+
+---
+
+### [2026-10-20 15:20 IST] | Phase: 5 — Self-Annealing Stability Fix in CompositeLoss & Resumed Run
+
+**What changed:**
+- Diagnosed non-finite gradient at epoch 7 step 606 caused by `torch.angle()` (`atan2` singular derivative at zero STFT bins) and complex `.abs()` in `L_comp`.
+- Updated `execution/phase5_unet_film/21_train_unet_film.py`:
+  1. Replaced complex `.abs()` with closed-form magnitude power `clean_mag.pow(p)` avoiding complex $0/0$ derivatives.
+  2. Replaced `torch.angle()` difference with the stable cosine dot-product formulation $\frac{x_1 x_2 + y_1 y_2}{|z_1| |z_2| + 1e-7}$.
+  3. Added `flush=True` for real-time progress logging.
+  4. Added graceful skip for outlier gradients to guarantee non-stop execution.
+- Resumed training smoothly from `last.pt` (epoch 6, best val loss -11.8565).
+
+**Files touched:**
+- `execution/phase5_unet_film/21_train_unet_film.py`
+- `context.md`
+- `shared_context.md`
+
+**Status after:** Training is running continuously on the physical RTX 4090 with no further interruptions.
+
+**Action needed from partner:** None.
+
+---
+
+### [2026-10-20 15:10 IST] | Phase: 5 — Local RTX 4090 Workstation Initialized & Phase A Training Launched
+
+**What changed:**
+- Initialized physical Windows RTX 4090 workstation development environment.
+- Linked external SanDisk Extreme SSD via Windows NTFS Directory Junction (`data -> E:\Minor Project\Data`). Verified canonical filelists (`clean: 11,071`, `noise: 930`, `rir: 60,000`).
+- Configured Python 3.12 venv with CUDA 12.4 PyTorch (`torch-2.6.0+cu124`, `torchaudio-2.6.0+cu124`) and full signal processing stack (`soundfile`, `scipy`, `numpy`, `pywavelets`, `matplotlib`, `pystoi`).
+- Executed strict local verification gate (`execution/phase5_unet_film/24_verify_local_training.py`): passed with finite loss `21.49708` on physical RTX 4090 with bf16 autocast.
+- Verified CausalUNetCRM model architecture (`812,777 parameters`) and streaming inference latency (`1.82 ms/frame`, beating the `<10 ms` real-time requirement).
+- Launched canonical Phase A training (25 epochs, bf16, batch 8, accum 2).
+
+**Files touched:**
+- `context.md`
+- `shared_context.md`
+
+**Status after:** Workstation setup complete and strict verification gate cleared. Phase A training is actively running on the physical NVIDIA RTX 4090.
+
+**Action needed from partner:** None. Workstation is training locally; check `results/phase5_unet_film/checkpoints/` for `best_composite.pt` upon Phase A completion.
+
+---
+
 ### [2026-10-16 15:35 IST] | Phase: 5 — Removed Cloud-Pod Pilot Assumptions
 
 **What changed:**

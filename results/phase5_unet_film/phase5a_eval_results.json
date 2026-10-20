@@ -1,0 +1,34 @@
+{
+  "best_epoch": 23,
+  "best_val_loss": -14.354392269679478,
+  "m_mag_max": 1.0,
+  "mask_invariant_passed": true,
+  "mean_diff_profile_A_vs_B": 3.749889219761826e-05,
+  "mean_diff_profile_B_vs_C": 2.886276888602879e-05,
+  "profiles": {
+    "Profile_A_Normal": {
+      "si_sdr_input": 6.5811036699637775,
+      "si_sdr_enhanced": 14.718577422499656,
+      "si_sdr_gain": 8.137473752535879,
+      "stoi_input": 0.8321866486567009,
+      "stoi_enhanced": 0.8463428214058587,
+      "stoi_gain": 0.014156172749157814
+    },
+    "Profile_B_Presbycusis": {
+      "si_sdr_input": 6.5811036699637775,
+      "si_sdr_enhanced": 14.718255459070205,
+      "si_sdr_gain": 8.137151789106428,
+      "stoi_input": 0.8321866486567009,
+      "stoi_enhanced": 0.8463023799439775,
+      "stoi_gain": 0.014115731287276612
+    },
+    "Profile_C_SevereFlat": {
+      "si_sdr_input": 6.5811036699637775,
+      "si_sdr_enhanced": 14.718726090788842,
+      "si_sdr_gain": 8.137622420825064,
+      "stoi_input": 0.8321866486567009,
+      "stoi_enhanced": 0.8463106996650986,
+      "stoi_gain": 0.014124051008397753
+    }
+  }
+}
