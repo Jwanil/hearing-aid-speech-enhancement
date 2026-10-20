@@ -112,7 +112,26 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 # 📘 JWANIL'S SESSION LOG
 
-<!-- Agent: append Jwanil's entries below this line in reverse-chronological order (newest first) -->
+### [2026-10-20 15:05 IST] | Phase: 0–4 — Committed All Prior Phase Results & Metrics
+
+**What changed:**
+- Tracked and pushed 607 files containing all Phase 0–4 evaluation outputs to GitHub (`b841c8c`):
+  - Phase 4: `phase4_voicebank_eval.csv` (824-sample test set evaluation), `phase4_noizeus_eval.csv`, `phase4_summary_metrics.json` (+11.20 dB SI-SDR, 2.51 PESQ, 0.942 STOI), and comparison plots.
+  - Phase 3: `classical_baselines.csv`, `cli_output/`, and all MMSE/Wavelet output plots.
+  - Phase 0–2: spectrogram and dataloader verification plots.
+- Model checkpoints (`.pt`) and raw audio clips (`.wav`) remain properly excluded by `.gitignore`.
+
+**Files touched:**
+- `results/phase4_1d_cnn/*`
+- `results/phase3_classical_baselines/*`
+- `results/phase0_dsp/*`
+- `results/phase1_audiology/plots/*`
+- `results/phase2_data_pipeline/*`
+- `shared_context.md`
+
+**Status after:** The entire benchmark history and baseline metrics are live on GitHub and will be present upon `git clone` on any machine.
+
+---
 
 ### [2026-10-16 15:35 IST] | Phase: 5 — Removed Cloud-Pod Pilot Assumptions
 
