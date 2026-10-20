@@ -157,6 +157,33 @@ python execution/phase5_unet_film/21_train_unet_film.py \
 The `--allow_incomplete_data` option exists only for deliberate smoke tests;
 never use it for the canonical Phase A experiment.
 
+## Corrected Phase 5A evaluation
+
+Phase A evaluation must use the official VoiceBank-DEMAND test pair tree, not
+the dynamic training loader:
+
+```text
+data/processed/voicebank/clean_testset_wav/
+data/processed/voicebank/noisy_testset_wav/
+```
+
+After training, run the evaluator from the repository root:
+
+```bash
+python execution/phase5_unet_film/26_eval_phase5a.py \
+  --data_dir data/processed \
+  --checkpoint results/phase5_unet_film/checkpoints/best_composite.pt \
+  --results_json results/phase5_unet_film/phase5a_eval_results.json \
+  --results_csv results/phase5_unet_film/phase5a_eval_per_sample.csv \
+  --manifest results/phase5_unet_film/phase5a_eval_manifest.csv \
+  --seed 0
+```
+
+The evaluator writes the aggregate JSON, a deterministic clean/noisy manifest,
+and per-sample metrics with checkpoint and environment hashes. Phase A uses
+`center=True` for the trained offline reconstruction path; this evaluator must
+not be presented as proof of causal streaming latency or HASPI/HASQI gains.
+
 ## Platform policy
 
 - **Local RTX 4090:** canonical Phase 5/5b training platform.

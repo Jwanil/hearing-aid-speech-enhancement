@@ -1,99 +1,113 @@
-# Phase 5A Verification and Benchmark Report
+# Phase 5A Verification Report
 
-**Project:** Audiogram-Personalized Speech Enhancement for Hearing Aids  
-**Lead Developer:** Jwanil Modi  
-**Date:** 2026-10-20  
-**Platform:** Local NVIDIA GeForce RTX 4090 Workstation (24 GB VRAM)  
-**Model Architecture:** `CausalUNetCRM` (812,777 parameters)  
-**Checkpoint Evaluated:** `results/phase5_unet_film/checkpoints/best_composite.pt` (Epoch 23)  
-
----
-
-## 1. Executive Summary
-
-Phase A training has completed **all 25 epochs** on the local physical RTX 4090 workstation. 
-
-### Key Findings
-1. **Denoising Performance:** **Outstanding.** The model achieves an average **+8.14 dB SI-SDR Gain** (improving noisy input from `6.58 dB` to `14.72 dB`) and improves STOI from `0.8322` to `0.8463`.
-2. **Clinical Safety (NAL-R Invariant):** **Strictly Preserved.** The maximum predicted complex ratio mask magnitude is $|M| = 1.0000 \le 1.0$. The model acts strictly as a suppression denoiser, completely eliminating the risk of acoustic feedback howl or double amplification with downstream NAL-R gain.
-3. **Inference Latency:** **1.82 ms/frame** (<10 ms target), confirming edge real-time feasibility.
-4. **Personalization Status:** In Phase A, the model learns the generic denoising manifold first. Waveform modulation across held-out audiogram profiles is currently minimal ($\sim 3.7 \times 10^{-5}$ RMS diff), exactly as predicted by the two-phase training protocol in Directive 05 Rev 2.1. This establishes the necessary stable baseline for **Phase B (HASPI MetricGAN+ / HASPINet fine-tuning)** to inject audiogram-dependent intelligibility gradients.
+**Project:** Audiogram-Personalized Speech Enhancement for Hearing Aids
+**Scope:** Phase 5A composite-loss foundation only
+**Model:** `CausalUNetCRM` class name retained for checkpoint compatibility; Phase A is currently an offline `center=True` STFT model
+**Canonical training platform:** Local NVIDIA RTX 4090 workstation
+**Phase B:** Not implemented in this branch and must not be launched from the Phase A trainer
 
 ---
 
-## 2. Training Dynamics & Loss Progression
+## 1. Corrected scope
 
-- **Initial Epoch 1 Validation Loss:** `-7.423`
-- **Final Best Validation Loss:** **`-14.354`** (achieved at Epoch 23)
-- **Speed per Epoch:** ~2.3 – 2.5 minutes on physical RTX 4090
-- **Total Training Duration:** ~65 minutes
-- **Numerical Stability:** After applying the self-annealing fix (replacing `atan2` phase angle and complex `.abs()` with closed-form magnitude power and dot-product cosine distance), gradient flow was 100% stable with zero NaN/Inf occurrences across the remaining 19 epochs.
+Phase 5A verifies the numerical-stability and training-pipeline changes:
 
-### Epoch Progress Summary Table
+- FFT-based RIR augmentation with equivalent padded `conv1d` semantics.
+- Deterministic ERB filterbank loading and log-frequency audiogram interpolation.
+- Suppression-only polar CRM with `|M| <= 1`.
+- Stable compressed-complex and cosine phase loss terms under bf16.
+- Strict VoiceBank/MUSAN/RIR file-count validation.
+- 25-epoch composite-loss foundation training on the RTX 4090 (pending the
+  corrected fresh workstation run).
 
-| Epoch | Learning Rate | Train Loss | Validation Loss | Status |
-|:---:|:---:|:---:|:---:|:---:|
-| 1 | 1.50e-4 | -5.436 | -7.423 | Initial Checkpoint |
-| 2 | 3.00e-4 | -8.561 | -9.287 | Improved |
-| 4 | 2.99e-4 | -10.477 | -10.956 | Improved |
-| 7 | 2.81e-4 | -11.450 | -12.186 | Post-Fix Resume |
-| 10 | 2.37e-4 | -12.355 | -13.328 | Improved |
-| 15 | 1.40e-4 | -13.217 | -13.433 | Improved |
-| 18 | 8.17e-5 | -13.662 | -13.823 | Improved |
-| 19 | 6.43e-5 | -13.794 | -14.302 | Improved |
-| **23** | **1.34e-5** | **-13.927** | **-14.354** | ⭐ **Best Composite Model** |
-| 25 | 2.39e-6 | -14.114 | -14.242 | Training Complete |
+Phase 5A does **not** establish:
 
----
+- HASPI/HASQI improvement.
+- Audiogram personalization benefit.
+- Causal streaming equivalence.
+- Final hearing-aid latency.
+- Phase B HASPI surrogate or MetricGAN+/LSGAN performance.
 
-## 3. Comprehensive Benchmark Across Clinical Profiles
-
-Tested over $N=100$ held-out full-length test audio samples (64,000 samples @ 16 kHz) mixed with realistic acoustic conditions (MUSAN noise + simulated room impulse responses).
-
-| Metric | Profile A (Normal) | Profile B (Presbycusis) | Profile C (Severe Flat) |
-|---|:---:|:---:|:---:|
-| **Input SI-SDR** | 6.58 dB | 6.58 dB | 6.58 dB |
-| **Enhanced SI-SDR** | **14.72 dB** | **14.72 dB** | **14.72 dB** |
-| **SI-SDR Gain ($\Delta$)** | **+8.14 dB** | **+8.14 dB** | **+8.14 dB** |
-| **Input STOI** | 0.8322 | 0.8322 | 0.8322 |
-| **Enhanced STOI** | **0.8463** | **0.8463** | **0.8463** |
-| **STOI Gain ($\Delta$)** | **+0.0142** | **+0.0141** | **+0.0141** |
-| **Max Mask $|M|$** | 1.0000 | 1.0000 | 1.0000 |
+Those claims require separate implementations and evaluation gates.
 
 ---
 
-## 4. Personalization Analysis: Why Are Profile Results Similar in Phase A?
+## 2. Corrections made to the verification workflow
 
-### The Question: Are the results as predicted?
-**Yes, exactly as predicted by Directive 05 Rev 2.1 §7.**
+The corrected evaluator in `execution/phase5_unet_film/26_eval_phase5a.py` now:
 
-### Explanation:
-1. **The Objective Function in Phase A:**
-   - In Phase A, the model is optimized purely with `CompositeLoss`:
-     $$\mathcal{L}_{\text{comp}} = \mathcal{L}_{\text{SI-SDR}} + 0.5 \mathcal{L}_{\text{MR-STFT}} + 0.3 \mathcal{L}_{\text{complex}} + 0.5 \mathcal{L}_{\text{asym}} + 0.1 \mathcal{L}_{\text{gain}} + 0.05 \mathcal{L}_{\text{cons}}$$
-   - Notice that every term in `CompositeLoss` compares the enhanced audio $\hat{s}(t)$ directly to clean ground-truth speech $s(t)$.
-   - Because $s(t)$ is identical regardless of who is listening, the optimal mathematical solution for `CompositeLoss` alone is **generic speech enhancement**.
-   - FiLM layers were initialized with $\gamma = 1, \beta = 0$. Since modulating internal features by the audiogram vector provides no reduction in clean waveform reconstruction error, the optimizer appropriately prioritizes the U-Net denoising trunk.
-2. **Why Phase B is Required:**
-   - Personalization in speech enhancement means: *modulating noise suppression specifically where a hearing-impaired listener suffers loss*.
-   - Only **HASPI** (Hearing Aid Speech Perception Index) takes the listener's audiogram into account when scoring speech intelligibility.
-   - In **Phase B**, fine-tuning with the HASPI objective provides the direct gradient:
-     $$\nabla_a \mathcal{L}_{\text{HASPI}} \neq 0$$
-   - This explicitly forces the FiLM generator to modulate the U-Net bottleneck and decoder stages based on the audiogram profile.
+1. Uses the official non-overlapping VoiceBank-DEMAND test split:
+   `clean_testset_wav/` paired with `noisy_testset_wav/`.
+2. Never evaluates the dynamic training clean filelist.
+3. Uses deterministic sorted pairs and records the evaluation seed.
+4. Writes a manifest containing every clean/noisy test pair.
+5. Records SHA-256 hashes for the checkpoint, manifest, and per-sample CSV.
+6. Records Git revision, Python, PyTorch, torchaudio, CUDA, GPU, model, and
+   evaluation configuration metadata.
+7. Writes per-sample SI-SDR/STOI results before calculating aggregate means.
+8. Records the actual profile-output difference as mean absolute waveform
+   difference; it is not mislabeled as RMS.
+9. Explicitly records that the Phase A model is not causal.
 
----
-
-## 5. Next Steps: Phase B Readiness
-
-With `best_composite.pt` verified and saved at `results/phase5_unet_film/checkpoints/best_composite.pt`:
-
-1. **Pilot B1 (Frozen HASPINet Surrogate):**
-   - Fine-tunes `best_composite.pt` for 5 epochs with $\mathcal{L} = \mathcal{L}_{\text{comp}} + 0.05 \mathcal{L}_{\text{HASPI}}$.
-   - Uses a differentiable HASPI surrogate network to steer FiLM conditioning toward hearing-loss-specific intelligibility.
-   - Gating condition: $\Delta\text{HASPI} \ge +0.015$.
-2. **Pilot B2 (Adversarial HASPI Discriminator):**
-   - If B1 achieves $\Delta\text{HASPI} < +0.015$, execute Pilot B2 with LSGAN + Spectral Norm discriminator.
+The old aggregate values below are retained only as historical traceability.
+They were produced by the previous dynamic-mix evaluator and are **not** the
+accepted final Phase 5A benchmark.
 
 ---
 
-*Report generated automatically on local RTX 4090 workstation.*
+## 3. Historical Phase A run — not independently reproducible here
+
+The previous report recorded:
+
+| Metric | Historical value |
+|---|---:|
+| Best checkpoint epoch | 23 |
+| Best validation loss | `-14.3544` |
+| SI-SDR input | `6.58 dB` |
+| SI-SDR enhanced | `14.72 dB` |
+| SI-SDR gain | `+8.14 dB` |
+| STOI input | `0.8322` |
+| STOI enhanced | `0.8463` |
+| Observed mask maximum | `1.0000` |
+
+These numbers agree internally with the historical JSON artifact, but the
+current Mac checkout does not contain the workstation dataset or the ignored
+`.pt` checkpoint. They cannot be rerun here and must be regenerated after the
+corrected Phase A retraining run.
+
+The historical profile differences were approximately `3.75e-05` mean absolute
+waveform difference for Profile A versus B. The evaluator's prior `>1e-4`
+personalization threshold therefore did not pass. Phase A should be reported
+as a generic denoising foundation, not as a completed personalization result.
+
+---
+
+## 4. Required RTX 4090 acceptance gates
+
+Before accepting a new Phase 5A result:
+
+```text
+1. CUDA is available and the GPU is NVIDIA GeForce RTX 4090.
+2. bfloat16 support is reported as true.
+3. File counts are exactly clean=11071, noise=930, rir=60000.
+4. The bf16 one-step gate reports finite loss, gradients, and parameters.
+5. All 25 Phase A epochs complete without non-finite loss or parameters.
+6. best_composite.pt and last.pt exist and are loadable.
+7. The corrected evaluator processes official VoiceBank test pairs only.
+8. The JSON, manifest, per-sample CSV, and checkpoint hash agree.
+9. No causal or HASPI/HASQI claim is made from Phase A alone.
+```
+
+The exact setup and retraining sequence are in `phase5a_retraining_prompt.md`.
+
+---
+
+## 5. Current disposition
+
+Phase 5A source safeguards are substantially corrected and ready for a fresh
+RTX 4090 run. The historical Phase A result is not discarded as evidence of a
+failed training attempt; it is reclassified as a legacy run whose evaluation
+protocol and provenance were insufficient for final reporting.
+
+Phase 5 overall remains active. Phase B is intentionally deferred until the
+Phase A checkpoint and corrected held-out evaluation are complete.

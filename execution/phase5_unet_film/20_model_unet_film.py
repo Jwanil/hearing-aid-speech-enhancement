@@ -1,6 +1,7 @@
 # execution/phase5_unet_film/20_model_unet_film.py
-# Directive 05 Rev 2.1 — CausalUNetCRM (U-Net + Attention + Per-Stage FiLM + Polar CRM)
-# Arch: STFT n_fft=256 hop=64 Hann center=True (training COLA) -> Causal Encoder 4-stage depthwise+SE
+# Directive 05 Rev 2.1 — Phase A UNetCRM (U-Net + Attention + Per-Stage FiLM + Polar CRM)
+# Phase A uses center=True for stable Hann COLA reconstruction. This checkpoint
+# is an offline foundation model, not a causality/streaming proof.
 #       -> Bottleneck causal attention + FiLM0(256) -> Decoder 3-stage FiLM+skip -> Polar CRM |M|<=1
 # Params: ~770k (base) / 310k (tiny). Verify via: python 20_model_unet_film.py
 
@@ -227,6 +228,13 @@ class CausalDecoderBlock(nn.Module):
 
 # ── 3.5 Full CausalUNetCRM ────────────────────────────────────────────────────
 class CausalUNetCRM(nn.Module):
+    """Phase A offline U-Net/FiLM foundation model.
+
+    The historical class name is retained for checkpoint compatibility. The
+    Phase A model uses ``center=True`` STFT/iSTFT and must not be described as
+    a causal streaming model until a separate stateful causal implementation
+    has been trained and verified.
+    """
     def __init__(self, n_fft=256, sr=16000):
         super().__init__()
         self.n_fft = n_fft

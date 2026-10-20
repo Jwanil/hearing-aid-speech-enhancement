@@ -112,6 +112,39 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 # 📘 JWANIL'S SESSION LOG
 
+### [2026-10-20 23:37 IST] | Phase: 5A — Corrected Evaluation/Provenance Workflow and Retraining Handoff
+
+**What changed:**
+- Kept scope to Phase 5A only; removed the misleading random-surrogate B1/B2 implementation from the trainer and restricted the CLI to `--phase A`.
+- Added official VoiceBank-DEMAND test-pair discovery in `03c_data_pipeline_v2.py` and replaced the old dynamic-training-filelist evaluator with deterministic held-out evaluation in `26_eval_phase5a.py`.
+- Added manifest, per-sample CSV, SHA-256 checkpoint/manifest/result hashes, Git/environment metadata, deterministic seed handling, and `27_generate_phase5a_report.py`.
+- Corrected Phase 5A documentation and retraining instructions; explicitly labeled the current `center=True` model as an offline foundation rather than a causal streaming result.
+- Added `28_verify_phase5a_protocol.py` and checkpoint run metadata for focused verification and provenance.
+
+**Files touched:**
+- `execution/phase5_unet_film/03c_data_pipeline_v2.py`
+- `execution/phase5_unet_film/20_model_unet_film.py`
+- `execution/phase5_unet_film/21_train_unet_film.py`
+- `execution/phase5_unet_film/22_streaming_inference.py`
+- `execution/phase5_unet_film/26_eval_phase5a.py`
+- `execution/phase5_unet_film/27_generate_phase5a_report.py`
+- `execution/phase5_unet_film/28_verify_phase5a_protocol.py`
+- `execution/phase5_unet_film/check_progress.py`
+- `execution/phase5_unet_film/email_results.py`
+- `docs/phase_5a_verification_report.md`
+- `docs/training_platform.md`
+- `directives/05_unet_film_model_v2.md`
+- `phase5a_retraining_prompt.md`
+- `shared_context.md`
+
+**Agent used:** OmniRush
+
+**Status after:** Python compilation, model forward/Tiny forward, protocol smoke, report-generator smoke, and targeted whitespace checks pass on the Mac. Real CUDA/data/retraining/evaluation remain workstation-only because the SSD and checkpoints are not present here.
+
+**Action needed from partner:** Pull the commit, connect the SSD on the RTX 4090 workstation, follow `phase5a_retraining_prompt.md`, and do not run Phase B.
+
+---
+
 ### [2026-10-20 15:05 IST] | Phase: 0–4 — Committed All Prior Phase Results & Metrics
 
 **What changed:**

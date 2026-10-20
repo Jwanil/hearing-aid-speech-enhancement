@@ -3,6 +3,7 @@
 # Dynamic SNR mix -5..20 dB, RIR 50% (openSLR26 RT60 0.2-0.6s, 8000 taps), stratified audiograms B/C 40%.
 # Single source of truth — Phase 5b imports this file.
 
+import glob
 import os, json, random
 import torch
 import torchaudio
@@ -139,6 +140,50 @@ class HearingAidDatasetV2(torch.utils.data.Dataset):
 
 def _no_dot(files):
     return [f for f in files if not os.path.basename(f).startswith("._") and "/._" not in f]
+
+
+def build_voicebank_test_pairs(data_dir):
+    """Return the fixed official VoiceBank-DEMAND test pairs.
+
+    Phase A training uses dynamically mixed VoiceBank training utterances. The
+    evaluation protocol must not reuse those clean files. VoiceBank-DEMAND
+    ships a non-overlapping test split with matching clean/noisy filenames:
+    ``clean_testset_wav`` and ``noisy_testset_wav``.
+
+    Returns:
+        Sorted ``[(clean_path, noisy_path), ...]`` pairs.
+
+    Raises:
+        FileNotFoundError: if either official test directory is absent.
+        ValueError: if the directories exist but no complete pairs are found.
+    """
+    clean_dir = os.path.join(data_dir, "voicebank", "clean_testset_wav")
+    noisy_dir = os.path.join(data_dir, "voicebank", "noisy_testset_wav")
+    if not os.path.isdir(clean_dir) or not os.path.isdir(noisy_dir):
+        raise FileNotFoundError(
+            "Phase A evaluation requires the official VoiceBank-DEMAND test split: "
+            f"{clean_dir} and {noisy_dir}. Do not evaluate on the training clean filelist."
+        )
+
+    clean_by_name = {
+        os.path.basename(path): path
+        for path in _no_dot(glob.glob(os.path.join(clean_dir, "*.wav")))
+    }
+    noisy_by_name = {
+        os.path.basename(path): path
+        for path in _no_dot(glob.glob(os.path.join(noisy_dir, "*.wav")))
+    }
+    names = sorted(set(clean_by_name) & set(noisy_by_name))
+    if not names:
+        raise ValueError("No matching clean/noisy VoiceBank-DEMAND test pairs were found")
+    missing_clean = sorted(set(noisy_by_name) - set(clean_by_name))
+    missing_noisy = sorted(set(clean_by_name) - set(noisy_by_name))
+    if missing_clean or missing_noisy:
+        raise ValueError(
+            "VoiceBank-DEMAND test split is incomplete: "
+            f"missing_clean={len(missing_clean)} missing_noisy={len(missing_noisy)}"
+        )
+    return [(clean_by_name[name], noisy_by_name[name]) for name in names]
 
 
 def build_filelists(data_dir, pattern_clean="voicebank/clean_trainset_28spk_wav/*.wav",

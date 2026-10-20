@@ -1,13 +1,14 @@
 # execution/phase5_unet_film/22_streaming_inference.py
-# Streaming harness for CausalUNetCRM — circular buffer n_fft=256 hop=64.
-# Training uses center=True (COLA proof). Streaming keeps a causal ring buffer
-# and returns PCM hop via overlap-add. Bench via .profile().
+# Approximate frame-step benchmark harness for the Phase A offline model.
+# Phase A uses center=True STFT/iSTFT and this helper is not a proof of causal
+# streaming equivalence. Do not use its timing as a final hearing-aid latency
+# claim until a stateful causal model is implemented and validated.
 
 import torch
 import torch.nn.functional as F
 
 class StreamingHarness:
-    """Frame-by-frame streaming with cached audiogram embedding."""
+    """Shape-level frame-step harness with cached audiogram conditioning."""
     def __init__(self, model, sr=16000, n_fft=256, hop=64):
         self.model = model.eval()
         self.sr = sr; self.n_fft = n_fft; self.hop = hop
@@ -61,5 +62,5 @@ class StreamingHarness:
         t0 = time.perf_counter()
         for _ in range(n): self.push_frame(frame)
         ms = (time.perf_counter() - t0) / n * 1000
-        print(f"Streaming per-frame: {ms:.2f} ms (target <10 ms)")
+        print(f"Phase A frame-step benchmark: {ms:.2f} ms (not a causal latency claim)")
         return ms

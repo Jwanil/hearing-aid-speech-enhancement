@@ -16,21 +16,21 @@ if not os.path.exists(last_path):
 try:
     last_ckpt = torch.load(last_path, map_location="cpu", weights_only=False)
     best_ckpt = torch.load(best_path, map_location="cpu", weights_only=False) if os.path.exists(best_path) else last_ckpt
-    
+
     cur_epoch = last_ckpt.get("epoch", 0)
     total_epochs = 25
     last_val = last_ckpt.get("val_loss", 0.0)
     best_val = best_ckpt.get("val_loss", 0.0)
     best_epoch = best_ckpt.get("epoch", 0)
-    
+
     mtime = os.path.getmtime(last_path)
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(mtime))
-    
+
     print(f"Current Epoch:      {cur_epoch} / {total_epochs} ({(cur_epoch/total_epochs)*100:.1f}%)")
     print(f"Last Val Loss:      {last_val:.4f}")
     print(f"Best Val Loss:      {best_val:.4f} (at Epoch {best_epoch})")
     print(f"Last Checkpoint:    {time_str}")
-    
+
     if cur_epoch >= total_epochs:
         print("\n[SUCCESS] Training is COMPLETE! All 25 epochs finished.")
     else:

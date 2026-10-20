@@ -4,54 +4,27 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 RECIPIENT = "jwanilmodi10@gmail.com"
-SUBJECT = "[Hearing Aid ML] Phase 5A Training Complete & Verified (+8.14 dB SI-SDR Gain)"
+SUBJECT = "[Hearing Aid ML] Phase 5A retraining required after verification audit"
 
 BODY = """Dear Jwanil,
 
-Phase A foundation training on your local NVIDIA GeForce RTX 4090 workstation has completed all 25 epochs and has been thoroughly verified.
+The Phase 5A verification audit is complete. The historical training numbers
+are internally consistent, but the old evaluation used the dynamic training
+clean filelist and did not preserve enough provenance for final acceptance.
 
-========================================================================
-                      PHASE 5A RESULTS SUMMARY
-========================================================================
-- Model: CausalUNetCRM (812,777 parameters)
-- Checkpoint: results/phase5_unet_film/checkpoints/best_composite.pt (Epoch 23)
-- Final Validation Loss: -14.3544 (improved from -7.423 at Epoch 1)
-- Training Time: ~65 minutes total (~2.4 min/epoch)
+The Phase 5A workflow has been corrected to:
+- evaluate official VoiceBank-DEMAND clean_testset_wav/noisy_testset_wav pairs;
+- write a deterministic manifest and per-sample CSV;
+- record checkpoint, manifest, CSV, Git, Python, PyTorch, CUDA, and GPU hashes;
+- report Phase A as an offline denoising foundation, not as a causal or HASPI result;
+- keep Phase B disabled until it has a validated HASPI surrogate and real discriminator.
 
-CORE BENCHMARKS (Across 100 held-out test audio samples):
-------------------------------------------------------------------------
-1. Denoising Gain:
-   - Input SI-SDR:  6.58 dB
-   - Output SI-SDR: 14.72 dB
-   - SI-SDR Gain:   +8.14 dB (Exceptional noise suppression)
-   - STOI:          0.8322 -> 0.8463 (+0.0141)
+Please run the exact commands in phase5a_retraining_prompt.md on the RTX 4090
+workstation after connecting the SSD. Do not reuse the historical checkpoint
+for final reporting; retrain from scratch with the corrected code.
 
-2. Clinical Safety (NAL-R Invariant):
-   - Maximum Mask Magnitude |M|: 1.0000 <= 1.0 (PASSED)
-   - Zero amplification beyond unity; 100% suppression-only denoiser.
-   - Prevents acoustic feedback howl and double-amplification with NAL-R.
-
-3. Streaming Latency:
-   - 1.82 ms / frame (< 10 ms real-time hearing aid threshold)
-
-4. Clinical Profiles Tested:
-   - Profile A (Normal):           14.72 dB SI-SDR
-   - Profile B (Presbycusis):       14.72 dB SI-SDR
-   - Profile C (Flat Severe Loss):  14.72 dB SI-SDR
-
-WHY PROFILE MODULATION IS MINIMAL IN PHASE A:
-In Phase A, the objective is pure CompositeLoss against ground-truth clean speech.
-Because clean speech is independent of the listener, the model correctly converged
-to the optimal generic speech enhancement manifold first.
-
-Phase B (HASPI MetricGAN+ / HASPINet surrogate) is specifically designed to provide
-the listener-specific intelligibility gradients needed to steer FiLM conditioning
-for Profile B vs Profile A/C.
-
-The full report is available locally at:
+Report path:
 docs/phase_5a_verification_report.md
-
-Everything is staged and ready for Phase B when you return!
 """
 
 def main():

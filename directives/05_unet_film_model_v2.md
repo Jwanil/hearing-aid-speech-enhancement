@@ -544,6 +544,9 @@ kernel is not equivalent (especially for the even `K=8000` RIRs used here).
 ## 7. Two-Phase Training Protocol
 
 ### 7.1 Phase A — Composite-Only Foundation (Epochs 1–25)
+- **Current implementation boundary:** The repository's Phase 5A trainer ships
+  this foundation stage only. Phase B below is a design specification, not an
+  implemented training path in `21_train_unet_film.py`.
 - **Canonical platform:** Local NVIDIA RTX 4090 24 GB with the full dataset on persistent local storage. Cloud execution is not part of the current training plan.
 - **Optimizer:** `AdamW (lr=3e-4, weight_decay=1e-4, betas=(0.9,0.999))`
 - **Scheduler:** `Linear Warmup 2 epochs → Cosine Annealing to 1e-6`
@@ -552,6 +555,10 @@ kernel is not equivalent (especially for the even `K=8000` RIRs used here).
 - **AMP:** `bfloat16` via `torch.amp.autocast("cuda", ...)`; use `torch.amp.GradScaler("cuda")` only for fp16.
 - **Checkpoint:** Saves to `results/phase5_unet_film/checkpoints/best_composite.pt` (lowest val total). Early stop patience 5 on val SI-SDR.
 - **Storage:** Keep `data/processed/` and `results/phase5_unet_film/checkpoints/` on persistent local storage; do not use ephemeral `/tmp` or Drive FUSE for the canonical run.
+- **Causality note:** The current Phase A checkpoint uses the stable `center=True`
+  Hann STFT/iSTFT reconstruction path. It is an offline foundation model; a
+  causal stateful streaming implementation requires a separate model, training
+  run, and equivalence/latency gate.
 
 ### 7.2 Phase B — HASPI-Aware Fine-Tune (Epochs 26–35, Conditional Keep — Result > Time)
 

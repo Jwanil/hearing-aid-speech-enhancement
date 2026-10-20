@@ -1,168 +1,318 @@
-# execution/phase5_unet_film/26_eval_phase5a.py
-# Authoritative Phase 5A Evaluation & Personalization Verification Suite
-import os, sys, json, time, importlib.util
+"""Deterministic Phase 5A evaluation on the official VoiceBank test split.
+
+The Phase A training loader intentionally performs dynamic mixing. This
+evaluator must not reuse that loader because it would evaluate on training
+clean utterances with a new random augmentation. Instead, it uses the fixed
+official ``clean_testset_wav``/``noisy_testset_wav`` pairs, records a manifest
+and provenance, and writes both aggregate JSON and per-file CSV results.
+"""
+
+import argparse
+import csv
+import hashlib
+import importlib.util
+import io
+import json
+import os
+import platform
+import random
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
 import numpy as np
 import torch
-import torch.nn.functional as F
-from torch.utils.data import DataLoader
+import torchaudio
 from pystoi import stoi
 
-# Load model and dataset modules
-HERE = os.path.dirname(__file__)
 
-def load_mod(name, fname):
-    spec = importlib.util.spec_from_file_location(name, os.path.join(HERE, fname))
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[1]
+SR = 16_000
+HOP = 64
 
-model_mod = load_mod("model", "20_model_unet_film.py")
-data_mod = load_mod("data", "03c_data_pipeline_v2.py")
 
+def load_mod(name, filename):
+    spec = importlib.util.spec_from_file_location(name, HERE / filename)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Could not load {filename}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+model_mod = load_mod("phase5_model", "20_model_unet_film.py")
+data_mod = load_mod("phase5_data", "03c_data_pipeline_v2.py")
 CausalUNetCRM = model_mod.CausalUNetCRM
-HearingAidDatasetV2 = data_mod.HearingAidDatasetV2
-build_filelists = data_mod.build_filelists
-validate_filelists = data_mod.validate_filelists
+build_voicebank_test_pairs = data_mod.build_voicebank_test_pairs
+
+
+PROFILES = {
+    "Profile_A_Normal": [10, 10, 10, 10, 10, 10],
+    "Profile_B_Presbycusis": [10, 15, 20, 45, 70, 85],
+    "Profile_C_SevereFlat": [60, 60, 60, 60, 60, 60],
+}
+
+
+def sha256_file(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def sha256_text(text):
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def git_state():
+    try:
+        revision = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL
+        ).strip()
+        status = subprocess.check_output(
+            ["git", "status", "--porcelain", "--untracked-files=no"],
+            cwd=ROOT,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+        return {"commit": revision, "tracked_tree_clean": not bool(status), "tracked_status": status}
+    except (OSError, subprocess.CalledProcessError):
+        return {"commit": "unknown", "tracked_tree_clean": False, "tracked_status": "unavailable"}
+
+
+def set_deterministic_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
 
 def si_sdr(est, ref):
     ref = ref - np.mean(ref)
     est = est - np.mean(est)
     eps = 1e-8
     alpha = np.dot(est, ref) / (np.dot(ref, ref) + eps)
-    s_target = alpha * ref
-    e_noise = est - s_target
-    return float(10 * np.log10((np.dot(s_target, s_target) + eps) / (np.dot(e_noise, e_noise) + eps)))
+    target = alpha * ref
+    error = est - target
+    return float(10 * np.log10((np.dot(target, target) + eps) / (np.dot(error, error) + eps)))
 
-def evaluate():
+
+def load_mono_16k(path):
+    wav, sample_rate = torchaudio.load(path)
+    if sample_rate != SR:
+        raise ValueError(f"Expected {SR} Hz audio, got {sample_rate} Hz: {path}")
+    wav = wav.mean(dim=0) if wav.shape[0] > 1 else wav.squeeze(0)
+    if wav.numel() == 0 or not torch.isfinite(wav).all():
+        raise ValueError(f"Audio is empty or non-finite: {path}")
+    return wav.float()
+
+
+def relative_data_path(path, data_dir):
+    return os.path.relpath(path, data_dir)
+
+
+def write_manifest(pairs, data_dir, path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    buffer = io.StringIO(newline="")
+    writer = csv.writer(buffer, lineterminator="\n")
+    writer.writerow(("filename", "clean_path", "noisy_path", "clean_sha256", "noisy_sha256"))
+    for clean_path, noisy_path in pairs:
+        writer.writerow(
+            (
+                Path(clean_path).name,
+                relative_data_path(clean_path, data_dir),
+                relative_data_path(noisy_path, data_dir),
+                sha256_file(clean_path),
+                sha256_file(noisy_path),
+            )
+        )
+    text = buffer.getvalue()
+    path.write_text(text, encoding="utf-8")
+    return sha256_text(text)
+
+
+def profile_tensor(levels, device):
+    return torch.tensor(levels, dtype=torch.float32, device=device).unsqueeze(0) / 120.0
+
+
+def evaluate(args):
+    set_deterministic_seed(args.seed)
+    data_dir = (ROOT / args.data_dir).resolve()
+    checkpoint_path = (ROOT / args.checkpoint).resolve()
+    results_path = (ROOT / args.results_json).resolve()
+    csv_path = (ROOT / args.results_csv).resolve()
+    manifest_path = (ROOT / args.manifest).resolve()
+    git = git_state()
+    if not git["tracked_tree_clean"]:
+        raise RuntimeError(
+            "Tracked Git changes are present; commit the Phase 5A source before evaluation "
+            "so the result provenance identifies the exact code."
+        )
+
+    if not checkpoint_path.exists():
+        raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
+
+    pairs = build_voicebank_test_pairs(str(data_dir))
+    if args.max_samples > 0:
+        pairs = pairs[: args.max_samples]
+    if not pairs:
+        raise ValueError("No evaluation pairs remain after applying --max_samples")
+    manifest_hash = write_manifest(pairs, str(data_dir), manifest_path)
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"[Eval Phase 5A] Using device: {device} ({torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'})")
-
-    ckpt_path = "results/phase5_unet_film/checkpoints/best_composite.pt"
-    if not os.path.exists(ckpt_path):
-        raise FileNotFoundError(f"Checkpoint not found: {ckpt_path}")
-
-    ckpt = torch.load(ckpt_path, map_location=device, weights_only=False)
-    model = CausalUNetCRM(n_fft=256).to(device)
-    state = ckpt["model"] if "model" in ckpt else ckpt
+    checkpoint_hash = sha256_file(checkpoint_path)
+    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
+    model = CausalUNetCRM(n_fft=256).to(device).eval()
+    state = checkpoint["model"] if isinstance(checkpoint, dict) and "model" in checkpoint else checkpoint
     model.load_state_dict(state)
-    model.eval()
 
-    best_epoch = ckpt.get("epoch", "unknown")
-    best_val_loss = ckpt.get("val_loss", "unknown")
-    print(f"[Eval Phase 5A] Loaded {ckpt_path} (trained epoch {best_epoch}, best val loss {best_val_loss:.4f})")
+    profiles = {name: profile_tensor(levels, device) for name, levels in PROFILES.items()}
+    rows = []
+    mask_max = 0.0
+    diff_ab = []
+    diff_bc = []
+    started = time.perf_counter()
 
-    # Load dataset
-    clean, noise, rir = build_filelists("data/processed")
-    counts = validate_filelists(clean, noise, rir)
-    print(f"[Data] clean={counts['clean']} noise={counts['noise']} rir={counts['rir']}")
+    for index, (clean_path, noisy_path) in enumerate(pairs):
+        clean = load_mono_16k(clean_path)
+        noisy = load_mono_16k(noisy_path)
+        if clean.shape != noisy.shape:
+            raise ValueError(
+                f"Clean/noisy length mismatch for {Path(clean_path).name}: "
+                f"{clean.shape[-1]} != {noisy.shape[-1]}"
+            )
+        noisy_batch = noisy.unsqueeze(0).unsqueeze(0).to(device)
+        clean_np = clean.numpy()
+        noisy_np = noisy.numpy()
+        base = {
+            "index": index,
+            "file": Path(clean_path).name,
+            "clean_path": relative_data_path(clean_path, str(data_dir)),
+            "noisy_path": relative_data_path(noisy_path, str(data_dir)),
+            "num_samples": int(clean.shape[-1]),
+            "si_sdr_input": si_sdr(noisy_np, clean_np),
+            "stoi_input": float(stoi(clean_np, noisy_np, SR, extended=False)),
+        }
+        outputs = {}
+        with torch.inference_mode():
+            for profile_name, audiogram in profiles.items():
+                amp_enabled = device.type == "cuda"
+                with torch.amp.autocast("cuda", dtype=torch.bfloat16, enabled=amp_enabled):
+                    enhanced, (_, _, m_mag, _), _ = model(noisy_batch, audiogram)
+                enhanced_np = enhanced.squeeze().float().cpu().numpy()
+                outputs[profile_name] = enhanced_np
+                mask_max = max(mask_max, float(m_mag.max().cpu()))
+                row = dict(base)
+                row.update(
+                    {
+                        "profile": profile_name,
+                        "si_sdr_enhanced": si_sdr(enhanced_np, clean_np),
+                        "stoi_enhanced": float(stoi(clean_np, enhanced_np, SR, extended=False)),
+                    }
+                )
+                row["si_sdr_gain"] = row["si_sdr_enhanced"] - row["si_sdr_input"]
+                row["stoi_gain"] = row["stoi_enhanced"] - row["stoi_input"]
+                rows.append(row)
+        diff_ab.append(float(np.mean(np.abs(outputs["Profile_A_Normal"] - outputs["Profile_B_Presbycusis"]))))
+        diff_bc.append(float(np.mean(np.abs(outputs["Profile_B_Presbycusis"] - outputs["Profile_C_SevereFlat"]))))
 
-    audiograms_path = "results/phase1_audiology/audiograms.json"
-    dataset = HearingAidDatasetV2(clean, noise, rir, audiograms_path, segment=64000, sr=16000)
+    fieldnames = list(rows[0].keys())
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+    with csv_path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
 
-    # 3 Held-out clinical test profiles
-    profiles = {
-        "Profile_A_Normal": torch.tensor([10, 10, 10, 10, 10, 10], dtype=torch.float32) / 120.0,
-        "Profile_B_Presbycusis": torch.tensor([10, 15, 20, 45, 70, 85], dtype=torch.float32) / 120.0,
-        "Profile_C_SevereFlat": torch.tensor([60, 60, 60, 60, 60, 60], dtype=torch.float32) / 120.0,
-    }
-
-    n_eval = 100  # 100 test samples
-    results_by_profile = {p: {"si_sdr_in": [], "si_sdr_out": [], "stoi_in": [], "stoi_out": []} for p in profiles}
-    m_mag_max = 0.0
-    diff_AB_list = []
-    diff_BC_list = []
-
-    print(f"[Eval Phase 5A] Running evaluation over {n_eval} samples across 3 audiogram profiles...")
-    t0 = time.time()
-
-    with torch.no_grad():
-        for i in range(n_eval):
-            sample = dataset[i]
-            clean_wav = sample["clean"].numpy().squeeze(0)  # (64000,)
-            noisy_wav = sample["noisy"].numpy().squeeze(0)
-            noisy_t = sample["noisy"].unsqueeze(0).to(device)  # (1, 1, 64000)
-
-            sdr_in = si_sdr(noisy_wav, clean_wav)
-            st_in = stoi(clean_wav, noisy_wav, 16000, extended=False)
-
-            enh_wavs = {}
-            for pname, ag in profiles.items():
-                ag_t = ag.unsqueeze(0).to(device)
-                with torch.amp.autocast("cuda", dtype=torch.bfloat16):
-                    enh_t, (m_real, m_imag, m_mag, m_phase), _ = model(noisy_t, ag_t)
-                
-                enh = enh_t.squeeze().float().cpu().numpy()
-                enh_wavs[pname] = enh
-                m_mag_max = max(m_mag_max, float(m_mag.max().cpu()))
-
-                sdr_out = si_sdr(enh, clean_wav)
-                st_out = stoi(clean_wav, enh, 16000, extended=False)
-
-                results_by_profile[pname]["si_sdr_in"].append(sdr_in)
-                results_by_profile[pname]["si_sdr_out"].append(sdr_out)
-                results_by_profile[pname]["stoi_in"].append(st_in)
-                results_by_profile[pname]["stoi_out"].append(st_out)
-
-            # Measure personalization difference between profiles on same audio
-            diff_AB = np.mean(np.abs(enh_wavs["Profile_A_Normal"] - enh_wavs["Profile_B_Presbycusis"]))
-            diff_BC = np.mean(np.abs(enh_wavs["Profile_B_Presbycusis"] - enh_wavs["Profile_C_SevereFlat"]))
-            diff_AB_list.append(diff_AB)
-            diff_BC_list.append(diff_BC)
-
-            if (i + 1) % 25 == 0:
-                print(f"  Processed {i+1}/{n_eval} samples ({time.time() - t0:.1f}s)")
-
-    print("\n" + "=" * 70)
-    print("                PHASE 5A COMPREHENSIVE BENCHMARK REPORT")
-    print("=" * 70)
-    print(f"Model: CausalUNetCRM (812k params) | Checkpoint: best_composite.pt (Epoch {best_epoch})")
-    print(f"Max Mask Magnitude (|M|): {m_mag_max:.4f} (<= 1.0 Strict Invariant: {m_mag_max <= 1.0})")
-    print("-" * 70)
-
-    summary = {
-        "best_epoch": int(best_epoch),
-        "best_val_loss": float(best_val_loss),
-        "m_mag_max": float(m_mag_max),
-        "mask_invariant_passed": bool(m_mag_max <= 1.0),
-        "mean_diff_profile_A_vs_B": float(np.mean(diff_AB_list)),
-        "mean_diff_profile_B_vs_C": float(np.mean(diff_BC_list)),
-        "profiles": {}
-    }
-
-    for pname, data in results_by_profile.items():
-        sdr_in_mean = np.mean(data["si_sdr_in"])
-        sdr_out_mean = np.mean(data["si_sdr_out"])
-        sdr_gain = sdr_out_mean - sdr_in_mean
-
-        stoi_in_mean = np.mean(data["stoi_in"])
-        stoi_out_mean = np.mean(data["stoi_out"])
-        stoi_gain = stoi_out_mean - stoi_in_mean
-
-        summary["profiles"][pname] = {
-            "si_sdr_input": float(sdr_in_mean),
-            "si_sdr_enhanced": float(sdr_out_mean),
-            "si_sdr_gain": float(sdr_gain),
-            "stoi_input": float(stoi_in_mean),
-            "stoi_enhanced": float(stoi_out_mean),
-            "stoi_gain": float(stoi_gain),
+    summary = {}
+    for profile_name in PROFILES:
+        profile_rows = [row for row in rows if row["profile"] == profile_name]
+        summary[profile_name] = {
+            "si_sdr_input": float(np.mean([row["si_sdr_input"] for row in profile_rows])),
+            "si_sdr_enhanced": float(np.mean([row["si_sdr_enhanced"] for row in profile_rows])),
+            "si_sdr_gain": float(np.mean([row["si_sdr_gain"] for row in profile_rows])),
+            "stoi_input": float(np.mean([row["stoi_input"] for row in profile_rows])),
+            "stoi_enhanced": float(np.mean([row["stoi_enhanced"] for row in profile_rows])),
+            "stoi_gain": float(np.mean([row["stoi_gain"] for row in profile_rows])),
         }
 
-        print(f"\n{pname}:")
-        print(f"  SI-SDR: {sdr_in_mean:.2f} dB -> {sdr_out_mean:.2f} dB  (Gain: +{sdr_gain:.2f} dB)")
-        print(f"  STOI:   {stoi_in_mean:.4f} -> {stoi_out_mean:.4f}  (Gain: +{stoi_gain:.4f})")
+    results = {
+        "schema_version": 2,
+        "protocol": "official_voicebank_test_pairs",
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "git_commit": git["commit"],
+        "git_tracked_tree_clean": git["tracked_tree_clean"],
+        "command": {
+            "argv": [sys.executable, str(Path(__file__).resolve()), *sys.argv[1:]],
+            "working_directory": str(ROOT),
+        },
+        "checkpoint": {
+            "path": os.path.relpath(checkpoint_path, ROOT),
+            "sha256": checkpoint_hash,
+            "epoch": checkpoint.get("epoch", "unknown") if isinstance(checkpoint, dict) else "unknown",
+            "val_loss": checkpoint.get("val_loss", "unknown") if isinstance(checkpoint, dict) else "unknown",
+        },
+        "environment": {
+            "python": sys.version,
+            "platform": platform.platform(),
+            "torch": torch.__version__,
+            "torchaudio": torchaudio.__version__,
+            "cuda_available": bool(torch.cuda.is_available()),
+            "cuda_version": torch.version.cuda,
+            "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+        },
+        "dataset": {
+            "data_dir": args.data_dir,
+            "pair_count": len(pairs),
+            "manifest": os.path.relpath(manifest_path, ROOT),
+            "manifest_sha256": manifest_hash,
+            "evaluation_split": "VoiceBank-DEMAND official clean_testset_wav/noisy_testset_wav",
+        },
+        "evaluation": {
+            "seed": args.seed,
+            "sample_rate": SR,
+            "n_fft": 256,
+            "hop_length": HOP,
+            "center": True,
+            "model_is_causal": False,
+            "profile_vectors_db_hl": PROFILES,
+            "elapsed_seconds": time.perf_counter() - started,
+            "mask_max": mask_max,
+            "mask_invariant_passed": bool(mask_max <= 1.0 + 1e-6),
+            "mean_output_abs_diff_profile_A_vs_B": float(np.mean(diff_ab)),
+            "mean_output_abs_diff_profile_B_vs_C": float(np.mean(diff_bc)),
+            "personalization_signal_detected": bool(np.mean(diff_ab) > 1e-4),
+        },
+        "profiles": summary,
+        "artifacts": {
+            "per_sample_csv": os.path.relpath(csv_path, ROOT),
+            "per_sample_csv_sha256": sha256_file(csv_path),
+        },
+    }
+    results_path.parent.mkdir(parents=True, exist_ok=True)
+    results_path.write_text(json.dumps(results, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(results, indent=2))
+    print(f"Saved aggregate results: {results_path}")
+    print(f"Saved manifest: {manifest_path}")
+    print(f"Saved per-sample CSV: {csv_path}")
 
-    print("\n" + "-" * 70)
-    print("PERSONALIZATION INVARIANT TEST:")
-    print(f"  Mean Output Waveform Diff (Profile A vs B): {np.mean(diff_AB_list):.6f}")
-    print(f"  Mean Output Waveform Diff (Profile B vs C): {np.mean(diff_BC_list):.6f}")
-    print(f"  Personalization Active: {np.mean(diff_AB_list) > 1e-4}")
-    print("=" * 70)
 
-    # Save to JSON
-    out_json = "results/phase5_unet_film/phase5a_eval_results.json"
-    with open(out_json, "w") as f:
-        json.dump(summary, f, indent=2)
-    print(f"\nSaved full benchmark results to {out_json}")
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--data_dir", default="data/processed")
+    parser.add_argument("--checkpoint", default="results/phase5_unet_film/checkpoints/best_composite.pt")
+    parser.add_argument("--results_json", default="results/phase5_unet_film/phase5a_eval_results.json")
+    parser.add_argument("--results_csv", default="results/phase5_unet_film/phase5a_eval_per_sample.csv")
+    parser.add_argument("--manifest", default="results/phase5_unet_film/phase5a_eval_manifest.csv")
+    parser.add_argument("--max_samples", type=int, default=0, help="0 evaluates every official test pair")
+    parser.add_argument("--seed", type=int, default=0)
+    args = parser.parse_args()
+    evaluate(args)
+
 
 if __name__ == "__main__":
-    evaluate()
+    main()

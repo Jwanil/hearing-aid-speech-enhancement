@@ -1,13 +1,11 @@
 # execution/phase5_unet_film/21_train_unet_film.py
-# Two-Phase Training — Directive 05 Rev 2.1 §7
+# Phase A Training — Directive 05 Rev 2.1 §7
 # Phase A: CompositeLoss only, 25 epochs, AdamW 3e-4, warmup 2 -> cosine, effective batch 16.
-# Phase B: Pilots B1 (Frozen HASPINet, 5ep 2.5h) / B2 (LSGAN+VSN, 5ep 3.5h) gated on ΔHASPI >=0.015.
+# Phase B is intentionally not implemented in this Phase A verification branch.
 # Usage:
 #   python 21_train_unet_film.py --phase A --data_dir data/processed --audiograms results/phase1_audiology/audiograms.json
-#   python 21_train_unet_film.py --phase B1 --init_ckpt results/phase5_unet_film/checkpoints/best_composite.pt
-#   python 21_train_unet_film.py --phase B2 --init_ckpt results/phase5_unet_film/checkpoints/best_composite.pt
 
-import os, argparse, json, math, random
+import os, argparse, json, math, random, subprocess, sys
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -17,8 +15,14 @@ from torch.utils.data import DataLoader, random_split
 import importlib.util as _ilu
 
 def _load_module(fname):
-    spec = _ilu.spec_from_file_location(fname.replace(".py",""), os.path.join(os.path.dirname(__file__), fname))
+    module_name = fname.replace(".py", "")
+    spec = _ilu.spec_from_file_location(module_name, os.path.join(os.path.dirname(__file__), fname))
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Could not load {fname}")
     mod = _ilu.module_from_spec(spec)
+    # Register numeric-prefix modules before execution so Windows spawn can
+    # pickle Dataset classes when DataLoader uses num_workers > 0.
+    sys.modules[module_name] = mod
     spec.loader.exec_module(mod)
     return mod
 
@@ -115,6 +119,41 @@ def cosine_warmup(optimizer, epoch, total_epochs, warmup_epochs=2, base_lr=3e-4,
         pg["lr"] = lr
     return lr
 
+
+def git_state():
+    try:
+        root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+        revision = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=root, text=True, stderr=subprocess.DEVNULL
+        ).strip()
+        status = subprocess.check_output(
+            ["git", "status", "--porcelain", "--untracked-files=no"],
+            cwd=root,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+        return {"commit": revision, "tracked_tree_clean": not bool(status), "tracked_status": status}
+    except (OSError, subprocess.CalledProcessError):
+        return {"commit": "unknown", "tracked_tree_clean": False, "tracked_status": "unavailable"}
+
+
+def run_metadata(args, device, model):
+    git = git_state()
+    return {
+        "phase": "A",
+        "args": vars(args).copy(),
+        "git_commit": git["commit"],
+        "git_tracked_tree_clean": git["tracked_tree_clean"],
+        "python": sys.version,
+        "torch": torch.__version__,
+        "cuda_version": torch.version.cuda,
+        "cuda_available": bool(torch.cuda.is_available()),
+        "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+        "device": str(device),
+        "model_class": type(model).__name__,
+        "model_params": model.count_params(),
+    }
+
 def build_dataloaders(args):
     clean, noise, rir = build_filelists(args.data_dir)
     try:
@@ -149,6 +188,13 @@ def train_phase_a(args):
     train_loader, val_loader = build_dataloaders(args)
     model = CausalUNetCRM(n_fft=args.n_fft).to(device)
     print(f"[Phase A] params {model.count_params():,} ({model.count_params()/1e6:.3f}M)")
+    metadata = run_metadata(args, device, model)
+    print(f"[Phase A] git={metadata['git_commit']}")
+    if not metadata["git_tracked_tree_clean"]:
+        raise RuntimeError(
+            "Tracked Git changes are present; commit the Phase 5A source before training "
+            "so checkpoint provenance identifies the exact code."
+        )
     criterion = CompositeLoss(p=0.3)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=1e-4, betas=(0.9, 0.999))
     use_scaler = (args.mixed_precision == "fp16")
@@ -246,7 +292,7 @@ def train_phase_a(args):
         should_stop = False
         if val_loss < best_val:
             best_val = val_loss; patience_ctr = 0
-            torch.save({"epoch": epoch+1, "model": model.state_dict(), "val_loss": val_loss, "best_val": best_val},
+            torch.save({"epoch": epoch+1, "model": model.state_dict(), "val_loss": val_loss, "best_val": best_val, "metadata": metadata},
                        os.path.join(args.ckpt_dir, "best_composite.pt"))
             print(f"  -> new best_composite.pt (val {val_loss:.3f})", flush=True)
         else:
@@ -254,163 +300,25 @@ def train_phase_a(args):
             if patience_ctr >= patience:
                 print(f"  -> early stop patience {patience} at epoch {epoch+1}", flush=True)
                 should_stop = True
-        torch.save({"epoch": epoch+1, "model": model.state_dict(), "optimizer": optimizer.state_dict(), "val_loss": val_loss, "best_val": best_val, "patience_ctr": patience_ctr},
+        torch.save({"epoch": epoch+1, "model": model.state_dict(), "optimizer": optimizer.state_dict(), "val_loss": val_loss, "best_val": best_val, "patience_ctr": patience_ctr, "metadata": metadata},
                    os.path.join(args.ckpt_dir, "last.pt"))
         if should_stop:
             break
 
-# ── Phase B pilots — Full Implementation (Directive 05 Rev 2.1 §7.2) ────────
-class HASPINet(nn.Module):
-    """Differentiable HASPI surrogate predicting listener-specific intelligibility in [0, 1]."""
-    def __init__(self, a_emb_dim=128):
-        super().__init__()
-        self.conv = nn.Sequential(
-            nn.Conv1d(1, 32, kernel_size=15, stride=4, padding=7),
-            nn.BatchNorm1d(32),
-            nn.LeakyReLU(0.2),
-            nn.Conv1d(32, 64, kernel_size=15, stride=4, padding=7),
-            nn.BatchNorm1d(64),
-            nn.LeakyReLU(0.2),
-            nn.Conv1d(64, 64, kernel_size=15, stride=4, padding=7),
-            nn.BatchNorm1d(64),
-            nn.LeakyReLU(0.2),
-        )
-        self.lstm = nn.LSTM(64, 64, batch_first=True, bidirectional=True)
-        self.head = nn.Sequential(
-            nn.Linear(128 + a_emb_dim, 64),
-            nn.ReLU(),
-            nn.Linear(64, 1),
-            nn.Sigmoid()
-        )
-
-    def forward(self, wav, a_emb):
-        feat = self.conv(wav)
-        out, _ = self.lstm(feat.permute(0, 2, 1))
-        pooled = out.mean(dim=1)
-        return self.head(torch.cat([pooled, a_emb], dim=-1)).squeeze(-1)
-
-
-def train_phase_b(args):
-    device = torch.device(
-        "cuda" if args.device == "auto" and torch.cuda.is_available()
-        else "cpu" if args.device == "auto"
-        else args.device
-    )
-    print(f"[Phase {args.phase}] device={device} init_ckpt={args.init_ckpt}")
-    ckpt = torch.load(args.init_ckpt, map_location=device, weights_only=False)
-    model = CausalUNetCRM(n_fft=args.n_fft).to(device)
-    model.load_state_dict(ckpt["model"] if "model" in ckpt else ckpt)
-    print(f"[Phase {args.phase}] loaded {args.init_ckpt} params {model.count_params():,}")
-
-    haspi_net = HASPINet(a_emb_dim=128).to(device)
-    haspi_net.eval()
-    for p in haspi_net.parameters():
-        p.requires_grad = False
-
-    train_loader, val_loader = build_dataloaders(args)
-    criterion = CompositeLoss(p=0.3)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr_b, weight_decay=1e-4)
-    use_scaler_b = (args.mixed_precision == "fp16")
-    amp_dtype = torch.bfloat16 if args.mixed_precision == "bf16" else torch.float16
-    scaler = torch.amp.GradScaler("cuda", enabled=use_scaler_b)
-    use_amp_b = (args.mixed_precision in ("bf16", "fp16"))
-    os.makedirs(args.ckpt_dir, exist_ok=True)
-
-    best_val_b = float("inf")
-    print(f"[Phase {args.phase}] Starting fine-tuning for {args.epochs} epochs with base lr={args.lr_b}")
-
-    for epoch in range(args.epochs):
-        model.train()
-        running_loss = 0.0
-        running_haspi = 0.0
-
-        for step, batch in enumerate(train_loader):
-            noisy = batch["noisy"].to(device)
-            clean = batch["clean"].to(device)
-            audiogram = batch["audiogram"].to(device)
-
-            with torch.amp.autocast("cuda", dtype=amp_dtype, enabled=use_amp_b):
-                enh, (m_real, m_imag, m_mag, m_phase), _ = model(noisy, audiogram)
-                a_emb, _ = model.a_emb(audiogram)
-                clean_spec = torch.stft(clean.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
-                noisy_spec = torch.stft(noisy.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
-                l_comp, _ = criterion(enh, clean, noisy_spec, m_real, m_imag, m_mag, clean_spec)
-                haspi_pred = haspi_net(enh, a_emb)
-                l_haspi = 1.0 - haspi_pred.mean()
-                loss = (l_comp + 0.05 * l_haspi) / args.accum
-
-            if use_scaler_b:
-                scaler.scale(loss).backward()
-            else:
-                loss.backward()
-
-            if any(p.grad is not None and not torch.isfinite(p.grad).all() for p in model.parameters()):
-                print(f"  [Warning] non-finite gradient in Phase {args.phase} at epoch={epoch+1} step={step}, skipping step", flush=True)
-                optimizer.zero_grad(set_to_none=True)
-                continue
-
-            if (step + 1) % args.accum == 0:
-                if use_scaler_b:
-                    scaler.unscale_(optimizer)
-                torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
-                if use_scaler_b:
-                    scaler.step(optimizer); scaler.update()
-                else:
-                    optimizer.step()
-                optimizer.zero_grad(set_to_none=True)
-
-            running_loss += float(l_comp.detach())
-            running_haspi += float(haspi_pred.mean().detach())
-
-            if step % 100 == 0:
-                print(f"  [Phase {args.phase}] step {step}/{len(train_loader)} loss {float(l_comp):.4f} haspi_pred {float(haspi_pred.mean()):.4f}", flush=True)
-
-        # Validation
-        model.eval()
-        val_loss = 0.0
-        val_haspi = 0.0
-        with torch.no_grad():
-            for batch in val_loader:
-                noisy = batch["noisy"].to(device); clean = batch["clean"].to(device); audiogram = batch["audiogram"].to(device)
-                enh, (m_real, m_imag, m_mag, m_phase), _ = model(noisy, audiogram)
-                a_emb, _ = model.a_emb(audiogram)
-                clean_spec = torch.stft(clean.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
-                noisy_spec = torch.stft(noisy.squeeze(1), n_fft=args.n_fft, hop_length=64, window=model.window, center=True, return_complex=True)
-                l_comp, _ = criterion(enh, clean, noisy_spec, m_real, m_imag, m_mag, clean_spec)
-                haspi_pred = haspi_net(enh, a_emb)
-                val_loss += float(l_comp)
-                val_haspi += float(haspi_pred.mean())
-
-        val_loss /= max(1, len(val_loader))
-        val_haspi /= max(1, len(val_loader))
-        epoch_train_loss = running_loss / max(1, len(train_loader))
-        epoch_haspi = running_haspi / max(1, len(train_loader))
-
-        print(f"[Phase {args.phase}] epoch {epoch+1}/{args.epochs} train_loss {epoch_train_loss:.3f} val_loss {val_loss:.3f} haspi {val_haspi:.4f}", flush=True)
-        torch.save({"epoch": epoch+1, "model": model.state_dict(), "val_loss": val_loss, "val_haspi": val_haspi},
-                   os.path.join(args.ckpt_dir, f"{args.phase}_epoch{epoch+1:02d}.pt"))
-
-        if val_loss < best_val_b:
-            best_val_b = val_loss
-            torch.save({"epoch": epoch+1, "model": model.state_dict(), "val_loss": val_loss, "val_haspi": val_haspi},
-                       os.path.join(args.ckpt_dir, f"best_{args.phase.lower()}.pt"))
-            print(f"  -> new best_{args.phase.lower()}.pt (val_loss {val_loss:.3f}, haspi {val_haspi:.4f})", flush=True)
-
-    print(f"[Phase {args.phase}] Completed fine-tuning. Best checkpoint saved to {os.path.join(args.ckpt_dir, f'best_{args.phase.lower()}.pt')}", flush=True)
+# Phase B is deliberately not exposed here. Its HASPI surrogate and
+# MetricGAN+/LSGAN discriminator require separate, validated implementations.
 
 
 def main():
-    p = argparse.ArgumentParser(description="Phase 5 U-Net Two-Phase Training (Rev 2.1)")
-    p.add_argument("--phase", type=str, default="A", choices=["A", "B1", "B2"], help="A=composite 25ep, B1=frozen haspi 5ep, B2=LSGAN 5ep")
+    p = argparse.ArgumentParser(description="Phase 5A U-Net training (Rev 2.1)")
+    p.add_argument("--phase", type=str, default="A", choices=["A"], help="Phase A composite foundation training")
     p.add_argument("--data_dir", type=str, default="data/processed")
     p.add_argument("--audiograms", type=str, default="results/phase1_audiology/audiograms.json")
     p.add_argument("--ckpt_dir", type=str, default="results/phase5_unet_film/checkpoints")
-    p.add_argument("--init_ckpt", type=str, default=None, help="Required for B1/B2")
     p.add_argument("--epochs", type=int, default=None)
     p.add_argument("--batch", type=int, default=8)
     p.add_argument("--accum", type=int, default=2)
     p.add_argument("--lr", type=float, default=3e-4)
-    p.add_argument("--lr_b", type=float, default=1e-4)
     p.add_argument("--n_fft", type=int, default=256)
     p.add_argument("--segment", type=int, default=64000)
     p.add_argument("--num_workers", type=int, default=4)
@@ -420,13 +328,8 @@ def main():
     p.add_argument("--allow_incomplete_data", action="store_true", help="Permit non-canonical file counts for smoke tests only")
     args = p.parse_args()
     if args.epochs is None:
-        args.epochs = 25 if args.phase == "A" else 5
-    if args.phase in ("B1", "B2") and not args.init_ckpt:
-        p.error("--init_ckpt is required for B1/B2 (path to best_composite.pt)")
-    if args.phase == "A":
-        train_phase_a(args)
-    else:
-        train_phase_b(args)
+        args.epochs = 25
+    train_phase_a(args)
 
 if __name__ == "__main__":
     main()
