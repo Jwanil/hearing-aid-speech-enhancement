@@ -114,6 +114,71 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 <!-- Agent: append Jwanil's entries below this line in reverse-chronological order (newest first) -->
 
+### [2026-10-16 15:35 IST] | Phase: 5 — Removed Cloud-Pod Pilot Assumptions
+
+**What changed:**
+- Updated `directives/05_unet_film_model_v2.md`: B1/B2 now run on the local RTX 4090 workstation, sequentially by default; parallel execution is only for a second local GPU. Removed the `$6` cloud-pod pilot plan and cloud-service dependency from the timeline.
+- Updated `directives/05b_mamba_film_model_v2.md`: replaced pod-specific evaluation, ablation, and fallback language with local workstation/single-GPU wording.
+- Updated `context.md` current task, environment, open milestones, and Phase A command to the local RTX 4090 plan. Historical cloud incident entries remain preserved as historical records.
+
+**Status after:** Current Phase 5/5b instructions no longer treat cloud pods as the execution platform. The local dataset gate remains `11071/930/60000`; the only pending verification is running the CUDA/bf16 gate on the physical RTX 4090 host.
+
+**Action needed from partner:** Use the local workstation command in `context.md`; do not restart or migrate the old cloud pod.
+
+---
+
+### [2026-10-16 12:35 IST] | Phase: 5 — Thorough Execution and Dataset Verification
+
+**What changed:**
+- Audited all four Phase 5 execution files and the processed dataset.
+- Fixed three correctness issues in the Phase 5 path: preserve sparse precomputed `W_erb.npy` instead of softmax-flattening it; interpolate audiograms on the log-frequency axis with exact six-frequency anchors; include the final valid random crop. Added clear empty-input guards, modern AMP APIs, and a validation finite-loss guard.
+
+**Verification:**
+- Filelists: clean `11071`, MUSAN `930`, RIR `60000`; all `72,001` selected WAV headers audited as readable, mono, 16 kHz, positive frame count.
+- Dataset forced-RIR output: `(1,64000)` clean/noisy, finite, peak bounded by `0.95`, audiogram `(6,)`.
+- Base model: `812,777` params; Tiny model: `243,441`; output length preserved; polar mask invariant passes.
+- Streaming output `(1,1,64)` finite at `1.68 ms/frame`; log-frequency interpolation anchors pass; updated bf16-autocast optimizer smoke passes for two steps.
+
+**Files touched:**
+- `execution/phase5_unet_film/03c_data_pipeline_v2.py`
+- `execution/phase5_unet_film/20_model_unet_film.py`
+- `execution/phase5_unet_film/21_train_unet_film.py`
+- `context.md`
+- `shared_context.md`
+
+**Status after:** Local Phase 5 code and dataset checks pass. Commit `b17b217` was pushed to `main`. Training must use this commit after the pod pulls it; the previous NaN run remains invalid. RunPod infrastructure reads show the existing pod idle, but shell execution is unavailable from this agent session.
+
+**Action needed from partner:** Pull the new commit on RunPod, then start Phase A and retain the first finite step/epoch logs.
+
+**Execution note:** Direct and proxy SSH attempts were rejected because the running pod has a different registered key. No SSH-key replacement, pod restart, or new pod was performed. Phase A remains pending in the connected pod terminal.
+
+**Latest training attempt:** The pod command stopped before model construction because `data/processed` contains no files matching the expected clean VoiceBank glob. This is a pod data-path/content issue; the pod is currently idle and should be stopped if the dataset cannot be restored immediately.
+
+**Follow-up inventory:** Pod inspection confirms MUSAN `930` WAVs, RIR `11,026` WAVs, no VoiceBank directory, and no `clean_trainset_28spk_wav`. Existing `clean/` and `noisy/` are the previously identified NOIZEUS evaluation-only tree. Phase A is blocked pending restoration of VoiceBank clean training data and the remaining RIR files; do not silently train on NOIZEUS clean data.
+
+**RunPod allocation update:** The pod's GPU allocation was removed/unavailable. RunPod screenshot reports no available GPU instances; API `get-pod` confirms `rcf3s0xldlni9o` is `EXITED` with `gpu.count=0` and no runtime. CPU start is unsuitable for Phase A. Automatic migration would preserve the incomplete current volume but would not restore missing VoiceBank/RIR files, so migration should wait until the dataset source is restored or be treated only as GPU-capacity recovery.
+
+**Recovery recommendation:** Use “Automatically migrate your Pod data” from the RunPod dialog to recover GPU access and preserve the current volume, then upload the two local tar archives. A live catalog read found Secure RTX 4090 `MEDIUM` at `$0.89/hr`, Secure RTX A6000 `LOW` at `$0.59/hr`, and Secure RTX 3090 `LOW` at `$0.50/hr`; the 4090 remains preferred for reproducibility and fits the `$8.41` balance if training stays within the projected window.
+
+**Latest update:** The migration action itself now reports “There are no instances currently available.” Replacement placement capacity is unavailable, so migration cannot proceed. CPU start remains rejected for Phase A. Fallback is to wait or manually create a separate GPU pod in an available region/GPU class and re-upload the local archives; do not terminate the exited pod yet.
+
+### [2026-10-16 15:05 IST] | Phase: 5 — Switched Training to Local RTX 4090
+
+**What changed:**
+- Replaced the RunPod-primary training plan with a local RTX 4090-primary plan in `docs/training_platform.md`, `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `README.md`, `execution/README.md`, `requirements.txt`, `directives/05_unet_film_model_v2.md`, `directives/08_future_plan.md`, and `docs/phase_5_complete_architecture_blueprint.md`.
+- Added strict dataset count validation (`11071/930/60000`), explicit device selection, CUDA-required bf16/fp16 guard, and Phase A resume support in `execution/phase5_unet_film/21_train_unet_film.py`.
+- Added `execution/phase5_unet_film/24_verify_local_training.py`, a no-checkpoint local GPU/data/one-step gate.
+
+**Verification:** Local filelists pass clean `11071`, MUSAN `930`, RIR `60000`; full DataLoader gate, model/Tiny forward, strict mismatch guard, Python compilation, and whitespace checks pass. The current agent host is macOS CPU-only, so the physical RTX 4090 CUDA gate must be run on that machine before full training.
+
+**Status after:** Dataset issue is resolved on the local workspace. Phase A is ready for the local RTX 4090 and must be launched only after `24_verify_local_training.py` passes there.
+
+**Action needed from partner:** On the RTX 4090 host, run the local CUDA gate, then launch Phase A with `--device cuda --mixed_precision bf16`; keep checkpoints under `results/phase5_unet_film/checkpoints/`.
+
+**Verification note:** Full local audio header audit passes all `72,001` WAVs. The local CUDA gate correctly refuses the current macOS CPU-only host (`CUDA is unavailable`), so no false claim of training readiness was made; the physical RTX 4090 host remains the only pending environment check.
+
+---
+
 ### [2026-10-16 12:05 IST] | Phase: 5 — Fixed NaN Gradients in CompositeLoss
 
 **What changed:**

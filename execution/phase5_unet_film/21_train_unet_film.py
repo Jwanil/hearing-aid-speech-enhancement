@@ -29,6 +29,7 @@ AudiogramEmbedding = _model_mod.AudiogramEmbedding
 _data_mod = _load_module("03c_data_pipeline_v2.py")
 HearingAidDatasetV2 = _data_mod.HearingAidDatasetV2
 build_filelists = _data_mod.build_filelists
+validate_filelists = _data_mod.validate_filelists
 
 # ── 5 CompositeLoss (SI-SDR + MR-STFT + Compressed p=0.3 + Asymmetric + Gain + von Mises) ──
 try:
@@ -112,10 +113,14 @@ def cosine_warmup(optimizer, epoch, total_epochs, warmup_epochs=2, base_lr=3e-4,
 
 def build_dataloaders(args):
     clean, noise, rir = build_filelists(args.data_dir)
-    if not clean:
-        raise FileNotFoundError(f"No clean files found under {args.data_dir}. Check --data_dir and globs.")
-    if not noise:
-        raise FileNotFoundError(f"No MUSAN noise files found under {args.data_dir}; refusing to train without noise augmentation.")
+    try:
+        counts = validate_filelists(
+            clean, noise, rir,
+            require_full=not getattr(args, "allow_incomplete_data", False),
+        )
+    except ValueError as exc:
+        raise FileNotFoundError(f"{exc} Check --data_dir and the required VoiceBank/MUSAN/RIR layout.") from exc
+    print(f"[Data] clean={counts['clean']} noise={counts['noise']} rir={counts['rir']}")
     full = HearingAidDatasetV2(clean, noise, rir, args.audiograms, segment=args.segment, sr=16000)
     n_val = max(1, int(len(full) * 0.05))
     n_train = len(full) - n_val
@@ -126,7 +131,15 @@ def build_dataloaders(args):
 
 # ── Phase A ──────────────────────────────────────────────────────────────────
 def train_phase_a(args):
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if args.device == "cuda" and not torch.cuda.is_available():
+        raise RuntimeError("CUDA was requested but torch.cuda.is_available() is False")
+    device = torch.device(
+        "cuda" if args.device == "auto" and torch.cuda.is_available()
+        else "cpu" if args.device == "auto"
+        else args.device
+    )
+    if device.type == "cpu" and args.mixed_precision != "no":
+        raise RuntimeError("bf16/fp16 Phase A training requires CUDA; use a local NVIDIA GPU or pass --mixed_precision no for a smoke test")
     print(f"[Phase A] device={device} cuda={torch.cuda.is_available()} torch={torch.__version__}")
     os.makedirs(args.ckpt_dir, exist_ok=True)
     train_loader, val_loader = build_dataloaders(args)
@@ -139,11 +152,23 @@ def train_phase_a(args):
     amp_dtype = torch.bfloat16 if args.mixed_precision == "bf16" else torch.float16
     use_amp = (args.mixed_precision in ("bf16", "fp16"))
 
+    start_epoch = 0
     best_val = float("inf")
     patience = 5
     patience_ctr = 0
+    if args.resume:
+        if not os.path.exists(args.resume):
+            raise FileNotFoundError(f"Resume checkpoint not found: {args.resume}")
+        checkpoint = torch.load(args.resume, map_location=device)
+        model.load_state_dict(checkpoint["model"])
+        if "optimizer" in checkpoint:
+            optimizer.load_state_dict(checkpoint["optimizer"])
+        start_epoch = int(checkpoint.get("epoch", 0))
+        best_val = float(checkpoint.get("best_val", checkpoint.get("val_loss", best_val)))
+        patience_ctr = int(checkpoint.get("patience_ctr", 0))
+        print(f"[Phase A] resumed epoch={start_epoch} best_val={best_val:.4f} from {args.resume}")
 
-    for epoch in range(args.epochs):
+    for epoch in range(start_epoch, args.epochs):
         lr = cosine_warmup(optimizer, epoch, args.epochs, warmup_epochs=2, base_lr=args.lr)
         model.train()
         running = 0
@@ -212,18 +237,21 @@ def train_phase_a(args):
         print(f"[Phase A] epoch {epoch+1}/{args.epochs} lr {lr:.2e} train {train_loss:.3f} val {val_loss:.3f}")
 
         # Save best and last
-        torch.save({"epoch": epoch+1, "model": model.state_dict(), "optimizer": optimizer.state_dict(), "val_loss": val_loss},
-                   os.path.join(args.ckpt_dir, "last.pt"))
+        should_stop = False
         if val_loss < best_val:
             best_val = val_loss; patience_ctr = 0
-            torch.save({"epoch": epoch+1, "model": model.state_dict(), "val_loss": val_loss},
+            torch.save({"epoch": epoch+1, "model": model.state_dict(), "val_loss": val_loss, "best_val": best_val},
                        os.path.join(args.ckpt_dir, "best_composite.pt"))
             print(f"  -> new best_composite.pt (val {val_loss:.3f})")
         else:
             patience_ctr += 1
             if patience_ctr >= patience:
                 print(f"  -> early stop patience {patience} at epoch {epoch+1}")
-                break
+                should_stop = True
+        torch.save({"epoch": epoch+1, "model": model.state_dict(), "optimizer": optimizer.state_dict(), "val_loss": val_loss, "best_val": best_val, "patience_ctr": patience_ctr},
+                   os.path.join(args.ckpt_dir, "last.pt"))
+        if should_stop:
+            break
 
 # ── Phase B pilots — SKELETON (Phase A only ships; B1/B2 gate TODO per §7.2) ─
 # Do not claim B1/B2 as implemented until HASPINet + HASPIDiscriminator + LSGAN+R1 are present.
@@ -287,6 +315,9 @@ def main():
     p.add_argument("--segment", type=int, default=64000)
     p.add_argument("--num_workers", type=int, default=4)
     p.add_argument("--mixed_precision", type=str, default="bf16", choices=["bf16", "fp16", "no"])
+    p.add_argument("--device", type=str, default="auto", choices=["auto", "cuda", "cpu"], help="Training device; auto selects CUDA when available")
+    p.add_argument("--resume", type=str, default=None, help="Resume Phase A from a last.pt checkpoint")
+    p.add_argument("--allow_incomplete_data", action="store_true", help="Permit non-canonical file counts for smoke tests only")
     args = p.parse_args()
     if args.epochs is None:
         args.epochs = 25 if args.phase == "A" else 5

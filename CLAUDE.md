@@ -179,3 +179,17 @@ hearing-aid-speech-enhancement/
 You sit between human intent (directives) and deterministic execution (Python scripts). Read context first. Make decisions. Call tools. Handle errors. Log everything. Self-anneal.
 
 Be pragmatic. Be reliable. Self-anneal. **Always check your context health.**
+
+---
+
+## GPU Training — Local RTX 4090 (Current Platform)
+
+Phase 5 and Phase 5b training run on the local NVIDIA RTX 4090 workstation.
+Cloud GPU services are not part of the current plan. Before training, verify CUDA with
+`nvidia-smi`, run the strict Phase 5 filelist gate (`11071/930/60000`), run
+`execution/phase5_unet_film/24_verify_local_training.py`, and train from the
+repository root with `--device cuda --mixed_precision bf16`.
+
+The canonical dataset is `data/processed/voicebank/clean_trainset_28spk_wav/`,
+`data/processed/musan/`, and `data/processed/rir/`. NOIZEUS `clean/` and
+`noisy/` are evaluation-only and cannot substitute for VoiceBank training data.

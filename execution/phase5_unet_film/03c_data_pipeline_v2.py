@@ -7,6 +7,8 @@ import os, json, random
 import torch
 import torchaudio
 
+EXPECTED_FILE_COUNTS = {"clean": 11071, "noise": 930, "rir": 60000}
+
 
 def _fft_convolve(signal, kernel):
     """FFT-based equivalent of the pipeline's padded ``conv1d`` call.
@@ -163,3 +165,26 @@ def build_filelists(data_dir, pattern_clean="voicebank/clean_trainset_28spk_wav/
     rir_candidates = sorted(glob.glob(os.path.join(data_dir, pattern_rir), recursive=True))
     rir = _no_dot(rir_candidates)
     return clean, noise, rir
+
+
+def validate_filelists(clean, noise, rir, require_full=True):
+    """Validate the Phase A corpus split before an expensive training run."""
+    counts = {"clean": len(clean), "noise": len(noise), "rir": len(rir)}
+    if require_full:
+        mismatches = {
+            name: (counts[name], EXPECTED_FILE_COUNTS[name])
+            for name in EXPECTED_FILE_COUNTS
+            if counts[name] != EXPECTED_FILE_COUNTS[name]
+        }
+        if mismatches:
+            details = ", ".join(
+                f"{name}={actual} (expected {expected})"
+                for name, (actual, expected) in mismatches.items()
+            )
+            raise ValueError(
+                "Incomplete Phase A dataset: " + details + ". "
+                "NOIZEUS clean/noisy files cannot substitute for VoiceBank clean training data."
+            )
+    elif not clean or not noise:
+        raise ValueError("At least one clean file and one noise file are required")
+    return counts

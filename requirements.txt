@@ -3,8 +3,9 @@
 # Install with:  pip install -r requirements.txt
 # Or use uv:     uv pip install -r requirements.txt
 #
-# Note: These must stay compatible with Python 3.11+ (Colab default) and 3.14+
-# (local dev). The pesq package requires C extension build — ensure gcc is present.
+# Local Phase 5 training target: NVIDIA RTX 4090 with a CUDA-enabled PyTorch
+# and torchaudio build installed separately for the host's supported CUDA runtime.
+# Python 3.11 or 3.12 is recommended. The pesq package requires a C compiler.
 
 # ── Audio I/O ────────────────────────────────────────────────────────────────
 soundfile>=0.12.1
@@ -21,6 +22,10 @@ pystoi>=0.3.3            # STOI intelligibility metric
 # ── Visualisation ────────────────────────────────────────────────────────────
 matplotlib>=3.7.0
 
-# ── Deep learning (Phase 4+, GPU on Colab) ───────────────────────────────────
-# torch>=2.1.0           # uncomment when starting Phase 4
-# torchaudio>=2.1.0
+# ── Deep learning ────────────────────────────────────────────────────────────
+# Install torch and torchaudio from the official CUDA wheel index selected for
+# the local RTX 4090; do not install a CPU-only wheel accidentally.
+# Example verification after installation:
+#   python -c "import torch; assert torch.cuda.is_available(); print(torch.version.cuda)"
+# torch>=2.4.0
+# torchaudio>=2.4.0

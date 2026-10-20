@@ -174,7 +174,7 @@ Tool: `pyclarity` computes HASPI/HASQI. Free and open-source.
 ## Tech Stack
 
 ```
-Core:          PyTorch + torchaudio
+Core:          PyTorch + torchaudio (CUDA-enabled local RTX 4090 for Phase 5)
 Classical:     PyWavelets (Wavelet DWT), pysepm (MMSE-LSA)
 DL Models:     Asteroid (ConvTasNet), mamba-ssm (Mamba SSM)
 Baselines:     SpeechBrain
@@ -184,9 +184,10 @@ Version:       Git + GitHub
 Repo:          github.com/Jwanil/hearing-aid-speech-enhancement
 ```
 
-Install all:
+Install the CUDA-enabled PyTorch/torchaudio build appropriate for the local
+RTX 4090 first, then install the remaining packages:
 ```bash
-pip install torch torchaudio asteroid speechbrain pyclarity pystoi pesq PyWavelets mamba-ssm pysepm
+pip install asteroid speechbrain pyclarity pystoi pesq PyWavelets mamba-ssm pysepm
 ```
 
 ---

@@ -25,6 +25,13 @@ execution/
 │   ├── 05_wavelet_denoising.py   — Wavelet DWT denoising (Donoho & Johnstone 1994)
 │   └── 06_baseline_eval.py       — STOI/PESQ/SI-SDR evaluation for all baselines
 │
+├── phase5_unet_film/
+│   ├── 03c_data_pipeline_v2.py   — VoiceBank+MUSAN+RIR dynamic mixer and strict filelist gate
+│   ├── 20_model_unet_film.py     — CausalUNetCRM + TinyUNetCRM
+│   ├── 21_train_unet_film.py     — local CUDA Phase A training and checkpoint resume
+│   ├── 22_streaming_inference.py — 64-hop streaming latency harness
+│   └── 24_verify_local_training.py — strict local CUDA/data/one-step gate
+│
 └── README.md                     — this file
 ```
 
@@ -39,6 +46,15 @@ uv run --python 3.14 python execution/phase0_dsp/00_verify_setup.py
 # Phase 3 — evaluation (needs SSD mounted)
 uv run --with pesq --with pystoi --with soundfile --with matplotlib \
        --python 3.14 python execution/phase3_classical_baselines/06_baseline_eval.py
+
+# Phase 5 — run from a local RTX 4090 workstation after the strict dataset gate
+python execution/phase5_unet_film/24_verify_local_training.py
+
+python execution/phase5_unet_film/21_train_unet_film.py \
+  --phase A --device cuda --mixed_precision bf16 \
+  --data_dir data/processed \
+  --audiograms results/phase1_audiology/audiograms.json \
+  --ckpt_dir results/phase5_unet_film/checkpoints
 ```
 
 ## Outputs
@@ -52,3 +68,4 @@ uv run --with pesq --with pystoi --with soundfile --with matplotlib \
 | 3 | 04_mmse_lsa_filter.py | `results/enhanced_mmse/noizeus/` |
 | 3 | 05_wavelet_denoising.py | `results/enhanced_wavelet/noizeus/` |
 | 3 | 06_baseline_eval.py | `results/classical_baselines.csv`, `results/plots/phase3_baselines/` |
+| 5 | 21_train_unet_film.py | `results/phase5_unet_film/checkpoints/{last,best_composite}.pt` |

@@ -1,0 +1,203 @@
+{
+  "frequencies_hz": [
+    250,
+    500,
+    1000,
+    2000,
+    4000,
+    8000
+  ],
+  "note": "Audiogram levels in dB HL. Higher = worse hearing.",
+  "test_profiles": [
+    {
+      "name": "Mild Flat Loss",
+      "levels": [
+        15,
+        20,
+        25,
+        25,
+        30,
+        30
+      ],
+      "severity": "Mild"
+    },
+    {
+      "name": "Moderate Sloping Loss (Presbycusis)",
+      "levels": [
+        10,
+        15,
+        30,
+        50,
+        65,
+        80
+      ],
+      "severity": "Moderate"
+    },
+    {
+      "name": "Severe High-Frequency Loss",
+      "levels": [
+        10,
+        10,
+        35,
+        65,
+        85,
+        90
+      ],
+      "severity": "Mod-Severe"
+    }
+  ],
+  "random_audiograms": [
+    {
+      "frequencies": [
+        250,
+        500,
+        1000,
+        2000,
+        4000,
+        8000
+      ],
+      "levels": [
+        26.6,
+        33.6,
+        32.0,
+        32.3,
+        36.9,
+        40.2
+      ],
+      "severity": "Mild"
+    },
+    {
+      "frequencies": [
+        250,
+        500,
+        1000,
+        2000,
+        4000,
+        8000
+      ],
+      "levels": [
+        16.0,
+        24.0,
+        29.8,
+        38.8,
+        45.8,
+        48.9
+      ],
+      "severity": "Mild"
+    },
+    {
+      "frequencies": [
+        250,
+        500,
+        1000,
+        2000,
+        4000,
+        8000
+      ],
+      "levels": [
+        24.1,
+        28.3,
+        32.2,
+        34.6,
+        42.7,
+        46.6
+      ],
+      "severity": "Mild"
+    },
+    {
+      "frequencies": [
+        250,
+        500,
+        1000,
+        2000,
+        4000,
+        8000
+      ],
+      "levels": [
+        11.4,
+        20.9,
+        30.6,
+        40.4,
+        55.2,
+        62.5
+      ],
+      "severity": "Moderate"
+    },
+    {
+      "frequencies": [
+        250,
+        500,
+        1000,
+        2000,
+        4000,
+        8000
+      ],
+      "levels": [
+        14.0,
+        24.2,
+        30.6,
+        34.9,
+        39.2,
+        47.9
+      ],
+      "severity": "Mild"
+    },
+    {
+      "frequencies": [
+        250,
+        500,
+        1000,
+        2000,
+        4000,
+        8000
+      ],
+      "levels": [
+        25.3,
+        35.7,
+        45.7,
+        56.1,
+        68.4,
+        78.7
+      ],
+      "severity": "Mod-Severe"
+    },
+    {
+      "frequencies": [
+        250,
+        500,
+        1000,
+        2000,
+        4000,
+        8000
+      ],
+      "levels": [
+        29.4,
+        39.2,
+        42.7,
+        49.7,
+        56.2,
+        62.2
+      ],
+      "severity": "Moderate"
+    },
+    {
+      "frequencies": [
+        250,
+        500,
+        1000,
+        2000,
+        4000,
+        8000
+      ],
+      "levels": [
+        18.2,
+        36.7,
+        47.2,
+        61.7,
+        77.7,
+        95.0
+      ],
+      "severity": "Mod-Severe"
+    }
+  ]
+}

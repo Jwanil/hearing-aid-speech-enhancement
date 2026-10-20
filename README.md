@@ -50,11 +50,23 @@ hearing-aid-speech-enhancement/
 
 ---
 
-## Setup (coming soon)
+## Local RTX 4090 setup
 
 ```bash
-pip install torch torchaudio speechbrain asteroid-filterbanks pyclarity pystoi
+# Install the CUDA-enabled torch/torchaudio build appropriate for the host first.
+python -m pip install -r requirements.txt
+
+# Verify the local GPU build.
+python - <<'PY'
+import torch
+assert torch.cuda.is_available(), "CUDA-enabled PyTorch is required"
+print(torch.cuda.get_device_name(0), torch.version.cuda)
+PY
 ```
+
+Phase 5 training is local-first. From the repository root, verify the complete
+dataset gate (`clean=11071`, `noise=930`, `rir=60000`) and then follow
+`docs/training_platform.md` for the CUDA smoke checks and Phase A command.
 
 ---
 

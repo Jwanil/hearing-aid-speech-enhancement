@@ -151,7 +151,7 @@ Errors are learning opportunities. When something breaks:
 | 2 | Data Pipeline (TIMIT + Clarity + NOIZEUS + MUSAN) | `directives/02_data_pipeline.md` | [/] |
 | 3 | Classical Baselines: Wavelet DWT + MMSE-LSA | `directives/03_classical_baselines.md` | [ ] |
 | 4 | 1D CNN Model (Conv-TasNet style) | `directives/04_1d_cnn_model.md` | [ ] |
-| 5 | U-Net + Attention + FiLM (Core Contribution) | `directives/05_unet_film_model.md` | [ ] |
+| 5 | U-Net + Attention + FiLM (Core Contribution) | `directives/05_unet_film_model.md` | [/] |
 | 5b | Mamba / State Space Model (SSM) + FiLM | `directives/05b_mamba_film_model.md` | [ ] |
 | 6 | Full Evaluation (all 5 models, all metrics) | `directives/06_evaluation.md` | [ ] |
 | 7 | Report + Audio Demo | `directives/07_report.md` | [ ] |
@@ -203,22 +203,26 @@ hearing-aid-speech-enhancement/
 
 ---
 
-## GPU Training — Google Colab + colab-mcp
+## GPU Training — Local RTX 4090 (Current Platform)
 
-Model training (Phases 4–5b) runs on Google Colab GPUs, not locally.
-The `colab-mcp` MCP server bridges this IDE to a live Colab notebook.
+Phase 5 and Phase 5b training now run on the team's local NVIDIA RTX 4090 workstation.
+Cloud GPU services are not part of the current plan; never assume a cloud runtime or Drive-mounted dataset.
 
-**MCP config:** Already in `.agents/mcp_config.json` — auto-loaded when the workspace opens.
-**Full setup guide:** `docs/colab_setup.md` — read this before starting Phase 4.
+**Local setup guide:** `docs/training_platform.md` — verify the CUDA-enabled PyTorch build,
+the full local dataset, and persistent checkpoint directory before training.
 
 **For agents:** When the user asks to train a model:
-1. Check that Colab MCP tools are available (look for colab-mcp in tool list)
-2. Send setup cells (git clone + drive mount + pip install)
-3. Send training script cells
-4. Read back loss/metrics
-5. Save checkpoint to Drive; commit results to GitHub
+1. Run `nvidia-smi` and verify `torch.cuda.is_available()` plus the GPU name.
+2. Run the strict Phase 5 filelist gate: clean `11071`, MUSAN `930`, RIR `60000`.
+3. Run the model and bf16 one-step smoke checks before the full command.
+4. Train with `--device cuda --mixed_precision bf16` from the repository root.
+5. Keep checkpoints under `results/phase5_unet_film/checkpoints/`; never commit `*.pt`.
 
-**Data on Drive:** `MyDrive/hearing-aid-data/processed/` — both partners must upload their processed WAVs here once.
+**Canonical local dataset:** `data/processed/voicebank/clean_trainset_28spk_wav/`,
+`data/processed/musan/`, and `data/processed/rir/`. NOIZEUS `clean/` and `noisy/`
+directories are evaluation-only and cannot substitute for VoiceBank training data.
+
+**Legacy fallback:** `docs/colab_setup.md` remains for historical/prototyping use only.
 
 ---
 

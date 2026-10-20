@@ -1,70 +1,168 @@
-# Training Platform Recommendation
+# Training Platform — Local RTX 4090 (Canonical)
 
-## Recommended: RunPod (Primary) / Vast.ai (Fallback)
+## Decision
 
-### Why RunPod
+Phase 5 U-Net/FiLM and Phase 5b Mamba training run on the team's **local NVIDIA
+RTX 4090 workstation**. Cloud GPU allocation and migration are not part of the
+current training plan; the local workstation is the sole canonical platform.
 
-| Factor | RunPod | Vast.ai | Colab |
-|--------|--------|---------|-------|
-| **GPU Availability** | RTX 4090 24GB, A100 40/80GB — consistent supply | Similar, but more spot preemption | T4/A100 — limited, frequent disconnects |
-| **Storage** | Local NVMe `/tmp` (100GB+ included) — critical for MUSAN+RIR cache (avoids 40% GPU idle on Drive FUSE) | Local NVMe available | Google Drive FUSE only — 80ms/load, GPU starves |
-| **Billing** | Per-second, **Community $0.34/h, Secure $0.89/h** for 4090 (verified Oct 11 2026) | Per-second, similar | Free tier unstable; Pro $10/mo but quota-limited |
-| **Environment** | `runpod/pytorch:2.4.0-cuda12.4.1` (or 2.2.0) — `mamba_ssm` + `causal-conv1d --no-build-isolation` | Same containers work | `nvcc` often missing → `mamba_ssm` falls back to slow `S4D` |
-| **Persistence** | Pod survives 24h+; checkpoint to Drive via `rclone` async | Similar | 12h max, random preemption loses state |
+The local machine provides:
 
-### Required Spec for This Project
+- No hourly GPU cost or cloud-balance risk.
+- Persistent local dataset and checkpoints.
+- Full control over CUDA, PyTorch, worker count, and process lifetime.
+- Reproducible restarts using `last.pt` without re-uploading data.
 
-| Phase | GPU | VRAM | Disk | Est. Time | Community $0.34/h | Secure $0.89/h |
-|-------|-----|------|------|-----------|-------------------|----------------|
-| Phase 5 U-Net (Rev 2.1) | RTX 4090 24GB | 8–12GB | 30GB container + 20GB volume | 10.5–14h (Phases A 5.5h + pilots 6h + ext 2.5h) | **$3.57–$4.76** | **$9.66–$12.52** |
-| Phase 5b Mamba (Rev 2.0) | RTX 4090 24GB | 10–16GB | 30GB + 20GB | 7–14h (base/S4D) | $2.38–$4.76 | $6.23–$12.46 |
+## Required local environment
 
-> **Oct 2026 note:** Community RTX 4090 is $0.34/h but frequently sold out. If unavailable, Secure 4090 is $0.89/h — then Phase 5 sequential 14h = $12.52 (tight on $12 credit). Use gated plan: run Phase A (5.5h = $4.92 Secure), then Pilots B1/B2 only if gate warrants, to stay within $12.
+| Component | Requirement |
+|---|---|
+| GPU | NVIDIA RTX 4090, 24 GB VRAM |
+| Driver | Current NVIDIA driver supporting the installed CUDA runtime |
+| Python | 3.11 or 3.12 recommended |
+| PyTorch | CUDA-enabled build; `torch.version.cuda` must not be `None` |
+| Precision | `bf16` for Phase A; RTX 4090 supports bfloat16 |
+| Storage | At least 25 GB free for the verified corpus, temporary files, and checkpoints |
+| Checkpoints | `results/phase5_unet_film/checkpoints/` on persistent local storage |
 
-### Quick Start (RunPod)
+Do not use a CPU-only PyTorch wheel on the 4090 machine. Verify the actual
+environment before training:
 
 ```bash
-# 1. Create pod: runpod/pytorch:2.2.0-cuda12.1, 4090 24GB, 100GB container disk, 50GB volume
-# 2. SSH in, then:
-git clone https://github.com/<your-repo>.git hearing-aid-speech-enhancement
-cd hearing-aid-speech-enhancement
+nvidia-smi
 
-# 3. Preload data to local NVMe (critical — avoids Drive FUSE bottleneck)
-mkdir -p /tmp/hearing-aid-data
-gsutil -m cp -r gs://<your-bucket>/processed/* /tmp/hearing-aid-data/  # or rclone from Drive
-# MUSAN+RIR ~10GB, VoiceBank+NOIZEUS+Clarity ~15GB
+python - <<'PY'
+import torch, torchaudio
 
-# 4. Install deps (mamba_ssm needs --no-build-isolation on some images)
-pip install -q torch torchaudio pyclarity pystoi pesq accelerate wandb
-pip install -q causal-conv1d mamba_ssm --no-build-isolation || echo "S4D fallback active"
-
-# 5. Train Phase 5 U-Net
-python execution/phase5_unet_film/21_train_unet_film.py \
-  --phase A --epochs 25 --batch 8 --accum 2 --lr 3e-4 \
-  --data_dir /tmp/hearing-aid-data \
-  --ckpt_dir /tmp/checkpoints/phase5A \
-  --mixed_precision bf16
-
-# 6. After Phase A: run Pilot B1/B2 in parallel (separate pods) for conditional GAN gate
+print("torch:", torch.__version__)
+print("CUDA build:", torch.version.cuda)
+print("CUDA available:", torch.cuda.is_available())
+assert torch.cuda.is_available()
+print("GPU:", torch.cuda.get_device_name(0))
+print("capability:", torch.cuda.get_device_capability(0))
+print("bf16:", torch.cuda.is_bf16_supported())
+print("torchaudio:", torchaudio.__version__)
+PY
 ```
 
-### Colab + colab-mcp (Development/Prototyping Only)
+## Canonical dataset layout
 
-- Use for: architecture debugging, small-scale test runs (<1 epoch), streaming harness profiling
-- **Do not use for full training** — Drive FUSE I/O kills GPU utilization, 12h timeout loses checkpoints, no persistent NVMe
-- `colab-mcp` MCP server bridges this IDE to a live Colab notebook for interactive dev
-- Setup guide: `docs/colab_setup.md`
+The Phase A loader requires the complete corpus below. These are local files,
+not Git-tracked artifacts:
 
-### Hardware Targets (Post-Training)
+```text
+data/processed/
+├── voicebank/clean_trainset_28spk_wav/   11,071 WAV files
+├── musan/                                    930 WAV files
+└── rir/                                   60,000 WAV files
+```
 
-| Tier | Device | Model | Quantization | Latency | Power | When |
-|------|--------|-------|--------------|---------|-------|------|
-| **A (Nov 1 Demo)** | **Phone (SD 7xx/8 Gen) / Laptop / ESP32-S3 ($30 alt)** | U-Net 770k (phone/laptop FP16) / 310k Tiny (ESP32 INT8) | TFLite GPU/NNAPI / TFLite Micro | 14–24 ms phone wired (6.8 ms algo), 18–26 ms ESP32 | 0.8 W / 70 mW |
-| **B** | **Skipped** | — | — | — | — |
-| **C (Post-Nov)** | GAP9 NE16 / Ezairo 7150 | Tiny U-Net 310k / Mamba Tiny 950k (GAP9 only) | INT8 (+ INT16 state for Mamba) | 6.87 ms (GAP9) | 11 mW |
+NOIZEUS `clean/` and `noisy/` directories are evaluation-only. They must not
+be used as VoiceBank training substitutes.
 
-See `docs/hardware_deployment_roadmap.md` (Tier A directive + future overview) and `docs/future_plan_tier_c_implementation.md` (full Tier C BOM/bench).
+Run the strict gate from the repository root before every new training run:
 
----
+```bash
+python - <<'PY'
+import importlib.util
 
-**Bottom line:** Provision a **RunPod RTX 4090 24GB with 100GB NVMe**, preload data to `/tmp`, train with `bf16` + `Accelerate`. This is the only configuration that reliably delivers the 10–14h training windows for Phases 5/5b within budget and without I/O bottlenecks.
+path = "execution/phase5_unet_film/03c_data_pipeline_v2.py"
+spec = importlib.util.spec_from_file_location("phase5_data", path)
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+
+clean, noise, rir = mod.build_filelists("data/processed")
+counts = mod.validate_filelists(clean, noise, rir)
+print(counts)
+assert counts == {"clean": 11071, "noise": 930, "rir": 60000}
+print("DATASET FILELIST PASS")
+PY
+```
+
+The loader also uses FFT-based RIR augmentation and excludes macOS `._*`
+resource-fork files. Do not delete or replace a corpus directory unless a
+verified backup/archive is available.
+
+## Install and checks
+
+Install a CUDA-enabled PyTorch build appropriate for the local driver first,
+then install the project dependencies. The exact PyTorch command depends on
+the machine's supported CUDA runtime; verify it with the command above.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+# Install the CUDA-enabled torch/torchaudio build selected for this host.
+python -m pip install -r requirements.txt
+```
+
+Run the focused Phase 5 checks:
+
+```bash
+python -m py_compile \
+  execution/phase5_unet_film/03c_data_pipeline_v2.py \
+  execution/phase5_unet_film/20_model_unet_film.py \
+  execution/phase5_unet_film/21_train_unet_film.py \
+  execution/phase5_unet_film/22_streaming_inference.py
+
+python execution/phase5_unet_film/20_model_unet_film.py
+```
+
+Before a full run, perform a CUDA bf16 one-step smoke test using a real batch.
+Require finite forward output, loss, gradients, and parameters. The training
+script now fails fast if any loss or gradient becomes non-finite.
+
+The repository provides the strict gate directly:
+
+```bash
+python execution/phase5_unet_film/24_verify_local_training.py
+```
+
+## Phase A command
+
+Run from the repository root and keep checkpoints on persistent local storage:
+
+```bash
+python execution/phase5_unet_film/21_train_unet_film.py \
+  --phase A \
+  --device cuda \
+  --data_dir data/processed \
+  --audiograms results/phase1_audiology/audiograms.json \
+  --ckpt_dir results/phase5_unet_film/checkpoints \
+  --batch 8 \
+  --accum 2 \
+  --num_workers 4 \
+  --mixed_precision bf16
+```
+
+Expected effective batch size is `16`. The run writes:
+
+```text
+results/phase5_unet_film/checkpoints/last.pt
+results/phase5_unet_film/checkpoints/best_composite.pt
+```
+
+To resume after an interruption:
+
+```bash
+python execution/phase5_unet_film/21_train_unet_film.py \
+  --phase A --device cuda --mixed_precision bf16 \
+  --data_dir data/processed \
+  --audiograms results/phase1_audiology/audiograms.json \
+  --ckpt_dir results/phase5_unet_film/checkpoints \
+  --resume results/phase5_unet_film/checkpoints/last.pt
+```
+
+The `--allow_incomplete_data` option exists only for deliberate smoke tests;
+never use it for the canonical Phase A experiment.
+
+## Platform policy
+
+- **Local RTX 4090:** canonical Phase 5/5b training platform.
+- **CPU:** smoke tests only, never a Phase A training run.
+- **Cloud GPUs:** not used for the current training plan.
+
+The source of truth for the executable behavior is the Phase 5 scripts in
+`execution/phase5_unet_film/`; this document describes the local platform and
+verification gate around them.
