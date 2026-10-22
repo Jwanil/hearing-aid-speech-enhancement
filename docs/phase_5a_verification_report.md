@@ -6,7 +6,7 @@
 
 ## 1. Reproducibility record
 
-- Git commit: `f548253eb66ab4e285e199d8af9af68aee2164e1`
+- Git commit: `c53f9789e09264fcae9e02bf3e8212ac9dc6e6c8`
 - Git tracked tree clean: `True`
 - Checkpoint: `results\phase5_unet_film\checkpoints\best_composite.pt`
 - Checkpoint SHA-256: `94de1a1ef6ef34af3e136a3899d12ec126ef85c01c44c6780603b59f2bfb0696`
