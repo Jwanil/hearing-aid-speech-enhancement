@@ -112,6 +112,32 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 # 📘 JWANIL'S SESSION LOG
 
+### [2026-10-22 09:50 IST] | Phase: 5A — Retrained on Physical RTX 4090 Workstation + Official Benchmark Verification
+
+**What changed:**
+- Reconnected SanDisk SSD, verified 11071/930/60000 canonical dataset file counts, and passed CUDA & protocol verification gates.
+- Archived prior checkpoints to `checkpoints_legacy_20261022_092643`.
+- Retrained Phase A (`CausalUNetCRM`, 812.8k params, bf16) from scratch for all 25 epochs on physical NVIDIA RTX 4090; best validation loss achieved at Epoch 22 (`val_loss = -14.4848`).
+- Evaluated against official held-out VoiceBank-DEMAND test split (824 test pairs, unseen speakers `p232`/`p257`). Achieved **+5.35 dB SI-SDR gain** (8.45 dB -> 13.80 dB), STOI 0.920 -> 0.919, with mask magnitude bounded $|M| \le 1.0$.
+- Cryptographic provenance captured in `phase5a_eval_results.json`, `phase5a_eval_manifest.csv`, `phase5a_eval_per_sample.csv`, and `docs/phase_5a_verification_report.md`.
+
+**Files touched:**
+- `results/phase5_unet_film/checkpoints/best_composite.pt` (local)
+- `results/phase5_unet_film/checkpoints/last.pt` (local)
+- `results/phase5_unet_film/phase5a_eval_manifest.csv`
+- `results/phase5_unet_film/phase5a_eval_per_sample.csv`
+- `results/phase5_unet_film/phase5a_eval_results.json`
+- `docs/phase_5a_verification_report.md`
+- `shared_context.md`
+
+**Agent used:** Antigravity (Gemini 3.8 Flash / Physical RTX 4090 workstation)
+
+**Status after:** Phase 5A retraining and official verification fully complete and committed/pushed to GitHub. Ready for Phase B planning.
+
+**Action needed from partner:** Pull the latest commit containing the official benchmark results and verification report.
+
+---
+
 ### [2026-10-20 23:37 IST] | Phase: 5A — Corrected Evaluation/Provenance Workflow and Retraining Handoff
 
 **What changed:**
