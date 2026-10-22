@@ -1,34 +1,118 @@
 {
-  "best_epoch": 23,
-  "best_val_loss": -14.354392269679478,
-  "m_mag_max": 1.0,
-  "mask_invariant_passed": true,
-  "mean_diff_profile_A_vs_B": 3.749889219761826e-05,
-  "mean_diff_profile_B_vs_C": 2.886276888602879e-05,
+  "schema_version": 2,
+  "protocol": "official_voicebank_test_pairs",
+  "generated_at_utc": "2026-10-22T04:19:12.200689+00:00",
+  "git_commit": "f548253eb66ab4e285e199d8af9af68aee2164e1",
+  "git_tracked_tree_clean": true,
+  "command": {
+    "argv": [
+      "C:\\Users\\ADMIN\\.gemini\\antigravity-ide\\scratch\\hearing-aid-speech-enhancement\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\ADMIN\\.gemini\\antigravity-ide\\scratch\\hearing-aid-speech-enhancement\\execution\\phase5_unet_film\\26_eval_phase5a.py",
+      "--data_dir",
+      "data/processed",
+      "--checkpoint",
+      "results/phase5_unet_film/checkpoints/best_composite.pt",
+      "--results_json",
+      "results/phase5_unet_film/phase5a_eval_results.json",
+      "--results_csv",
+      "results/phase5_unet_film/phase5a_eval_per_sample.csv",
+      "--manifest",
+      "results/phase5_unet_film/phase5a_eval_manifest.csv",
+      "--seed",
+      "0"
+    ],
+    "working_directory": "C:\\Users\\ADMIN\\.gemini\\antigravity-ide\\scratch\\hearing-aid-speech-enhancement"
+  },
+  "checkpoint": {
+    "path": "results\\phase5_unet_film\\checkpoints\\best_composite.pt",
+    "sha256": "94de1a1ef6ef34af3e136a3899d12ec126ef85c01c44c6780603b59f2bfb0696",
+    "epoch": 22,
+    "val_loss": -14.484773329326085
+  },
+  "environment": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "torch": "2.6.0+cu124",
+    "torchaudio": "2.6.0+cu124",
+    "cuda_available": true,
+    "cuda_version": "12.4",
+    "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "dataset": {
+    "data_dir": "data/processed",
+    "pair_count": 824,
+    "manifest": "results\\phase5_unet_film\\phase5a_eval_manifest.csv",
+    "manifest_sha256": "98216ac42a29f22965d6ef15028cb6222cb65be39bf462d53da421c8fb0c3b85",
+    "evaluation_split": "VoiceBank-DEMAND official clean_testset_wav/noisy_testset_wav"
+  },
+  "evaluation": {
+    "seed": 0,
+    "sample_rate": 16000,
+    "n_fft": 256,
+    "hop_length": 64,
+    "center": true,
+    "model_is_causal": false,
+    "profile_vectors_db_hl": {
+      "Profile_A_Normal": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "Profile_B_Presbycusis": [
+        10,
+        15,
+        20,
+        45,
+        70,
+        85
+      ],
+      "Profile_C_SevereFlat": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ]
+    },
+    "elapsed_seconds": 44.02527310000005,
+    "mask_max": 1.0,
+    "mask_invariant_passed": true,
+    "mean_output_abs_diff_profile_A_vs_B": 6.543667627650314e-05,
+    "mean_output_abs_diff_profile_B_vs_C": 3.040702049210029e-05,
+    "personalization_signal_detected": false
+  },
   "profiles": {
     "Profile_A_Normal": {
-      "si_sdr_input": 6.5811036699637775,
-      "si_sdr_enhanced": 14.718577422499656,
-      "si_sdr_gain": 8.137473752535879,
-      "stoi_input": 0.8321866486567009,
-      "stoi_enhanced": 0.8463428214058587,
-      "stoi_gain": 0.014156172749157814
+      "si_sdr_input": 8.451493601245778,
+      "si_sdr_enhanced": 13.800755890827734,
+      "si_sdr_gain": 5.349262289581956,
+      "stoi_input": 0.9202508120921038,
+      "stoi_enhanced": 0.9188455033234415,
+      "stoi_gain": -0.0014053087686623203
     },
     "Profile_B_Presbycusis": {
-      "si_sdr_input": 6.5811036699637775,
-      "si_sdr_enhanced": 14.718255459070205,
-      "si_sdr_gain": 8.137151789106428,
-      "stoi_input": 0.8321866486567009,
-      "stoi_enhanced": 0.8463023799439775,
-      "stoi_gain": 0.014115731287276612
+      "si_sdr_input": 8.451493601245778,
+      "si_sdr_enhanced": 13.812216430613137,
+      "si_sdr_gain": 5.36072282936736,
+      "stoi_input": 0.9202508120921038,
+      "stoi_enhanced": 0.9188239063264827,
+      "stoi_gain": -0.001426905765620977
     },
     "Profile_C_SevereFlat": {
-      "si_sdr_input": 6.5811036699637775,
-      "si_sdr_enhanced": 14.718726090788842,
-      "si_sdr_gain": 8.137622420825064,
-      "stoi_input": 0.8321866486567009,
-      "stoi_enhanced": 0.8463106996650986,
-      "stoi_gain": 0.014124051008397753
+      "si_sdr_input": 8.451493601245778,
+      "si_sdr_enhanced": 13.814811249091788,
+      "si_sdr_gain": 5.363317647846009,
+      "stoi_input": 0.9202508120921038,
+      "stoi_enhanced": 0.9187819835948426,
+      "stoi_gain": -0.001468828497261137
     }
+  },
+  "artifacts": {
+    "per_sample_csv": "results\\phase5_unet_film\\phase5a_eval_per_sample.csv",
+    "per_sample_csv_sha256": "8364b3e139689b08e721fb8fcd6daf0cf9b676c71e7a694b7d27879422886070"
   }
 }
