@@ -1,25 +1,25 @@
-# OmniRush Handoff Context — Phase 5A Completion & Phase B Roadmap
+# OmniRush Handoff Context — Phase 5A Audit & Phase B Roadmap
 
 > **Agent Notice:** This document is the canonical handoff file between the **Windows RTX 4090 Workstation Agent (Antigravity)** and the **Mac / Remote Agent (OmniRush)**.
-> **Last Updated:** 2026-10-22 09:55 IST  
+> **Last Updated:** 2026-10-22 10:13 IST
 > **Repository:** `https://github.com/Jwanil/hearing-aid-speech-enhancement.git`  
 > **Lead Developer:** Jwanil Modi (`@Jwanil`) | **Co-Developer:** Namya Shah  
-> **Current Git HEAD:** Commit `01ef4fc` (synchronized with `origin/main`)
+> **Required baseline for the next OmniRush session:** pull `origin/main` and verify commit `d20f066` or newer. This handoff is a snapshot; do not rely on the commit hash printed here after making new changes.
 
 ---
 
 ## 1. Executive Summary: What Was Accomplished
 
 1. **Hardware & Environment Verified:** Physical Windows 11 workstation with **NVIDIA GeForce RTX 4090 (24 GB VRAM)**, CUDA 12.4, PyTorch 2.6.0+cu124, and 1 TB external SanDisk SSD (`E:\SANDISK`).
-2. **Phase 5A Retraining Completed from Scratch:** Full 25 epochs trained with `bf16` precision and composite loss ($L_{comp} + 0.1 L_{cons}$) on the canonical VoiceBank training set (11,071 clean, 930 noise, 60,000 RIR).
+2. **Phase 5A Retraining Completed from Scratch:** Full 25 epochs trained with `bf16` precision and the implemented composite loss on the canonical VoiceBank training set (11,071 clean, 930 noise, 60,000 RIR).
 3. **Best Checkpoint Saved:** `best_composite.pt` at **Epoch 22**, achieving validation composite loss of **`-14.4848`** (exceeding previous run `-14.3544`).
 4. **Official Held-Out Benchmark Evaluated:** Evaluated deterministically across all **824 canonical VoiceBank-DEMAND test pairs** (`clean_testset_wav` / `noisy_testset_wav`, unseen speakers `p232` and `p257`).
 5. **Results Verified & Pushed:**
    - **SI-SDR Gain:** **+5.35 dB** (8.45 dB input $\to$ 13.80 dB enhanced).
    - **STOI:** 0.9203 input $\to$ 0.9188 enhanced (neutral/high speech intelligibility preserved).
    - **Suppression-Only Invariant:** $|M| \le 1.0$ strictly verified across all 2,472 inferences (824 pairs $\times$ 3 profiles).
-   - **Cryptographic Provenance:** Checkpoint, dataset manifest, and per-sample CSV SHA-256 hashes generated and verified by `27_generate_phase5a_report.py`.
-   - **Committed & Pushed to GitHub:** Commits `2da5af5` and `01ef4fc` pushed to `origin/main`.
+   - **Cryptographic Provenance:** Checkpoint, dataset manifest, and per-sample CSV SHA-256 hashes were generated on the workstation; the committed artifact bundle was independently audited on the Mac.
+   - **Committed & Pushed to GitHub:** Official result commits `2da5af5`, `01ef4fc`, `095e050`, and provenance-fix commit `d20f066` are on `origin/main`.
 
 ---
 
@@ -72,6 +72,14 @@
   - Committed official verification artifacts (`Commit 2da5af5`) and pushed to `origin/main`.
   - Appended session entry to `shared_context.md` (`Commit 01ef4fc`) and pushed to `origin/main`.
 
+### Phase 4: Mac / OmniRush Independent Audit and Handoff Decision
+- **2026-10-22 10:13 IST:**
+  - Audited the committed manifest and per-sample CSV: 824 pairs, 2,472 rows, 824 rows per profile, finite metrics, correct gain arithmetic, and speakers `p232`/`p257` only.
+  - Found that the JSON stored the Windows CRLF hash for the per-sample CSV while Git stored the committed artifact with LF line endings. This was a provenance-byte mismatch, not a metric mismatch.
+  - Updated `26_eval_phase5a.py` to write LF line endings and synchronized the JSON/report hash. Pushed as `d20f066`.
+  - **Decision:** Do not retrain Phase A for this fix. The model weights, inference logic, and metric values did not change. On the workstation, rerun the evaluator once after pulling `d20f066` if a fresh JSON/report provenance bundle is required.
+  - Confirmed that this Mac checkout lacks the RTX 4090 checkpoint and SSD audio, so raw-waveform inference and checkpoint-byte verification remain workstation-only.
+
 ---
 
 ## 3. Detailed Results Analysis: How the Model is Performing
@@ -87,7 +95,7 @@
 ### C. Personalization Status: Why Profile Differences are Subtle in Phase A
 - In Phase 5A, the model produced virtually identical waveforms across Profiles A, B, and C (mean absolute difference $\approx 3\times 10^{-5}$ to $6\times 10^{-5}$).
 - **Why this is expected:** 
-  The Phase A loss function is purely composite reconstruction ($L_{comp} = L_{mag} + L_{RI} + 0.1 L_{cons}$), which optimizes toward clean ground truth $S$. There is no loss term penalizing high-frequency hearing loss or incentivizing profile-specific audibility curves.
+   The Phase A loss is a generic reconstruction objective that optimizes toward clean ground truth $S$. There is no loss term penalizing high-frequency hearing loss or incentivizing profile-specific audibility curves. The exact code should be treated as authoritative for coefficient values; the older shorthand description of the consistency weighting was imprecise.
 - **The Phase B Role:** 
   Phase B will incorporate **HASPI loss** ($L_{haspi} = 1 - \text{HASPI}(\hat{s}, s, \text{audiogram})$). Because HASPI specifically models impaired auditory thresholds, frequency resolution degradation, and loudness recruitment, optimizing for HASPI will force the FiLM conditioning to dynamically alter the frequency-dependent filtering for each hearing loss profile.
 
@@ -113,13 +121,11 @@ All files are located on the workstation at:
 
 ## 5. Next Steps for OmniRush / Phase B Roadmap
 
-1. **Pull Latest Commits on Mac:**
+1. **Pull Latest Commits on the OmniRush machine:**
    ```bash
    git pull origin main
    ```
-2. **Phase B Implementation Requirements:**
-   - **Pretrained HASPI Surrogate Network:** Implement a differentiable neural surrogate (or integrate differentiable auditory periphery model) that outputs predicted HASPI score given $(\hat{s}, s, \text{audiogram})$.
-   - **Phase B Fine-Tuning Script:** Create `23_train_phase_b.py` which initializes from `results/phase5_unet_film/checkpoints/best_composite.pt`, freezes encoder layers if desired, and trains with $L_{total} = L_{comp} + \lambda_{haspi} (1 - \text{HASPI}_{pred}) + \lambda_{gan} L_{gan}$.
-   - **Discriminator:** Real MetricGAN+ or LSGAN spectrogram discriminator.
+2. **Phase B implementation requirements:** Follow `phase_b_omnirush_prompt.md`. Do not use a random or untrained HASPI surrogate, and do not claim Phase B success without true HASPI/HASQI validation, a held-out surrogate check, and a baseline-vs-candidate gate.
 3. **Execution on Workstation:**
-   - When the Phase B scripts are written and pushed from Mac, pull them to this RTX 4090 workstation and launch Phase B fine-tuning using `best_composite.pt`.
+    - First run the corrected evaluator once with the existing `best_composite.pt` after pulling `d20f066`.
+    - Only after the Phase A provenance refresh passes should the new Phase B scripts be trained on the RTX 4090.

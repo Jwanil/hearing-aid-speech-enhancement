@@ -156,6 +156,26 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 **Action needed from partner:** Pull the verification-fix commit before any future Phase 5A evaluation; rerun the evaluator on the workstation if a fresh artifact bundle is required.
 
+### [2026-10-22 10:34 IST] | Phase: 5A → Phase B — OmniRush Handoff Updated
+
+**What changed:**
+- Updated `omnirush_context.md` with the Mac-side artifact audit, the no-retraining decision for the provenance-only fix, the `d20f066` baseline, and the remaining workstation-only verification limitation.
+- Added `phase_b_omnirush_prompt.md`, a self-contained prompt for the next OmniRush session.
+- The prompt requires a corrected Phase A evaluator refresh first, then a real validated HASPI/HASQI path, held-out surrogate validation, separate B1 checkpoints, and a measured B1/B2 gate.
+- Explicitly prohibited random/untrained HASPI surrogates, test-split leakage, causal claims, and overwriting the accepted Phase A checkpoint.
+
+**Files touched:**
+- `omnirush_context.md`
+- `phase_b_omnirush_prompt.md`
+- `context.md`
+- `shared_context.md`
+
+**Agent used:** OmniRush
+
+**Status after:** Phase A is accepted as the offline foundation; no second Phase A training run is required for the hash fix. The next workstation action is one corrected evaluator refresh, followed by Phase B tooling validation and implementation.
+
+**Action needed from partner:** Start the next OmniRush session with `phase_b_omnirush_prompt.md` after pulling the latest `origin/main`.
+
 ---
 
 ### [2026-10-20 23:37 IST] | Phase: 5A — Corrected Evaluation/Provenance Workflow and Retraining Handoff
