@@ -17,7 +17,7 @@
 - Manifest: `results\phase5_unet_film\phase5a_eval_manifest.csv`
 - Manifest SHA-256: `98216ac42a29f22965d6ef15028cb6222cb65be39bf462d53da421c8fb0c3b85`
 - Per-sample CSV: `results\phase5_unet_film\phase5a_eval_per_sample.csv`
-- Per-sample CSV SHA-256: `8364b3e139689b08e721fb8fcd6daf0cf9b676c71e7a694b7d27879422886070`
+- Per-sample CSV SHA-256: `1180605443fd11bc073782016f9a9fa513987296018eca6b31b29dcc47ab6920`
 - Evaluator command: `["C:\\Users\\ADMIN\\.gemini\\antigravity-ide\\scratch\\hearing-aid-speech-enhancement\\.venv\\Scripts\\python.exe", "C:\\Users\\ADMIN\\.gemini\\antigravity-ide\\scratch\\hearing-aid-speech-enhancement\\execution\\phase5_unet_film\\26_eval_phase5a.py", "--data_dir", "data/processed", "--checkpoint", "results/phase5_unet_film/checkpoints/best_composite.pt", "--results_json", "results/phase5_unet_film/phase5a_eval_results.json", "--results_csv", "results/phase5_unet_film/phase5a_eval_per_sample.csv", "--manifest", "results/phase5_unet_film/phase5a_eval_manifest.csv", "--seed", "0"]`
 - Seed: `0`
 - PyTorch: `2.6.0+cu124`; torchaudio: `2.6.0+cu124`

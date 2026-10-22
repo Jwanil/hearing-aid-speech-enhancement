@@ -136,6 +136,26 @@ These decisions have been made after faculty meeting + research sweep. They are 
 
 **Action needed from partner:** Pull the latest commit containing the official benchmark results and verification report.
 
+### [2026-10-22 10:13 IST] | Phase: 5A — Independent Artifact Audit and Cross-Platform Hash Fix
+
+**What changed:**
+- Recomputed the committed manifest/per-sample hashes and audited the full 824-pair manifest plus 2,472 per-sample rows.
+- Confirmed that the aggregate JSON metrics exactly match the per-profile means from the CSV, all gain columns are arithmetically correct, and the manifest covers only speakers `p232` and `p257`.
+- Found a Windows/POSIX line-ending mismatch: the JSON recorded the CRLF hash for the per-sample CSV, while Git stores the committed CSV with LF. Updated `26_eval_phase5a.py` to write LF explicitly and synchronized the JSON/report hash to the committed bytes.
+
+**Files touched:**
+- `execution/phase5_unet_film/26_eval_phase5a.py`
+- `results/phase5_unet_film/phase5a_eval_results.json`
+- `docs/phase_5a_verification_report.md`
+- `context.md`
+- `shared_context.md`
+
+**Agent used:** OmniRush
+
+**Status after:** Artifact consistency checks pass. The reported metrics are internally verified; checkpoint-byte and waveform-level re-evaluation remain workstation-only because the Mac checkout lacks the RTX 4090 checkpoint and SSD dataset.
+
+**Action needed from partner:** Pull the verification-fix commit before any future Phase 5A evaluation; rerun the evaluator on the workstation if a fresh artifact bundle is required.
+
 ---
 
 ### [2026-10-20 23:37 IST] | Phase: 5A — Corrected Evaluation/Provenance Workflow and Retraining Handoff

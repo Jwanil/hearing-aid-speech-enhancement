@@ -224,7 +224,9 @@ def evaluate(args):
     fieldnames = list(rows[0].keys())
     csv_path.parent.mkdir(parents=True, exist_ok=True)
     with csv_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        # Use LF explicitly so the recorded artifact hash is stable across
+        # Windows and POSIX checkouts.
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
